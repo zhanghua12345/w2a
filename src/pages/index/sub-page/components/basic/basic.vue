@@ -12,80 +12,215 @@ const topSwiperData = [
   'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
   'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
 ]
-
-const pageData: PageContainerData = {
-  基础: {
-    tips: '1212',
-    data: [
+const data: PageContainerData[] = [
+  {
+    title: '',
+    tip: '',
+    type: 'banner',
+    list: [
       {
-        title: '配色',
-        icon: 'gloves',
-        path: 'color',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
         url: '/demo-pages/basic/color/index',
       },
       {
-        title: '图标',
-        icon: 'font',
-        path: 'icon',
-        url: '/demo-pages/basic/icon/index',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
       },
       {
-        title: '边框',
-        icon: 'square',
-        path: 'border',
-        url: '/demo-pages/basic/border/index',
-      },
-      {
-        title: '阴影',
-        icon: 'copy-fill',
-        path: 'shadow',
-        url: '/demo-pages/basic/shadow/index',
-      },
-      {
-        title: 'Flex布局',
-        icon: 'menu-more',
-        path: 'flex',
-        url: '/demo-pages/basic/flex/index',
-      },
-      {
-        title: '标题',
-        icon: 'bankcard',
-        path: 'title',
-        url: '/demo-pages/basic/title/index',
-      },
-      {
-        title: '按钮',
-        icon: 'circle-fill',
-        path: 'button',
-        url: '/demo-pages/basic/button/index',
-      },
-      {
-        title: '标签',
-        icon: 'tag',
-        path: 'tag',
-        url: '/demo-pages/basic/tag/index',
-      },
-      {
-        title: '徽标',
-        icon: 'moon',
-        path: 'badge',
-        url: '/demo-pages/basic/badge/index',
-      },
-      {
-        title: '头像',
-        icon: 'emoji-good',
-        path: 'avatar',
-        url: '/demo-pages/basic/avatar/index',
-      },
-      {
-        title: '页脚',
-        icon: 'rocket',
-        path: 'footer',
-        url: '/demo-pages/basic/footer/index',
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
       },
     ],
   },
-}
+  {
+    title: '',
+    tip: '',
+    type: 'banner_sub',
+    list: [
+      {
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
+        name: '奶油风',
+      },
+      {
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+        url: '/demo-pages/basic/color/index',
+        name: '奶油风',
+      },
+      {
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+        name: '奶油风',
+      },
+    ],
+  },
+  {
+    title: '家空间',
+    tip: '潮流新品，一应俱全',
+    type: 'box-1',
+    list: [
+      {
+        name: '奶油风',
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '现代风',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '潮流风',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+    ],
+  },
+  {
+    title: '家生活方式',
+    tip: '打造111',
+    type: 'box-2',
+    list: [
+      {
+        name: '介绍1',
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍2',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍3',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+    ],
+  },
+  {
+    title: '新品品鉴',
+    tip: '打造121',
+    type: 'box-3',
+    list: [
+      {
+        name: '介绍1',
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍2',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍3',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+    ],
+  },
+  {
+    title: '严选',
+    tip: '打造121',
+    type: 'box-4',
+    list: [
+      {
+        name: '介绍1',
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍2',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍3',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍4',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+    ],
+  },
+  {
+    title: '推文',
+    tip: '打造121',
+    type: 'box-5',
+    list: [
+      {
+        name: '介绍1',
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍2',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍3',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍4',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+    ],
+  },
+  {
+    title: '',
+    tip: '',
+    type: 'footer',
+    list: [
+      {
+        name: '介绍1',
+        image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍2',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍3',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+      {
+        name: '介绍4',
+        image_url:
+          'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+        url: '/demo-pages/basic/color/index',
+      },
+    ],
+  },
+]
 </script>
 
 // #ifdef MP-WEIXIN
@@ -100,7 +235,7 @@ export default {
 // #endif
 
 <template>
-  <TnDemoPageContainer :top-swiper-data="topSwiperData" :data="pageData" />
+  <TnDemoPageContainer :top-swiper-data="topSwiperData" :data="data" />
 </template>
 
 <style lang="scss" scoped>
