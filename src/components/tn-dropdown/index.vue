@@ -2,15 +2,8 @@
 import { computed, ref } from 'vue'
 import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import TnDropDown from 'tnuiv3p-tn-dropdown/index.vue'
-import TnLoadmore from '@tuniao/tnui-vue3-uniapp/components/loadmore/src/loadmore.vue'
-import Box from '@/components/box.vue'
+import CustomPage from '@/components/custom-page/src/custom-page.vue'
 import { useDemoH5Page, useWxShare } from '@/hooks'
-
-const topSwiperData = [
-  'https://resource.tuniaokj.com/images/vue3/banner/vue3-2-min.jpg',
-]
-
-// 下拉逻辑
 
 type SelectOrderConditionDataItem = {
   title: string
@@ -87,29 +80,9 @@ const sortConditionSelectHandle = (index: number) => {
 }
 </script>
 
-<script lang="ts">
-export default {
-  options: {
-    // 在微信小程序中将组件节点渲染为虚拟节点，更加接近Vue组件的表现(不会出现shadow节点下再去创建元素)
-    virtualHost: true,
-  },
-}
-</script>
-
 <template>
-  <view class="main">
-    <!-- 顶部轮播 -->
-    <swiper class="banner">
-      <swiper-item
-        v-for="(e, index) in topSwiperData"
-        :key="index"
-        class="swiper-item"
-      >
-        <image class="tn-w-full" :src="e" mode="heightFix" />
-      </swiper-item>
-    </swiper>
-    <!-- 下拉框 -->
-    <div class="dropdown-container">
+  <CustomPage title="下拉框" padding="0" :is-h5-demo-page="isDemoH5Page">
+    <view class="dropdown-container">
       <TnDropDown v-model:open="openDropdown">
         <template #menu>
           <view class="dropdown-menu">
@@ -168,99 +141,10 @@ export default {
           </view>
         </view>
       </TnDropDown>
-    </div>
-    <div class="content-container">
-      <Box />
-    </div>
-    <TnLoadmore status="nomore" color="tn-gray-disabled" />
-    <TnLoadmore status="loading" color="tn-gray-disabled" />
-  </view>
+    </view>
+  </CustomPage>
 </template>
 
 <style lang="scss" scoped>
-.main {
-  width: 100%;
-  .banner {
-    width: 100%;
-    height: 400rpx;
-  }
-  .dropdown-container {
-    position: relative;
-    width: 100%;
-
-    .dropdown-menu {
-      position: relative;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      background-color: var(--tn-color-white);
-
-      .dropdown-menu-item {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10rpx 0rpx;
-
-        .icon {
-          margin-left: 6rpx;
-          transform-origin: center center;
-          transform: rotate(0deg);
-          transition: transform 0.25s linear;
-          line-height: 1;
-
-          &.active {
-            transform: rotate(-180deg);
-          }
-        }
-
-        .double-icon {
-          margin-left: 6rpx;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-
-          .top {
-            transform: translateY(14rpx);
-          }
-          .bottom {
-            transform: translateY(-12rpx);
-          }
-        }
-      }
-    }
-
-    .dropdown-content {
-      position: relative;
-      width: 100%;
-      padding: 0rpx 30rpx;
-
-      .recommend-list {
-        position: relative;
-        width: 100%;
-
-        .recommend-list-item {
-          position: relative;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          padding: 20rpx 0rpx;
-
-          .item-select-icon {
-            margin-right: 20rpx;
-          }
-        }
-      }
-    }
-  }
-
-  .content-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
+@import './styles/index.scss';
 </style>

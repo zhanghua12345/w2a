@@ -10,6 +10,7 @@
       }
     }
   ],
+
   "subPackages": [
     {
       "root": "info-pages",
@@ -18,6 +19,17 @@
           "path": "change-log/index",
           "style": {
             "navigationBarTitleText": "更新日志"
+          }
+        }
+      ]
+    },
+    {
+      "root": "container-page",
+      "pages": [
+        {
+          "path": "detail-goods/index",
+          "style": {
+            "navigationBarTitleText": "商品详情"
           }
         }
       ]
