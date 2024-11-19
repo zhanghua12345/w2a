@@ -94,7 +94,12 @@ export default {
         v-if="item.type === 'banner'"
         class="swiper-wrapper tn-animation-fade-in"
       >
-        <TnSwiper :data="item.list" indicator indicator-position="right-bottom">
+        <TnSwiper
+          :data="item.list"
+          indicator
+          indicator-position="right-bottom"
+          height="600"
+        >
           <template #default="{ data, active }">
             <view class="swiper-data animation" :class="[{ active }]">
               <image class="image" :src="data.image_url" mode="aspectFill" />
@@ -111,7 +116,7 @@ export default {
         </view>
       </template>
       <!-- 顶部轮播 -->
-      <view
+      <!-- <view
         v-if="item.type === 'banner2'"
         class="top-swiper tn-animation-fade-in"
       >
@@ -124,7 +129,7 @@ export default {
             <image class="image" :src="e.image_url" mode="heightFix" />
           </swiper-item>
         </swiper>
-      </view>
+      </view> -->
       <TnScrollList v-if="item.type === 'box-1'" :indicator="false">
         <view class="item-container">
           <view

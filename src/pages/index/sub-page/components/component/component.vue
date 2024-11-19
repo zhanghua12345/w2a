@@ -259,6 +259,7 @@ export default {
   .content-container {
     position: relative;
     width: 100%;
+    padding: 32rpx;
     display: flex;
     flex-wrap: wrap;
   }

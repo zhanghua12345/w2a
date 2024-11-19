@@ -35,10 +35,11 @@ const {
 
 // 底部导航栏数据
 const tabbarData = [
-  { text: '基础', icon: 'assign-fill' },
-  { text: '组件', icon: 'menu-more-fill' },
+  { text: '梵', icon: 'assign-fill' },
+  { text: '商品', icon: 'menu-more-fill' },
   { text: '模板', icon: 'menu-match-fill' },
-  { text: '图鸟', icon: 'logo-tuniao' },
+  { text: '文案', icon: 'menu-match-fill' },
+  { text: '我', icon: 'logo-tuniao' },
 ]
 // 导航切换事件
 const onTabbarChange = (index: string | number) => {
@@ -138,6 +139,15 @@ provide(
         <AboutPage />
       </scroll-view>
     </view>
+    <view
+      v-if="pageStatus[4]"
+      class="page__container"
+      :style="pageContainerStyle(4)"
+    >
+      <scroll-view class="scroll-view" scroll-y>
+        <AboutPage />
+      </scroll-view>
+    </view>
   </view>
   <TnTabbar
     v-model="currentTabbarIndex"
@@ -153,6 +163,7 @@ provide(
       :name="index"
       :text="item.text"
       inactive-color="#c5cad5"
+      :bulge="index === 2"
       :icon="item.icon"
       :active-icon="item.icon"
     />

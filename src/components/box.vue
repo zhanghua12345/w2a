@@ -52,15 +52,9 @@ export default {
   flex-shrink: 0;
   position: relative;
   width: calc(100% / 2 - 16rpx);
-  height: 117rpx;
-  margin-top: 30rpx;
-
+  height: 300rpx;
   opacity: 0;
   animation: list-item-enter-animation 0.3s ease forwards;
-
-  &:nth-of-type(odd) {
-    margin-right: 30rpx;
-  }
 
   .bg {
     position: absolute;
@@ -69,7 +63,7 @@ export default {
     width: 100%;
     height: 100%;
     mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4NDcuMyAyODkuOSI+PGNpcmNsZSBjeD0iNzczLjQiIGN5PSIyMTYiIHI9IjczIi8+PHBhdGggZD0iTTc5NCAwSDQyLjVDMTkgMCAwIDE5IDAgNDIuNXYyMDQuOGMwIDIzLjUgMTkgNDIuNSA0Mi41IDQyLjVoNjA4LjhjMjQuMSAwIDQxLjMtMjEuNiAzNy44LTQ0LjEtLjQtMi42LTEuMS01LjMtMi4xLTcuOS0xLjQtMy41LTIuNS03LjItMy4zLTExLS44LTQuNy0xLjItOS41LTEuMi0xNC40IDAtNDggMzguOS04Ni45IDg2LjktODYuOSA3LjggMCAxNS40IDEgMjIuNiAzIDEuMS40IDIuMS43IDMuMiAxLjEgMS43LjYgMy40IDEuMSA1LjEgMS41IDIzLjUgNS41IDQ3LTEyLjIgNDctMzcuMlY1My4zQzg0Ny4zIDIzLjggODIzLjUgMCA3OTQgMHoiLz48L3N2Zz4=');
-    mask-size: 100% 100%, contain;
+    mask-size: 100% 100%, top;
     mask-repeat: no-repeat;
     mask-composite: xor;
     z-index: 1;
