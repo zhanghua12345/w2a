@@ -170,7 +170,7 @@ export default {
       </TnDropDown>
     </div>
     <div class="content-container">
-      <Box />
+      <Box v-for="item in 30" :key="item" />
     </div>
     <TnLoadmore status="nomore" color="tn-gray-disabled" />
     <TnLoadmore status="loading" color="tn-gray-disabled" />
@@ -262,6 +262,7 @@ export default {
     padding: 32rpx;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 }
 </style>

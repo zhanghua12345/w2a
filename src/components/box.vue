@@ -32,79 +32,60 @@ export default {
 
 <template>
   <view class="content-item" @tap.stop="navDemoPage(dItem.url)">
-    <view class="bg tn-gradient-bg__blue-light" />
-    <view class="data">
-      <view class="title tn-text-ellipsis-1">{{ dItem.title }}</view>
-      <view class="path tn-gray_text tn-text-ellipsis-1">
-        <TnIcon name="code" />
-        <text>{{ dItem.path }}</text>
-      </view>
-      <view class="icon tn-grey_text">
-        <TnIcon :name="dItem.icon" />
-      </view>
+    <img
+      src="https://resource.tuniaokj.com/images/vue3/banner/vue3-2-min.jpg"
+      alt=""
+    />
+    <view class="info"> 12 </view>
+    <view class="icon">
+      <TnIcon :name="dItem.icon" />
     </view>
   </view>
 </template>
 
 <style lang="scss" scoped>
 .content-item {
-  flex-grow: 0;
-  flex-shrink: 0;
   position: relative;
-  width: calc(100% / 2 - 16rpx);
-  height: 300rpx;
+  width: 330rpx;
+  margin-bottom: 24rpx;
+  height: 400rpx;
   opacity: 0;
+  border-radius: 8rpx;
+  overflow: hidden;
   animation: list-item-enter-animation 0.3s ease forwards;
-
-  .bg {
-    position: absolute;
-    left: 0;
-    top: 0;
+  img {
     width: 100%;
     height: 100%;
-    mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4NDcuMyAyODkuOSI+PGNpcmNsZSBjeD0iNzczLjQiIGN5PSIyMTYiIHI9IjczIi8+PHBhdGggZD0iTTc5NCAwSDQyLjVDMTkgMCAwIDE5IDAgNDIuNXYyMDQuOGMwIDIzLjUgMTkgNDIuNSA0Mi41IDQyLjVoNjA4LjhjMjQuMSAwIDQxLjMtMjEuNiAzNy44LTQ0LjEtLjQtMi42LTEuMS01LjMtMi4xLTcuOS0xLjQtMy41LTIuNS03LjItMy4zLTExLS44LTQuNy0xLjItOS41LTEuMi0xNC40IDAtNDggMzguOS04Ni45IDg2LjktODYuOSA3LjggMCAxNS40IDEgMjIuNiAzIDEuMS40IDIuMS43IDMuMiAxLjEgMS43LjYgMy40IDEuMSA1LjEgMS41IDIzLjUgNS41IDQ3LTEyLjIgNDctMzcuMlY1My4zQzg0Ny4zIDIzLjggODIzLjUgMCA3OTQgMHoiLz48L3N2Zz4=');
-    mask-size: 100% 100%, top;
-    mask-repeat: no-repeat;
-    mask-composite: xor;
-    z-index: 1;
   }
-
-  /* 数据 start */
-  .data {
-    position: relative;
+  .info {
+    position: absolute;
+    z-index: 1;
+    padding: 24rpx;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 100rpx;
+    color: #fff;
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0)
+    );
+  }
+  .icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     z-index: 2;
-    padding: 20rpx 30rpx;
-    padding-top: 14rpx;
-
-    .title {
-      font-size: 38rpx;
-      width: 90%;
-      vertical-align: middle;
-    }
-    .path {
-      margin-top: 8rpx;
-      width: 80%;
-      line-height: 1;
-
-      text {
-        margin-left: 10rpx;
-      }
-    }
-
-    .icon {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 60rpx;
-      height: 60rpx;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36rpx;
-    }
+    width: 60rpx;
+    height: 60rpx;
+    padding: 10rpx;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36rpx;
   }
   /* 数据 end */
 }
