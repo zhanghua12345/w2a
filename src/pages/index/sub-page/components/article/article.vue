@@ -77,7 +77,7 @@ const dropdownMenuItemClickHandle = (index: number) => {
     case 1:
       uni.showToast({
         icon: 'none',
-        title: '按照销量排序',
+        title: '按照热度排序',
       })
       break
     case 2:
@@ -85,13 +85,13 @@ const dropdownMenuItemClickHandle = (index: number) => {
         priceSort.value = 'down'
         uni.showToast({
           icon: 'none',
-          title: '按照价格降序排序',
+          title: '按照时间排序',
         })
       } else {
         priceSort.value = 'up'
         uni.showToast({
           icon: 'none',
-          title: '按照价格升序排序',
+          title: '按照时间序排序',
         })
       }
       break
@@ -135,13 +135,13 @@ const sortConditionSelectHandle = (index: number) => {
                 :class="[{ 'tn-red_text': dropdownItemIndex === 1 }]"
                 @tap.stop="dropdownMenuItemClickHandle(1)"
               >
-                销量
+                热度
               </view>
               <view
                 class="flex-1 flex items-center justify-center px-[10rpx]"
                 @tap.stop="dropdownMenuItemClickHandle(2)"
               >
-                <view class="text">价格</view>
+                <view class="text">时间</view>
                 <view
                   class="ml-[6rpx] flex flex-col items-center justify-center"
                 >
@@ -167,7 +167,7 @@ const sortConditionSelectHandle = (index: number) => {
               <view
                 v-for="(item, index) in selectOrderConditionData"
                 :key="index"
-                class="relative w-full flex items-center px-[20rpx]"
+                class="relative w-full flex items-center py-[20rpx]"
                 @tap.stop="sortConditionSelectHandle(index)"
               >
                 <view v-if="item.select" class="mr-[20rpx] tn-red_text">
@@ -202,5 +202,26 @@ const sortConditionSelectHandle = (index: number) => {
 </template>
 
 <style lang="scss" scoped>
-@import './styles/index.scss';
+.graphic-card-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: calc(100rpx + 80rpx + env(safe-area-inset-bottom));
+
+  .graphic-card-item {
+    position: relative;
+    width: 100%;
+
+    & + .graphic-card-item {
+      margin-top: 30rpx;
+    }
+
+    .custom-brief-operation {
+      background-color: var(--tn-color-red-light);
+      color: var(--tn-color-red);
+      line-height: 1;
+      padding: 12rpx 20rpx;
+      border-radius: 100rpx;
+    }
+  }
+}
 </style>

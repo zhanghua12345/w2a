@@ -7,7 +7,6 @@ defineProps({
     default: () => {
       return {
         title: '页脚',
-        icon: 'rocket',
         path: 'footer',
         url: '/demo-pages/basic/footer/index',
       }
@@ -31,21 +30,31 @@ export default {
 </script>
 
 <template>
-  <view class="content-item" @tap.stop="navDemoPage(dItem.url)">
+  <view
+    class="w-full rounded-12 overflow-hidden tn-shadow tn-gray-disabled_shadow bg-fff"
+    @tap.stop="navDemoPage(dItem.url)"
+  >
     <img
+      class="w-full h-[300rpx]"
       src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
       alt=""
     />
-    <view class="info">
-      <view class="title">雅居 - 绿地V岛</view>
-      <view class="tag">
-        <view v-for="item in list" :key="item" class="box">
-          {{ item }}
+    <view class="p-[24rpx] w-full">
+      <view class="truncate"
+        >雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 -
+        绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛</view
+      >
+      <view class="flex flex-wrap justify-between mt-[20rpx]">
+        <view class="flex-1 flex flex-wrap justify-start">
+          <view v-for="item in list" :key="item" class="text-24">
+            {{ item }}
+            <TnIcon name="title" />
+          </view>
+        </view>
+        <view class="icon">
+          <TnIcon name="carousel" />
         </view>
       </view>
-    </view>
-    <view class="icon">
-      <TnIcon :name="dItem.icon" />
     </view>
   </view>
 </template>

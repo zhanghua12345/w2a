@@ -79,7 +79,7 @@ const pageContainerStyle = computed<(index: number) => CSSProperties>(() => {
 
 onLoad((options: any) => {
   // 获取当前进入的子页面的索引
-  const index = Number(options?.index || 3)
+  const index = Number(options?.index || 1)
   // 设置当前子页面的状态为true
   pageStatus.value[index] = true
   nextTick(() => {
