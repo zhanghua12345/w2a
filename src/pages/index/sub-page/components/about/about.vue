@@ -257,7 +257,7 @@ export default {
             <view class="left-text">公众号</view>
           </view>
           <view class="right tn-blue_text">
-            即刻关注<TnIcon name="share-square" />
+            <TnIcon name="share-square" />
           </view>
         </view>
       </view>
@@ -270,7 +270,7 @@ export default {
             <view class="left-text">视频号</view>
           </view>
           <view class="right tn-blue_text">
-            即刻关注<TnIcon name="share-square" />
+            <TnIcon name="share-square" />
           </view>
         </view>
       </view>
