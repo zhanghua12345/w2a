@@ -1,8 +1,5 @@
 <script lang="ts" setup>
 import TnEmpty from '@tuniao/tnui-vue3-uniapp/components/empty/src/empty.vue'
-import { useTemplate } from './composables'
-
-useTemplate()
 </script>
 
 // #ifdef MP-WEIXIN

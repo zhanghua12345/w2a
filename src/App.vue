@@ -7,4 +7,5 @@ onLaunch(() => {
 </script>
 <style lang="scss">
 @import '@tuniao/tn-style/dist/uniapp/index.css';
+@import './assets/tailwind.css';
 </style>

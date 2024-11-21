@@ -3,10 +3,9 @@ import { reactive, ref } from 'vue'
 import { useUniAppSystemRectInfo } from '@tuniao/tnui-vue3-uniapp/hooks'
 import TnButton from '@tuniao/tnui-vue3-uniapp/components/button/src/button.vue'
 import TnScrollList from '@tuniao/tnui-vue3-uniapp/components/scroll-list/src/scroll-list.vue'
+import TnFooter from '@tuniao/tnui-vue3-uniapp/components/footer/src/footer.vue'
 
 import { tnNavPage } from '@tuniao/tnui-vue3-uniapp/utils'
-
-import { useAbout } from './composables'
 
 import type { CSSProperties } from 'vue'
 
@@ -17,8 +16,11 @@ import {
 } from '@/utils'
 
 const { navBarInfo } = useUniAppSystemRectInfo()
-
-const { githubData } = useAbout()
+const githubData = reactive({
+  商品: 50,
+  案例: 30,
+  文章: 40,
+})
 
 // 自定义按钮样式
 const customButtonStyle: CSSProperties = {
@@ -27,16 +29,14 @@ const customButtonStyle: CSSProperties = {
 }
 
 const userInfo = reactive({
-  nickName: '图55鸟UI-vue3',
+  nickName: '张三李四',
   avatarUrl: '',
 })
-
-const frameVersion = ref('1.0.21')
 
 const friendLinkData = ref([
   {
     id: 1,
-    name: 'uCharts',
+    name: '公众号',
     image: 'https://resource.tuniaokj.com/images/friend_link/1_uCharts.jpg',
     mini_app_id: 'wx37a9ee6a7398dec0',
     mini_app_path: 'demo/home',
@@ -44,7 +44,7 @@ const friendLinkData = ref([
   },
   {
     id: 2,
-    name: '芊云全景',
+    name: '视频号',
     image: 'https://resource.tuniaokj.com/images/friend_link/2_qianyun.jpg',
     mini_app_id: 'wx9f77d65eb4eff65b',
     mini_app_path: 'pages/index/index',
@@ -52,7 +52,7 @@ const friendLinkData = ref([
   },
   {
     id: 3,
-    name: '前端铺子',
+    name: '抖音号',
     image: 'https://resource.tuniaokj.com/images/friend_link/3_puzi.jpg',
     mini_app_id: 'wx201efd3f86fa2ba7',
     mini_app_path: 'pages/index/tabbar',
@@ -60,7 +60,7 @@ const friendLinkData = ref([
   },
   {
     id: 4,
-    name: 'DIY神器',
+    name: '门店位置',
     image: 'https://resource.tuniaokj.com/images/friend_link/4_diy.jpg',
     mini_app_id: 'wxda438798441f31f1',
     mini_app_path: 'pages/index',
@@ -92,6 +92,24 @@ const copyGithubUrl = () => {
   })
   // #endif
 }
+const footerNavigator: any = [
+  {
+    title: '回到首页',
+    url: '/pages/index/index?index=0',
+    textColor: 'tn-gray',
+  },
+  {
+    title: '关于图鸟',
+    url: '/pages/index/index?index=3',
+  },
+]
+
+// 导航点击事件
+const navClick = (nav: any) => {
+  if (nav.url) {
+    tnNavPage(nav.url, 'reLaunch')
+  }
+}
 </script>
 
 // #ifdef MP-WEIXIN
@@ -119,8 +137,9 @@ export default {
       >
         <view class="left">
           <view class="user-nickname">{{ userInfo.nickName }}</view>
+          <view class="bg-black text-orange-500">464646 </view>
           <view class="frame-version tn-gray-dark_text">
-            uniapp11-ts-v3 version: {{ frameVersion }}
+            梵米尼 - 走进生活
           </view>
         </view>
         <view class="right">
@@ -158,7 +177,7 @@ export default {
               name="vip-text"
             />
           </view>
-          <view class="join-text tn-gray_text">加入图鸟会员</view>
+          <view class="join-text tn-gray_text">加入梵米尼</view>
         </view>
         <view
           class="operation-btn"
@@ -181,19 +200,19 @@ export default {
         <view class="icon tn-bg-image tn-gradient-bg__cool-5">
           <TnIcon name="logo-tuniao" />
         </view>
-        <view class="text">图鸟UI-V2</view>
+        <view class="text">预约定制</view>
       </view>
       <view class="item">
         <view class="icon tn-bg-image tn-gradient-bg__cool-7">
           <TnIcon name="code" />
         </view>
-        <view class="text">图鸟模板</view>
+        <view class="text">公众号</view>
       </view>
       <view class="item">
         <view class="icon tn-bg-image tn-gradient-bg__cool-6">
           <TnIcon name="safe-fill" />
         </view>
-        <view class="text">会员协议</view>
+        <view class="text">视频号</view>
       </view>
       <view class="item button">
         <TnButton
@@ -224,9 +243,9 @@ export default {
             <view class="left-icon tn-gradient-bg__cool-2">
               <TnIcon name="set-fill" />
             </view>
-            <view class="left-text">更新日志</view>
+            <view class="left-text">预约定制</view>
           </view>
-          <view class="right tn-gray_text">懒</view>
+          <view class="right tn-gray_text">免费咨询</view>
         </view>
       </view>
       <view class="item-container">
@@ -235,10 +254,23 @@ export default {
             <view class="left-icon github tn-gradient-bg__cool-1">
               <TnIcon name="github" />
             </view>
-            <view class="left-text">开源地址</view>
+            <view class="left-text">公众号</view>
           </view>
           <view class="right tn-blue_text">
-            <TnIcon name="copy-fill" />
+            即刻关注<TnIcon name="share-square" />
+          </view>
+        </view>
+      </view>
+      <view class="item-container">
+        <view class="item" @tap.stop="copyGithubUrl">
+          <view class="left">
+            <view class="left-icon github tn-gradient-bg__cool-1">
+              <TnIcon name="github" />
+            </view>
+            <view class="left-text">视频号</view>
+          </view>
+          <view class="right tn-blue_text">
+            即刻关注<TnIcon name="share-square" />
           </view>
         </view>
       </view>
@@ -317,6 +349,13 @@ export default {
       </view>
     </view>
     <!-- #endif -->
+    <TnFooter
+      class="tn-mt-lg"
+      content="Copyright © 2023 图鸟科技"
+      :navigator="footerNavigator"
+      :fixed="false"
+      @navigator-click="navClick"
+    />
   </view>
 </template>
 

@@ -10,6 +10,7 @@ import BasicPage from './sub-page/components/basic/basic.vue'
 import ComponentPage from './sub-page/components/component/component.vue'
 import TemplatePage from './sub-page/components/template/template.vue'
 import AboutPage from './sub-page/components/about/about.vue'
+import ArticlePage from './sub-page/components/article/article.vue'
 
 import type { CSSProperties } from 'vue'
 import type { IndexSubPageContext } from '@/tokens'
@@ -35,18 +36,18 @@ const {
 
 // 底部导航栏数据
 const tabbarData = [
-  { text: '梵', icon: 'assign-fill' },
-  { text: '商品', icon: 'menu-more-fill' },
-  { text: '模板', icon: 'menu-match-fill' },
-  { text: '文案', icon: 'menu-match-fill' },
+  { text: '材料', icon: 'assign-fill' },
+  { text: '案例', icon: 'menu-more-fill' },
+  { text: '梵米尼', icon: 'menu-match-fill' },
+  { text: '文章', icon: 'menu-match-fill' },
   { text: '我', icon: 'logo-tuniao' },
 ]
 // 导航切换事件
 const onTabbarChange = (index: string | number) => {
-  if (index === 2) {
-    navMiniProgram('wxa698b1eee960632f', 'pages/index/index')
-    return
-  }
+  // if (index === 2) {
+  //   navMiniProgram('wxa698b1eee960632f', 'pages/index/index')
+  //   return
+  // }
   if (!pageStatus.value?.[index as number]) {
     pageStatus.value[index as number] = true
     nextTick(() => {
@@ -78,7 +79,7 @@ const pageContainerStyle = computed<(index: number) => CSSProperties>(() => {
 
 onLoad((options: any) => {
   // 获取当前进入的子页面的索引
-  const index = Number(options?.index || 1)
+  const index = Number(options?.index || 3)
   // 设置当前子页面的状态为true
   pageStatus.value[index] = true
   nextTick(() => {
@@ -102,49 +103,49 @@ provide(
 
 <template>
   <!-- 虚拟首页 -->
-  <view class="page">
+  <view class="relative w-full h-screen bg-fafafa text-mains">
     <view
       v-if="pageStatus[0]"
-      class="page__container"
+      class="relative w-full h-full"
       :style="pageContainerStyle(0)"
     >
-      <scroll-view class="scroll-view" scroll-y>
-        <BasicPage />
+      <scroll-view class="w-full h-full" scroll-y>
+        <TemplatePage />
       </scroll-view>
     </view>
     <view
       v-if="pageStatus[1]"
-      class="page__container"
+      class="relative w-full h-full"
       :style="pageContainerStyle(1)"
     >
-      <scroll-view class="scroll-view" scroll-y>
+      <scroll-view class="w-full h-full" scroll-y>
         <ComponentPage />
       </scroll-view>
     </view>
     <view
       v-if="pageStatus[2]"
-      class="page__container"
+      class="relative w-full h-full"
       :style="pageContainerStyle(2)"
     >
-      <scroll-view class="scroll-view" scroll-y>
-        <TemplatePage />
+      <scroll-view class="w-full h-full" scroll-y>
+        <BasicPage />
       </scroll-view>
     </view>
     <view
       v-if="pageStatus[3]"
-      class="page__container"
+      class="relative w-full h-full"
       :style="pageContainerStyle(3)"
     >
-      <scroll-view class="scroll-view" scroll-y>
-        <AboutPage />
+      <scroll-view class="w-full h-full" scroll-y>
+        <ArticlePage />
       </scroll-view>
     </view>
     <view
       v-if="pageStatus[4]"
-      class="page__container"
+      class="relative w-full h-full"
       :style="pageContainerStyle(4)"
     >
-      <scroll-view class="scroll-view" scroll-y>
+      <scroll-view class="w-full h-full" scroll-y>
         <AboutPage />
       </scroll-view>
     </view>
@@ -169,7 +170,3 @@ provide(
     />
   </TnTabbar>
 </template>
-
-<style lang="scss" scoped>
-@import './style/index.scss';
-</style>

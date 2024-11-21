@@ -14,7 +14,7 @@ defineProps({
     },
   },
 })
-
+const list = ['123m²', '现代风', '大三房']
 // 跳转到对应的演示页面
 const navDemoPage = (path: string) => {
   console.log(1)
@@ -33,10 +33,17 @@ export default {
 <template>
   <view class="content-item" @tap.stop="navDemoPage(dItem.url)">
     <img
-      src="https://resource.tuniaokj.com/images/vue3/banner/vue3-2-min.jpg"
+      src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
       alt=""
     />
-    <view class="info"> 12 </view>
+    <view class="info">
+      <view class="title">雅居 - 绿地V岛</view>
+      <view class="tag">
+        <view v-for="item in list" :key="item" class="box">
+          {{ item }}
+        </view>
+      </view>
+    </view>
     <view class="icon">
       <TnIcon :name="dItem.icon" />
     </view>
@@ -71,6 +78,30 @@ export default {
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0)
     );
+
+    .title {
+      font-size: 28rpx;
+      font-weight: 600;
+    }
+    .tag {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      overflow: hidden;
+      height: 40rpx;
+      width: 100%;
+      .box {
+        max-width: 100%;
+        white-space: nowrap; /* 保证文本在一行内显示 */
+        overflow: hidden; /* 超出容器部分隐藏 */
+        text-overflow: ellipsis; /* 使用省略符号表示文本被截断 */
+        line-height: 1;
+        font-size: 22rpx;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 4rpx 8rpx;
+      }
+    }
   }
   .icon {
     position: absolute;

@@ -179,6 +179,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
+  padding-bottom: calc(100rpx + 80rpx + env(safe-area-inset-bottom));
   width: 100%;
   .banner {
     width: 100%;

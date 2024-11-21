@@ -1,14 +1,6 @@
 <script lang="ts" setup>
 import TnSwiper from '@tuniao/tnui-vue3-uniapp/components/swiper/src/swiper.vue'
 import TnTitle from '@tuniao/tnui-vue3-uniapp/components/title/src/title.vue'
-import TnFooter from '@tuniao/tnui-vue3-uniapp/components/footer/src/footer.vue'
-import { tnNavPage } from '@tuniao/tnui-vue3-uniapp/utils'
-import TnDemoPageContainer from '../page-container/src/page-container.vue'
-import { useBasic } from './composables'
-
-import type { PageContainerData } from '../page-container'
-
-useBasic()
 
 const bannerList = [
   {
@@ -48,24 +40,6 @@ const bannerSub = [
     name: '奶1油风',
   },
 ]
-const footerNavigator: any = [
-  {
-    title: '回到首页',
-    url: '/pages/index/index?index=0',
-    textColor: 'tn-gray',
-  },
-  {
-    title: '关于图鸟',
-    url: '/pages/index/index?index=3',
-  },
-]
-
-// 导航点击事件
-const navClick = (nav: any) => {
-  if (nav.url) {
-    tnNavPage(nav.url, 'reLaunch')
-  }
-}
 </script>
 
 // #ifdef MP-WEIXIN
@@ -195,19 +169,11 @@ export default {
         <view class="box2" />
       </view>
     </view>
-
-    <TnFooter
-      content="Copyright © 2023 图鸟科技"
-      :navigator="footerNavigator"
-      :fixed="false"
-      @navigator-click="navClick"
-    />
   </view>
 </template>
 
 <style lang="scss" scoped>
 .page-container {
-  padding-bottom: calc(100rpx + 80rpx + constant(safe-area-inset-bottom));
   padding-bottom: calc(100rpx + 80rpx + env(safe-area-inset-bottom));
 }
 .title {
