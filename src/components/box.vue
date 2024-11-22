@@ -13,7 +13,7 @@ defineProps({
     },
   },
 })
-const list = ['123m²', '现代风', '大三房']
+const list = ['三居室', '123m²', '现代简约', '马克色']
 // 跳转到对应的演示页面
 const navDemoPage = (path: string) => {
   console.log(1)
@@ -31,28 +31,34 @@ export default {
 
 <template>
   <view
-    class="w-full rounded-12 overflow-hidden tn-shadow tn-gray-disabled_shadow bg-fff"
+    class="w-full rounded-12 overflow-hidden tn-shadow tn-gray-disabled_shadow bg-fff content-item"
     @tap.stop="navDemoPage(dItem.url)"
   >
+    <!-- https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg -->
     <img
       class="w-full h-[300rpx]"
-      src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
+      src="https://img2.baidu.com/it/u=3788447690,3423920042&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500"
       alt=""
     />
-    <view class="p-[24rpx] w-full">
+    <view class="px-[24rpx] py-[14rpx] w-full">
       <view class="truncate"
-        >雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 -
-        绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛雅居 - 绿地V岛</view
+        >最佳“灰+白”搭配！138m²美式温馨四居室，餐厅利用率100%</view
       >
-      <view class="flex flex-wrap justify-between mt-[20rpx]">
+      <view
+        class="flex flex-wrap items-center justify-between mt-[6rpx] text-24 text-000-4"
+      >
         <view class="flex-1 flex flex-wrap justify-start">
-          <view v-for="item in list" :key="item" class="text-24">
+          <view v-for="(item, index) in list" :key="item" class="">
             {{ item }}
-            <TnIcon name="title" />
+            <TnIcon v-show="index !== list.length - 1" name="title" />
           </view>
         </view>
-        <view class="icon">
-          <TnIcon name="carousel" />
+        <view class="flex flex-wrap items-center justify-end">
+          <TnIcon name="like-lack" class="mr-[4rpx]" /> 555
+          <TnIcon name="title" />
+          <TnIcon name="star" class="mr-[4rpx]" /> 100
+          <!-- <TnIcon name="title" /> -->
+          <!-- <TnIcon name="carousel" /> -->
         </view>
       </view>
     </view>
@@ -61,73 +67,8 @@ export default {
 
 <style lang="scss" scoped>
 .content-item {
-  position: relative;
-  width: 330rpx;
-  margin-bottom: 24rpx;
-  height: 400rpx;
   opacity: 0;
-  border-radius: 8rpx;
-  overflow: hidden;
   animation: list-item-enter-animation 0.3s ease forwards;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  .info {
-    position: absolute;
-    z-index: 1;
-    padding: 24rpx;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100rpx;
-    color: #fff;
-    background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0)
-    );
-
-    .title {
-      font-size: 28rpx;
-      font-weight: 600;
-    }
-    .tag {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-items: center;
-      overflow: hidden;
-      height: 40rpx;
-      width: 100%;
-      .box {
-        max-width: 100%;
-        white-space: nowrap; /* 保证文本在一行内显示 */
-        overflow: hidden; /* 超出容器部分隐藏 */
-        text-overflow: ellipsis; /* 使用省略符号表示文本被截断 */
-        line-height: 1;
-        font-size: 22rpx;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 4rpx 8rpx;
-      }
-    }
-  }
-  .icon {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-    width: 60rpx;
-    height: 60rpx;
-    padding: 10rpx;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36rpx;
-  }
-  /* 数据 end */
 }
 
 /* 入场动画 start */

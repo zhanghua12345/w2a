@@ -137,7 +137,6 @@ export default {
       >
         <view class="left">
           <view class="user-nickname">{{ userInfo.nickName }}</view>
-          <view class="bg-black text-orange-500">464646 </view>
           <view class="frame-version tn-gray-dark_text">
             梵米尼 - 走进生活
           </view>

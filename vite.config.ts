@@ -12,4 +12,7 @@ export default defineConfig({
       plugins: [tailwindcss()],
     },
   },
+  server: {
+    port: 5112, // 将3000修改为你想要的端口号
+  },
 })

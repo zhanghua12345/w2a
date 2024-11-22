@@ -9,7 +9,7 @@ export interface WxShareOptions {
 
 export const useWxShare = (options?: WxShareOptions) => {
   // #ifdef MP-WEIXIN
-  const title = options?.title ?? 'TuniaoUI vue3'
+  const title = options?.title ?? '梵米尼'
   const path = options?.path ?? ''
   const query = options?.query ?? ''
   const imageUrl = options?.imageUrl ?? ''

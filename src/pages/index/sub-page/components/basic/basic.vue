@@ -6,39 +6,47 @@ import TnScrollList from '@tuniao/tnui-vue3-uniapp/components/scroll-list/src/sc
 const bannerList = [
   {
     image_url:
-      'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+      'https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg',
     url: '/demo-pages/basic/color/index',
   },
   {
-    image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+    image_url:
+      'https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg',
     url: '/demo-pages/basic/color/index',
   },
   {
-    image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+    image_url:
+      'https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png',
     url: '/demo-pages/basic/color/index',
   },
 ]
 const bannerSub = [
   {
     image_url:
-      'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new1.png',
+      'https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg',
     url: '/demo-pages/basic/color/index',
-    name: '奶1油风',
+    icon: 'reload-home',
+    name: '家具风格',
   },
   {
-    image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d-new.jpg',
+    image_url:
+      'https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png',
     url: '/demo-pages/basic/color/index',
-    name: '奶1油风',
+    icon: 'receipt',
+    name: '10秒算报价',
   },
   {
-    image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+    image_url: 'https://tgi1.jia.com/111/760/11760562.jpg',
     url: '/demo-pages/basic/color/index',
-    name: '奶1油风',
+    icon: 'tips',
+    name: '梵米尼攻略',
   },
   {
-    image_url: 'https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg',
+    image_url:
+      'https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg',
     url: '/demo-pages/basic/color/index',
-    name: '奶1油风',
+    icon: 'carousel',
+    name: '新品首发',
   },
 ]
 </script>
@@ -60,19 +68,36 @@ export default {
       <TnSwiper
         :data="bannerList"
         indicator
+        autoplay
         indicator-position="right-bottom"
         height="600"
       >
         <template #default="{ data, active }">
           <view class="animation" :class="[{ active }]">
-            <image class="image" :src="data.image_url" mode="aspectFill" />
+            <image
+              class="w-full h-full"
+              :src="data.image_url"
+              mode="aspectFill"
+            />
           </view>
         </template>
       </TnSwiper>
-      <view class="swiper-list tn-flex-center-around">
-        <view v-for="e in bannerSub" :key="e.image_url" class="list-wrapper">
-          <image class="wrapper-image" :src="e.image_url" mode="aspectFill" />
-          <view class="wrapper-name">{{ e.name }}</view>
+
+      <view
+        class="absolute bottom-[30rpx] left-[30rpx] w-[690rpx] py-[10rpx] rounded-[10rpx] bg-000-4 tn-flex-center-around"
+      >
+        <view
+          v-for="e in bannerSub"
+          :key="e.image_url"
+          class="relative w-[150rpx] h-[100rpx] overflow-hidden tn-shadow tn-gray-disabled_shadow rounded-[10rpx]"
+        >
+          <image class="w-full h-full bg-cover" :src="e.image_url" />
+          <view
+            class="absolute flex flex-col items-center justify-center w-full h-full top-0 left-0 text-fff bg-000-4"
+          >
+            <TnIcon :name="e.icon" size="40" />
+            <view class="text-24">{{ e.name }}</view>
+          </view>
         </view>
       </view>
     </view>
@@ -81,9 +106,9 @@ export default {
         class="title"
         title="家·空间"
         sub-title="潮流新品，一应俱全"
-        color="tn-type-primary"
-        size="lg"
+        size="sm"
         mode="subTitle"
+        assist-color="rgba(0,0,0,.1)"
       />
       <TnScrollList :indicator="false">
         <view class="scroll-container">
@@ -92,11 +117,7 @@ export default {
             :key="i"
             class="scroll-item tn-flex-center tn-flex-column"
           >
-            <image
-              class="tn-grey-light_bg"
-              :src="e.image_url"
-              mode="aspectFill"
-            />
+            <image class="tn-grey-light_bg bg-cover" :src="e.image_url" />
             <view class="title">{{ e.name }}</view>
           </view>
         </view>
@@ -107,14 +128,18 @@ export default {
         class="title"
         title="家·生活方式"
         sub-title="打造属于您的专属梦想家"
-        color="tn-type-primary"
-        size="lg"
+        size="sm"
         mode="subTitle"
+        assist-color="rgba(0,0,0,.1)"
       />
-      <view class="flex flex-wrap justify-between px-[30rpx] h-[400rpx]">
-        <view class="w-[330rpx] h-full rounded-20 relative">
-          <img
-            class="w-full h-full"
+      <view
+        class="flex flex-wrap justify-between px-[30rpx] h-[400rpx] text-fff"
+      >
+        <view
+          class="w-[300rpx] h-full rounded-20 relative overflow-hidden tn-shadow tn-gray-disabled_shadow"
+        >
+          <image
+            class="w-full h-full bg-cover"
             src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
             alt=""
           />
@@ -123,10 +148,12 @@ export default {
             >梵米尼介绍1
           </view>
         </view>
-        <view class="right flex-1 flex flex-col justify-between h-full">
-          <view class="w-[330rpx] h-[185rpx] relative rounded-20">
-            <img
-              class="w-full h-full"
+        <view class="flex-1 flex flex-col justify-between h-full items-end">
+          <view
+            class="w-[360rpx] h-[185rpx] relative rounded-20 overflow-hidden tn-shadow tn-gray-disabled_shadow"
+          >
+            <image
+              class="w-full h-full bg-cover"
               src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
               alt=""
             />
@@ -135,9 +162,11 @@ export default {
               >梵米尼介绍2
             </view>
           </view>
-          <view class="w-[330rpx] h-[185rpx] relative rounded-20">
-            <img
-              class="w-full h-full"
+          <view
+            class="w-[360rpx] h-[185rpx] relative rounded-20 overflow-hidden tn-shadow tn-gray-disabled_shadow"
+          >
+            <image
+              class="w-full h-full bg-cover"
               src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
               alt=""
             />
@@ -154,15 +183,17 @@ export default {
         class="title"
         title="梵米尼严选"
         sub-title="潮流新品，一应俱全"
-        color="tn-type-primary"
-        size="lg"
+        size="sm"
         mode="subTitle"
+        assist-color="rgba(0,0,0,.1)"
       />
-      <view class="px-[30rpx]">
+      <view class="px-[30rpx] text-fff">
         <view class="flex justify-between h-[200rpx]">
-          <view class="w-[330rpx] h-full relative rounded-20">
-            <img
-              class="w-full h-full"
+          <view
+            class="w-[330rpx] h-full relative rounded-20 overflow-hidden tn-shadow tn-gray-disabled_shadow"
+          >
+            <image
+              class="w-full h-full bg-cover"
               src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
               alt=""
             />
@@ -171,9 +202,11 @@ export default {
               >柜子
             </view>
           </view>
-          <view class="w-[330rpx] h-full relative rounded-20">
-            <img
-              class="w-full h-full"
+          <view
+            class="w-[330rpx] h-full relative rounded-20 overflow-hidden tn-shadow tn-gray-disabled_shadow"
+          >
+            <image
+              class="w-full h-full bg-cover"
               src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
               alt=""
             />
@@ -184,9 +217,11 @@ export default {
           </view>
         </view>
         <view class="mt-[30rpx] flex justify-between h-[160rpx]">
-          <view class="w-[210rpx] h-full relative rounded-20">
-            <img
-              class="w-full h-full"
+          <view
+            class="w-[210rpx] h-full relative rounded-20 overflow-hidden tn-shadow tn-gray-disabled_shadow"
+          >
+            <image
+              class="w-full h-full bg-cover"
               src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
               alt=""
             />
@@ -195,9 +230,11 @@ export default {
               >床沙发
             </view>
           </view>
-          <view class="w-[210rpx] h-full relative rounded-20">
-            <img
-              class="w-full h-full"
+          <view
+            class="w-[210rpx] h-full relative rounded-20 overflow-hidden tn-shadow tn-gray-disabled_shadow"
+          >
+            <image
+              class="w-full h-full bg-cover"
               src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
               alt=""
             />
@@ -206,42 +243,41 @@ export default {
               >五金工艺
             </view>
           </view>
-          <view class="w-[210rpx] h-full relative rounded-20 bg-ccc">
+          <view
+            class="w-[210rpx] h-full relative rounded-20 overflow-hidden tn-shadow tn-gray-disabled_shadow"
+          >
             <view
-              class="w-full h-full absolute left-0 top-0 z-1 bg-000-1 flex justify-center items-center"
+              class="w-full h-full absolute left-0 top-0 z-1 bg-000-1 flex justify-center items-center text-mains"
               >更多<TnIcon name="right" />
             </view>
           </view>
         </view>
       </view>
     </view>
-    margin: 0 32rpx; padding: 20rpx; background: rgba(0, 0, 0, 0.5);
-    border-radius: 10rpx; display: flex; flex-wrap: wrap; justify-content:
-    flex-start; align-items: center;
     <view class="">
       <TnTitle
         class="title"
         title="推文装修"
         sub-title="打造属于您的专属梦想家"
-        color="tn-type-primary"
-        size="lg"
+        size="sm"
         mode="subTitle"
+        assist-color="rgba(0,0,0,.1)"
       />
       <view
-        class="mx-30 px-20 py-10 bg-000-5 rounded-[20rpx] flex flex-wrap justify-between"
+        class="mx-[30rpx] px-[20rpx] py-[10rpx] bg-000-1 rounded-20 flex flex-wrap justify-between"
       >
         <view
-          class="py-10 w-[315rpx] rounded-20 relative"
           v-for="item in 4"
           :key="item"
+          class="my-[10rpx] w-[315rpx] h-[200rpx] rounded-20 relative overflow-hidden tn-shadow tn-gray-disabled_shadow"
         >
-          <img
-            class="w-full h-full"
+          <image
+            class="w-full h-full bg-cover"
             src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
             alt=""
           />
           <view
-            class="w-full h-full absolute left-0 top-0 z-1 bg-000-1 flex justify-center items-center"
+            class="w-full h-full absolute left-0 top-0 z-1 bg-000-2 text-fff flex justify-center items-center font-32"
             >全屋类
           </view>
         </view>
@@ -252,19 +288,21 @@ export default {
         class="title"
         title="金牌服务"
         sub-title="售出非终止，服务才开始！"
-        color="tn-type-primary"
-        size="lg"
+        size="sm"
         mode="subTitle"
+        assist-color="rgba(0,0,0,.1)"
       />
       <view class="mx-[30rpx]">
-        <view class="w-full h-[200rpx] rounded-20 relative">
-          <img
-            class="w-full h-full"
-            src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
+        <view
+          class="w-full h-[200rpx] rounded-20 relative overflow-hidden tn-shadow tn-gray-disabled_shadow"
+        >
+          <image
+            class="w-full h-full bg-cover"
+            src="https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg"
             alt=""
           />
           <view
-            class="w-full h-full absolute left-0 top-0 z-1 bg-000-1 flex flex-col justify-center items-center"
+            class="w-full h-full absolute left-0 top-0 z-1 bg-000-1 flex flex-col justify-center items-center text-fff"
           >
             <view>梵米尼</view>
             <view>共同见证。开创未来</view>
@@ -273,9 +311,9 @@ export default {
         <view class="w-full h-[450rpx] mt-[30rpx]">
           <video
             class="w-full h-full"
-            src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e2000204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef2020326e7802040400"
+            src="https://static.guyantv.com/videom3u8/8a56ea34086faddab80e/8a56ea34086faddab80e.m3u8"
             controls
-            poster="http://www.example.com/poster.jpg"
+            poster="https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg"
           />
         </view>
       </view>
@@ -369,46 +407,5 @@ export default {
   /* 保持图片的宽高比，并覆盖整个元素 */
   background-repeat: no-repeat;
   /* 防止背景图片重复 */
-}
-
-.box5 {
-  margin: 0 32rpx;
-  padding: 20rpx;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10rpx;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-
-  .box {
-    margin: 10rpx;
-    width: 300rpx;
-    height: 400rpx;
-    background: #f30;
-    border-radius: 10rpx;
-    background-image: url('https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg');
-  }
-}
-
-.box6 {
-  padding: 0 32rpx;
-
-  .box1 {
-    width: 100%;
-    height: 200rpx;
-    background: #f30;
-    border-radius: 10rpx;
-    background-image: url('https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg');
-  }
-
-  .box2 {
-    margin-top: 10rpx;
-    width: 100%;
-    height: 500rpx;
-    background: #f30;
-    border-radius: 10rpx;
-    background-image: url('https://resource.tuniaokj.com/images/xiongjie/xiong-3d.jpg');
-  }
 }
 </style>
