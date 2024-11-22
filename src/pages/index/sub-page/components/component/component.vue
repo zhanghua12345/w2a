@@ -1,11 +1,20 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import {
+  onPageScroll,
+  onShareAppMessage,
+  onShareTimeline,
+} from '@dcloudio/uni-app'
 import TnLoadmore from '@tuniao/tnui-vue3-uniapp/components/loadmore/src/loadmore.vue'
 import TnSwiper from '@tuniao/tnui-vue3-uniapp/components/swiper/src/swiper.vue'
 import TnPicker from '@tuniao/tnui-vue3-uniapp/components/picker/src/picker.vue'
+import TnNavbar from '@tuniao/tnui-vue3-uniapp/components/navbar/src/navbar.vue'
+import TnSuspendButton from 'tnuiv3p-tn-suspend-button/index.vue'
+import { useUniAppSystemRectInfo } from '@tuniao/tnui-vue3-uniapp/hooks'
 import Box from '@/components/box.vue'
 import { useWxShare } from '@/hooks'
+console.log(useUniAppSystemRectInfo())
+const { navBarInfo } = useUniAppSystemRectInfo()
 
 const topSwiperData = [
   'https://pic.rmb.bdstatic.com/bjh/240515/events/38e5e2dfabdd3ee5dbab1cf0229f4e3c6395.jpeg',
@@ -70,9 +79,24 @@ const pickerConfirm = (value: any, item: any) => {
   console.log(value, item)
   pickers.value[pickerIndex.value] = item
 }
+
+const scrollTop = ref(0)
+
+onPageScroll((e) => {
+  console.log(e.scrollTop)
+  scrollTop.value = e.scrollTop
+})
 </script>
 
 <template>
+  <TnSuspendButton icon="logo-tuniao" class="z-[9999]" />
+
+  <!-- <view
+    class="header fixed top-0 left-0 w-full z-[99999] flex items-center justify-center bg-fff tn-shadow tn-gray_shadow"
+    :style="{ height: navBarInfo.height + 'px' }"
+    >梵米尼</view
+  > -->
+
   <view class="main w-full">
     <!-- 顶部轮播 -->
     <TnSwiper
@@ -111,7 +135,7 @@ const pickerConfirm = (value: any, item: any) => {
       />
     </view>
     <view class="content-container">
-      <view v-for="item in 30" :key="item" class="mt-[30rpx]">
+      <view v-for="item in 30" :key="item" class="mt-[30rpx] w-full">
         <Box />
       </view>
     </view>

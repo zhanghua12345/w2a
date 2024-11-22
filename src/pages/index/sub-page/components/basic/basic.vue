@@ -106,7 +106,7 @@ export default {
         class="title"
         title="家·空间"
         sub-title="潮流新品，一应俱全"
-        size="sm"
+        size="lg"
         mode="subTitle"
         assist-color="rgba(0,0,0,.1)"
       />
@@ -118,7 +118,7 @@ export default {
             class="scroll-item tn-flex-center tn-flex-column"
           >
             <image class="tn-grey-light_bg bg-cover" :src="e.image_url" />
-            <view class="title">{{ e.name }}</view>
+            <view class="title text-fff">{{ e.name }}</view>
           </view>
         </view>
       </TnScrollList>
@@ -128,7 +128,7 @@ export default {
         class="title"
         title="家·生活方式"
         sub-title="打造属于您的专属梦想家"
-        size="sm"
+        size="lg"
         mode="subTitle"
         assist-color="rgba(0,0,0,.1)"
       />
@@ -183,7 +183,7 @@ export default {
         class="title"
         title="梵米尼严选"
         sub-title="潮流新品，一应俱全"
-        size="sm"
+        size="lg"
         mode="subTitle"
         assist-color="rgba(0,0,0,.1)"
       />
@@ -259,7 +259,7 @@ export default {
         class="title"
         title="推文装修"
         sub-title="打造属于您的专属梦想家"
-        size="sm"
+        size="lg"
         mode="subTitle"
         assist-color="rgba(0,0,0,.1)"
       />
@@ -288,7 +288,7 @@ export default {
         class="title"
         title="金牌服务"
         sub-title="售出非终止，服务才开始！"
-        size="sm"
+        size="lg"
         mode="subTitle"
         assist-color="rgba(0,0,0,.1)"
       />
