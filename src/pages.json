@@ -41,6 +41,12 @@
         "navigationStyle": "custom",
         "navigationBarTitleText": "关于"
       }
+    },
+    {
+      "path": "pages/register/index",
+      "style": {
+        "navigationBarTitleText": "关于"
+      }
     }
   ],
   "tabBar": {

@@ -58,9 +58,10 @@
     <view class="mt-main">
       <view class="flex justify-between items-center">
         <view class="">友情链接</view>
-        <view class=""
-          >全部 <i class="iconfont text-28 ml-10">&#xeaf6;</i></view
-        >
+        <view class="flex items-center">
+          全部
+          <i class="iconfont text-28 ml-10">&#xeaf6;</i>
+        </view>
       </view>
       <view class="bg-fff rounded-32 overflow-hidden mt-main">
         <view class="flex flex-wrap justify-around py-main">

@@ -54,8 +54,8 @@ const list4 = reactive([
 ]);
 </script>
 
-<style scoped>
-page {
-  height: 100%;
+<style scoped lang="scss">
+body {
+  height: 100% !important;
 }
 </style>

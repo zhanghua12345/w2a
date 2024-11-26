@@ -11,7 +11,6 @@
       easingFunction="easeInOutCubic"
       height="700rpx"
       radius="0"
-      loading
     ></up-swiper>
     <view
       class="absolute bottom-main left-main right-main py-10 rounded-main bg-000-4 flex items-center justify-around shadow-md"
