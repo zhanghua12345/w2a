@@ -1,11 +1,21 @@
-<script setup lang="ts">
-import { onLaunch } from '@dcloudio/uni-app'
-onLaunch(() => {
-  // eslint-disable-next-line no-console
-  console.log('欢迎使用图鸟UI')
-})
+<script>
+export default {
+  onLaunch: function () {
+    console.log("App Launch");
+  },
+  onShow: function () {
+    console.log("App Show");
+  },
+  onHide: function () {
+    console.log("App Hide");
+  },
+};
 </script>
+
 <style lang="scss">
-@import '@tuniao/tn-style/dist/uniapp/index.css';
-@import './assets/tailwind.css';
+/*每个页面公共css */
+@import "./styles/iconfont.css";
+@import "uview-plus/index.scss";
+@import "./styles/tailwind.css";
+@import "./styles/animation.scss";
 </style>

@@ -1,0 +1,20 @@
+/* stylelint-disable scss/at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  font-size: 28rpx;
+  line-height: 1.5;
+  font-weight: normal;
+  position: relative;
+  background-color: #f8f8f8;
+  color: rgba(0,0,0,.9);
+}
+.bg-cover {
+  background-position: center;
+  /* 水平垂直居中 */
+  background-size: cover;
+  /* 保持图片的宽高比，并覆盖整个元素 */
+  background-repeat: no-repeat;
+  /* 防止背景图片重复 */
+}

@@ -1,15 +1,3 @@
-# Editor directory and files
-.idea
-.vscode/*
-!.vscode/extensions.json
-.eslintcache
-cypress/screenshots/*
-cypress/videos/*
-tmp
-
-# Package Manager
-node_modules
-
 # Logs
 logs
 *.log
@@ -19,14 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# System
+node_modules
 .DS_Store
-
-# Bundle
 dist
-coverage
-dist-ssr
 *.local
 
-# ignore config files
-src/config/upload-headers.ts
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
