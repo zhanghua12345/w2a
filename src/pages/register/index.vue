@@ -1,20 +1,26 @@
 <template>
-  <view class="container">
-    <view class="title">欢迎购买厘舍会籍</view>
-    <view class="sub-title">请填写您的实名信息</view>
-    <form @submit="formSubmit" class="form">
-      <view class="form-box">
+  <view class="px-main">
+    <view class="mt-64">欢迎加入梵米尼会籍</view>
+    <view class="text-36 mt-16">请填写您的实名信息</view>
+    <form @submit="formSubmit" class="mt-main">
+      <view
+        class="form-box pt-40 border-0 border-b-2 border-solid border-line relative"
+      >
         <view
-          class="input-box"
+          class="absolute z-[10] top-22 left-0 right-0 h-98"
           @click="focused(1)"
           v-if="inputFocused !== 1"
         ></view>
         <view
-          class="label"
-          :class="{ 'label-focused': inputFocused === 1 || form.mobile }"
-          >您的手机号</view
+          class="absolute z-0 top-44 left-0 text-tip transition-all duration-300"
+          :class="{
+            'label-focused': inputFocused === 1 || form.mobile,
+          }"
         >
+          您的手机号
+        </view>
         <input
+          class="my-20 h-48 leading-[48rpx] w-full"
           type="number"
           v-model="form.mobile"
           maxlength="11"
@@ -22,80 +28,92 @@
           @blur="inputFocused = 0"
         />
       </view>
-      <!-- <view class="form-box">
+
+      <view
+        class="form-box pt-40 border-0 border-b-2 border-solid border-line relative"
+      >
         <view
-          class="input-box"
+          class="absolute z-[10] top-22 left-0 right-0 h-98"
           @click="focused(2)"
           v-if="inputFocused !== 2"
         ></view>
         <view
-          class="label"
-          :class="{ 'label-focused': inputFocused === 2 || form.idcardType }"
-          >证件类型</view
-        >
-        <input
-          type="text"
-          v-model="form.idcardType"
-          disabled
-          :focus="inputFocused === 2"
-          @blur="inputFocused = 0"
-        />
-      </view> -->
-      <view class="form-box">
-        <view
-          class="input-box"
-          @click="focused(3)"
-          v-if="inputFocused !== 3"
-        ></view>
-        <view
-          class="label"
-          :class="{ 'label-focused': inputFocused === 3 || form.name }"
+          class="absolute z-0 top-44 left-0 text-tip transition-all duration-300"
+          :class="{ 'label-focused': inputFocused === 2 || form.name }"
           >您的真实姓名</view
         >
         <input
+          class="my-20 h-48 leading-[48rpx] w-full"
           type="text"
           v-model="form.name"
-          :focus="inputFocused === 3"
+          :focus="inputFocused === 2"
           @blur="inputFocused = 0"
         />
       </view>
 
-      <view class="form-box">
+      <view
+        class="form-box pt-40 border-0 border-b-2 border-solid border-line relative"
+      >
         <view
-          class="input-box"
-          @click="focused(5)"
-          v-if="inputFocused !== 5"
+          class="absolute z-[10] top-22 left-0 right-0 h-98"
+          @click="focused(3)"
+          v-if="inputFocused !== 3"
         ></view>
-        <view class="label label-focused">您的常去门店</view>
-        <picker
-          @change="bindPickerChange"
-          :value="storeId"
-          :range="list"
-          range-key="name"
-        >
-          <view class="uni-input">{{ name }}</view>
-        </picker>
-      </view>
-      <!-- <view class="form-box">
         <view
-          class="input-box"
+          class="absolute z-0 top-44 left-0 text-tip transition-all duration-300"
+          :class="{ 'label-focused': inputFocused === 3 || form.role }"
+          >您的角色</view
+        >
+        <view
+          class="my-20 h-48 leading-[48rpx] w-full"
+          @click="openRoles = true"
+        >
+          {{ form.role?.label }}
+        </view>
+
+        <input type="text" disabled v-model="form.role" class="hidden" />
+        <up-picker
+          :show="openRoles"
+          :columns="[roles]"
+          @confirm="rolesConfirm"
+          closeOnClickOverlay
+          @cancel="openRoles = false"
+          keyName="label"
+          @close="openRoles = false"
+        ></up-picker>
+      </view>
+
+      <view
+        class="form-box pt-40 border-0 border-b-2 border-solid border-line relative"
+        v-if="form.role"
+      >
+        <view
+          class="absolute z-[10] top-22 left-0 right-0 h-98"
           @click="focused(4)"
           v-if="inputFocused !== 4"
         ></view>
         <view
-          class="label"
-          :class="{ 'label-focused': inputFocused === 4 || form.idcardNo }"
-          >您的证件号码</view
+          class="absolute z-0 top-44 left-0 text-tip transition-all duration-300"
+          :class="{ 'label-focused': inputFocused === 4 || form.store }"
+          >{{
+            form.role?.value === 1
+              ? "所在小区"
+              : form.role?.value === 2
+              ? "所在门店"
+              : "所在门店"
+          }}</view
         >
         <input
+          class="my-20 h-48 leading-[48rpx] w-full"
           type="text"
-          v-model="form.idcardNo"
+          :disabled="form.role?.value === 3"
+          v-model="form.store"
           :focus="inputFocused === 4"
           @blur="inputFocused = 0"
         />
-      </view> -->
-      <view class="tip">
-        <view class="tip-text">
+      </view>
+      <view class="mt-56 text-tip">
+        <view class="flex items-center">
           <!-- <image
             mode=""
             src="/static/images/icon/info.png"
@@ -106,382 +124,142 @@
         <view style="margin-top: 6upx">1、姓名信息请与手机号码保持一致；</view>
         <view>2、请输入真实姓名，勿使用“先生，女士 ”等称谓；</view>
         <view>3、如未填写真实信息可能导致注册后无法享受会员权益；</view>
-        <view
-          >4、此页面所填写信息仅作为厘舍会员注册使用，不作为会员对外公开使用。</view
-        >
+        <view>4、此页面所填写信息仅梵米尼会员注册，不作为对外使用。</view>
       </view>
-      <button
-        class="btn"
-        :class="
-          form.mobile === '' || form.idcardNo === '' || form.name === ''
-            ? 'clickActiveBg2'
-            : ''
-        "
-        form-type="submit"
-      >
-        <view
-          style="
-            font-size: 38upx;
-            color: #dbdbdb;
-            text-decoration: line-through;
-            padding-right: 8upx;
-          "
-          >￥298</view
-        >
-        <view>
-          <span style="font-size: 50upx">￥</span
-          >{{ detail.price || "??" }}</view
-        >
 
-        <view class="bl"></view>
-        <view class="bth-d">立即开通</view>
-      </button>
+      <up-button shape="circle" text="立即加入" color="#805844" class="mt-60" />
     </form>
-    <uni-popup ref="popup" type="bottom">
-      <view class="popup-box">
-        <!-- <image
-          class="close"
-          @click="close"
-          mode=""
-          src="/static/images/icon/icon-close.png"
-        /> -->
-        <view class="title">授权同意页面</view>
-        <view class="checkbox">
-          <checkbox-group @change="checkboxChange">
+    <!-- 弹框授权 -->
+    <up-popup
+      :show="showDocPopup"
+      mode="bottom"
+      @close="showDocPopup = false"
+      round="20"
+      bgColor="#f6ede7"
+      closeable
+      closeOnClickOverlay
+    >
+      <view class="my-30 flex flex-col items-center px-main">
+        <view class="font-600 text-30">授权同意页面</view>
+        <view class="bg-fff mt-52 rounded-28">
+          <checkbox-group
+            @change="checkboxChange"
+            class="px-26 py-44 flex flex-col"
+          >
             <label class="label">
-              <checkbox value="1" style="transform: scale(0.7)" />
-              我已阅读并同意<span
-                style="color: #805844"
-                @click.stop="docClick(1)"
-                >《厘舍SPA门店会员章程》</span
+              <checkbox
+                value="1"
+                style="transform: scale(0.7)"
+              />我已阅读并同意<span
+                class="text-vip-main"
+                @click.stop="docClick(2)"
+                >《梵米尼门店会员章程》</span
               >
             </label>
-
             <label class="label" style="margin-top: 20upx">
               <checkbox
                 value="2"
                 style="transform: scale(0.7)"
               />我已阅读并同意<span
-                style="color: #805844"
+                class="text-vip-main"
                 @click.stop="docClick(2)"
-                >《个人证件信息使用条款》</span
+                >《个人隐私信息保护条款》</span
               >
             </label>
           </checkbox-group>
         </view>
-        <view class="btn" hover-class="clickActiveBg2" @click="checkboxClick">
-          同意并继续
-        </view>
+        <up-button
+          shape="circle"
+          text="同意并继续"
+          color="#805844"
+          class="mt-60"
+        />
       </view>
-    </uni-popup>
+    </up-popup>
   </view>
 </template>
 
-<script>
-// import { createCard, storeList } from "@/api/custormer.js";
-// import Coupon from "@/pages/member/coupon.vue";
-// import { profile } from "@/api/custormer.js";
-export default {
-  data() {
-    return {
-      titleTranslateX: 0, // 标题的水平位置
-      checkboxList: [],
-      checkbox: false,
-      focusState: true,
-      form: {
-        mobile: "",
-        idcardNo: "432503198205277711",
-        name: "",
-        storeId: 0,
-        id: "",
-        idcardType: "身份证",
-      },
-      payType: 1,
-      inputFocused: 0,
-      couponId: 0,
-      detail: {
-        price: "",
-      },
-      list: [],
-      name: "",
-      city: 22907,
-    };
-  },
-  onLoad(options) {
-    this.detail = {
-      price: options.price,
-      memberRuleId: options.memberRuleId,
-    };
-    this.open();
-    // this.init();
-    // this.loadUser();
-  },
-  methods: {
-    init() {
-      const cityinfo = uni.getStorageSync("cityinfo");
-      if (cityinfo) {
-        this.cityName = cityinfo.name;
-        this.city = cityinfo.id;
-      }
-      this.loadList();
-    },
-    loadList() {
-      storeList(
-        {
-          name: "",
-          city: this.city,
-          lat: uni.getStorageSync("latV"),
-          lng: uni.getStorageSync("lonV"),
-        },
-        (res) => {
-          if (res.code === 0) {
-            this.name = res.rows[0].name;
-            this.form.storeId = res.rows[0].deptId;
-            this.list = res.rows;
-          }
-        }
-      );
-    },
-    loadUser() {
-      profile({}, (res) => {
-        if (res.code === 0) {
-          this.form.mobile = res.data.phoneNumber;
-        }
-      });
-    },
-    bindPickerChange: function (e) {
-      this.name = this.list[e.detail.value].name;
-      this.form.storeId = this.list[e.detail.value].deptId;
-    },
-    docClick(index) {
-      if (index === 1) {
-        uni.navigateTo({
-          url: "/pagesA/member/doc-1",
-        });
-      } else {
-        uni.navigateTo({
-          url: "/pagesA/member/doc-2",
-        });
-      }
-    },
-    formSubmit() {
-      const { mobile, idcardNo, name } = this.form;
-      if (mobile === "" || idcardNo === "" || name === "") {
-        return false;
-      } else if (!/^1\d{10}$/.test(mobile)) {
-        uni.showToast({
-          icon: "none",
-          title: "手机号码填写错误",
-        });
-        return;
-      }
-      if (!this.checkbox) {
-        this.open();
-      } else {
-        this.submit();
-      }
-    },
-    checkboxChange(e) {
-      this.checkboxList = e.detail.value;
-    },
-    checkboxClick() {
-      if (this.checkboxList.length !== 2) {
-        return uni.showToast({
-          icon: "none",
-          title: "请认真阅读并授权条款！",
-        });
-      }
-      this.checkbox = true;
-      this.close();
-      this.formSubmit();
-    },
-    open() {
-      this.$refs.popup.open("bottom");
-    },
-    close() {
-      this.$refs.popup.close();
-    },
-    submit() {
-      console.log(
-        { ...this.form, memberRuleId: this.detail.memberRuleId },
-        "/memberCard/createCard"
-      );
-      createCard(
-        {
-          ...this.form,
-          memberRuleId: this.detail.memberRuleId,
-          cityId: this.city,
-        },
-        (res) => {
-          if (res.code === 0) {
-            this.couponId = res.data.id;
-            this.$refs.couponComponent.couponOpen();
-          }
-        }
-      );
-    },
-    focused(index) {
-      setTimeout(() => {
-        this.inputFocused = index;
-      }, 300);
-    },
-  },
+<script setup>
+import { ref, reactive } from "vue";
+const showDocPopup = ref(true);
+const inputFocused = ref(0);
+const form = reactive({
+  mobile: "",
+  name: "",
+  store: "",
+  role: null,
+});
+
+const openRoles = ref(false);
+const roles = ref([
+  { label: "会员（普通）", value: 1 },
+  { label: "会员（异业）", value: 2 },
+  { label: "员工", value: 3 },
+]);
+
+const docClick = (index) => {
+  if (index === 1) {
+    uni.navigateTo({
+      url: "/pagesA/member/doc-1",
+    });
+  } else {
+    uni.navigateTo({
+      url: "/pagesA/member/doc-2",
+    });
+  }
+};
+
+const formSubmit = () => {
+  const { mobile, name } = form;
+  if (mobile === "" || name === "") {
+    return false;
+  } else if (!/^1\d{10}$/.test(mobile)) {
+    uni.showToast({
+      icon: "none",
+      title: "手机号码填写错误",
+    });
+    return;
+  }
+  if (!checkbox.value) {
+    showDocPopup.value = true;
+  } else {
+    submit();
+  }
+};
+const checkboxChange = (e) => {
+  console.log(e);
+  // this.checkboxList = e.detail.value;
+};
+
+const submit = () => {
+  console.log(
+    { ...this.form, memberRuleId: this.detail.memberRuleId },
+    "/memberCard/createCard"
+  );
+};
+const focused = (index) => {
+  setTimeout(() => {
+    inputFocused.value = index;
+    if (index === 3) {
+      openRoles.value = true;
+    }
+  }, 300);
+};
+
+const rolesConfirm = (e) => {
+  console.log(e);
+  form.role = e.value[0];
+  openRoles.value = false;
+  if (e.value[0].value === 3) form.store = "梵米尼全屋定制";
+  else form.store = "";
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
-  margin: 0 auto;
-  width: 650upx;
-  letter-spacing: 2upx;
-  color: #333333;
-  line-height: 1.5;
-  font-size: 26upx;
-  position: relative;
-  .clickActiveBg2 {
-    background: #805844 !important;
-    opacity: 0.6;
-  }
-  .title {
-    margin-top: 64upx;
-  }
-  .sub-title {
-    margin-top: 16upx;
-    font-size: 36upx;
-  }
-  .form {
-    margin-top: 36rpx;
-    .form-box {
-      padding-top: 40rpx;
-      border-bottom: solid 2upx #f0f0f0;
-      position: relative;
-      .input-box {
-        position: absolute;
-        z-index: 10;
-        top: 22upx;
-        left: 0;
-        height: 98upx;
-        width: 100%;
-      }
-      .label {
-        transition: all 0.3s ease;
-        position: absolute;
-        z-index: 0;
-        top: 44upx;
-        left: 0;
-        color: #999;
-        font-size: 28upx;
-      }
-      .label-focused {
-        top: 20upx;
-        left: 0;
-        font-size: 24upx;
-      }
-      input {
-        margin: 20upx 0 20rpx;
-        height: 48upx;
-        line-height: 48upx;
-        width: 100%;
-      }
-      .uni-input {
-        height: 88upx;
-        width: 100%;
-        font-size: 28upx;
-        line-height: 88upx;
-      }
-    }
-    .tip {
-      margin-top: 56rpx;
-      color: #999999;
-      .tip-text {
-        display: flex;
-        align-items: center;
-      }
-    }
-  }
-}
-.popup-box {
-  padding: 0 40upx 80upx;
-  background: #f6ede7;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 40upx;
-  width: calc(100% - 80upx);
-
-  .close {
-    position: absolute;
-    right: 30upx;
-    top: 50upx;
-    width: 40upx;
-    height: 40upx;
-    padding: 10upx;
-  }
-  .title {
-    margin-top: 52upx;
-    font-size: 30upx;
-    font-weight: bold;
-  }
-  .checkbox {
-    background: #fff;
-    width: 100%;
-    margin-top: 52upx;
-    border-radius: 28upx;
-    checkbox-group {
-      padding: 44upx 26upx;
-      display: flex;
-      flex-direction: column;
-    }
-  }
-  .btn {
-    width: 100%;
-    margin-top: 40upx;
-    font-size: 30upx;
-  }
-  .coupon {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 40upx;
-    color: #000;
-
-    .icon-paytype {
-      width: 50upx;
-      height: 50upx;
-    }
-
-    .icon-check {
-      width: 30upx;
-      height: 30upx;
-      display: block;
-      margin-left: auto;
-    }
-  }
-}
-
-.btn {
-  width: 660upx;
-  height: 96upx;
-  background: #805844;
-  margin: 46upx auto;
-  color: #fff;
-  border-radius: 48upx;
-  line-height: 96upx;
-  font-size: 55upx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .bth-d {
-    font-size: 40upx;
-  }
-  .bl {
-    height: 42upx;
-    width: 2upx;
-    background: #fff;
-    margin: 0 16upx;
-    opacity: 0.6;
+.form-box {
+  .label-focused {
+    top: 20upx;
+    font-size: 24upx;
   }
 }
 </style>

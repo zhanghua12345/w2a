@@ -45,7 +45,13 @@
     {
       "path": "pages/register/index",
       "style": {
-        "navigationBarTitleText": "关于"
+        "navigationBarTitleText": "加入我们"
+      }
+    },
+    {
+      "path": "pages/register/done",
+      "style": {
+        "navigationBarTitleText": "加入我们"
       }
     }
   ],

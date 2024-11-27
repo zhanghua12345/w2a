@@ -33,7 +33,9 @@
           <i class="iconfont text-fff text-40">&#xeaf6;</i>
           <view>加入VIP</view>
         </view>
-        <view class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient"
+        <view
+          class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient"
+          @click="goVip"
           >立即加入</view
         >
       </view>
@@ -90,6 +92,9 @@ const router = ref([
     router: "../leave/index",
   },
 ]);
+const goVip = () => {
+  uni.navigateTo({ url: "/pages/register/index" });
+};
 </script>
 
 <style scoped lang="scss">
