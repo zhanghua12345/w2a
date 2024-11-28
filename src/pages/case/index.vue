@@ -20,17 +20,27 @@
           @click="pickerClick(index)"
         >
           {{ item.label }}
-          <i class="iconfont text-main text-28 mr-4">&#xeaf6;</i>
+          <i
+            class="iconfont text-tip text-20 ml-10 transition-transform duration-300"
+            :class="{
+              'rotate-180': index === pickerIndex && openPicker,
+            }"
+            >&#xfd90;</i
+          >
         </view>
       </view>
     </view>
   </up-sticky>
 
-  <view>
-    <view class="px-main w-full">
-      <Box className="mb-main" v-for="item in 30" :key="item" />
-    </view>
+  <view class="px-main w-full">
+    <Box className="mb-main" v-for="item in list" :key="item" />
   </view>
+  <up-loadmore
+    :status="status"
+    loading-text="努力加载中，先喝杯茶"
+    loadmore-text="轻轻上拉···"
+    nomore-text="实在没有了"
+  />
   <up-picker
     :show="openPicker"
     :columns="[pickerData[pickerIndex]]"
@@ -45,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 import Box from "@/components/box/index.vue";
 const pickers = ref([
@@ -107,6 +117,55 @@ const pickerConfirm = (value, e) => {
   console.log();
   pickers.value[pickerIndex.value] = value.value[0];
 };
+
+import { onReachBottom, onPullDownRefresh } from "@dcloudio/uni-app";
+
+const list = ref([]);
+let pageNo = 1;
+let pageSize = 5;
+const status = ref("loading");
+
+// 下拉刷新
+onPullDownRefresh(() => {
+  pageNo = 1;
+  loadData(true).then(() => {
+    uni.stopPullDownRefresh();
+  });
+});
+
+// 上拉加载
+onReachBottom(() => {
+  console.log(2345678);
+  loadData();
+});
+
+// 加载数据的函数
+const loadData = async (isRefresh = false) => {
+  if (isRefresh) {
+    list.value = []; // 刷新时清空数据
+    status.value = "loadmore";
+  }
+  if (status.value === "nomore") return;
+  console.log(status.value);
+  status.value = "loading";
+  // 模拟数据加载，实际中应该是API请求
+  setTimeout(() => {
+    for (let i = 0; i < pageSize; i++) {
+      console.log(status.value);
+
+      list.value.push(`Item ${pageNo * pageSize + i}`);
+      status.value = pageNo >= 4 ? "nomore" : "loadmore";
+    }
+
+    pageNo++;
+    console.log(pageNo);
+  }, 500);
+};
+
+// 页面加载时自动加载数据
+onMounted(() => {
+  loadData(true);
+});
 </script>
 
 <style scoped></style>

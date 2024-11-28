@@ -1,31 +1,34 @@
 <template>
   <view class="h-full w-full flex flex-col">
-    <up-tabs
-      :list="list4"
-      lineWidth="20"
-      lineHeight="7"
-      :lineColor="`url(${lineBg}) 100% 100%`"
-      :activeStyle="{
-        color: '#303133',
-        fontWeight: 'bold',
-        transform: 'scale(1.05)',
-      }"
-      :inactiveStyle="{
-        color: '#606266',
-        transform: 'scale(1)',
-      }"
-      itemStyle="padding-left: 30rpx; padding-right: 30rpx; height: 88rpx;"
-    />
+    <view class="pb-10">
+      <up-tabs
+        :list="list4"
+        lineWidth="20"
+        lineHeight="7"
+        :lineColor="`url(${lineBg}) 100% 100%`"
+        :activeStyle="{
+          color: '#303133',
+          fontWeight: 'bold',
+          transform: 'scale(1.05)',
+        }"
+        :inactiveStyle="{
+          color: '#606266',
+          transform: 'scale(1)',
+        }"
+        itemStyle="padding-left: 30rpx; padding-right: 30rpx; height: 88rpx;"
+      />
+    </view>
+
     <view class="flex-1 w-full h-full">
       <swiper
         @change="change"
         @click="click"
-        :style="{ height: 'calc(100vh - 88rpx)' }"
+        :style="{ height: 'calc(100vh - 98rpx)' }"
       >
         <swiper-item>
           <scroll-view :scroll-y="true" class="h-full">
             <view class="px-main pb-main">
-              <Article className="mb-main" v-for="item in 10" :key="item" />
+              <Article className="mb-main" v-for="item in list" :key="item" />
               <up-loadmore
                 :status="status"
                 loading-text="努力加载中，先喝杯茶"
@@ -38,7 +41,7 @@
         <swiper-item>
           <scroll-view :scroll-y="true" class="h-full">
             <view class="px-main pb-main">
-              <Article className="mb-main" v-for="item in 10" :key="item" />
+              <Article className="mb-main" v-for="item in list" :key="item" />
               <up-loadmore
                 :status="status"
                 loading-text="努力加载中，先喝杯茶"
@@ -57,7 +60,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 
 import Article from "@/components/article/index.vue";
 
@@ -68,9 +71,61 @@ const status = ref("loading");
 
 // 响应式数据
 const list4 = reactive([
-  { name: "dd" },
-  { name: "dd", badge: { isDot: true } },
+  { name: "梵米尼精选" },
+  { name: "空间设计" },
+  { name: "装修攻略" },
+  { name: "家居风水" },
+  { name: "收纳攻略" },
+  { name: "家居生活" },
 ]);
+
+import { onLoad, onReachBottom, onPullDownRefresh } from "@dcloudio/uni-app";
+
+const list = ref([]);
+let pageNo = 1;
+let pageSize = 10;
+
+// 下拉刷新
+onPullDownRefresh(() => {
+  pageNo = 1;
+  loadData(true).then(() => {
+    uni.stopPullDownRefresh();
+  });
+});
+
+// 上拉加载
+onReachBottom(() => {
+  console.log(2345678);
+  loadData();
+});
+
+// 加载数据的函数
+const loadData = async (isRefresh = false) => {
+  if (isRefresh) {
+    list.value = []; // 刷新时清空数据
+    status.value = "loadmore";
+  }
+  if (status.value === "nomore") return;
+  console.log(status.value);
+  status.value = "loading";
+  // 模拟数据加载，实际中应该是API请求
+  setTimeout(() => {
+    for (let i = 0; i < pageSize; i++) {
+      console.log(status.value);
+
+      list.value.push(`Item ${pageNo * pageSize + i}`);
+      status.value = pageNo >= 4 ? "nomore" : "loadmore";
+    }
+
+    pageNo++;
+    console.log(pageNo);
+  }, 500);
+};
+
+// 页面加载时自动加载数据
+onMounted(() => {
+  loadData(true);
+});
 </script>
 
 <style scoped lang="scss"></style>

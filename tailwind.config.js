@@ -144,6 +144,9 @@ module.exports = {
         "000-04": "rgba(0,0,0,.04)",
         "fff-0": "rgba(255, 255, 255, 0)",
         "000-0": "rgba(0,0,0,0)",
+        'fdf2e0':'#fdf2e0',
+        'f9ebea':'#f9ebea',
+        'f5f4d6':'#f5f4d6',
         linear:
           "linear-gradient(135deg, #FE5351 0%, #FE345B 51%, #FE3964 100%)",
         ddd: "#ddd",

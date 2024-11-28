@@ -31,22 +31,22 @@
     </view>
   </view>
   <!-- 案例 -->
-  <view class="mt-main mx-main">
+  <view class="mt-40 mx-main">
     <Title
-      className=" mb-20"
+      className="mb-20"
       title="全屋方案"
       subTitleBottom="盘点最备受瞩目的全屋设计方案"
     />
     <up-scroll-list :indicator="false">
       <view
-        class="h-300 pr-main last:pr-0"
+        class="h-300 mr-main last:mr-0 shadow-md"
         v-for="(item, index) in cases"
         :key="index"
       >
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-250 h-full" :src="item.image_url"></image>
           <view
-            class="absolute top-40 left-0 bg-fff-8 text-main font-600 p-12 pr-16 rounded-r-full"
+            class="absolute top-40 left-0 bg-fff-8 text-main font-600 p-12 pr-16 min-w-160 rounded-r-full flex justify-center"
             >{{ item.name }}</view
           >
         </view>
@@ -54,79 +54,98 @@
     </up-scroll-list>
   </view>
   <view class="mx-main mt-40">
-    <!-- <Title title="积极向上2" /> -->
     <view class="grid grid-rows-2 grid-cols-9 gap-20 h-330">
       <view
-        class="rounded-main text-fff flex items-center justify-center"
-        :class="{
-          'row-span-2 col-span-4 bg-[#E8E3D9]': index === 0,
-          'col-span-5 bg-[#856755]': index === 1,
-          'row-span-1 col-span-5 bg-[#A48360]': index === 2,
-        }"
+        class="rounded-main text-fff relative"
         v-for="(item, index) in actives"
         :key="index"
+        :class="
+          index === 0
+            ? ['row-span-2', 'col-span-4', 'bg-fdf2e0']
+            : index === 1
+            ? ['col-span-5', 'bg-f5f4d6']
+            : ['row-span-1', 'col-span-5', 'bg-f9ebea']
+        "
       >
-        {{ item.name }}
+        <view class="p-main absolute z-10 flex flex-col justify-between">
+          <view class="text-[#866350] text-36 font-600">{{ item.name }}</view>
+          <view class="text-tip text-24 pt-10 flex items-center">
+            {{ item.subName }}
+            <i class="iconfont text-20">&#xe671;</i>
+          </view>
+        </view>
+        <view
+          class="border-[#e1a490] text-[#e1a490] px-20 py-10 border-2 border-solid rounded-8 absolute bottom-80 left-main"
+          v-if="index === 0"
+        >
+          立即邀请
+        </view>
+
+        <image
+          class="w-100 h-100 bg-cover absolute right-0 bottom-30"
+          :src="item.image_url"
+          alt=""
+        />
       </view>
     </view>
   </view>
-  <view class="mx-main mt-main">
-    <Title title="积极向上3" />
-    <view class="mt-20 grid grid-rows-5 grid-cols-6 gap-main h-400">
+  <view class="mx-main mt-40">
+    <Title title="家·空间" subTitle="细致打造有品生活" />
+    <view class="mt-main grid grid-rows-5 grid-cols-6 gap-main h-450">
       <view
-        class="bg-000 rounded-main text-fff flex items-center justify-center"
+        class="bg-000 rounded-main text-fff relative overflow-hidden shadow-md"
         :class="{
           'row-span-3 col-span-3': index === 0 || index === 1,
-          'row-span-2 col-span-2': index === 2 || index === 3,
+          'row-span-2 col-span-2': index === 2 || index === 3 || index === 4,
         }"
-        v-for="(item, index) in bannerSub"
+        v-for="(item, index) in spaces"
         :key="index"
       >
-        {{ index }}
-      </view>
-      <view
-        class="bg-000 rounded-main text-fff row-span-2 col-span-2 flex items-center justify-center"
-      >
-        更多 <i class="iconfont text-fff text-28">&#xeaf6;</i>
+        <image class="w-full h-full bg-cover" :src="item.image_url" alt="" />
+        <view class="absolute bottom-10 left-0 right-0 flex justify-center">
+          <view class="bg-000-6 text-fff rounded-full px-20 py-6">
+            {{ item.name }}
+          </view>
+        </view>
       </view>
     </view>
   </view>
-  <view class="mx-main mt-main pb-20">
-    <Title title="积极向上4" />
+  <view class="mx-main mt-40">
+    <Title title="梵米尼优选" subTitle="满足你对生活的所有想象" />
     <view
-      class="mt-20 p-20 bg-000-04 rounded-main grid grid-rows-2 grid-cols-2 gap-main"
+      class="mt-main p-20 bg-000-04 rounded-main grid grid-rows-2 grid-cols-2 gap-main"
     >
       <view
-        v-for="item in 4"
+        v-for="item in introduces"
         :key="item"
         class="relative h-200 rounded-main overflow-hidden"
       >
-        <image
-          class="w-full h-full bg-cover"
-          src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
-          alt=""
-        />
+        <image class="w-full h-full bg-cover" :src="item.image_url" alt="" />
         <view
           class="absolute left-0 top-0 bottom-0 right-0 z-1 bg-000-2 text-fff flex justify-center items-center"
-          >全屋类
+          >{{ item.name }}
+          <i
+            class="iconfont text-20 p-10 rounded-full bg-000-5 text-fff flex justify-center items-center ml-10"
+            >&#xe7ea;</i
+          >
         </view>
       </view>
     </view>
   </view>
   <!-- 品牌介绍 -->
-  <view class="mx-main mt-main pb-20">
+  <view class="mx-main mt-40 pb-20">
     <Title title="品牌介绍" subTitle="美好生活轻松实现" />
-    <up-image
+    <image
       class="rounded-main mt-main overflow-hidden"
-      width="100%"
-      height="400rpx"
       @click="
         openBrands({
           router: '/pages/join/index',
         })
       "
       src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
+      alt=""
     />
+
     <video
       class="w-full h-400 rounded-main mt-main"
       src="https://static.guyantv.com/videos/2024_11_27/w2a_0_355/720/7E2reK4X5TH6UNzBkhcfsZGQqvjVYxDR_720.m3u8"
@@ -135,7 +154,7 @@
     />
     <up-scroll-list :indicator="false">
       <view
-        class="pt-main pl-main first:pl-0"
+        class="mt-main ml-main first:ml-0 shadow-md"
         v-for="(item, index) in brands"
         :key="index"
         @click="openBrands(item)"
@@ -201,25 +220,55 @@ const bannerSub = [
 //活动
 const actives = ref([
   {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    image_url: "/static/active_1.png",
     router: "/pages/join/index",
     name: "推荐有礼",
     subName: "邀好友得门店好礼",
   },
   {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    image_url: "/static/active_1.png",
     router: "/demo-pages/basic/color/index",
     name: "免费设计",
     subName: "省2880元设计礼包",
   },
   {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    image_url: "/static/active_1.png",
     router: "/demo-pages/basic/color/index",
     name: "来点灵感",
     subName: "实景装修案例",
+  },
+]);
+// 家·空间
+const spaces = ref([
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/pages/join/index",
+    name: "客餐厅",
+  },
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/demo-pages/basic/color/index",
+    name: "卧室",
+  },
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/demo-pages/basic/color/index",
+    name: "厨房",
+  },
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/demo-pages/basic/color/index",
+    name: "入户",
+  },
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/demo-pages/basic/color/index",
+    name: "书房",
   },
 ]);
 // 案例
@@ -240,7 +289,34 @@ const cases = ref([
     image_url:
       "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
     router: "/demo-pages/basic/color/index",
-    name: "北欧",
+    name: "北 欧",
+  },
+]);
+// 公司介绍
+const introduces = ref([
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/pages/join/index",
+    name: "走进梵米尼",
+  },
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/demo-pages/basic/color/index",
+    name: "走进AI工厂",
+  },
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/demo-pages/basic/color/index",
+    name: "发展进程",
+  },
+  {
+    image_url:
+      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
+    router: "/demo-pages/basic/color/index",
+    name: "品质保障",
   },
 ]);
 // 品牌介绍

@@ -24,9 +24,14 @@
           </view>
         </view>
         <view class="flex flex-wrap items-center justify-end">
-          <i class="iconfont text-main text-28 mr-4">&#xeaf6;</i>555
-          <TnIcon name="title" />
-          <i class="iconfont text-main text-28 mr-4">&#xeaf6;</i> 100
+          <i class="iconfont text-tip text-24 mr-6">&#xe662;</i
+          >{{ Math.floor(Math.random() * 100) }}
+          <view class="px-20">
+            <up-line length="10" direction="col"></up-line
+          ></view>
+
+          <i class="iconfont text-tip text-24 mr-6">&#xe66e;</i>
+          {{ Math.floor(Math.random() * 100) }}
           <!-- <TnIcon name="title" /> -->
           <!-- <TnIcon name="carousel" /> -->
         </view>
