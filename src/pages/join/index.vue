@@ -2,7 +2,7 @@
   <view class="fixed z-[9999] left-0 w-full" v-show="scrollTop > 60">
     <up-navbar
       :style="{ 'z-index': 9999 }"
-      title="厘舍SPA品牌合作指南"
+      title="梵米尼家具优选"
       leftIcon=""
     />
   </view>
@@ -14,12 +14,12 @@
     />
     <view class="px-main" :style="{ paddingTop: tops + 'px' }">
       <i
-        class="iconfont text-vip-main text-40 flex justify-end items-center"
+        class="iconfont text-main-vip text-40 flex justify-end items-center"
         :style="{ height: height || 0 + 'px' }"
         >&#xe632;</i
       >
       <view class="flex justify-center text-40 text-main-vip"
-        >厘舍SPA品牌合作指南1</view
+        >梵米尼家具优选</view
       >
     </view>
     <up-sticky :offset-top="height + tops" bgColor="#fff">

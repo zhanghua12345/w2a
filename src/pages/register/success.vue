@@ -5,7 +5,7 @@
       mode="scaleToFill"
       class="success-icon"
     />
-    <i class="iconfont text-vip-main text-128">&#xe632;</i>
+    <i class="iconfont text-main-vip text-128">&#xe632;</i>
     <view class="name">提交成功</view>
     <view class="text">请您保持电话畅通</view>
     <view class="text">工作人员会在3个工作日内与您联系</view>

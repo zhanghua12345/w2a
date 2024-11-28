@@ -100,7 +100,7 @@ module.exports = {
         tip: "#9c9c9c",
         line: "#f0f0f0",
         "main-sub": "#b3ecff",
-        "vip-main": "#805844",
+        "main-vip": "#805844",
         red: "#f30",
         f0f0f0: "#f0f0f0",
         d6f4fa: "#d6f4fa",

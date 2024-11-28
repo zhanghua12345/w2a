@@ -48,7 +48,7 @@
         "navigationBarTitleText": "注册会员"
       }
     },
-   
+
     {
       "path": "pages/register/success",
       "style": {
@@ -58,9 +58,52 @@
     {
       "path": "pages/join/index",
       "style": {
-         "navigationStyle": "custom",
+        "navigationStyle": "custom",
         "navigationBarTitleText": "加入我们"
       }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "授权"
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pagesA",
+      "pages": [
+        {
+          "path": "articleCollection/index",
+          "style": {
+            "navigationBarTitleText": "文章收藏"
+          }
+        },
+        {
+          "path": "articleHistory/index",
+          "style": {
+            "navigationBarTitleText": "文章历史"
+          }
+        },
+        {
+          "path": "carefullySelectedHistory/index",
+          "style": {
+            "navigationBarTitleText": "梵米尼严选"
+          }
+        },
+        {
+          "path": "caseCollection/index",
+          "style": {
+            "navigationBarTitleText": "案例收藏"
+          }
+        },
+        {
+          "path": "caseHistory/index",
+          "style": {
+            "navigationBarTitleText": "案例历史"
+          }
+        }
+      ]
     }
   ],
   "tabBar": {

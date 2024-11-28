@@ -151,7 +151,7 @@
                 value="1"
                 style="transform: scale(0.7)"
               />我已阅读并同意<span
-                class="text-vip-main"
+                class="text-main-vip"
                 @click.stop="docClick(2)"
                 >《梵米尼门店会员章程》</span
               >
@@ -161,7 +161,7 @@
                 value="2"
                 style="transform: scale(0.7)"
               />我已阅读并同意<span
-                class="text-vip-main"
+                class="text-main-vip"
                 @click.stop="docClick(2)"
                 >《个人隐私信息保护条款》</span
               >

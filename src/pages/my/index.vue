@@ -1,4 +1,11 @@
 <template>
+  <!-- <view class="fixed z-[9999] left-0 w-full" v-show="scrollTop > 60">
+    <up-navbar
+      :style="{ 'z-index': 9999 }"
+      title="梵米尼家具优选"
+      leftIcon=""
+    />
+  </view> -->
   <!-- 背景毛玻璃 -->
   <view
     class="bg-frosted-glass fixed z-1b left-0 top-0 right-0 h-690 bg-no-repeat"
@@ -10,51 +17,76 @@
     <view
       class="flex flex-wrap justify-between items-center"
       :style="{
-        paddingTop: '45px',
+        paddingTop: '90px',
       }"
     >
       <view>
-        <view class="text-48 font-700">张三李四</view>
-        <view class="">张三李四张三李四张三李四张三李四</view>
+        <view class="text-48 font-700"
+          >{{ detail.phoneNumber ? "您好，" : "" }}{{ detail.nickname }}</view
+        >
+        <view class="mt-20">{{ detail.phoneNumber }}</view>
+        <view class="" @click="goLogin">梵米尼-创造您的生活</view>
       </view>
-      <view class="h-150 w-150 rounded-full bg-d6f4fa"></view>
+      <image
+        class="h-150 w-150 rounded-full"
+        :src="detail.avatar || '/static/user.png'"
+        @click="showLoginPopup = true"
+      ></image>
     </view>
     <view class="pt-80 flex flex-wrap">
-      <view class="pr-50" v-for="item in 3">
-        <view class="text-40">{{ item }}</view>
-        <view class="text-9c9c9c text-32">案例</view>
+      <view
+        class="pr-50"
+        v-for="item in dataFilter(routers, 0, 3)"
+        @click="openMenu(item)"
+      >
+        <view class="text-40">{{ item.number }}</view>
+        <view class="text-9c9c9c">{{ item.label }}</view>
       </view>
     </view>
     <view class="bg-fff rounded-32 overflow-hidden mt-50">
       <view
         class="bg-131313 px-main flex flex-wrap justify-between items-center"
       >
-        <view class="text-[#aaa] py-30">
-          <i class="iconfont text-fff text-40">&#xeaf6;</i>
-          <view>加入VIP</view>
+        <view class="py-30">
+          <i class="iconfont text-main-vip text-40">&#xe6ca;</i>
+          <view class="text-fff">加入VIP</view>
         </view>
         <view
           class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient"
           @click="goVip"
-          >立即加入</view
         >
+          立即加入
+        </view>
       </view>
       <view class="flex flex-wrap justify-around py-main">
-        <view class="flex flex-col items-center" v-for="item in 4">
-          <i class="iconfont text-64">&#xeaf6;</i>
-          <view>加入VIP</view>
+        <view
+          class="flex flex-col items-center"
+          v-for="item in dataFilter(routers, 3, 7)"
+          @click="openMenu(item)"
+        >
+          <i class="iconfont text-64">{{
+            item.icon === 1 ? "&#xeaf6;" : "&#xeaf6;"
+          }}</i>
+          <view>{{ item.label }}</view>
         </view>
       </view>
     </view>
     <view class="mt-main bg-fff rounded-32 overflow-hidden">
       <up-cell-group :border="false">
         <up-cell
-          v-for="item in 4"
+          v-for="item in dataFilter(routers, 7, 11)"
+          @click="openMenu(item)"
           icon="map"
-          title="霜叶红于二月花"
-          :isLink="false"
+          :title="item.label"
           :border="false"
-        ></up-cell>
+          :isLink="true"
+        >
+          <template #icon>
+            <i class="iconfont text-64">{{
+              item.icon === 1 ? "&#xeaf6;" : "&#xeaf6;"
+            }}</i>
+          </template>
+        </up-cell>
       </up-cell-group>
     </view>
     <view class="mt-main">
@@ -62,38 +94,143 @@
         <view class="">友情链接</view>
         <view class="flex items-center">
           全部
-          <i class="iconfont text-28 ml-10">&#xeaf6;</i>
+          <i class="iconfont text-20 ml-10 text-tip">&#xe671;</i>
         </view>
       </view>
+
       <view class="bg-fff rounded-32 overflow-hidden mt-main">
-        <view class="flex flex-wrap justify-around py-main">
-          <view class="flex flex-col items-center" v-for="item in 4">
+        <up-scroll-list :indicator="false">
+          <view
+            class="flex flex-col items-center px-main py-20"
+            v-for="item in links"
+            :key="item.id"
+            @click="openLink(item)"
+          >
             <i class="iconfont text-64">&#xeaf6;</i>
-            <view>加入VIP</view>
+            <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
           </view>
-        </view>
+        </up-scroll-list>
       </view>
     </view>
   </view>
   <Footer className="py-60" content="Copyright © 2023 图鸟科技" />
+  <Login v-model:detail="detail" v-model:show="showLoginPopup" />
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Footer from "@/components/footer/index.vue";
+import Login from "@/components/login/index.vue";
+const detail = ref({ nickname: "去登录", avatar: "" });
 
-const router = ref([
+const showLoginPopup = ref(false);
+const routers = ref([
   {
-    label: "reward.Rewards",
-    router: "../reward/index",
+    label: "案例",
+    router: "/pagesA/caseHistory/index",
+    number: 10,
   },
   {
-    label: "leave.Leave",
-    router: "../leave/index",
+    label: "好文",
+    router: "/pagesA/articleHistory/index",
+    number: 10,
+  },
+  {
+    label: "严选",
+    router: "/pagesA/carefullySelectedHistory/index",
+    number: 10,
+  },
+  {
+    label: "案例收藏",
+    router: "/pagesA/caseCollection/index",
+    icon: 1,
+  },
+  {
+    label: "好文收藏",
+    router: "/pagesA/articleCollection/index",
+    icon: 2,
+  },
+  {
+    label: "0元设计",
+    router: "/pagesA/articleCollection/index",
+    icon: 3,
+  },
+  {
+    label: "分享",
+    router: "/pagesA/articleCollection/index",
+    icon: 4,
+  },
+  {
+    label: "查看门店",
+    router: "/pagesA/articleCollection/index",
+    icon: 4,
+  },
+  {
+    label: "关于我们",
+    router: "/pagesA/articleCollection/index",
+    icon: 4,
+  },
+  {
+    label: "隐私政策",
+    router: "/pagesA/articleCollection/index",
+    icon: 4,
+  },
+  {
+    label: "低价量房",
+    router: "/pagesA/articleCollection/index",
+    icon: 4,
+  },
+  {
+    label: "设置",
+    router: "/pagesA/articleCollection/index",
+    icon: 4,
   },
 ]);
+const links = [
+  {
+    label: "梵米尼商城",
+    router: "/pagesA/articleCollection/index",
+    icon: 1,
+  },
+  {
+    label: "公众号",
+    router: "/pagesA/articleCollection/index",
+    icon: 1,
+  },
+  {
+    label: "抖音号",
+    router: "/pagesA/articleCollection/index",
+    icon: 1,
+  },
+  {
+    label: "视频号",
+    router: "/pagesA/articleCollection/index",
+    icon: 1,
+  },
+
+  {
+    label: "H5网站",
+    router: "/pagesA/articleCollection/index",
+    icon: 1,
+  },
+  {
+    label: "在线客服",
+    router: "/pagesA/articleCollection/index",
+    icon: 1,
+  },
+];
+const dataFilter = (list, startIndex, length) => {
+  return list.slice(startIndex, length);
+};
 const goVip = () => {
   uni.navigateTo({ url: "/pages/register/index" });
+};
+const goLogin = () => {
+  uni.navigateTo({ url: "/pages/login/index" });
+};
+const openMenu = (item) => {
+  console.log();
+  uni.navigateTo({ url: item.router });
 };
 </script>
 
