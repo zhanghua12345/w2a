@@ -33,6 +33,7 @@ module.exports = {
       40: "40rpx",
       48: "48rpx",
       64: "64rpx",
+      100: "100rpx",
       128: "128rpx",
     },
     fontWeight: {

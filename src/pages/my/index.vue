@@ -58,9 +58,7 @@
           v-for="item in dataFilter(routers, 3, 7)"
           @click="openMenu(item)"
         >
-          <i class="iconfont text-64">{{
-            item.icon === 1 ? "&#xeaf6;" : "&#xeaf6;"
-          }}</i>
+          <i class="iconfont text-64" v-html="item.icon" />
           <view>{{ item.label }}</view>
         </view>
       </view>
@@ -76,7 +74,7 @@
           :isLink="true"
         >
           <template #icon>
-            <i class="iconfont text-64" v-html="item.icon" />
+            <i class="iconfont text-36 text-tip" v-html="item.icon" />
           </template>
         </up-cell>
       </up-cell-group>
@@ -147,47 +145,47 @@ const routers = ref([
   {
     label: "案例收藏",
     router: "/pagesA/caseCollection/index",
-    icon: 1,
+    icon: "&#xe681;",
   },
   {
     label: "好文收藏",
     router: "/pagesA/articleCollection/index",
-    icon: 2,
+    icon: "&#xe628;",
   },
   {
     label: "0元设计",
     router: "/pagesA/articleCollection/index",
-    icon: 3,
+    icon: "&#xe76c;",
   },
   {
     label: "分享",
     router: "/pagesA/articleCollection/index",
-    icon: 4,
+    icon: "&#xe6d5;",
   },
   {
     label: "查看门店",
     router: "/pagesA/articleCollection/index",
-    icon: 4,
+    icon: "&#xe622;",
   },
   {
     label: "关于我们",
     router: "/pagesA/articleCollection/index",
-    icon: 4,
+    icon: "&#xe612;",
   },
   {
     label: "隐私协议",
     router: "/pagesA/articleCollection/index",
-    icon: 4,
+    icon: "&#xe740;",
   },
   {
     label: "低价量房",
     router: "/pagesA/articleCollection/index",
-    icon: 4,
+    icon: "&#xe817;",
   },
   {
     label: "设置",
     router: "/pagesA/articleCollection/index",
-    icon: 4,
+    icon: "&#xe7eb;",
   },
 ]);
 const links = [

@@ -3,40 +3,48 @@
     :show="show"
     mode="bottom"
     @close="$emit('update:show', false)"
-    round="20"
+    round="8"
     bgColor="#fff"
     closeable
     closeOnClickOverlay
   >
     <view
-      class="popup-box tracking-[4rpx] px-44 py-main flex flex-col items-center"
+      class="popup-box px-main py-60 flex flex-col items-center leading-1.3"
     >
-      <image class="w-250" mode="widthFix" src="/static/login-w.png" />
-      <button
-        class="mt-40 overflow-hidden rounded-full w-168 h-168 px-0"
-        open-type="chooseAvatar"
-        @chooseavatar="onChooseAvatar"
+      <view class="text-36 text-000 font-700 w-full">获取您的昵称、头像</view>
+      <view class="text-26 text-[#aaa] mt-12 w-full"
+        >获取用户头像、昵称，主要用于向用户提供具有辨识度的用户体验</view
       >
-        <image
-          class="w-full h-full"
-          :src="newDetail.avatar || '/static/user.png'"
-          mode="aspectFill"
-        />
-      </button>
+      <view class="avatar relative mt-60 rounded-full w-180 h-180">
+        <button
+          class="w-full h-full bg-f8f7f8 rounded-full flex justify-center items-center px-0"
+          open-type="chooseAvatar"
+          @chooseavatar="onChooseAvatar"
+        >
+          <i class="iconfont text-100 leading-1 text-[#e4e9ec]">&#xe617;</i>
+        </button>
+        <view
+          class="absolute bottom-[-12rpx] right-[-10rpx] h-64 w-64 border-4 border-fff border-solid rounded-full bg-000 flex justify-center items-center"
+        >
+          <i class="iconfont text-40 leading-1 text-fff">&#xe6c9;</i>
+        </view>
+      </view>
+
       <input
         type="nickname"
-        class="mt-60 px-18 h-84 rounded-full leading-[84rpx] border-4 border-solid border-line text-32 w-full"
+        class="mt-50 px-20 h-80 rounded-12 leading-[80rpx] bg-[#f8f7f8] text-32 w-full"
         placeholder="请输入昵称"
         @change="inputChange"
         v-model="newDetail.nickname"
       />
-      <up-button
-        shape="circle"
-        text="确认"
-        color="#805844"
-        class="mt-60"
-        @click="submit"
-      />
+      <view class="mt-70 w-full">
+        <up-button
+          text="保 存"
+          color="#e6e6e6"
+          customStyle="{ color: '#838383'}"
+          @click="submit"
+        />
+      </view>
     </view>
   </up-popup>
 </template>
@@ -149,4 +157,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.avatar::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 2.5rem 0 rgba(0, 0, 0, 0.15);
+}
+</style>

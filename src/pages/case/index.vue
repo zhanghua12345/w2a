@@ -145,7 +145,6 @@ onPullDownRefresh(() => {
 
 // 上拉加载
 onReachBottom(() => {
-  console.log(2345678);
   loadData();
 });
 
