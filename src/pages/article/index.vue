@@ -26,7 +26,12 @@
         :style="{ height: 'calc(100vh - 98rpx)' }"
       >
         <swiper-item>
-          <scroll-view :scroll-y="true" class="h-full">
+          <scroll-view
+            :scroll-y="true"
+            class="h-full"
+            @scrolltolower="onReachBottom"
+            @scrolltoupper="onPullDownRefresh"
+          >
             <view class="px-main pb-main">
               <Article className="mb-main" v-for="item in list" :key="item" />
               <up-loadmore
@@ -63,7 +68,14 @@
 import { reactive, ref, onMounted } from "vue";
 
 import Article from "@/components/article/index.vue";
-
+import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import { useWxShare } from "@/hooks/index.js";
+// 微信分享
+onShareAppMessage(() => ({}));
+onShareTimeline(() => ({}));
+useWxShare({
+  path: "/pages/article/index",
+});
 const lineBg =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAOCAYAAABdC15GAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFxSURBVHgBzZNRTsJAEIb/WTW+lpiY+FZPIDew3ABP4GJ8hxsI9zBpOYHeQDwBPQI+mRiRvpLojtPdYhCorQqF/6GdbGd2vvwzBXZcNAt4oj1ANeUoAT5iqkUjbEFLHNmhD1YPEvpZ3ghkGlVDCkc94/BmHMq998I5ONiY1ZBfpKAyuOtgAc5yOEDmYEWNh32BHF91sGHZHmwW4azciN9aQwnz3SJEgOmte+R2tdLprTYoa50mvuomlLpD4Y3oQZnov6D2RzCqI93bWOHaEmAGqQUyRBlZR1WfarcD/EJ2z8DtzDGvsMCwpm8XOCfDUsVOCYhiqRxI/CTQo4UOvjzO7Pow18vfywneuUHHUUxLn55lLw5JFpZ8bEUcY8oXdOLWiHLTxvoGpLqoUmy6dBT15o/ox3znpoycAmxUsiJTbs1cmxeVKp+0zmFIS7bGWiVghC7Vwse8jFKAX9eljh4ggKLLv7uaQvG9/F59Oo2SouxPu7OTCxN/s8wAAAAASUVORK5CYII=";
 
@@ -79,25 +91,23 @@ const list4 = reactive([
   { name: "家居生活" },
 ]);
 
-import { onLoad, onReachBottom, onPullDownRefresh } from "@dcloudio/uni-app";
-
 const list = ref([]);
 let pageNo = 1;
 let pageSize = 10;
 
 // 下拉刷新
-onPullDownRefresh(() => {
+const onPullDownRefresh = () => {
   pageNo = 1;
+  list.value = [];
   loadData(true).then(() => {
     uni.stopPullDownRefresh();
   });
-});
+};
 
 // 上拉加载
-onReachBottom(() => {
-  console.log(2345678);
+const onReachBottom = () => {
   loadData();
-});
+};
 
 // 加载数据的函数
 const loadData = async (isRefresh = false) => {
@@ -116,7 +126,6 @@ const loadData = async (isRefresh = false) => {
       list.value.push(`Item ${pageNo * pageSize + i}`);
       status.value = pageNo >= 4 ? "nomore" : "loadmore";
     }
-
     pageNo++;
     console.log(pageNo);
   }, 500);

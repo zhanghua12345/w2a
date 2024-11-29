@@ -58,6 +58,16 @@
 import { ref, onMounted } from "vue";
 
 import Box from "@/components/box/index.vue";
+import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import { useWxShare } from "@/hooks/index.js";
+
+// 微信分享
+onShareAppMessage(() => ({}));
+onShareTimeline(() => ({}));
+useWxShare({
+  path: "/pages/case/index",
+});
+
 const pickers = ref([
   { label: "户型", value: 0, index: 0 },
   { label: "风格", value: 0, index: 0 },

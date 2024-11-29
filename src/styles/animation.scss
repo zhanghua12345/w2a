@@ -36,3 +36,16 @@ $animation-duration: 0.3s;
   }
 }
 /* 动画 end */
+
+.animation-zoom-in-out{
+  animation: zoomInOut 1.6s infinite;
+}
+@keyframes zoomInOut {
+  0%,
+  100% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1); /* 放大到 1.5 倍 */
+  }
+}

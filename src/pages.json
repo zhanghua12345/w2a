@@ -102,6 +102,12 @@
           "style": {
             "navigationBarTitleText": "案例历史"
           }
+        },
+        {
+          "path": "spaces/index",
+          "style": {
+            "navigationBarTitleText": "空间设计"
+          }
         }
       ]
     }
@@ -124,14 +130,14 @@
       },
       {
         "pagePath": "pages/case/index",
-        "iconPath": "static/tabBar/home.png",
-        "selectedIconPath": "static/tabBar/home_active.png",
+        "iconPath": "static/tabBar/case.png",
+        "selectedIconPath": "static/tabBar/case_active.png",
         "text": "案例"
       },
       {
         "pagePath": "pages/article/index",
-        "iconPath": "static/tabBar/home.png",
-        "selectedIconPath": "static/tabBar/home_active.png",
+        "iconPath": "static/tabBar/article.png",
+        "selectedIconPath": "static/tabBar/article_active.png",
         "text": "文章"
       },
       {

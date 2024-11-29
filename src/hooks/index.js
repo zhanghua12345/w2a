@@ -1,2 +1,2 @@
-export * from './use-wx-share'
-export * from './use-demo-h5-page'
+export * from "./use-wx-share";
+export * from "./get-bound-info";

@@ -22,7 +22,7 @@
     <view class="pt-80 flex flex-wrap">
       <view class="pr-50" v-for="item in 3">
         <view class="text-40">{{ item }}</view>
-        <view class="text-9c9c9c text-32">案例</view>
+        <view class="text-tip text-32">案例</view>
       </view>
     </view>
     <view class="bg-fff rounded-32 overflow-hidden mt-50">

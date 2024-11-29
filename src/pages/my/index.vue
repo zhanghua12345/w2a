@@ -1,11 +1,5 @@
 <template>
-  <!-- <view class="fixed z-[9999] left-0 w-full" v-show="scrollTop > 60">
-    <up-navbar
-      :style="{ 'z-index': 9999 }"
-      title="梵米尼家具优选"
-      leftIcon=""
-    />
-  </view> -->
+  <Navbar title="梵米尼家具优选" leftIcon=" " />
   <!-- 背景毛玻璃 -->
   <view
     class="bg-frosted-glass fixed z-1b left-0 top-0 right-0 h-690 bg-no-repeat"
@@ -40,7 +34,7 @@
         @click="openMenu(item)"
       >
         <view class="text-40">{{ item.number }}</view>
-        <view class="text-9c9c9c">{{ item.label }}</view>
+        <view class="text-tip">{{ item.label }}</view>
       </view>
     </view>
     <view class="bg-fff rounded-32 overflow-hidden mt-50">
@@ -82,9 +76,7 @@
           :isLink="true"
         >
           <template #icon>
-            <i class="iconfont text-64">{{
-              item.icon === 1 ? "&#xeaf6;" : "&#xeaf6;"
-            }}</i>
+            <i class="iconfont text-64" v-html="item.icon" />
           </template>
         </up-cell>
       </up-cell-group>
@@ -102,11 +94,12 @@
         <up-scroll-list :indicator="false">
           <view
             class="flex flex-col items-center px-main py-20"
+            :class="item.class"
             v-for="item in links"
             :key="item.id"
             @click="openLink(item)"
           >
-            <i class="iconfont text-64">&#xeaf6;</i>
+            <i class="iconfont text-64" v-html="item.icon" />
             <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
           </view>
         </up-scroll-list>
@@ -119,8 +112,19 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import Navbar from "@/components/navbar/index.vue";
 import Footer from "@/components/footer/index.vue";
 import Login from "@/components/login/index.vue";
+import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import { useWxShare } from "@/hooks/index.js";
+
+// 微信分享
+onShareAppMessage(() => ({}));
+onShareTimeline(() => ({}));
+useWxShare({
+  path: "/pages/my/index",
+});
+
 const detail = ref({ nickname: "去登录", avatar: "" });
 
 const showLoginPopup = ref(false);
@@ -171,7 +175,7 @@ const routers = ref([
     icon: 4,
   },
   {
-    label: "隐私政策",
+    label: "隐私协议",
     router: "/pagesA/articleCollection/index",
     icon: 4,
   },
@@ -190,33 +194,39 @@ const links = [
   {
     label: "梵米尼商城",
     router: "/pagesA/articleCollection/index",
-    icon: 1,
+    icon: "&#xe74b;",
+    class: "",
   },
   {
     label: "公众号",
     router: "/pagesA/articleCollection/index",
-    icon: 1,
+    icon: "&#xe614;",
+    class: "text-main",
   },
   {
     label: "抖音号",
     router: "/pagesA/articleCollection/index",
-    icon: 1,
+    icon: "&#xe601;",
+    class: "",
   },
   {
     label: "视频号",
     router: "/pagesA/articleCollection/index",
-    icon: 1,
+    icon: "&#xe69c;",
+    class: "",
   },
 
   {
     label: "H5网站",
     router: "/pagesA/articleCollection/index",
-    icon: 1,
+    icon: "&#xe607;",
+    class: "",
   },
   {
     label: "在线客服",
     router: "/pagesA/articleCollection/index",
-    icon: 1,
+    icon: "&#xe658;",
+    class: "",
   },
 ];
 const dataFilter = (list, startIndex, length) => {

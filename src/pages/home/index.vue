@@ -1,7 +1,5 @@
 <template>
-  <view class="fixed z-[9999] left-0 w-full" v-show="scrollTop > 50">
-    <up-navbar :style="{ 'z-index': 9999 }" title="梵米尼" leftIcon="" />
-  </view>
+  <Navbar leftIcon=" " />
   <view class="w-full h-700 relative">
     <up-swiper
       :list="list3"
@@ -36,6 +34,8 @@
       className="mb-20"
       title="全屋方案"
       subTitleBottom="盘点最备受瞩目的全屋设计方案"
+      :isMore="true"
+      @click="openPage('/pages/case/index', 'switchTab')"
     />
     <up-scroll-list :indicator="false">
       <view
@@ -90,7 +90,12 @@
     </view>
   </view>
   <view class="mx-main mt-40">
-    <Title title="家·空间" subTitle="细致打造有品生活" />
+    <Title
+      title="家·空间"
+      subTitle="细致打造有品生活"
+      :isMore="true"
+      @click="openPage('/pagesA/spaces/index')"
+    />
     <view class="mt-main grid grid-rows-5 grid-cols-6 gap-main h-450">
       <view
         class="bg-000 rounded-main text-fff relative overflow-hidden shadow-md"
@@ -124,10 +129,11 @@
         <view
           class="absolute left-0 top-0 bottom-0 right-0 z-1 bg-000-2 text-fff flex justify-center items-center"
           >{{ item.name }}
-          <i
-            class="iconfont text-20 p-10 rounded-full bg-000-5 text-fff flex justify-center items-center ml-10"
-            >&#xe7ea;</i
+          <view
+            class="w-36 h-36 rounded-full bg-000-5 flex justify-center items-center ml-10 animation-zoom-in-out"
           >
+            <i class="iconfont text-20 text-fff">&#xe674;</i>
+          </view>
         </view>
       </view>
     </view>
@@ -136,12 +142,8 @@
   <view class="mx-main mt-40 pb-20">
     <Title title="品牌介绍" subTitle="美好生活轻松实现" />
     <image
-      class="rounded-main mt-main overflow-hidden"
-      @click="
-        openBrands({
-          router: '/pages/join/index',
-        })
-      "
+      class="rounded-main mt-main overflow-hidden w-full"
+      @click="openPage('/pages/join/index')"
       src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
       alt=""
     />
@@ -173,17 +175,24 @@
 
 <script setup>
 import Title from "@/components/title/index.vue";
+import Navbar from "@/components/navbar/index.vue";
 import { onMounted, onUnmounted, ref } from "vue";
-import { onPageScroll } from "@dcloudio/uni-app";
-import { useWxShare } from "@/hooks";
+import {
+  onPageScroll,
+  onShareAppMessage,
+  onShareTimeline,
+} from "@dcloudio/uni-app";
+import { useWxShare } from "@/hooks/index.js";
+// 微信分享
+onShareAppMessage(() => ({}));
+onShareTimeline(() => ({}));
 useWxShare({
-  path: "/demo-pages/component/steps/index",
+  path: "/pages/home/index",
 });
 const scrollTop = ref(0);
 onPageScroll((e) => {
   scrollTop.value = e.scrollTop;
 });
-
 // 使用 ref 创建响应式引用
 const list3 = ref([
   "https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png",
@@ -345,6 +354,9 @@ const brands = [
 ];
 const openBrands = (item) => {
   uni.navigateTo({ url: item.router });
+};
+const openPage = (page, type = "navigateTo") => {
+  uni[type]({ url: page });
 };
 </script>
 
