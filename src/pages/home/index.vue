@@ -175,7 +175,10 @@
 import Title from "@/components/title/index.vue";
 import { onMounted, onUnmounted, ref } from "vue";
 import { onPageScroll } from "@dcloudio/uni-app";
-
+import { useWxShare } from "@/hooks";
+useWxShare({
+  path: "/demo-pages/component/steps/index",
+});
 const scrollTop = ref(0);
 onPageScroll((e) => {
   scrollTop.value = e.scrollTop;
