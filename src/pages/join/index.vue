@@ -8,17 +8,17 @@
   </view>
   <view class="tabbar-contain">
     <image
-      src="https://nfassetoss.southcn.com/__asset/c8ecec36a0/f8b2fabad4.webp"
+      src="https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png"
       mode="scaleToFill"
-      class="slice"
+      class="slice h-400"
     />
     <view class="px-main" :style="{ paddingTop: tops + 'px' }">
       <i
-        class="iconfont text-main text-40 flex justify-end items-center"
+        class="iconfont text-main text-40 flex justify-start items-center"
         :style="{ height: height || 0 + 'px' }"
         >&#xe633;</i
       >
-      <view class="flex justify-center text-40 text-main-vip"
+      <view class="flex justify-center text-40 text-main font-600"
         >梵米尼家具优选</view
       >
     </view>
@@ -28,9 +28,9 @@
         :list="list1"
         lineWidth="28"
         lineHeight="4"
-        lineColor="#805844"
+        lineColor="#cf5d38"
         :activeStyle="{
-          color: '#805844',
+          color: '#cf5d38',
           fontWeight: 'bold',
           transform: 'scale(1.05)',
         }"
@@ -53,8 +53,8 @@
       />
     </view>
     <view class="bottoms">
-      <view class="btn2" @click="goForm">
-        申请合作 <i class="iconfont text-fff text-40">&#xeaf6;</i>
+      <view class="btn2 bg-main" @click="goForm">
+        客服咨询 <i class="iconfont text-fff text-24">&#xe671;</i>
       </view>
     </view>
   </view>
@@ -174,9 +174,13 @@ export default {
         .exec();
     },
     goForm() {
-      uni.navigateTo({
-        url: "/pagesA/join/form",
+      wx.openCustomerServiceChat({
+        corpid: "你的客服消息corpid", // 必填，公众号的corpid，必须与当前登录的微信号是同一个公众号
+        kfaccount: "客服微信号", // 必填，客服账号
       });
+      // uni.navigateTo({
+      //   url: "/pagesA/join/form",
+      // });
     },
   },
 };
@@ -232,7 +236,7 @@ export default {
   .btn2 {
     width: 660rpx;
     height: 96rpx;
-    background: #805844;
+
     margin: 30rpx auto;
     color: #fff;
     border-radius: 4rpx;
