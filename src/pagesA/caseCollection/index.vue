@@ -1,3 +1,7 @@
-<template>案例收藏</template>
-<script setup></script>
-<style lang="sass" scoped></style>
+<template>
+  <Handle />
+</template>
+<script setup>
+import Handle from "@/components/handle/index.vue";
+</script>
+<style lang="scss" scoped></style>

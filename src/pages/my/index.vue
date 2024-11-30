@@ -46,10 +46,13 @@
           <view class="text-fff">加入VIP</view>
         </view>
         <view
-          class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient"
+          class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient relative"
           @click="goVip"
         >
           立即加入
+          <view class="absolute z-100 right-50 top-4">
+            <Handle />
+          </view>
         </view>
       </view>
       <view class="flex flex-wrap justify-around py-main">
@@ -115,6 +118,7 @@ import Footer from "@/components/footer/index.vue";
 import Login from "@/components/login/index.vue";
 import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
 import { useWxShare } from "@/hooks/index.js";
+import Handle from "@/components/handle/index.vue";
 
 // 微信分享
 onShareAppMessage(() => ({}));
