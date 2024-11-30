@@ -7,9 +7,9 @@
     />
     <i class="iconfont text-main-vip text-128">&#xe632;</i>
     <view class="name">提交成功</view>
-    <view class="text">请您保持电话畅通</view>
-    <view class="text">工作人员会在3个工作日内与您联系</view>
-    <view class="btn2" @click="goHome"> 返回首页 </view>
+    <view class="text">工作人员会在3个工作日内审核</view>
+    <view class="text">联系我们：865-884-6224</view>
+    <view class="btn2" @click="goHome"> 返回个人中心 </view>
   </view>
 </template>
 <script>
@@ -35,7 +35,7 @@ export default {
   methods: {
     goHome(e) {
       uni.reLaunch({
-        url: "/pages/custormer/index/index",
+        url: "/pages/my/index",
       });
     },
   },

@@ -15,7 +15,6 @@ module.exports = {
   content: ["index.html", "./src/**/*.{html,js,ts,vue}"],
   theme: {
     fontSize: {
-      main: "28rpx",
       8: "8rpx",
       10: "10rpx",
       12: "12rpx",

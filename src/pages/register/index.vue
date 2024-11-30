@@ -127,7 +127,13 @@
         <view>4、此页面所填写信息仅梵米尼会员注册，不作为对外使用。</view>
       </view>
 
-      <up-button shape="circle" text="立即加入" color="#805844" class="mt-60" />
+      <up-button
+        shape="circle"
+        text="立即加入"
+        color="#805844"
+        class="mt-60"
+        form-type="submit"
+      />
     </form>
     <!-- 弹框授权 -->
     <up-popup
@@ -210,6 +216,9 @@ const docClick = (index) => {
 };
 
 const formSubmit = () => {
+  uni.navigateTo({
+    url: "/pages/register/success",
+  });
   const { mobile, name } = form;
   if (mobile === "" || name === "") {
     return false;

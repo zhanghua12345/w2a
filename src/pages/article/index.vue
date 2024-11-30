@@ -59,9 +59,7 @@
       </swiper>
     </view>
   </view>
-  <!-- 
- 
-  </up-swiper> -->
+  <ScrollTop />
 </template>
 
 <script setup>

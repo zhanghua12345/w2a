@@ -20,9 +20,9 @@
       >
         <image class="w-full h-full bg-cover" :src="e.image_url" />
         <view
-          class="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full text-fff bg-000-4"
+          class="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full text-fff bg-000-1"
         >
-          <i class="iconfont text-fff text-40">&#xeaf6;</i>
+          <i class="iconfont text-fff text-40" v-html="e.icon" />
           <view class="text-24">{{ e.name }}</view>
         </view>
       </view>
@@ -124,6 +124,7 @@
         v-for="item in introduces"
         :key="item"
         class="relative h-200 rounded-main overflow-hidden"
+        @click="openPage(item.router)"
       >
         <image class="w-full h-full bg-cover" :src="item.image_url" alt="" />
         <view
@@ -171,11 +172,13 @@
       </view>
     </up-scroll-list>
   </view>
+  <ScrollTop />
 </template>
 
 <script setup>
 import Title from "@/components/title/index.vue";
 import Navbar from "@/components/navbar/index.vue";
+import ScrollTop from "@/components/scrollTop/index.vue";
 import { onMounted, onUnmounted, ref } from "vue";
 import {
   onPageScroll,
@@ -183,15 +186,13 @@ import {
   onShareTimeline,
 } from "@dcloudio/uni-app";
 import { useWxShare } from "@/hooks/index.js";
+// 监听滚动
+onPageScroll((e) => {});
 // 微信分享
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
 useWxShare({
   path: "/pages/home/index",
-});
-const scrollTop = ref(0);
-onPageScroll((e) => {
-  scrollTop.value = e.scrollTop;
 });
 // 使用 ref 创建响应式引用
 const list3 = ref([
@@ -205,27 +206,27 @@ const bannerSub = [
     image_url:
       "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
     url: "/demo-pages/basic/color/index",
-    icon: "reload-home",
+    icon: "&#xe627;",
     name: "家具风格",
   },
   {
     image_url:
       "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
     url: "/demo-pages/basic/color/index",
-    icon: "receipt",
+    icon: "&#xe613;",
     name: "10秒算报价",
   },
   {
     image_url: "https://tgi1.jia.com/111/760/11760562.jpg",
     url: "/pages/join/index",
-    icon: "tips",
+    icon: "&#xe62c;",
     name: "梵米尼攻略",
   },
   {
     image_url:
       "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
     url: "/demo-pages/basic/color/index",
-    icon: "carousel",
+    icon: "&#xe68f;",
     name: "新品首发",
   },
 ];

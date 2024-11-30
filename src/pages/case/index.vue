@@ -52,15 +52,22 @@
     @close="openPicker = false"
   >
   </up-picker>
+  <ScrollTop />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 
+import ScrollTop from "@/components/scrollTop/index.vue";
 import Box from "@/components/box/index.vue";
-import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import {
+  onPageScroll,
+  onShareAppMessage,
+  onShareTimeline,
+} from "@dcloudio/uni-app";
 import { useWxShare } from "@/hooks/index.js";
-
+// 监听滚动
+onPageScroll((e) => {});
 // 微信分享
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));

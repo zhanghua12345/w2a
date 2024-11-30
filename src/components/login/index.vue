@@ -170,4 +170,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.4);
   box-shadow: 0 0 2.5rem 0 rgba(0, 0, 0, 0.15);
 }
+::v-deep(.uni-button)::after {
+  border: 0;
+}
 </style>

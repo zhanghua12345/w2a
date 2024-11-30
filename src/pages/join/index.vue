@@ -14,9 +14,9 @@
     />
     <view class="px-main" :style="{ paddingTop: tops + 'px' }">
       <i
-        class="iconfont text-main-vip text-40 flex justify-end items-center"
+        class="iconfont text-main text-40 flex justify-end items-center"
         :style="{ height: height || 0 + 'px' }"
-        >&#xe632;</i
+        >&#xe633;</i
       >
       <view class="flex justify-center text-40 text-main-vip"
         >梵米尼家具优选</view
@@ -60,6 +60,14 @@
   </view>
 </template>
 <script>
+import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import { useWxShare } from "@/hooks/index.js";
+// 微信分享
+onShareAppMessage(() => ({}));
+onShareTimeline(() => ({}));
+useWxShare({
+  path: "pages/join/index",
+});
 export default {
   data() {
     return {
@@ -130,12 +138,6 @@ export default {
       });
       this.loading = false;
     }, 1000);
-  },
-  onShareAppMessage(e) {
-    return {
-      title: "厘舍SPA品牌合作指南",
-      path: "pages/join/index",
-    };
   },
   onPageScroll(e) {
     // 页面滚动时会触发

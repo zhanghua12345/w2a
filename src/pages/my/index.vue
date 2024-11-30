@@ -43,7 +43,7 @@
       >
         <view class="py-30">
           <i class="iconfont text-main-vip text-40">&#xe6ca;</i>
-          <view class="text-fff">加入VIP</view>
+          <view class="text-fff">加入我们</view>
         </view>
         <view
           class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient relative"
@@ -116,10 +116,16 @@ import { ref, onMounted } from "vue";
 import Navbar from "@/components/navbar/index.vue";
 import Footer from "@/components/footer/index.vue";
 import Login from "@/components/login/index.vue";
-import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import {
+  onShareAppMessage,
+  onShareTimeline,
+  onPageScroll,
+} from "@dcloudio/uni-app";
 import { useWxShare } from "@/hooks/index.js";
 import Handle from "@/components/handle/index.vue";
 
+// 监听滚动
+onPageScroll(() => {});
 // 微信分享
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
