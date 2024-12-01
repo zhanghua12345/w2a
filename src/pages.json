@@ -108,7 +108,15 @@
           "style": {
             "navigationBarTitleText": "空间设计"
           }
+        },
+        {
+          "path": "member/index",
+          "style": {
+            "navigationStyle": "custom",
+            "navigationBarTitleText": "会员"
+          }
         }
+
       ]
     }
   ],
