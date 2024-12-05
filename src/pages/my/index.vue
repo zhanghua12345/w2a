@@ -41,7 +41,7 @@
       <view
         class="bg-131313 px-main flex flex-wrap justify-between items-center"
       >
-        <view class="py-30">
+        <view class="py-30" @click="openPage('/pagesA/member/index')">
           <i class="iconfont text-main-vip text-40">&#xe6ca;</i>
           <view class="text-fff">加入我们</view>
         </view>
@@ -245,6 +245,10 @@ const goVip = () => {
 };
 const goLogin = () => {
   uni.navigateTo({ url: "/pages/login/index" });
+};
+const openPage = (page, type = "navigateTo") => {
+  console.log(245);
+  uni[type]({ url: page });
 };
 const openMenu = (item) => {
   console.log();
