@@ -6,13 +6,15 @@
       leftIcon=""
     />
   </view>
-  <view class="tabbar-contain">
+
+  <view class="tabbar-contain relative pb-200">
     <image
       src="https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png"
       mode="scaleToFill"
-      class="slice h-400"
+      class="slice fixed left-0 top-0 w-full z-1b h-400"
     />
-    <view class="px-main" :style="{ paddingTop: tops + 'px' }">
+
+    <view class="px-main" :style="{ paddingTop: statusBarHeight + 'px' }">
       <i
         class="iconfont text-main text-40 flex justify-start items-center"
         :style="{ height: height || 0 + 'px' }"
@@ -22,11 +24,11 @@
         >梵米尼家具优选</view
       >
     </view>
-    <up-sticky :offset-top="height + tops" bgColor="#fff">
+    <up-sticky :offset-top="height + statusBarHeight" bgColor="#fff">
       <up-tabs
         :current="current"
         :list="list1"
-        lineWidth="28"
+        lineWidth="24"
         lineHeight="4"
         lineColor="#cf5d38"
         :activeStyle="{
@@ -43,8 +45,10 @@
       />
     </up-sticky>
 
-    <view class="images">
-      <image
+    <view>
+      <up-image
+        width="750rpx"
+        height=" "
         v-for="item in list1"
         :key="item"
         :id="item.id"
@@ -52,199 +56,128 @@
         mode="widthFix"
       />
     </view>
-    <view class="bottoms">
-      <view class="btn2 bg-main" @click="goForm">
+    <view
+      class="fixed left-0 bottom-0 pb-100 bg-fff w-full flex justify-center"
+    >
+      <view
+        class="w-660 h-96 my-30 text-fff rounded-4 flex justify-center items-center text-30 bg-main"
+        @click="goForm"
+      >
         客服咨询 <i class="iconfont text-fff text-24">&#xe671;</i>
       </view>
     </view>
   </view>
 </template>
-<script>
-import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
-import { useWxShare } from "@/hooks/index.js";
+<script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+import { useWxShare, getBoundInfo } from "@/hooks/index.js";
+import {
+  onPageScroll,
+  onShareAppMessage,
+  onShareTimeline,
+} from "@dcloudio/uni-app";
 // 微信分享
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
 useWxShare({
   path: "pages/join/index",
 });
-export default {
-  data() {
-    return {
-      loading: true,
-      tops: 0,
-      height: 44,
-      scrollTop: 0, // 记录滚动位置
-      current: 0,
-      list1: [
-        {
-          id: "a",
-          name: "理念",
-          src: "https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png",
-        },
-        {
-          id: "b",
-          name: "要求",
-          src: "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
-        },
-        {
-          id: "c",
-          name: "模式",
-          src: "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
-        },
-        {
-          id: "d",
-          name: "资金",
-          src: "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
-        },
-        {
-          id: "e",
-          name: "流程",
-          src: "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
-        },
-        {
-          id: "f",
-          name: "问答",
-          src: "https://tgi1.jia.com/111/760/11760562.jpg",
-        },
-      ],
-    };
-  },
-  onLoad() {
-    // const res = uni.getSystemInfoSync();
-    // console.log(res);
-    // this.height = res.statusBarHeight * 2;
-    uni.getSystemInfo({
-      success: (e) => {
-        this.tops = e.statusBarHeight;
 
-        let custom = uni.getMenuButtonBoundingClientRect();
+const list1 = ref([
+  {
+    id: "a",
+    name: "理念",
+    src: "https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png",
+  },
+  {
+    id: "b",
+    name: "要求",
+    src: "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
+  },
+  {
+    id: "c",
+    name: "模式",
+    src: "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
+  },
+  {
+    id: "d",
+    name: "资金",
+    src: "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
+  },
+  {
+    id: "e",
+    name: "流程",
+    src: "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
+  },
+  {
+    id: "f",
+    name: "问答",
+    src: "https://tgi1.jia.com/111/760/11760562.jpg",
+  },
+]);
+let loading = true;
+const statusBarHeight = ref(0);
+const height = ref(44);
+const scrollTop = ref(0);
+const current = ref(0);
 
-        this.height = custom.height + (custom.top - e.statusBarHeight) * 2;
-      },
-    });
-  },
-  onReady() {
-    setTimeout(() => {
-      this.list1.forEach((e) => {
-        uni
-          .createSelectorQuery()
-          .in(this)
-          .select("#" + e.id)
-          .boundingClientRect((res) => {
-            e.scrollTop = res.top - this.height / 2 - 84;
-          })
-          .exec();
-      });
-      this.loading = false;
-    }, 1000);
-  },
-  onPageScroll(e) {
-    // 页面滚动时会触发
-    this.scrollTop = e.scrollTop; // 更新滚动位置
-    if (e.scrollTop + 6 >= this.list1[5].scrollTop) {
-      this.current = 5;
-    } else if (e.scrollTop + 6 >= this.list1[4].scrollTop) {
-      this.current = 4;
-    } else if (e.scrollTop + 6 >= this.list1[3].scrollTop) {
-      this.current = 3;
-    } else if (e.scrollTop + 6 >= this.list1[2].scrollTop) {
-      this.current = 2;
-    } else if (e.scrollTop + 6 >= this.list1[1].scrollTop) {
-      this.current = 1;
-    } else {
-      this.current = 0;
-    }
-  },
-  methods: {
-    click(item) {
-      if (this.loading) return false;
-      this.current = item.index;
+onMounted(() => {
+  height.value = getBoundInfo().navBarHeight; // 导航栏的高度
+  statusBarHeight.value = getBoundInfo().statusBarHeight;
+  setTimeout(() => {
+    list1.value.forEach((e) => {
       uni
         .createSelectorQuery()
         .in(this)
-        .select("#" + item.id)
+        .select("#" + e.id)
         .boundingClientRect((res) => {
-          this.top = res.top - this.height / 2 - 84;
-          uni.pageScrollTo({
-            duration: 0,
-            scrollTop: this.scrollTop + this.top,
-          });
+          e.scrollTop = res.top - height.value / 2 - 84;
         })
         .exec();
-    },
-    goForm() {
-      wx.openCustomerServiceChat({
-        corpid: "你的客服消息corpid", // 必填，公众号的corpid，必须与当前登录的微信号是同一个公众号
-        kfaccount: "客服微信号", // 必填，客服账号
+    });
+    loading = false;
+  }, 1000);
+});
+// 监听滚动
+onPageScroll((e) => {
+  scrollTop.value = e.scrollTop; // 更新滚动位置
+  if (e.scrollTop + 6 >= list1.value[5].scrollTop) {
+    current.value = 5;
+  } else if (e.scrollTop + 6 >= list1.value[4].scrollTop) {
+    current.value = 4;
+  } else if (e.scrollTop + 6 >= list1.value[3].scrollTop) {
+    current.value = 3;
+  } else if (e.scrollTop + 6 >= list1.value[2].scrollTop) {
+    current.value = 2;
+  } else if (e.scrollTop + 6 >= list1.value[1].scrollTop) {
+    current.value = 1;
+  } else {
+    current.value = 0;
+  }
+});
+const click = (item) => {
+  if (loading) return false;
+  current.value = item.index;
+  uni
+    .createSelectorQuery()
+    .in(this)
+    .select("#" + item.id)
+    .boundingClientRect((res) => {
+      const top = res.top - height.value / 2 - 84;
+      uni.pageScrollTo({
+        duration: 200,
+        scrollTop: scrollTop.value + top,
       });
-      // uni.navigateTo({
-      //   url: "/pagesA/join/form",
-      // });
-    },
-  },
+    })
+    .exec();
+};
+const goForm = () => {
+  wx.openCustomerServiceChat({
+    corpid: "你的客服消息corpid", // 必填，公众号的corpid，必须与当前登录的微信号是同一个公众号
+    kfaccount: "客服微信号", // 必填，客服账号
+  });
+  // uni.navigateTo({
+  //   url: "/pagesA/join/form",
+  // });
 };
 </script>
-
-<style lang="scss" scoped>
-.tabbar-contain {
-  color: #1c0808;
-  position: relative;
-  line-height: 1.5;
-  font-size: 24rpx;
-  letter-spacing: 2rpx;
-  padding-bottom: 320rpx;
-  .custom {
-    width: 100%;
-    height: 80rpx;
-    view {
-      margin: 0 auto;
-    }
-  }
-  .slice {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 750rpx;
-    z-index: -1;
-  }
-  .title {
-    width: 100%;
-    text-align: center;
-    font-size: 36rpx;
-    color: #805844;
-    padding-bottom: 50rpx;
-  }
-  .images {
-    width: 100%;
-    image {
-      width: 100%;
-    }
-  }
-}
-::v-deep .u-tabs__wrapper__nav__line {
-  width: 28px !important;
-}
-.bottoms {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  padding-bottom: 100rpx;
-  background: #fff;
-  height: 156rpx;
-  width: 100%;
-  .btn2 {
-    width: 660rpx;
-    height: 96rpx;
-
-    margin: 30rpx auto;
-    color: #fff;
-    border-radius: 4rpx;
-    line-height: 96rpx;
-    font-size: 30rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-</style>

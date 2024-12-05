@@ -108,6 +108,12 @@
           "style": {
             "navigationBarTitleText": "空间设计"
           }
+        },
+        {
+          "path": "join/form",
+          "style": {
+            "navigationStyle": "custom"
+          }
         }
       ]
     }
