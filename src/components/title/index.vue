@@ -1,7 +1,7 @@
 <template>
   <view
     class="pb-10 flex flex-wrap justify-between items-center"
-    :class="className"
+    :class="[className, color]"
     @click="emit('click')"
   >
     <view class="flex flex-col">
@@ -19,6 +19,7 @@
       </view>
       <view
         class="mt-10 w-50 h-10 rounded-full bg-000-9"
+        :class="classLine"
         v-if="!subTitleBottom"
       ></view>
     </view>
@@ -37,6 +38,7 @@ defineProps([
   "subTitle",
   "subTitleBottom",
   "className",
+  "classLine",
   "isMore",
   "moreTitle",
 ]);

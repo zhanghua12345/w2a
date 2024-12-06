@@ -36,6 +36,13 @@
       }
     },
     {
+      "path": "pages/caseDetail/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "案例详情"
+      }
+    },
+    {
       "path": "pages/about/index",
       "style": {
         "navigationStyle": "custom",

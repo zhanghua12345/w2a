@@ -149,6 +149,7 @@ module.exports = {
           "linear-gradient(135deg, #FE5351 0%, #FE345B 51%, #FE3964 100%)",
         ddd: "#ddd",
         ccc: "#ccc",
+        eee: "#eee",
         secondary: {
           "000": "linear-gradient(red, yellow, blue)",
           linear:

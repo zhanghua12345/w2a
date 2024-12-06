@@ -1,10 +1,10 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
   font-family: 'iconfont';  /* Project id 4758292 */
-  src: url('//at.alicdn.com/t/c/font_4758292_h5t2vfborjw.woff2?t=1732959987064') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4758292_h5t2vfborjw.woff?t=1732959987064') format('woff'),
-       url('//at.alicdn.com/t/c/font_4758292_h5t2vfborjw.ttf?t=1732959987064') format('truetype'),
-       url('//at.alicdn.com/t/c/font_4758292_h5t2vfborjw.svg?t=1732959987064#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/c/font_4758292_7u01uo7wi3j.woff2?t=1733473731771') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4758292_7u01uo7wi3j.woff?t=1733473731771') format('woff'),
+       url('//at.alicdn.com/t/c/font_4758292_7u01uo7wi3j.ttf?t=1733473731771') format('truetype'),
+       url('//at.alicdn.com/t/c/font_4758292_7u01uo7wi3j.svg?t=1733473731771#iconfont') format('svg');
 }
 .iconfont {
     font-family: "iconfont" !important;

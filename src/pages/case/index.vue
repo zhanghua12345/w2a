@@ -33,7 +33,12 @@
   </up-sticky>
 
   <view class="px-main w-full">
-    <Box className="mb-main" v-for="item in list" :key="item" />
+    <Box
+      className="mb-main"
+      v-for="item in list"
+      :key="item"
+      @click="goDetail"
+    />
   </view>
   <up-loadmore
     :status="status"
@@ -182,6 +187,11 @@ const loadData = async (isRefresh = false) => {
 onMounted(() => {
   loadData(true);
 });
+
+const goDetail = (item) => {
+  console.log(item);
+  uni.navigateTo({ url: "/pages/caseDetail/index" });
+};
 </script>
 
 <style scoped></style>
