@@ -1,6 +1,6 @@
 <template>
   <view
-    class="w-full rounded-main shadow-md bg-fff tn-animation-fade-in flex flex-wrap justify-between p-main"
+    class="w-full rounded-main shadow-sm bg-fff tn-animation-fade-in flex flex-wrap justify-between p-main"
     :class="className"
     @click="emit('click', obj)"
   >

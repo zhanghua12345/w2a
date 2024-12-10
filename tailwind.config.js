@@ -78,6 +78,7 @@ module.exports = {
       main: "10rpx",
       0: "0rpx",
       4: "4rpx",
+      6: "6rpx",
       8: "8rpx",
       12: "12rpx",
       16: "16rpx",

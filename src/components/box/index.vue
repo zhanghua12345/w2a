@@ -1,6 +1,6 @@
 <template>
   <view
-    class="w-full rounded-main overflow-hidden shadow-md bg-fff tn-animation-fade-in"
+    class="w-full rounded-main overflow-hidden shadow-sm bg-fff tn-animation-fade-in"
     :class="className"
     @click="emit('click', obj)"
   >
@@ -12,7 +12,7 @@
     />
     <view class="px-main py-14 w-full">
       <view class="truncate"
-        >最佳“灰+白”搭配！138m²美式温馨四居室，餐厅利用率100%</view
+        >最1佳“灰+白”搭配！138m²美式温馨四居室，餐厅利用率100%</view
       >
       <view
         class="flex flex-wrap items-center justify-between mt-6 text-24 text-000-4"

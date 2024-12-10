@@ -72,12 +72,17 @@
       className="text-main"
       classLine="bg-main ml-20"
     />
-
-    <view class="" v-for="item in info" :key="item">
-      <up-line></up-line>
-      <view class="text-36">{{ item.name }}</view>
+    <up-line></up-line>
+    <view
+      class=""
+      v-for="item in showMore ? info : dataFilter(info, 1)"
+      :key="item"
+    >
+      <view class="text-36 font-600 w-full flex justify-center py-30">{{
+        item.name
+      }}</view>
       <view
-        class="rounded-32 overflow-hidden mt-20"
+        class="rounded-32 overflow-hidden mb-20 last:mb-0"
         v-for="e in item.images"
         :key="e"
       >
@@ -86,20 +91,36 @@
     </view>
     <view
       class="absolute bottom-0 left-0 right-0 h-160 pt-30 bg-gradient-to-t from-fff from-10% via-fff-5 via-70% to-fff-0 flex flex-wrap justify-center items-center text-32 text-main"
+      @click="showMoreClick"
+      v-if="!showMore"
     >
       点击查看更多 <i class="iconfont text-24 ml-6">&#xfd90;</i>
     </view>
   </view>
-  <view class="mt-50 bg-eee px-main">
-    <up-divider text="猜你喜欢" textSize="24"></up-divider>
+  <view class="py-40 px-main flex flex-col items-center">
+    <view class="w-350">
+      <up-divider
+        text="猜你喜欢"
+        textSize="32rpx"
+        textColor="#cf5d38"
+        lineColor="#aaa"
+      />
+    </view>
+    <view class="grid grid-rows-2 grid-cols-2 gap-20">
+      <Case v-for="item in 20" />
+    </view>
   </view>
   <ScrollTop />
+  <BottomFun />
 </template>
 <script setup>
 import Title from "@/components/title/index.vue";
 import Navbar from "@/components/navbar/index.vue";
+import Case from "@/components/case/index.vue";
+import BottomFun from "@/components/bottomFun/index.vue";
 import ScrollTop from "@/components/scrollTop/index.vue";
 import { onMounted, onUnmounted, ref } from "vue";
+import { dataFilter } from "@/utils/utils";
 import {
   onPageScroll,
   onShareAppMessage,
@@ -127,6 +148,7 @@ const theme = ref([
   { icon: "&#xe662;", label: "系列", name: "帕马尔" },
   { icon: "&#xe662;", label: "小区", name: "绿地v岛" },
 ]);
+const showMore = ref(false);
 const info = ref([
   {
     name: "客厅",
@@ -136,5 +158,17 @@ const info = ref([
       "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
     ],
   },
+  {
+    name: "餐厅",
+    images: [
+      "https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png",
+      "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
+      "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
+    ],
+  },
 ]);
+
+const showMoreClick = () => {
+  showMore.value = true;
+};
 </script>
