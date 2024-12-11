@@ -10,7 +10,9 @@
       src="https://img2.baidu.com/it/u=3788447690,3423920042&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500"
       alt=""
     />
+
     <view
+      v-show="!noNew"
       class="absolute left-20 top-0 w-90 h-100 flex flex-wrap justify-center"
     >
       <i class="iconfont text-main text-64 leading-1">&#xe62d;</i>
@@ -20,11 +22,13 @@
       >
     </view>
     <view
+      v-show="!no720"
       class="absolute right-20 top-10 flex flex justify-center items-center h-54 bg-000-6 rounded-full px-14 text-fff"
     >
       <i class="iconfont text-34 leading-1">&#xe603;</i>
     </view>
     <view
+      v-show="!noView"
       class="absolute right-20 top-236 flex justify-center items-center bg-000-6 rounded-full px-14 h-54 text-fff leading-1 text-24"
     >
       <i class="iconfont leading-1 text-24 mr-4">&#xe662;</i>1K+
@@ -52,7 +56,7 @@
 </template>
 <script setup>
 const emit = defineEmits(["click"]);
-defineProps(["obj", "className"]);
+defineProps(["obj", "className", "noNew", "no720", "noView"]);
 const list = [
   { name: "三居室", className: "bg-[#faeef3] text-[#ad7680]" },
   { name: "123m²", className: "bg-[#e6eefc] text-[#707eb7]" },

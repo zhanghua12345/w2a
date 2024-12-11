@@ -14,10 +14,10 @@
         最佳“灰+白”搭配！138m²美式温馨四居室，餐厅利用率100%四居室，餐厅利用率100%
       </view>
       <view class="flex flex-wrap justify-between leading-1">
-        <view>
+        <view class="flex items-center">
           <i class="iconfont text-tip text-24 mr-6">&#xe89d;</i>2024-01-22
         </view>
-        <view>
+        <view class="flex items-center">
           <i class="iconfont text-tip text-24 mr-6">&#xe662;</i
           >{{ Math.floor(Math.random() * 100) }}
         </view>

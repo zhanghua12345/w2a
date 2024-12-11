@@ -101,6 +101,7 @@
         {
           "path": "caseCollection/index",
           "style": {
+            "navigationStyle": "custom",
             "navigationBarTitleText": "案例收藏"
           }
         },
@@ -118,6 +119,12 @@
         },
         {
           "path": "join/form",
+          "style": {
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "member/index",
           "style": {
             "navigationStyle": "custom"
           }
