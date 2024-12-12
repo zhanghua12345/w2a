@@ -41,11 +41,11 @@
         class="flex flex-wrap items-center justify-between mt-6 text-24 text-000-4"
       >
         <view class="flex-1 flex flex-wrap justify-start">
+          <!-- :class="[item.className]" -->
           <view
             v-for="(item, index) in list"
             :key="item"
-            class="flex justify-center items-center px-10 py-6 leading-1 mr-10 last:mr-0 rounded-6"
-            :class="item.className"
+            class="flex justify-center items-center px-10 py-6 leading-1 mr-10 last:mr-0 rounded-6 bg-[#faeef3] text-[#ad7680]"
           >
             {{ item.name }}
           </view>
@@ -58,7 +58,7 @@
 const emit = defineEmits(["click"]);
 defineProps(["obj", "className", "noNew", "no720", "noView"]);
 const list = [
-  { name: "三居室", className: "bg-[#faeef3] text-[#ad7680]" },
-  { name: "123m²", className: "bg-[#e6eefc] text-[#707eb7]" },
+  { name: "三居室", className: "bg-[#faeef3]" },
+  { name: "123m²", className: "bg-[#e6eefc]" },
 ];
 </script>

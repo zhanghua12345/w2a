@@ -17,9 +17,7 @@
         <view class="flex justify-between w-690 h-50 text-24">
           <view class="w-80"></view>
           <view class="bg-000-5 w-240 rounded-full flex text-fff">
-            <view
-              class="w-1/2 flex justify-center items-center"
-              :class="[currentNum === 0 && '']"
+            <view class="w-1/2 flex justify-center items-center"
               >720
               <i class="iconfont text-30 leading-1 ml-10">&#xe76e;</i></view
             >

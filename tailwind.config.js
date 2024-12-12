@@ -159,6 +159,7 @@ module.exports = {
       },
       zIndex: {
         "1b": "-1",
+        full: 9999,
       },
     },
   },

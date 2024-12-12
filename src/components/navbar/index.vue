@@ -1,6 +1,6 @@
 <template>
   <view
-    class="fixed z-[9999] left-0 w-full"
+    class="fixed z-full left-0 w-full"
     v-show="Number(scrollNum) > (Number(scrollTop) || 60)"
   >
     <up-navbar
