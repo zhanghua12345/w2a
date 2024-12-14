@@ -173,6 +173,12 @@
     </up-scroll-list>
   </view>
   <ScrollTop />
+  <view
+    class="fixed right-0 bottom-300 rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm"
+    @click="openPage('/pagesA/join/form')"
+  >
+    AI设计
+  </view>
 </template>
 
 <script setup>

@@ -13,9 +13,9 @@
       />
 
       <view class="flex-1 pl-main">
-        <view class="line-clamp-2 font-600"
-          >After A Breakup,the Ex-girlfriend Makes A Stunning Return</view
-        >
+        <view class="line-clamp-2 font-600">
+          After A Breakup,the Ex-girlfriend Makes A Stunning Return
+        </view>
         <view class="line-clamp-1 text-400 mt-20">EP.1/EP.1</view>
       </view>
     </view>

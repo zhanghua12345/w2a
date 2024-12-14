@@ -41,7 +41,11 @@
         ]
       },
       /* ios打包配置 */
-      "ios": {},
+      "ios": {
+        "map": {
+          "enable": true
+        }
+      },
       /* SDK配置 */
       "sdkConfigs": {}
     }
@@ -61,7 +65,13 @@
     "optimization": { "subPackages": true },
     "permission": {
       "scope.userLocation": {
-        "desc": "获取梵米尼门店位置"
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    },
+    "plugins": {
+      "chooseLocation": {
+        "version": "1.0.12",
+        "provider": "wx76a9a06e5b4e693e" // 地图选点appid
       }
     },
     "requiredPrivateInfos": ["getLocation"]

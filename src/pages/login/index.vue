@@ -1,34 +1,32 @@
 <template>
   <view>
     <view class="after-navber">
-      <view style="padding: 0 60rpx">
+      <view>
+        <image
+          src="https://img2.baidu.com/it/u=3788447690,3423920042&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500"
+          style="width: 100%"
+          mode="widthFix"
+          class="logo"
+        />
         <view
           style="
-            padding: 80rpx 0 48rpx;
-            border-bottom: 1rpx solid #e3e3e3;
-            margin-bottom: 72rpx;
             text-align: center;
+            padding-top: 100rpx;
+            color: #888;
+            letter-spacing: 0rpx;
           "
+          >首次进入需要手动开启授权</view
         >
-          <image
-            src="https://img2.baidu.com/it/u=3788447690,3423920042&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500"
-            style="width: 200rpx; height: 200rpx"
-            class="logo"
-          ></image>
-        </view>
-        <view style="font-size: 13pt; margin-bottom: 40rpx"
-          >申请获取以下权限</view
-        >
-        <view style="color: #888; margin-bottom: 88rpx"
+        <!-- <view style="color: #888; margin-bottom: 88rpx"
           >获得你的公开信息（昵称、头像、手机号等）</view
-        >
+        > -->
         <button
           class="login-btn"
           open-type="getPhoneNumber"
           @click="login"
           @getphonenumber="getphonenumber"
         >
-          授权登录
+          启动授权
         </button>
       </view>
     </view>
@@ -151,7 +149,8 @@ page {
   border: none;
   height: 88rpx;
   line-height: 88rpx;
-  background: #9a613f;
+  background: #31ba52;
+  margin: 30rpx;
   color: #fff;
   font-size: 11pt;
   border-radius: 999rpx;

@@ -84,8 +84,8 @@
     </view>
     <view class="mt-main">
       <view class="flex justify-between items-center">
-        <view class="">友情链接</view>
-        <view class="flex items-center">
+        <view class="" @click="openMap">友情链接</view>
+        <view class="flex items-center" @click="navKey">
           全部
           <i class="iconfont text-20 ml-10 text-tip">&#xe671;</i>
         </view>
@@ -120,10 +120,11 @@ import {
   onShareAppMessage,
   onShareTimeline,
   onPageScroll,
+  onShow,
 } from "@dcloudio/uni-app";
 import { useWxShare } from "@/hooks/index.js";
 import Handle from "@/components/handle/index.vue";
-
+const chooseLocation = requirePlugin("chooseLocation");
 // 监听滚动
 onPageScroll(() => {});
 // 微信分享
@@ -239,6 +240,25 @@ const links = [
 ];
 const dataFilter = (list, startIndex, length) => {
   return list.slice(startIndex, length);
+};
+onShow(() => {
+  console.log(5454);
+  const location = chooseLocation.getLocation();
+  console.log(location);
+});
+
+const openMap = () => {
+  const key = "3GLBZ-22HLF-Y2WJD-NPB7V-STWFO-RHFVS";
+  const referer = "梵米尼家具优选";
+  uni.navigateTo({
+    url: `plugin://chooseLocation/index?key=${key}&referer=${referer}&location={"latitude":${28.113988},"longitude":${113.033674}}&name=梵米尼家居(湘府东路店)`,
+  });
+};
+const navKey = (lat, lng) => {
+  uni.openLocation({
+    latitude: 28.113988,
+    longitude: 113.033674,
+  });
 };
 const goVip = () => {
   uni.navigateTo({ url: "/pages/register/index" });

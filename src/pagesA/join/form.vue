@@ -1,41 +1,23 @@
 <template>
+  <Navbar leftIcon=" " />
   <view class="tabbar-contain">
     <image
-      src="https://hsl76.jiaodaoren.com/profile/upload/images/slice.png"
+      src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
       mode="scaleToFill"
       class="slice"
     />
-
-    <u-sticky :bgColor="scrollTop > 60 && '#fff'" :offset-top="0">
-      <view
-        :style="'padding-top:' + height + 'rpx'"
-        class="custom flex-y-center"
-      >
-        <image
-          mode=""
-          src="/static/images/icon/back.png"
-          @click="navBack"
-          style="width: 38upx; height: 38upx; padding: 10upx 0 10upx 30upx"
-        ></image>
-        <view
-          class="font30 fontBold colorNormal"
-          style="margin-right: 68rpx; text-align: center; flex: 1"
-          v-show="scrollTop > 60"
-          >厘舍SPA品牌合作申请表</view
-        >
-      </view>
-    </u-sticky>
-    <view class="title">厘舍SPA品牌合作申请表</view>
+    <view class="title">梵米尼AI测试表</view>
     <view class="sub-tip">
-      <view>感谢您对厘舍的关注</view>
+      <view>感谢您对梵米尼的关注</view>
       <view>诚邀您填写以下内容</view>
     </view>
-    <u--form labelWidth="0" :model="form" :rules="rules" ref="uForm">
+
+    <up-form labelWidth="0" :model="form" :rules="rules" ref="uFormRef">
       <template v-for="(item, index) in list">
         <template v-if="item.seq <= 100">
           <view class="card" :key="index">
-            <u-form-item :prop="item.id">
-              <view class="">
+            <up-form-item :prop="item.id">
+              <view class="w-full">
                 <view class="question-box">
                   <view class="title-box">
                     <view class="lines"></view>
@@ -44,108 +26,113 @@
                   <view class="tips">{{ item.subTitle }}</view>
                 </view>
                 <template v-if="item.type === 'radio'">
-                  <u-radio-group v-model="form[item.id]" placement="column">
-                    <u-radio
+                  <up-radio-group v-model="form[item.id]" placement="column">
+                    <up-radio
                       activeColor="#805844"
                       :customStyle="{ marginBottom: '8px' }"
                       v-for="(i, k) in item.option"
                       :key="k"
-                      :label="i.name"
-                      :name="i.name"
+                      :name="i.id"
                     >
-                    </u-radio>
-                  </u-radio-group>
+                      <template #label>
+                        <view class="flex items-center">
+                          <view class="mr-main">{{ i.name }}</view>
+                          <up-input
+                            v-show="form[item.id] === i.id"
+                            v-model="form[item.id + 'input']"
+                            :style="{ height: '44rpx', 'font-size': '20rpx' }"
+                          />
+                        </view>
+                      </template>
+                    </up-radio>
+                  </up-radio-group>
                 </template>
+
                 <template v-if="item.type === 'select'">
                   <view class="select-box" @click="selectClick(item, index)">
-                    <u--input
+                    <up-input
                       v-model="form[item.id]"
-                      disabled
-                      disabledColor="#ffffff"
-                      placeholder="请选择"
+                      style="pointer-events: none"
+                      readonly
+                      placeholder="请选择1"
                       border="none"
-                    ></u--input>
-                    <u-icon name="arrow-right" size="20upx" />
+                    />
+                    <up-icon name="arrow-right" size="20rpx" />
                   </view>
                 </template>
                 <template v-if="item.type === 'input'">
                   <view class="select-box">
-                    <u--input
-                      v-model="form[item.id]"
-                      placeholder="请输入"
-                    ></u--input>
+                    <up-input v-model="form[item.id]" placeholder="请输入" />
                   </view>
                 </template>
                 <template v-if="item.type === 'textarea'">
                   <view class="select-box">
-                    <u--textarea v-model="form[item.id]" height="120" />
+                    <up-textarea v-model="form[item.id]" height="120" />
                   </view>
                 </template>
               </view>
-            </u-form-item>
+            </up-form-item>
           </view>
         </template>
       </template>
-      <template>
-        <view class="card">
-          <view class="question-box">
-            <view class="title-box">
-              <view class="lines"></view>
-              <view class="titles">基本信息</view>
-            </view>
-          </view>
-          <view class="info">
-            <template v-for="(item, index) in list">
-              <template v-if="item.seq > 100">
-                <view class="info-box" :key="index">
-                  <view class="name">{{ item.question }}：</view>
-                  <view class="value">
-                    <u-form-item :prop="item.id">
-                      <template v-if="item.type === 'select'">
-                        <view @click="selectClick(item, index)">
-                          <u--input
-                            v-model="form[item.id]"
-                            disabled
-                            disabledColor="#ffffff"
-                            placeholder="请选择"
-                          ></u--input>
-                        </view>
-                      </template>
-
-                      <template v-else-if="item.type === 'textarea'">
-                        <u--textarea
-                          v-model="form[item.id]"
-                          autoHeight
-                          disableDefaultPadding
-                          @focus="openMap(item.id)"
-                          placeholder="请选择地址"
-                        />
-                      </template>
-                      <template v-else>
-                        <u--input
-                          :type="item.type || 'text'"
-                          v-model="form[item.id]"
-                          placeholder="请输入"
-                        ></u--input>
-                      </template>
-                      <view class="info-tip">{{ item.tip }}</view>
-                    </u-form-item>
-                  </view>
-                </view>
-              </template>
-            </template>
+      <view class="card">
+        <view class="question-box">
+          <view class="title-box">
+            <view class="lines"></view>
+            <view class="titles">基本信息</view>
           </view>
         </view>
-      </template>
-    </u--form>
-    <u-action-sheet
+        <view class="info">
+          <template v-for="(item, index) in list">
+            <template v-if="item.seq > 100">
+              <view class="info-box" :key="index">
+                <view class="name">{{ item.question }}：</view>
+                <view class="value">
+                  <up-form-item :prop="item.id">
+                    <template v-if="item.type === 'select'">
+                      <view @click="selectClick(item, index)" class="w-full">
+                        <up-input
+                          style="pointer-events: none; width: 100%"
+                          readonly
+                          v-model="form[item.id]"
+                          placeholder="请选择"
+                        />
+                      </view>
+                    </template>
+
+                    <template v-else-if="item.type === 'textarea'">
+                      <up-textarea
+                        v-model="form[item.id]"
+                        autoHeight
+                        disableDefaultPadding
+                        @focus="openMap(item.id)"
+                        placeholder="请选择地址"
+                      />
+                    </template>
+                    <template v-else>
+                      <up-input
+                        :type="item.type || 'text'"
+                        v-model="form[item.id]"
+                        placeholder="请输入"
+                      />
+                    </template>
+                    <view class="info-tip">{{ item.tip }}</view>
+                  </up-form-item>
+                </view>
+              </view>
+            </template>
+          </template>
+        </view>
+      </view>
+    </up-form>
+    <up-action-sheet
       :show="showSheet"
       :actions="actions"
       title="请选择"
       @close="showSheet = false"
       @select="selectSheet"
     >
-    </u-action-sheet>
+    </up-action-sheet>
     <div class="warn" v-html="warn"></div>
     <view class="warn2"
       >此方案最终解释权在法律范围内归湖南厘舍健康科技集团有限公司所有</view
@@ -156,148 +143,132 @@
     </view>
   </view>
 </template>
-<script>
-// import list from "./form.json";
+<script setup>
+import list from "./form.json";
+import { onMounted, onUnmounted, ref } from "vue";
+import Navbar from "@/components/navbar/index.vue";
 // const chooseLocation = requirePlugin("chooseLocation");
 // import { questionList, questionSubmit, profile } from "@/api/custormer.js";
-import form from "./form.json";
-export default {
-  components: {},
-  data() {
-    return {
-      addressId: null,
-      height: 0,
-      scrollTop: 0,
-      list: [],
-      rules: {},
-      form,
-      showSheet: false,
-      selectIndex: 0,
-      actions: [],
-      detail: {},
+import {
+  onPageScroll,
+  onShareAppMessage,
+  onShareTimeline,
+} from "@dcloudio/uni-app";
+import { useWxShare } from "@/hooks/index.js";
+// 监听滚动
+onPageScroll((e) => {});
+// 微信分享
+onShareAppMessage(() => ({}));
+onShareTimeline(() => ({}));
+useWxShare({
+  path: "/pages/home/index",
+});
+const detail = ref("");
+const actions = ref([]);
+const selectIndex = ref(0);
+const showSheet = ref(false);
+const form = ref({
+  0: "",
+  1: "",
+  2: "",
+  3: "",
+  4: "",
+  5: "",
+  6: "",
+  7: "",
+  8: "",
+  9: "",
+  10: "",
+  11: "",
+  12: "",
+  13: "",
+  14: "",
+  15: "",
+});
+const rules = ref({});
+const scrollTop = ref(0);
+const height = ref(0);
+const addressId = ref(null);
+const uFormRef = ref(null);
+const warn = ref(
+  "市场有风险，投资需谨慎!<br>请确保您填写的信息真实有效!<br>收到您的申请后，我们将会认真评估!<br>如符合要求，我们将会尽快与您取得联系!"
+);
+onMounted(() => {});
+const selectClick1 = () => {
+  console.log(111);
+};
+const selectClick = (e, i) => {
+  console.log(e, i);
+  selectIndex.value = i;
+  actions.value = e.option;
+  showSheet.value = true;
+};
 
-      warn: "市场有风险，投资需谨慎!<br>请确保您填写的信息真实有效!<br>收到您的申请后，我们将会认真评估!<br>如符合要求，我们将会尽快与您取得联系!",
-    };
-  },
-  onLoad() {
-    const res = uni.getSystemInfoSync();
-    this.height = res.statusBarHeight * 2;
-    // questionList({}, (res) => {
-    //   if (res.code === 0) {
-    //     this.list = res.data
-    //       .sort(function (a, b) {
-    //         return a["seq"] - b["seq"];
-    //       })
-    //       .map((e) => {
-    //         const obj = e.options && JSON.parse(e.options);
-    //         this.form = { ...this.form, [e.id]: "" };
-    //         this.rules = {
-    //           ...this.rules,
-    //           [e.id]: {
-    //             required: true,
-    //             message: "内容不能为空",
-    //             trigger: ["blur", "change"],
-    //           },
-    //         };
-    //         return (e = { ...e, ...obj });
-    //       });
-    //   }
-    // });
-  },
-  onShow() {
-    const location = chooseLocation.getLocation();
-    if (location != null) {
-      this.form[this.addressId] = location.address + location.name;
-    }
-  },
-  onReady() {
-    // profile({}, (res) => {
-    //   if (res.code === 0) {
-    //     this.detail = res.data;
-    //   }
-    // });
-    //如果需要兼容微信小程序，并且校验规则中含有方法等，只能通过setRules方法设置规则。
-    this.$refs.uForm.setRules(this.rules);
-  },
-  onPageScroll(e) {
-    // 页面滚动时会触发
-    this.scrollTop = e.scrollTop; // 更新滚动位置
-  },
+const submit = () => {
+  uFormRef.value
+    .validate()
+    .then((res) => {
+      const answerList = [];
+      const info = {};
+      this.list.forEach((e) => {
+        let answer = "";
+        if (e.option) {
+          answer =
+            e.option[e.option.findIndex((n) => n.name === this.form[e.id])].id;
+        } else {
+          answer = this.form[e.id];
+        }
 
-  methods: {
-    selectClick(e, i) {
-      this.selectIndex = i;
-      this.actions = e.option;
-      this.showSheet = true;
-    },
-    submit() {
-      this.$refs.uForm
-        .validate()
-        .then((res) => {
-          const answerList = [];
-          const info = {};
-          this.list.forEach((e) => {
-            let answer = "";
-            if (e.option) {
-              answer =
-                e.option[e.option.findIndex((n) => n.name === this.form[e.id])]
-                  .id;
-            } else {
-              answer = this.form[e.id];
-            }
-
-            if (e.seq < 100 && !e.ids) {
-              const obj = {
-                questionId: e.id,
-                ids: e.ids,
-                answer,
-              };
-              answerList.push(obj);
-            } else {
-              info[e.ids] = answer;
-            }
-          });
-          // questionSubmit(
-          //   {
-          //     answerList,
-          //     franchiseIntention: { ...info, userId: this.detail.id },
-          //   },
-          //   (res) => {
-          //     if (res.code === 0) {
-          //       uni.$u.toast("提交成功");
-          //       setTimeout(() => {
-          //         uni.redirectTo({
-          //           url: "/pagesA/join/success",
-          //         });
-          //       }, 1000);
-          //     }
-          //   }
-          // );
-        })
-        .catch((errors) => {
-          uni.showToast({
-            title: "请仔细检查表单",
-            icon: "none",
-          });
-        });
-    },
-    navBack() {
-      uni.navigateBack();
-    },
-    selectSheet(e) {
-      const id = this.list[this.selectIndex].id;
-      this.form[id] = e.name;
-      this.$refs.uForm.validateField([id]);
-    },
-    openMap(id) {
-      this.addressId = id;
-      const key = "HLKBZ-63FC3-TIB3F-OVW2T-EEMTZ-O5BT5";
-      const referer = "厘舍SPA";
-      uni.navigateTo({
-        url: "plugin://chooseLocation/index?key=" + key + "&referer=" + referer,
+        if (e.seq < 100 && !e.ids) {
+          const obj = {
+            questionId: e.id,
+            ids: e.ids,
+            answer,
+          };
+          answerList.push(obj);
+        } else {
+          info[e.ids] = answer;
+        }
       });
-    },
-  },
+      // questionSubmit(
+      //   {
+      //     answerList,
+      //     franchiseIntention: { ...info, userId: this.detail.id },
+      //   },
+      //   (res) => {
+      //     if (res.code === 0) {
+      //       uni.$u.toast("提交成功");
+      //       setTimeout(() => {
+      //         uni.redirectTo({
+      //           url: "/pagesA/join/success",
+      //         });
+      //       }, 1000);
+      //     }
+      //   }
+      // );
+    })
+    .catch((errors) => {
+      uni.showToast({
+        title: "请仔细检查表单",
+        icon: "none",
+      });
+    });
+};
+const navBack = () => {
+  uni.navigateBack();
+};
+const selectSheet = (e) => {
+  const id = this.list[this.selectIndex].id;
+  this.form[id] = e.name;
+  this.$refs.uForm.validateField([id]);
+};
+const openMap = (id) => {
+  this.addressId = id;
+  const key = "HLKBZ-63FC3-TIB3F-OVW2T-EEMTZ-O5BT5";
+  const referer = "厘舍SPA";
+  uni.navigateTo({
+    url: "plugin://chooseLocation/index?key=" + key + "&referer=" + referer,
+  });
 };
 </script>
 
@@ -306,12 +277,12 @@ export default {
   color: #1c0808;
   position: relative;
   line-height: 1.5;
-  font-size: 24upx;
-  letter-spacing: 1upx;
-  padding-bottom: 190upx;
+  font-size: 24rpx;
+  letter-spacing: 1rpx;
+  padding-bottom: 190rpx;
   .custom {
     width: 100%;
-    height: 80upx;
+    height: 80rpx;
     view {
       margin: 0 auto;
     }
@@ -320,34 +291,34 @@ export default {
     position: fixed;
     left: 0;
     top: 0;
-    width: 750upx;
+    width: 750rpx;
     z-index: -1;
   }
   .title {
     width: 100%;
     text-align: center;
     font-weight: 500;
-    font-size: 48upx;
+    font-size: 48rpx;
     color: #805844;
-    padding-top: 30upx;
+    padding-top: 30rpx;
   }
   .sub-tip {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #805844;
-    font-size: 30upx;
-    padding: 10upx 0 40upx;
+    font-size: 30rpx;
+    padding: 10rpx 0 40rpx;
   }
 }
 .card {
-  margin: 0 24upx 20upx;
-  padding: 24upx;
-  border-radius: 8upx;
+  margin: 0 24rpx 20rpx;
+  padding: 24rpx;
+  border-radius: 8rpx;
   background: #ffffff;
   .question-box {
-    padding-bottom: 24upx;
-    border-bottom: 2upx solid #f7f7f7;
+    padding-bottom: 24rpx;
+    border-bottom: 2rpx solid #f7f7f7;
     color: #9e9e9e;
     .title-box {
       display: flex;
@@ -355,28 +326,28 @@ export default {
       align-items: start;
       text-align: left;
       .lines {
-        width: 4upx;
-        height: 28upx;
+        width: 4rpx;
+        height: 28rpx;
         background: #805844;
-        margin: 12upx 12upx 0 0;
+        margin: 12rpx 12rpx 0 0;
       }
       .titles {
-        font-size: 30upx;
+        font-size: 30rpx;
         font-weight: 400;
-        line-height: 52upx;
+        line-height: 52rpx;
         letter-spacing: 0;
         flex: 1;
       }
     }
     .tips {
-      font-size: 22upx;
-      line-height: 38upx;
-      margin-top: 2upx;
-      margin-left: 16upx;
+      font-size: 22rpx;
+      line-height: 38rpx;
+      margin-top: 2rpx;
+      margin-left: 16rpx;
     }
   }
   .select-box {
-    margin-top: 32upx;
+    margin-top: 32rpx;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -384,22 +355,22 @@ export default {
   }
 }
 .warn {
-  font-size: 30upx;
+  font-size: 30rpx;
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 80upx;
-  letter-spacing: 0upx;
+  margin-top: 80rpx;
+  letter-spacing: 0rpx;
   color: #333;
-  line-height: 52upx;
+  line-height: 52rpx;
 }
 .warn2 {
   display: flex;
   justify-content: center;
-  letter-spacing: 0upx;
-  font-size: 20upx;
+  letter-spacing: 0rpx;
+  font-size: 20rpx;
   color: #9e9e9e;
-  margin-top: 40upx;
+  margin-top: 40rpx;
 }
 .bottoms {
   position: fixed;
@@ -407,82 +378,82 @@ export default {
   left: 0;
   bottom: 0;
   background: #fff;
-  height: 156upx;
+  height: 156rpx;
   width: 100%;
   .btn2 {
-    width: 660upx;
-    height: 96upx;
+    width: 660rpx;
+    height: 96rpx;
     background: #805844;
-    margin: 30upx auto;
+    margin: 30rpx auto;
     color: #fff;
-    border-radius: 4upx;
-    line-height: 96upx;
-    font-size: 30upx;
+    border-radius: 4rpx;
+    line-height: 96rpx;
+    font-size: 30rpx;
     text-align: center;
   }
 }
 ::v-deep .u-form-item__body {
   padding: 0 !important;
   .u-radio-group {
-    margin-top: 8upx !important;
+    margin-top: 8rpx !important;
     .u-radio {
-      padding-top: 12upx;
-      margin-top: 0upx;
+      padding-top: 12rpx;
+      margin-top: 0rpx;
       margin-bottom: 0 !important;
       .u-radio__icon-wrap {
-        width: 30upx !important;
-        height: 30upx !important;
+        width: 30rpx !important;
+        height: 30rpx !important;
         .u-icon__icon {
-          font-size: 24upx !important;
-          line-height: 24upx !important;
-          top: 2upx !important;
+          font-size: 24rpx !important;
+          line-height: 24rpx !important;
+          top: 2rpx !important;
         }
       }
       .u-radio__text {
         color: #333333 !important;
-        font-size: 30upx !important;
-        line-height: 52upx !important;
+        font-size: 30rpx !important;
+        line-height: 52rpx !important;
         flex: 1;
       }
     }
   }
 }
 ::v-deep .u-form-item__body__right__message {
-  margin-top: 20upx !important;
-  font-size: 24upx !important;
-  line-height: 24upx !important;
+  margin-top: 20rpx !important;
+  font-size: 24rpx !important;
+  line-height: 24rpx !important;
 }
 ::v-deep .u-textarea {
-  padding: 10upx !important;
+  padding: 10rpx !important;
 }
 
 ::v-deep .info {
-  padding: 20upx 0;
+  padding: 20rpx 0;
   .info-box {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 20upx;
+    margin-top: 20rpx;
     color: #333333;
     .name {
-      padding-left: 20upx;
-      width: 200upx;
-      font-size: 30upx;
+      padding-left: 20rpx;
+      width: 200rpx;
+      font-size: 30rpx;
     }
     .value {
       flex: 1;
       .u-form-item__body__right__message {
-        margin-top: 10upx !important;
+        margin-top: 10rpx !important;
       }
     }
     .info-tip {
-      font-size: 22upx;
-      margin-top: 6upx;
+      font-size: 22rpx;
+      margin-top: 6rpx;
       color: #888;
     }
     .u-input {
-      padding: 2upx 18upx !important;
+      padding: 2rpx 18rpx !important;
     }
   }
 }
