@@ -14,7 +14,7 @@
           {{ subTitle }}
         </view>
       </view>
-      <view class="font-20 pt-10 text-tip" v-if="subTitleBottom">
+      <view class="text-20 pt-10 text-tip" v-if="subTitleBottom">
         {{ subTitleBottom }}
       </view>
       <view

@@ -1,75 +1,91 @@
-import axios from "axios";
-// import { Message } from 'element-ui';
+// 全局请求封装
+const base_url = "http://120.27.141.193:8088";
 
-import { userStore } from "@/store/userStore";
-const store = userStore();
-const url =
-  process.env.VITE_USER_NODE_ENV !== "development"
-    ? process.env.VITE_API_URL
-    : process.env.VITE_API_URL;
-// create an axios instance
-const service = axios.create({
-  baseURL: url, // url = base url + request url
-  // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 30000, // request timeout
-  // responseType: 'json',
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-    Accept: "application/json;charset=UTF-8",
-  },
-});
+export default (params) => {
+  console.log(params);
+  let url = params.url;
+  let method = params.method || "GET";
+  let data = params.data || {};
+  let header = {};
 
-// request interceptor
-service.interceptors.request.use(
-  (config) => {
-    // 自定义baseURL
-    config.baseURL = config.baseURL || url;
-
-    if (config.dataType === "json") {
-      config.headers["Content-Type"] = "application/json;charset=UTF-8";
-    }
-    if (config.dataType === "text") {
-      config.headers["Content-Type"] = "text/plain";
-    }
-    config.headers["Authorization"] = store.token;
-    config.headers["time-zone"] = store.headersParam["time_zone"] || "";
-    config.headers["lang-key"] = store.headersParam["lang"] || "en";
-    config.headers["system-type"] = store.headersParam["type"] || "web";
-    return config;
-  },
-  (error) => {
-    // do something with request error
-    console.log(error); // for debug
-    return Promise.reject(error);
+  if (method == "POST") {
+    header = {
+      "content-type": "application/json",
+    };
   }
-);
 
-// 请求队列
-service.interceptors.response.use(
-  (response) => {
-    // 对响应数据做处理，例如只返回data部分
-    const res = response.data;
-    // 如果返回的状态码为200，说明成功，可以直接返回数据
-    if (res.code === 200) {
-      return res.data;
+  // 获取本地token
+  const token = wx.getStorageSync("token");
+  if (token) {
+    header["Authorization"] = "Bearer " + token;
+    if (params.data) {
+      params.data["uid"] = token;
+    } else {
+      params.data = {
+        uid: token,
+      };
     }
-    // 其他状态码都当作错误处理
-    // 可以在这里对不同的错误码进行不同处理
-    return Promise.reject({
-      ...res,
-      message: res.message || "Error",
-      status: res.code,
+  }
+  return new Promise((resolve, reject) => {
+    // wx.showLoading();
+    wx.request({
+      url: base_url + url,
+      method: method,
+      header: header,
+      data: data,
+      success(response) {
+        const result = response.data;
+        console.log("response", result);
+        if (
+          result.status === 200 ||
+          result.errorCode === "200" ||
+          result.code === 200
+        ) {
+          resolve(result.data || result.res || result);
+        } else if (result.status === 3) {
+          wx.showModal({
+            title: "提示",
+            content: "登录失效请重新登录,3s自动跳转登录",
+            showCancel: false,
+            success(res) {
+              setTimeout(() => {
+                wx.navigateTo({
+                  url: "/pages/login/index",
+                });
+              }, 3000);
+            },
+          });
+          reject(result);
+        } else if (result.errorCode === "0" || result.status === 2) {
+          wx.showToast({
+            title: "请重试...",
+            icon: "error",
+            duration: 2000,
+          });
+          reject(result.data || result.res || result);
+        }
+      },
+      fail(err) {
+        console.log(err);
+        if (err.errMsg.indexOf("request:fail") !== -1) {
+          wx.showToast({
+            title: "网络异常",
+            icon: "error",
+            duration: 2000,
+          });
+        } else {
+          wx.showToast({
+            title: "未知异常",
+            icon: "error",
+            duration: 2000,
+          });
+        }
+        reject(err);
+      },
+      complete() {
+        // wx.hideLoading();
+        wx.hideToast();
+      },
     });
-  },
-  (error) => {
-    // Message({
-    //   message: error.message,
-    //   type: 'error',
-    //   duration: 5 * 1000,
-    // });
-    console.log(error, "error22");
-    return Promise.reject(error);
-  }
-);
-
-export default service;
+  });
+};

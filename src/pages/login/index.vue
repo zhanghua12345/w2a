@@ -3,7 +3,7 @@
     <view class="after-navber">
       <view>
         <image
-          src="https://img2.baidu.com/it/u=3788447690,3423920042&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500"
+          src="https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000"
           style="width: 100%"
           mode="widthFix"
           class="logo"
@@ -34,87 +34,70 @@
 </template>
 
 <script>
-// import { wxLogin } from "@/api/custormer.js";
+import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import { useWxShare } from "@/hooks/index.js";
+// 微信分享
+onShareAppMessage();
+onShareTimeline();
+useWxShare({
+  path: "/pages/login/index",
+});
 
+import { editUserInfo, getUserInfo, getPhone } from "@/api/login";
+const app = getApp();
 export default {
   data() {
-    return {
-      code: "",
-      nickName: "",
-      avatarUrl: "",
-      encryptedData: "",
-      iv: "",
-    };
+    return {};
   },
   onLoad() {
     // 获取启动参数
-    const launchOptions = wx.getLaunchOptionsSync();
-    // 判断是否是通过 URL Scheme 跳转到小程序
-    if (
-      launchOptions.scene === 1036 &&
-      launchOptions.query &&
-      launchOptions.query.urlScheme
-    ) {
-      // 获取 URL Scheme
-      const urlScheme = launchOptions.query.urlScheme;
-    }
-    uni.login({
-      success: (res) => {
-        this.code = res.code;
-      },
-    });
+    // const launchOptions = wx.getLaunchOptionsSync();
+    // // 判断是否是通过 URL Scheme 跳转到小程序
+    // if (
+    //   launchOptions.scene === 1036 &&
+    //   launchOptions.query &&
+    //   launchOptions.query.urlScheme
+    // ) {
+    //   // 获取 URL Scheme
+    //   const urlScheme = launchOptions.query.urlScheme;
+    // }
   },
   methods: {
     login() {
-      uni.getUserProfile({
-        lang: "zh_CN",
-        desc: "用于完善用户昵称、头像",
-        success: (r) => {
-          this.avatarUrl = r.userInfo.avatarUrl;
-          this.nickName = r.userInfo.nickName;
-          this.wxlogin();
-        },
-      });
-    },
-    getphonenumber(e) {
-      if (e.detail.errMsg === "getPhoneNumber:ok") {
-        this.encryptedData = e.detail.encryptedData;
-        this.iv = e.detail.iv;
-        this.wxlogin();
+      if (
+        !app.globalData.userInfo.nickname ||
+        !app.globalData.userInfo.avatar
+      ) {
+        uni.getUserProfile({
+          lang: "zh_CN",
+          desc: "用于完善用户昵称、头像",
+          success: async (res) => {
+            await editUserInfo({
+              avatar: res.userInfo.avatarUrl,
+              nickname: res.userInfo.nickName,
+            });
+            const userInfo = await getUserInfo();
+            app.globalData.userInfo = userInfo;
+          },
+        });
       }
     },
-    wxlogin() {
-      if (this.code && this.nickName && this.encryptedData) {
-        let info = {};
-        if (uni.getStorageSync("shareUserId")) {
-          info.userId = uni.getStorageSync("shareUserId");
-        }
-        // wxLogin(
-        //   {
-        //     code: this.code,
-        //     encryptedData: this.encryptedData,
-        //     iv: this.iv,
-        //     nickname: this.nickName,
-        //     avatar: this.avatarUrl,
-        //     ...info,
-        //   },
-        //   (res) => {
-        //     if (res.code === 0) {
-        //       uni.setStorageSync("token", res.token);
-        //       uni.showToast({
-        //         title: "登录成功!",
-        //       });
-        //       setTimeout(() => {
-        //         uni.navigateBack();
-        //       }, 1000);
-        //     } else {
-        //       uni.showToast({
-        //         title: res.msg,
-        //         icon: "none",
-        //       });
-        //     }
+    async getphonenumber(e) {
+      if (e.detail.errMsg === "getPhoneNumber:ok") {
+        console.log(JSON.stringify(e.detail));
+        // await getPhone(e.detail);
+        // const userInfo = await getUserInfo();
+        // if (userInfo.phone) {
+        //   if (getCurrentPages().length > 1) {
+        //     uni.navigateBack({
+        //       delta: 1,
+        //     });
+        //   } else {
+        //     uni.switchTab({
+        //       url: "/pages/home/indx",
+        //     });
         //   }
-        // );
+        // }
       }
     },
   },
@@ -125,7 +108,6 @@ export default {
 page {
   background: #fff;
 }
-
 .cup-box {
   width: 510rpx;
   padding: 60rpx;

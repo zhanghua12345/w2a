@@ -2,62 +2,64 @@
   <Navbar leftIcon=" " />
   <view class="w-full h-700 relative">
     <up-swiper
-      :list="list3"
+      :list="info[0].list"
+      keyName="img"
       indicator
       indicatorMode="line"
       circular
       easingFunction="easeInOutCubic"
       height="700rpx"
       radius="0"
-    ></up-swiper>
+    />
     <view
+      v-if="info[1].list?.length"
       class="absolute bottom-main left-main right-main py-10 rounded-main bg-000-4 flex items-center justify-around shadow-md"
     >
       <view
-        v-for="e in bannerSub"
-        :key="e.image_url"
+        v-for="(item, index) in info[1].list"
+        :key="index"
         class="relative w-150 h-100 overflow-hidden rounded-main"
       >
-        <image class="w-full h-full bg-cover" :src="e.image_url" />
+        <image class="w-full h-full bg-cover" :src="item.img" />
         <view
           class="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full text-fff bg-000-1"
         >
-          <i class="iconfont text-fff text-40" v-html="e.icon" />
-          <view class="text-24">{{ e.name }}</view>
+          <i class="iconfont text-fff text-40" v-html="item.icon" />
+          <view class="text-24">{{ item.title }}</view>
         </view>
       </view>
     </view>
   </view>
   <!-- 案例 -->
-  <view class="mt-40 mx-main">
+  <view class="mt-40 mx-main" v-if="info[2].list?.length">
     <Title
       className="mb-20"
-      title="全屋方案"
-      subTitleBottom="盘点最备受瞩目的全屋设计方案"
+      :title="info[2].title"
+      :subTitleBottom="info[2].subTitle"
       :isMore="true"
-      @click="openPage('/pages/case/index', 'switchTab')"
+      @click="openPage(info[2])"
     />
     <up-scroll-list :indicator="false">
       <view
         class="h-300 mr-main last:mr-0 shadow-md"
-        v-for="(item, index) in cases"
+        v-for="(item, index) in info[2].list"
         :key="index"
       >
         <view class="h-full overflow-hidden rounded-main relative">
-          <image class="w-250 h-full" :src="item.image_url"></image>
+          <image class="w-250 h-full" :src="item.img"></image>
           <view
             class="absolute top-40 left-0 bg-fff-8 text-main font-600 p-12 pr-16 min-w-160 rounded-r-full flex justify-center"
-            >{{ item.name }}</view
+            >{{ item.title }}</view
           >
         </view>
       </view>
     </up-scroll-list>
   </view>
-  <view class="mx-main mt-40">
+  <view class="mx-main mt-40" v-if="info[3].list?.length">
     <view class="grid grid-rows-2 grid-cols-9 gap-20 h-330">
       <view
         class="rounded-main text-fff relative"
-        v-for="(item, index) in actives"
+        v-for="(item, index) in info[3].list"
         :key="index"
         :class="
           index === 0
@@ -68,9 +70,9 @@
         "
       >
         <view class="p-main absolute z-10 flex flex-col justify-between">
-          <view class="text-[#866350] text-36 font-600">{{ item.name }}</view>
+          <view class="text-[#866350] text-36 font-600">{{ item.title }}</view>
           <view class="text-tip text-24 pt-10 flex items-center">
-            {{ item.subName }}
+            {{ item.subTitle }}
             <i class="iconfont text-20">&#xe671;</i>
           </view>
         </view>
@@ -83,18 +85,18 @@
 
         <image
           class="w-100 h-100 bg-cover absolute right-0 bottom-30"
-          :src="item.image_url"
+          :src="item.img"
           alt=""
         />
       </view>
     </view>
   </view>
-  <view class="mx-main mt-40">
+  <view class="mx-main mt-40" v-if="info[4].list?.length">
     <Title
-      title="家·空间"
-      subTitle="细致打造有品生活"
+      :title="info[4].title"
+      :subTitle="info[4].subTitle"
       :isMore="true"
-      @click="openPage('/pagesA/spaces/index')"
+      @click="openPage(info[4])"
     />
     <view class="mt-main grid grid-rows-5 grid-cols-6 gap-main h-450">
       <view
@@ -103,33 +105,33 @@
           'row-span-3 col-span-3': index === 0 || index === 1,
           'row-span-2 col-span-2': index === 2 || index === 3 || index === 4,
         }"
-        v-for="(item, index) in spaces"
+        v-for="(item, index) in info[4].list"
         :key="index"
       >
-        <image class="w-full h-full bg-cover" :src="item.image_url" alt="" />
+        <image class="w-full h-full bg-cover" :src="item.img" alt="" />
         <view class="absolute bottom-10 left-0 right-0 flex justify-center">
           <view class="bg-000-6 text-fff rounded-full px-20 py-6">
-            {{ item.name }}
+            {{ item.title }}
           </view>
         </view>
       </view>
     </view>
   </view>
-  <view class="mx-main mt-40">
-    <Title title="梵米尼优选" subTitle="满足你对生活的所有想象" />
+  <view class="mx-main mt-40" v-if="info[5].list?.length">
+    <Title :title="info[5].title" :subTitle="info[5].subTitle" />
     <view
       class="mt-main p-20 bg-000-04 rounded-main grid grid-rows-2 grid-cols-2 gap-main"
     >
       <view
-        v-for="item in introduces"
+        v-for="item in info[5].list"
         :key="item"
         class="relative h-200 rounded-main overflow-hidden"
-        @click="openPage(item.router)"
+        @click="openPage(item)"
       >
-        <image class="w-full h-full bg-cover" :src="item.image_url" alt="" />
+        <image class="w-full h-full bg-cover" :src="item.img" alt="" />
         <view
           class="absolute left-0 top-0 bottom-0 right-0 z-1 bg-000-2 text-fff flex justify-center items-center"
-          >{{ item.name }}
+          >{{ item.title }}
           <view
             class="w-36 h-36 rounded-full bg-000-5 flex justify-center items-center ml-10 animation-zoom-in-out"
           >
@@ -141,32 +143,34 @@
   </view>
   <!-- 品牌介绍 -->
   <view class="mx-main mt-40 pb-20">
-    <Title title="品牌介绍" subTitle="美好生活轻松实现" />
+    <Title :title="info[6].title" :subTitle="info[6].subTitle" />
     <image
+      v-if="info[6].img"
       class="rounded-main mt-main overflow-hidden w-full"
-      @click="openPage('/pages/join/index')"
-      src="https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg"
+      @click="openPage(item)"
+      :src="info[6].img"
       alt=""
     />
 
     <video
+      v-if="info[6].video"
       class="w-full h-400 rounded-main mt-main"
-      src="https://static.guyantv.com/videos/2024_11_27/w2a_0_355/720/7E2reK4X5TH6UNzBkhcfsZGQqvjVYxDR_720.m3u8"
+      :src="info[6].video"
       muted
       autoplay
     />
-    <up-scroll-list :indicator="false">
+    <up-scroll-list :indicator="false" v-if="info[6].list?.length">
       <view
         class="mt-main ml-main first:ml-0 shadow-md"
-        v-for="(item, index) in brands"
+        v-for="(item, index) in info[6].list"
         :key="index"
         @click="openBrands(item)"
       >
         <view class="h-full overflow-hidden rounded-main relative">
-          <up-image width="280rpx" height="400rpx" :src="item.image_url" />
+          <up-image width="280rpx" height="400rpx" :src="item.img" />
           <view
             class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32 font-600"
-            >{{ item.name }}</view
+            >{{ item.title }}</view
           >
         </view>
       </view>
@@ -175,9 +179,9 @@
   <ScrollTop />
   <view
     class="fixed right-0 bottom-300 rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm"
-    @click="openPage('/pagesA/join/form')"
+    @click="openPage(info[7])"
   >
-    AI设计
+    {{ info[7].title }}
   </view>
 </template>
 
@@ -200,6 +204,7 @@ onShareTimeline(() => ({}));
 useWxShare({
   path: "/pages/home/index",
 });
+const info = ref([]);
 // 使用 ref 创建响应式引用
 const list3 = ref([
   "https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png",
@@ -359,11 +364,21 @@ const brands = [
     name: "净醛抗菌",
   },
 ];
+
+// 页面加载时自动加载数据
+onMounted(() => {
+  getInfo();
+});
+
 const openBrands = (item) => {
   uni.navigateTo({ url: item.router });
 };
 const openPage = (page, type = "navigateTo") => {
   uni[type]({ url: page });
+};
+
+const getInfo = async () => {
+  info.value = await getHomeData();
 };
 </script>
 

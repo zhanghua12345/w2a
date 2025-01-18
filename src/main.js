@@ -8,8 +8,6 @@ import zh from "./langurage/zh";
 import zh_hk from "./langurage/zh_hk";
 import vi from "./langurage/vi";
 import ja from "./langurage/ja";
-// 这是移动端控制台调试工具，需要调试就打开,不用就注释
-import "@/utils/vconsole.js";
 // 导入store
 import store from "./store";
 const messages = {

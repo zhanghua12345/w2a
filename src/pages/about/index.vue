@@ -78,17 +78,6 @@
 <script setup>
 import { ref } from "vue";
 import Footer from "@/components/footer/index.vue";
-
-const router = ref([
-  {
-    label: "reward.Rewards",
-    router: "../reward/index",
-  },
-  {
-    label: "leave.Leave",
-    router: "../leave/index",
-  },
-]);
 </script>
 
 <style scoped lang="scss">

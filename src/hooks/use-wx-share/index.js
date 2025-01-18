@@ -1,7 +1,7 @@
 import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
 
 export const useWxShare = (options) => {
-  const title = options?.title ?? "梵米尼家具优选";
+  const title = options?.title ?? "梵米尼全屋定制 - 细致打造品质生活";
   const path = options?.path ?? "";
   const query = options?.query ?? "";
   const imageUrl = options?.imageUrl ?? "";
