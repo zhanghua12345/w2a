@@ -57,7 +57,7 @@ export function editUserInfo(data) {
  */
 export function getPhone(data) {
   return request({
-    url: `/api/v2/routine/auth_binding_phone`,
+    url: `/api/user/editPhone`,
     method: "post",
     data,
   });

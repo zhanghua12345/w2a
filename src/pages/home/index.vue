@@ -2,7 +2,7 @@
   <Navbar leftIcon=" " />
   <view class="w-full h-700 relative">
     <up-swiper
-      :list="info[0].list"
+      :list="info[0]?.list"
       keyName="img"
       indicator
       indicatorMode="line"
@@ -12,7 +12,7 @@
       radius="0"
     />
     <view
-      v-if="info[1].list?.length"
+      v-if="info[1]?.list?.length"
       class="absolute bottom-main left-main right-main py-10 rounded-main bg-000-4 flex items-center justify-around shadow-md"
     >
       <view
@@ -31,7 +31,7 @@
     </view>
   </view>
   <!-- 案例 -->
-  <view class="mt-40 mx-main" v-if="info[2].list?.length">
+  <view class="mt-40 mx-main" v-if="info[2]?.list?.length">
     <Title
       className="mb-20"
       :title="info[2].title"
@@ -55,7 +55,7 @@
       </view>
     </up-scroll-list>
   </view>
-  <view class="mx-main mt-40" v-if="info[3].list?.length">
+  <view class="mx-main mt-40" v-if="info[3]?.list?.length">
     <view class="grid grid-rows-2 grid-cols-9 gap-20 h-330">
       <view
         class="rounded-main text-fff relative"
@@ -91,7 +91,7 @@
       </view>
     </view>
   </view>
-  <view class="mx-main mt-40" v-if="info[4].list?.length">
+  <view class="mx-main mt-40" v-if="info[4]?.list?.length">
     <Title
       :title="info[4].title"
       :subTitle="info[4].subTitle"
@@ -117,7 +117,7 @@
       </view>
     </view>
   </view>
-  <view class="mx-main mt-40" v-if="info[5].list?.length">
+  <view class="mx-main mt-40" v-if="info[5]?.list?.length">
     <Title :title="info[5].title" :subTitle="info[5].subTitle" />
     <view
       class="mt-main p-20 bg-000-04 rounded-main grid grid-rows-2 grid-cols-2 gap-main"
@@ -143,26 +143,26 @@
   </view>
   <!-- 品牌介绍 -->
   <view class="mx-main mt-40 pb-20">
-    <Title :title="info[6].title" :subTitle="info[6].subTitle" />
+    <Title :title="info[7]?.title" :subTitle="info[7]?.subTitle" />
     <image
-      v-if="info[6].img"
+      v-if="info[7].img"
       class="rounded-main mt-main overflow-hidden w-full"
       @click="openPage(item)"
-      :src="info[6].img"
+      :src="info[7].img"
       alt=""
     />
 
     <video
-      v-if="info[6].video"
+      v-if="info[7]?.video"
       class="w-full h-400 rounded-main mt-main"
-      :src="info[6].video"
+      :src="info[7].video"
       muted
       autoplay
     />
-    <up-scroll-list :indicator="false" v-if="info[6].list?.length">
+    <up-scroll-list :indicator="false" v-if="info[7]?.list?.length">
       <view
         class="mt-main ml-main first:ml-0 shadow-md"
-        v-for="(item, index) in info[6].list"
+        v-for="(item, index) in info[7].list"
         :key="index"
         @click="openBrands(item)"
       >
@@ -189,7 +189,9 @@
 import Title from "@/components/title/index.vue";
 import Navbar from "@/components/navbar/index.vue";
 import ScrollTop from "@/components/scrollTop/index.vue";
-import { onMounted, onUnmounted, ref } from "vue";
+
+import { getHomeData } from "@/api/main";
+import { onMounted, ref } from "vue";
 import {
   onPageScroll,
   onShareAppMessage,
@@ -378,7 +380,8 @@ const openPage = (page, type = "navigateTo") => {
 };
 
 const getInfo = async () => {
-  info.value = await getHomeData();
+  const data = await getHomeData();
+  info.value = data.data;
 };
 </script>
 
