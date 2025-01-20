@@ -143,31 +143,31 @@
   </view>
   <!-- 品牌介绍 -->
   <view class="mx-main mt-40 pb-20">
-    <Title :title="info[7]?.title" :subTitle="info[7]?.subTitle" />
+    <Title :title="info[6]?.title" :subTitle="info[6]?.subTitle" />
     <image
-      v-if="info[7].img"
+      v-if="info[6]?.img"
       class="rounded-main mt-main overflow-hidden w-full"
-      @click="openPage(item)"
-      :src="info[7].img"
+      @click="openPage"
+      :src="info[6].img"
       alt=""
     />
 
     <video
-      v-if="info[7]?.video"
+      v-if="info[6]?.video"
       class="w-full h-400 rounded-main mt-main"
-      :src="info[7].video"
+      :src="info[6].video"
       muted
       autoplay
     />
-    <up-scroll-list :indicator="false" v-if="info[7]?.list?.length">
+    <up-scroll-list :indicator="false" v-if="info[6]?.list?.length">
       <view
         class="mt-main ml-main first:ml-0 shadow-md"
-        v-for="(item, index) in info[7].list"
+        v-for="(item, index) in info[6].list"
         :key="index"
         @click="openBrands(item)"
       >
         <view class="h-full overflow-hidden rounded-main relative">
-          <up-image width="280rpx" height="400rpx" :src="item.img" />
+          <image class="w-280 h-400 bg-cover" :src="item.img" alt="" />
           <view
             class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32 font-600"
             >{{ item.title }}</view
@@ -181,7 +181,7 @@
     class="fixed right-0 bottom-300 rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm"
     @click="openPage(info[7])"
   >
-    {{ info[7].title }}
+    {{ info[7]?.title || "" }}
   </view>
 </template>
 
@@ -381,12 +381,13 @@ const openPage = (page, type = "navigateTo") => {
 
 const getInfo = async () => {
   const data = await getHomeData();
+  console.log(data.data);
   info.value = data.data;
 };
 </script>
 
 <style scoped>
 .u-scroll-list {
-  padding-bottom: 0;
+  padding-bottom: 0 !important;
 }
 </style>
