@@ -147,8 +147,8 @@
     <image
       v-if="info[6]?.img"
       class="rounded-main mt-main overflow-hidden w-full"
-      @click="openPage"
       :src="info[6].img"
+      mode="widthFix"
       alt=""
     />
 
