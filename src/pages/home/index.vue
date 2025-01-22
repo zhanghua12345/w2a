@@ -1,5 +1,5 @@
 <template>
-  <Navbar leftIcon=" " />
+  <Navbar />
   <view class="w-full h-700 relative">
     <up-swiper
       :list="info[0]?.list"
@@ -69,7 +69,7 @@
             : ['row-span-1', 'col-span-5', 'bg-f9ebea']
         "
       >
-        <view class="p-main absolute z-10 flex flex-col justify-between">
+        <view class="p-main absolute z-[9] flex flex-col justify-between">
           <view class="text-[#866350] text-36 font-600">{{ item.title }}</view>
           <view class="text-tip text-24 pt-10 flex items-center">
             {{ item.subTitle }}
@@ -207,165 +207,6 @@ useWxShare({
   path: "/pages/home/index",
 });
 const info = ref([]);
-// 使用 ref 创建响应式引用
-const list3 = ref([
-  "https://q6.itc.cn/images01/20240801/8e8b611a60004c62b97895a9eaf31265.png",
-  "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
-  "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
-]);
-
-const bannerSub = [
-  {
-    image_url:
-      "https://ww4.sinaimg.cn/mw690/630584a6gy1hlhz3xt2cpj20u0140aft.jpg",
-    url: "/demo-pages/basic/color/index",
-    icon: "&#xe627;",
-    name: "家具风格",
-  },
-  {
-    image_url:
-      "https://q4.itc.cn/images01/20240817/8e56470b608145e0a79d2293f146a442.png",
-    url: "/demo-pages/basic/color/index",
-    icon: "&#xe613;",
-    name: "10秒算报价",
-  },
-  {
-    image_url: "https://tgi1.jia.com/111/760/11760562.jpg",
-    url: "/pages/join/index",
-    icon: "&#xe62c;",
-    name: "梵米尼攻略",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    url: "/demo-pages/basic/color/index",
-    icon: "&#xe68f;",
-    name: "新品首发",
-  },
-];
-//活动
-const actives = ref([
-  {
-    image_url: "/static/active_1.png",
-    router: "/pages/join/index",
-    name: "推荐有礼",
-    subName: "邀好友得门店好礼",
-  },
-  {
-    image_url: "/static/active_1.png",
-    router: "/demo-pages/basic/color/index",
-    name: "免费设计",
-    subName: "省2880元设计礼包",
-  },
-  {
-    image_url: "/static/active_1.png",
-    router: "/demo-pages/basic/color/index",
-    name: "来点灵感",
-    subName: "实景装修案例",
-  },
-]);
-// 家·空间
-const spaces = ref([
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/pages/join/index",
-    name: "客餐厅",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "卧室",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "厨房",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "入户",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "书房",
-  },
-]);
-// 案例
-const cases = ref([
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/pages/join/index",
-    name: "时尚简约",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "意式极简",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "北 欧",
-  },
-]);
-// 公司介绍
-const introduces = ref([
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/pages/join/index",
-    name: "走进梵米尼",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "走进AI工厂",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "发展进程",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "品质保障",
-  },
-]);
-// 品牌介绍
-const brands = [
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/pages/join/index",
-    name: "走进工厂",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "品质与售后",
-  },
-  {
-    image_url:
-      "https://pic.rmb.bdstatic.com/bjh/240515/events/c6504bf50d27c072e7f2927f0f5d75849572.jpeg",
-    router: "/demo-pages/basic/color/index",
-    name: "净醛抗菌",
-  },
-];
 
 // 页面加载时自动加载数据
 onMounted(() => {

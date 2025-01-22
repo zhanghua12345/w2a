@@ -5,11 +5,10 @@ import request from "@/utils/request";
  * @param data
  * @returns {*}
  */
-export function getCode(params) {
+export function caseList(data) {
   return request({
-    url: `/api/caseList`,
+    url: `/api/caseList/${data.type}`,
     method: "get",
-    data: params,
   });
 }
 
@@ -18,11 +17,10 @@ export function getCode(params) {
  * @param data
  * @returns {*}
  */
-export function getCode(params) {
+export function caseClass() {
   return request({
     url: `/api/caseClass`,
     method: "get",
-    data: params,
   });
 }
 
@@ -31,7 +29,7 @@ export function getCode(params) {
  * @param data
  * @returns {*}
  */
-export function getCode(data) {
+export function product_new_list(data) {
   return request({
     url: `/api/product_new_list`,
     method: "get",
@@ -44,7 +42,7 @@ export function getCode(data) {
  * @param data
  * @returns {*}
  */
-export function getCode(data) {
+export function product_new_detail(data) {
   return request({
     url: `/api/store_product_new_detail/${data.id}`,
     method: "get",
@@ -59,7 +57,7 @@ export function getCode(data) {
  * @param data
  * @returns {*}
  */
-export function getCode(data) {
+export function setPraise(data) {
   return request({
     url: `/api/praise/${data.id}/${data.type}/${data.funType}/${data.fun}`,
     method: "get",

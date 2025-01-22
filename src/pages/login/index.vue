@@ -94,7 +94,7 @@ export default {
         //     });
         //   } else {
         //     uni.switchTab({
-        //       url: "/pages/home/indx",
+        //       url: "/pages/home/index",
         //     });
         //   }
         // }

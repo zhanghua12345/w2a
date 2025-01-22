@@ -43,6 +43,14 @@
       }
     },
     {
+      "path": "pages/VR/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "VR链接",
+        "disableScroll": true
+      }
+    },
+    {
       "path": "pages/about/index",
       "style": {
         "navigationStyle": "custom",
@@ -127,6 +135,35 @@
           "path": "member/index",
           "style": {
             "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
+    {
+      "root": "PagesForm",
+      "pages": [
+        {
+          "path": "AIsheji/index",
+          "style": {
+            "navigationBarTitleText": "梵米尼严选"
+          }
+        },
+        {
+          "path": "baojia/index",
+          "style": {
+            "navigationBarTitleText": "算报价"
+          }
+        },
+        {
+          "path": "mianfeisheji/index",
+          "style": {
+            "navigationBarTitleText": "免费设计"
+          }
+        },
+        {
+          "path": "zhaungxiu/index",
+          "style": {
+            "navigationBarTitleText": "我要装修"
           }
         }
       ]
