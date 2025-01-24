@@ -48,12 +48,31 @@ export const JSON_mianfeisheji = {
     {
       title: "选择您家房屋面积",
       show: true,
+      type: "only",
       data: ["60m²以下", "61m²~90m²", "91m²~130m²", "130m²以上"],
     },
     {
       title: "选择装修档次",
       show: false,
-      data: ["60m²下", "61~90²", "91m²~0m²", "130m以上"],
+      type: "img",
+      data: [
+        {
+          img: "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
+          name: "出租装修",
+        },
+        {
+          img: "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
+          name: "刚需简装",
+        },
+        {
+          img: "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
+          name: "改善精装",
+        },
+        {
+          img: "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
+          name: "品质豪装",
+        },
+      ],
     },
   ],
   bottomTitle: "查看设计方案",
@@ -71,14 +90,26 @@ export const JSON_zhuangxiu = {
   ],
   list: [
     {
-      title: "选择您家房屋面积",
-      show: true,
-      data: ["60m²以下", "61m²~90m²", "91m²~130m²", "130m²以上"],
+      title: "填写房屋所在位置",
+      select: "",
+      data: [
+        ["中国", "美国"],
+        ["深圳", "厦门", "上海", "拉萨"],
+      ],
+      data1: [
+        ["深圳", "厦门", "上海", "拉萨"],
+        ["得州", "华盛顿", "纽约", "阿拉斯加"],
+      ],
     },
     {
-      title: "选择装修档次",
-      show: false,
-      data: ["60m²下", "61~90²", "91m²~0m²", "130m以上"],
+      title: "您的装修类型",
+      select: "毛坯装修",
+      data: ["毛坯装修", "旧房翻新", "局部改造", "商用公装"],
+    },
+    {
+      title: "预计什么时候装修",
+      select: "1个月内",
+      data: ["1个月内", "3个月内", "6个月内²", "1年月内"],
     },
   ],
   bottomTitle: "领取3份设计方案和报价",

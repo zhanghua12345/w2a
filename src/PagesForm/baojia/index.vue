@@ -77,7 +77,7 @@ onMounted(() => {
 const next = (item, index) => {
   wx.vibrateShort();
   setTimeout(() => {
-    data.value.list[index].selectValue = item;
+    data.value.list[index].select = item;
     data.value.list[index].show = false;
     setTimeout(() => {
       if (index < data.value.list.length - 1) {

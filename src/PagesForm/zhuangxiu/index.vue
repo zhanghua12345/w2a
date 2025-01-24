@@ -22,55 +22,66 @@
     <view class="text-32 font-600">开启安心装修第一步</view>
     <view class="w-full mt-main">
       <view class="mt-main">
-        <view class="mb-36">选择房屋所在位置</view>
+        <view class="mb-36">{{ data.list[0].title }}</view>
         <view
           class="h-90 px-main rounded-main flex items-center justify-between bg-[#f6f6f6]"
           @click="openPicker"
         >
           <view class="pr-main truncate text-ellipsis flex-1 text-24">
-            湖南省 长沙市 开福区 月湖街道
+            长沙市 {{ data.list[0].select }}
           </view>
 
           <i class="iconfont text-24 ml-10 text-tip">&#xe671;</i>
         </view>
       </view>
       <view class="mt-50">
-        <view class="mb-36">您的装修类型</view>
+        <view class="mb-36">{{ data.list[1].title }}</view>
 
         <view class="grid grid-cols-4 gap-20 text-24">
           <view
-            class="h-90 rounded-main bg-[#f6f6f6] px-10 truncate leading-[90rpx] text-center"
-            v-for="item in 4"
+            class="h-80 rounded-main px-10 truncate text-center relative border-4 leading-[80rpx]"
+            :class="{
+              'bg-fff border-[#0ccc83] ': data.list[1].select === item,
+              'bg-[#f6f6f6] border-[#f6f6f6]': data.list[1].select !== item,
+            }"
+            v-for="item in data.list[1].data"
+            @click="data.list[1].select = item"
           >
-            毛坯装修
+            {{ item }}
+            <i
+              v-show="data.list[1].select === item"
+              class="iconfont absolute top-[-4rpx] right-[-4rpx] text-[#0ccc83] leading-1 text-40"
+            >
+              &#xe604;
+            </i>
           </view>
         </view>
       </view>
       <view class="mt-50">
-        <view class="mb-36">预计什么时候装修</view>
+        <view class="mb-36">{{ data.list[2].title }}</view>
         <view class="grid grid-cols-3 gap-20 text-24">
           <view
-            class="h-90 rounded-main bg-[#f6f6f6] px-10 truncate leading-[90rpx] text-center"
-            v-for="item in 4"
+            class="h-80 rounded-main px-10 truncate text-center relative border-4 leading-[80rpx]"
+            :class="{
+              'bg-fff border-[#0ccc83] ': data.list[2].select === item,
+              'bg-[#f6f6f6] border-[#f6f6f6]': data.list[2].select !== item,
+            }"
+            v-for="item in data.list[2].data"
+            @click="data.list[2].select = item"
           >
-            毛坯装修
+            {{ item }}
+            <i
+              v-show="data.list[2].select === item"
+              class="iconfont absolute top-[-4rpx] right-[-4rpx] text-[#0ccc83] leading-1 text-40"
+            >
+              &#xe604;
+            </i>
           </view>
         </view>
       </view>
     </view>
-    <view class="w-full mt-main">
+    <view class="w-full mt-50">
       <formBottom @click="openKefu" :data="data" />
-      <!-- <view
-        class="h-110 flex justify-center items-center bg-[#0ccc83] text-fff rounded-16 text-32 font-600"
-        @click="emit('click')"
-        >查看装修报价</view
-      >
-      <view class="flex flex-wrap pt-main justify-center">
-        <i class="iconfont text-20 mr-6 text-tip">&#xe663;</i>
-        <view class="text-18 text-tip"
-          >允许梵米尼装修顾问稍后来电了解装修需求</view
-        >
-      </view> -->
     </view>
   </view>
   <image
@@ -81,7 +92,7 @@
 
   <view
     class="fixed left-0 right-0 transition-all bg-fff flex justify-center py-main"
-    :class="scrollNum > 500 ? 'bottom-0' : 'bottom-[-240rpx]'"
+    :class="scrollNum > 800 ? 'bottom-0' : 'bottom-[-240rpx]'"
   >
     <view class="w-650">
       <formBottom @click="openKefu" :data="data" />
@@ -90,8 +101,9 @@
   <up-picker
     :show="showPicker"
     ref="uPickerRef"
-    :columns="columns"
+    :columns="data.list[0].data"
     @confirm="confirmPicker"
+    @cancel="showPicker = false"
     @change="changeHandler"
   />
   <!-- <formKefu :status="status" :data="data" /> -->
@@ -124,14 +136,7 @@ const showPicker = ref(false);
 const openPicker = () => {
   showPicker.value = true;
 };
-const columns = reactive([
-  ["中国", "美国"],
-  ["深圳", "厦门", "上海", "拉萨"],
-]);
-const columnData = reactive([
-  ["深圳", "厦门", "上海", "拉萨"],
-  ["得州", "华盛顿", "纽约", "阿拉斯加"],
-]);
+
 const uPickerRef = ref(null);
 
 const scrollNum = ref(0);
@@ -153,12 +158,13 @@ const changeHandler = (e) => {
   const { columnIndex, value, values, index } = e;
 
   if (columnIndex === 0) {
-    uPickerRef.value.setColumnValues(1, columnData[index]);
+    uPickerRef.value.setColumnValues(1, data.value.list[0].data1[index]);
   }
 };
 
 const confirmPicker = (e) => {
   console.log("confirm", e);
+  data.value.list[0].select = e.value[0] + " " + e.value[1];
   showPicker.value = false;
 };
 

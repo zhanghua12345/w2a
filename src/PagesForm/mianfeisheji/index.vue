@@ -42,7 +42,14 @@
             :key="i"
             @click="next(e, index)"
           >
-            <view>{{ e }}</view>
+            <view v-if="item.type === 'only'">{{ e }}</view>
+            <view
+              v-if="item.type === 'img'"
+              class="h-full w-full flex flex-col items-center justify-center"
+            >
+              <image class="w-90 h-90 rounded-full" :src="e.img" alt="" />
+              <view class="pt-10">{{ e.name }}</view>
+            </view>
           </view>
         </view>
       </up-transition>
@@ -72,7 +79,7 @@ onMounted(() => {
 const next = (item, index) => {
   wx.vibrateShort();
   setTimeout(() => {
-    data.value.list[index].selectValue = item;
+    data.value.list[index].select = item;
     data.value.list[index].show = false;
     setTimeout(() => {
       if (index < data.value.list.length - 1) {

@@ -174,8 +174,7 @@
         {
           "path": "zhuangxiu/index",
           "style": {
-            "navigationBarTitleText": "我要装修",
-            "navigationStyle": "custom"
+            "navigationBarTitleText": "我要装修"
           }
         }
       ]
