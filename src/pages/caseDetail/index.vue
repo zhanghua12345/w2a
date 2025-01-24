@@ -42,7 +42,8 @@
   </view>
   <view class="px-main">
     <view class="text-48 text-000 font-600">{{ detail.name || "--" }}</view>
-    <view class="flex flex-wrap items-center mt-10">
+    <text class="mt-main">{{ detail.description }}</text>
+    <view class="flex flex-wrap items-center mt-main">
       <i class="iconfont text-tip text-24 mr-6">&#xe662;</i>浏览量{{
         Number(detail.browse || 0) + Number(detail.realBrowse || 0)
       }}
@@ -53,11 +54,11 @@
       <i class="iconfont text-tip text-24 mr-6">&#xe66e;</i>
       点赞{{ Number(detail.praise || 0) + Number(detail.realPraise || 0) }}
     </view>
-    <view
+    <!-- <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
     >
       {{ detail.cate_name || "--" }}
-    </view>
+    </view> -->
     <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
     >
@@ -108,11 +109,7 @@
       点击查看更多 <i class="iconfont text-24 ml-6">&#xfd90;</i>
     </view>
   </view>
-  <view
-    class="mt-50 px-main"
-    v-html="detail.description"
-    v-if="detail.description"
-  >
+  <view class="mt-main px-main" v-html="detail.content" v-if="detail.content">
   </view>
 
   <view class="py-40 px-main flex flex-col items-center">
@@ -145,7 +142,6 @@ import {
   onShareAppMessage,
   onShareTimeline,
   onLoad,
-  onShow,
 } from "@dcloudio/uni-app";
 import { useWxShare } from "@/hooks/index.js";
 
@@ -173,30 +169,41 @@ onLoad((options) => {
 
 // 详情查看更多
 const showMoreClick = () => {
-  if (!app.globalData.userInfo?.phone) {
-    uni.navigateTo({ url: "/pages/login/index" });
-  } else {
-    showMore.value = true;
-  }
+  showMore.value = true;
+  // if (!app.globalData.userInfo?.phone) {
+  //   uni.navigateTo({ url: "/pages/login/index" });
+  // } else {
+  //   showMore.value = true;
+  // }
 };
 
 const openVR = () => {
-  if (!app.globalData.userInfo?.phone) {
-    uni.navigateTo({ url: "/pages/login/index" });
-  } else {
-    uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
-  }
+  uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
+  // if (!app.globalData.userInfo?.phone) {
+  //   uni.navigateTo({ url: "/pages/login/index" });
+  // } else {
+  //   uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
+  // }
 };
 const setBottom = async (name) => {
   console.log(name);
   if (name === "praise") {
     await setPraise({
+      id: detail.value.id, //案例id
+      type: 1, // 案例1 文章2
+      funType: 1, // 点赞1 收藏2 (名词)
+      fun: detail.value.isPraise ? 0 : 1, // 点赞1 取消2  (动词)
+    });
+    getDetail();
+  } else if (name === "collect") {
+    await setPraise({
       id: detail.value.id,
       type: 1,
-      funType: 1,
+      funType: 2,
       fun: detail.value.isPraise ? 0 : 1,
     });
     getDetail();
+  } else if (name === "share") {
   }
 };
 const getDetail = async () => {

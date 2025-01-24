@@ -61,6 +61,7 @@
         class="rounded-main text-fff relative"
         v-for="(item, index) in info[3].list"
         :key="index"
+        @click="openDetail(item)"
         :class="
           index === 0
             ? ['row-span-2', 'col-span-4', 'bg-fdf2e0']
@@ -178,7 +179,7 @@
   </view>
   <ScrollTop />
   <view
-    class="fixed right-0 bottom-300 rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm"
+    class="fixed right-0 bottom-300 rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm z-full"
     @click="openPage(info[7])"
   >
     {{ info[7]?.title || "" }}
@@ -220,6 +221,15 @@ const openPage = (page, type = "navigateTo") => {
   uni[type]({ url: page });
 };
 
+const openDetail = (item) => {
+  console.log(item.router.type);
+  const type = item.router.type;
+  uni[type]({
+    url: item.router.isId
+      ? `/${item.router.page}?id=${item.router.id}`
+      : `/${item.router.page}`,
+  });
+};
 const getInfo = async () => {
   const data = await getHomeData();
   console.log(data.data);

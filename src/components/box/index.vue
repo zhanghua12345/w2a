@@ -5,7 +5,12 @@
     @click="emit('click', obj)"
   >
     <!-- https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg -->
-    <image class="w-full h-300 bg-cover" :src="obj.coverImg" alt="" />
+    <image
+      class="w-full h-300 bg-cover"
+      :src="obj.coverImg"
+      alt=""
+      mode="aspectFill"
+    />
     <view class="px-main py-14 w-full">
       <view class="truncate">{{ obj.name }}</view>
       <view

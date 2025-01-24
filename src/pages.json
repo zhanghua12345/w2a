@@ -140,30 +140,37 @@
       ]
     },
     {
-      "root": "PagesForm",
+      "root": "pagesForm",
       "pages": [
         {
           "path": "AIsheji/index",
           "style": {
-            "navigationBarTitleText": "梵米尼严选"
+            "navigationBarTitleText": "在线免费设计",
+            "navigationStyle": "custom"
           }
         },
         {
           "path": "baojia/index",
           "style": {
-            "navigationBarTitleText": "算报价"
+            "navigationBarTitleText": "算报价",
+            "navigationStyle": "custom",
+            "disableScroll": true
           }
         },
         {
           "path": "mianfeisheji/index",
           "style": {
-            "navigationBarTitleText": "免费设计"
+            "navigationBarTitleText": "免费设计",
+            "navigationStyle": "custom",
+            "disableScroll": true
           }
         },
         {
-          "path": "zhaungxiu/index",
+          "path": "zhuangxiu/index",
           "style": {
-            "navigationBarTitleText": "我要装修"
+            "navigationBarTitleText": "我要装修",
+            "navigationStyle": "custom",
+            "disableScroll": true
           }
         }
       ]
