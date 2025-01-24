@@ -102,7 +102,7 @@ const openKefu = () => {
     setTimeout(() => {
       uni.hideLoading();
       status.value = 2;
-    }, 500);
+    }, 1000);
   }, 500);
 };
 </script>

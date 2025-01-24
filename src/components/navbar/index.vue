@@ -31,6 +31,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
 const scrollNum = ref(0);
 
 onPageScroll((e) => {
+  console.log(e);
   scrollNum.value = e.scrollTop;
 });
 const back = () => {

@@ -30,4 +30,58 @@ export const JSON_baojia = {
       data: ["60m²下", "6m²~90m²", "91m²~30m²", "13²以上"],
     },
   ],
+  bottomTitle: "查看装修报价",
+  formRead: 2564,
+  bottomTip: "agreement",
+};
+
+export const JSON_mianfeisheji = {
+  title: "查看专属效果图方案",
+  banner: [
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/9c563e246d67ef749140417a3ad66a3a.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/840c57f126d0134bb7ee32a9c3173963.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/dc15271c0991cf892760288beb44dde5.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/3e48dc767d5e67ff97db670b8ab5a2ee.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
+  ],
+  list: [
+    {
+      title: "选择您家房屋面积",
+      show: true,
+      data: ["60m²以下", "61m²~90m²", "91m²~130m²", "130m²以上"],
+    },
+    {
+      title: "选择装修档次",
+      show: false,
+      data: ["60m²下", "61~90²", "91m²~0m²", "130m以上"],
+    },
+  ],
+  bottomTitle: "查看设计方案",
+  formRead: 3365,
+  bottomTip: "agreement",
+};
+export const JSON_zhuangxiu = {
+  title: "查看专属效果图方案",
+  banner: [
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/dc15271c0991cf892760288beb44dde5.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/840c57f126d0134bb7ee32a9c3173963.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/3e48dc767d5e67ff97db670b8ab5a2ee.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/9c563e246d67ef749140417a3ad66a3a.png",
+  ],
+  list: [
+    {
+      title: "选择您家房屋面积",
+      show: true,
+      data: ["60m²以下", "61m²~90m²", "91m²~130m²", "130m²以上"],
+    },
+    {
+      title: "选择装修档次",
+      show: false,
+      data: ["60m²下", "61~90²", "91m²~0m²", "130m以上"],
+    },
+  ],
+  bottomTitle: "领取3份设计方案和报价",
+  formRead: 0,
+  bottomTip: "允许梵米尼装修顾问稍后来电了解装修需求",
 };
