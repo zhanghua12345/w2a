@@ -97,14 +97,15 @@
       :title="info[4].title"
       :subTitle="info[4].subTitle"
       :isMore="true"
-      @click="openPage(info[4])"
+      @click="openDetail(info[4])"
     />
-    <view class="mt-main grid grid-rows-5 grid-cols-6 gap-main h-450">
+    <view class="mt-main grid grid-rows-6 grid-cols-6 gap-main h-500">
       <view
         class="bg-000 rounded-main text-fff relative overflow-hidden shadow-md"
         :class="{
-          'row-span-3 col-span-3': index === 0 || index === 1,
-          'row-span-2 col-span-2': index === 2 || index === 3 || index === 4,
+          'row-span-4 col-span-2': [0].includes(index),
+          'row-span-2 col-span-2': [1, 2, 3, 4].includes(index),
+          'row-span-2 col-span-3': [5, 6].includes(index),
         }"
         v-for="(item, index) in info[4].list"
         :key="index"
