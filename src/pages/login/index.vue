@@ -85,19 +85,21 @@ export default {
     async getphonenumber(e) {
       if (e.detail.errMsg === "getPhoneNumber:ok") {
         console.log(JSON.stringify(e.detail));
-        // await getPhone(e.detail);
-        // const userInfo = await getUserInfo();
-        // if (userInfo.phone) {
-        //   if (getCurrentPages().length > 1) {
-        //     uni.navigateBack({
-        //       delta: 1,
-        //     });
-        //   } else {
-        //     uni.switchTab({
-        //       url: "/pages/home/index",
-        //     });
-        //   }
-        // }
+        await getPhone(e.detail);
+        const userInfo = await getUserInfo();
+        app.globalData.userInfo = userInfo;
+        app.globalData.islogin = true;
+        if (userInfo.phone) {
+          if (getCurrentPages().length > 1) {
+            uni.navigateBack({
+              delta: 1,
+            });
+          } else {
+            uni.switchTab({
+              url: "/pages/home/index",
+            });
+          }
+        }
       }
     },
   },

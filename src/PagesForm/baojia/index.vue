@@ -46,7 +46,14 @@
               :key="i"
               @click="next(e, index)"
             >
-              <view>{{ e }}</view>
+              <view v-if="item.type === 'only'">{{ e }}</view>
+              <view
+                v-if="item.type === 'img'"
+                class="h-full w-full flex flex-col items-center justify-center"
+              >
+                <image class="w-90 h-90 rounded-full" :src="e.img" alt="" />
+                <view class="pt-10">{{ e.name }}</view>
+              </view>
             </view>
           </view>
         </up-transition>
@@ -58,11 +65,12 @@
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
-
 import { JSON_baojia } from "@/utils/mock.js";
-
 import formResult from "@/components/formResult/index.vue";
 import formKefu from "@/components/formKefu/index.vue";
+import { offerForm } from "@/api/form";
+
+const app = getApp();
 const data = ref({});
 const status = ref(0);
 
@@ -101,7 +109,16 @@ const openKefu = () => {
     });
     setTimeout(() => {
       uni.hideLoading();
-      status.value = 2;
+      if (!app.globalData.userInfo?.phone) {
+        uni.navigateTo({ url: "/pages/login/index" });
+      } else {
+        offerForm({
+          area: data.value.list[0].select,
+          type: data.value.list[1].select.name,
+          grade: data.value.list[2].select.name,
+        });
+        status.value = 2;
+      }
     }, 1000);
   }, 500);
 };

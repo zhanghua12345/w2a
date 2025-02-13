@@ -54,7 +54,7 @@
                       v-model="form[item.id]"
                       style="pointer-events: none"
                       readonly
-                      placeholder="请选择1"
+                      placeholder="请选择"
                       border="none"
                     />
                     <up-icon name="arrow-right" size="20rpx" />

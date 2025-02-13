@@ -109,6 +109,7 @@
         }"
         v-for="(item, index) in info[4].list"
         :key="index"
+        @click="openDetail(item)"
       >
         <image class="w-full h-full bg-cover" :src="item.img" alt="" />
         <view class="absolute bottom-10 left-0 right-0 flex justify-center">
@@ -223,11 +224,11 @@ const openPage = (page, type = "navigateTo") => {
 };
 
 const openDetail = (item) => {
-  console.log(item.router.type);
+  console.log(item.router);
   const type = item.router.type;
   uni[type]({
     url: item.router.isId
-      ? `/${item.router.page}?id=${item.router.id}`
+      ? `/${item.router.page}?id=${item.routerId}`
       : `/${item.router.page}`,
   });
 };

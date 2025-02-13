@@ -14,23 +14,33 @@
         paddingTop: '90px',
       }"
     >
-      <view>
-        <view class="text-48 font-700"
-          >{{ detail.phoneNumber ? "您好，" : "" }}{{ detail.nickname }}</view
-        >
-        <view class="mt-20">{{ detail.phoneNumber }}</view>
-        <view class="" @click="goLogin">梵米尼-创造您的生活</view>
+      <view class="flex-1 pr-30">
+        <view
+          class="text-48 font-700 w-full flex flex-wrap items-center"
+          @click="goLogin"
+          >{{ userInfo.nickname || "您好，请登录" }}
+          <span>
+            <i
+              class="iconfont text-48 leading-1 text-tip p-20"
+              v-if="userInfo.nickname"
+              @click="showLoginPopup = true"
+              >&#xe638;</i
+            >
+          </span>
+        </view>
+        <view class="mt-20">{{ userInfo.phone }}</view>
+        <view>梵米尼-创造您的生活</view>
       </view>
       <image
         class="h-150 w-150 rounded-full"
-        :src="detail.avatar || '/static/user.png'"
-        @click="showLoginPopup = true"
-      ></image>
+        :src="userInfo.avatar || '/static/user.png'"
+      />
     </view>
     <view class="pt-80 flex flex-wrap">
       <view
         class="pr-50"
-        v-for="item in dataFilter(routers, 0, 3)"
+        v-for="(item, index) in dataFilter(routers, 0, 3)"
+        :key="index"
         @click="openMenu(item)"
       >
         <view class="text-40">{{ item.number }}</view>
@@ -58,7 +68,8 @@
       <view class="flex flex-wrap justify-around py-main">
         <view
           class="flex flex-col items-center"
-          v-for="item in dataFilter(routers, 3, 7)"
+          v-for="(item, index) in dataFilter(routers, 3, 7)"
+          :key="index"
           @click="openMenu(item)"
         >
           <i class="iconfont text-64" v-html="item.icon" />
@@ -69,7 +80,8 @@
     <view class="mt-main bg-fff rounded-32 overflow-hidden">
       <up-cell-group :border="false">
         <up-cell
-          v-for="item in dataFilter(routers, 7, 11)"
+          v-for="(item, index) in dataFilter(routers, 7, 11)"
+          :key="index"
           @click="openMenu(item)"
           icon="map"
           :title="item.label"
@@ -108,7 +120,11 @@
     </view>
   </view>
   <Footer className="py-60" content="Copyright © 2023 图鸟科技" />
-  <Login v-model:detail="detail" v-model:show="showLoginPopup" />
+  <Login
+    v-model:userInfo="userInfo"
+    v-model:show="showLoginPopup"
+    @close="closeLogin"
+  />
 </template>
 
 <script setup>
@@ -125,6 +141,7 @@ import {
 import { useWxShare } from "@/hooks/index.js";
 import Handle from "@/components/handle/index.vue";
 const chooseLocation = requirePlugin("chooseLocation");
+import { getUserInfo } from "@/api/login";
 // 监听滚动
 onPageScroll(() => {});
 // 微信分享
@@ -133,8 +150,14 @@ onShareTimeline(() => ({}));
 useWxShare({
   path: "/pages/my/index",
 });
-
-const detail = ref({ nickname: "去登录", avatar: "" });
+const app = getApp();
+const userInfo = ref({});
+onMounted(async () => {
+  //判断是否获取到动态设置的globalData
+  const userData = await getUserInfo();
+  app.globalData.userInfo = userData;
+  userInfo.value = userData;
+});
 
 const showLoginPopup = ref(false);
 const routers = ref([
@@ -242,11 +265,16 @@ const dataFilter = (list, startIndex, length) => {
   return list.slice(startIndex, length);
 };
 onShow(() => {
-  console.log(5454);
+  // 获取用户地理位置
   const location = chooseLocation.getLocation();
   console.log(location);
 });
-
+const closeLogin = async () => {
+  showLoginPopup.value = false;
+  const userData = await getUserInfo();
+  app.globalData.userInfo = userData;
+  userInfo.value = userData;
+};
 const openMap = () => {
   const key = "3GLBZ-22HLF-Y2WJD-NPB7V-STWFO-RHFVS";
   const referer = "梵米尼家具优选";
@@ -264,10 +292,10 @@ const goVip = () => {
   uni.navigateTo({ url: "/pages/register/index" });
 };
 const goLogin = () => {
+  if (userInfo.value.phone) return false;
   uni.navigateTo({ url: "/pages/login/index" });
 };
 const openPage = (page, type = "navigateTo") => {
-  console.log(245);
   uni[type]({ url: page });
 };
 const openMenu = (item) => {

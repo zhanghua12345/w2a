@@ -28,10 +28,23 @@
           @click="openPicker"
         >
           <view class="pr-main truncate text-ellipsis flex-1 text-24">
-            长沙市 {{ data.list[0].select }}
+            湖南省 {{ data.list[0].select }}
           </view>
 
           <i class="iconfont text-24 ml-10 text-tip">&#xe671;</i>
+        </view>
+      </view>
+      <view class="mt-50">
+        <view class="mb-36">{{ data.list[3].title }}</view>
+        <view
+          class="h-90 px-main rounded-main flex items-center justify-between bg-[#f6f6f6]"
+        >
+          <up-input
+            v-model="data.list[3].select"
+            placeholder="请选择"
+            fontSize="24rpx"
+            border="none"
+          />
         </view>
       </view>
       <view class="mt-50">
@@ -44,7 +57,8 @@
               'bg-fff border-[#0ccc83] ': data.list[1].select === item,
               'bg-[#f6f6f6] border-[#f6f6f6]': data.list[1].select !== item,
             }"
-            v-for="item in data.list[1].data"
+            v-for="(item, index) in data.list[1].data"
+            :key="index"
             @click="data.list[1].select = item"
           >
             {{ item }}
@@ -66,7 +80,8 @@
               'bg-fff border-[#0ccc83] ': data.list[2].select === item,
               'bg-[#f6f6f6] border-[#f6f6f6]': data.list[2].select !== item,
             }"
-            v-for="item in data.list[2].data"
+            v-for="(item, index) in data.list[2].data"
+            :key="index"
             @click="data.list[2].select = item"
           >
             {{ item }}
@@ -113,7 +128,7 @@
 import { ref, onMounted, reactive } from "vue";
 import { JSON_zhuangxiu } from "@/utils/mock.js";
 import formBottom from "@/components/formBottom/index.vue";
-// import formKefu from "@/components/formKefu/index.vue";
+import { renovationForm } from "@/api/form";
 
 import {
   onPageScroll,
@@ -129,6 +144,7 @@ useWxShare({
   path: "/pages/home/index",
 });
 
+const app = getApp();
 const data = ref({});
 const status = ref(0);
 
@@ -138,7 +154,6 @@ const openPicker = () => {
 };
 
 const uPickerRef = ref(null);
-
 const scrollNum = ref(0);
 // 页面加载时自动加载数据
 onMounted(() => {
@@ -149,7 +164,6 @@ onMounted(() => {
 
 // 监听滚动
 onPageScroll((e) => {
-  console.log(e);
   scrollNum.value = e.scrollTop;
   console.log(scrollNum.value);
 });
@@ -169,6 +183,20 @@ const confirmPicker = (e) => {
 };
 
 const openKefu = () => {
+  if (!data.value.list[0].select) {
+    wx.showToast({
+      title: "请选择房屋所在地址",
+      icon: "none",
+    });
+    return false;
+  }
+  if (!data.value.list[3].select) {
+    wx.showToast({
+      title: "请填写房屋具体小区",
+      icon: "none",
+    });
+    return false;
+  }
   uni.showLoading({
     title: "计算中...",
     mask: true, // 是否显示透明蒙层，防止触摸穿透
@@ -180,8 +208,21 @@ const openKefu = () => {
       mask: true, // 是否显示透明蒙层，防止触摸穿透
     });
     setTimeout(() => {
+      console.log(data.value);
       uni.hideLoading();
-      status.value = 2;
+      if (!app.globalData.userInfo?.phone) {
+        uni.navigateTo({ url: "/pages/login/index" });
+      } else {
+        renovationForm({
+          province: "湖南省",
+          city: data.value.list[0].select.split(" ")[0],
+          area: data.value.list[0].select.split(" ")[1],
+          address: data.value.list[3].select,
+          type: data.value.list[1].select,
+          time: data.value.list[2].select,
+        });
+        uni.navigateTo({ url: "/pagesForm/success/index" });
+      }
     }, 1000);
   }, 500);
 };

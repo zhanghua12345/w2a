@@ -7,6 +7,7 @@
     bgColor="#fff"
     closeable
     closeOnClickOverlay
+    :safeAreaInsetBottom="false"
   >
     <view
       class="popup-box px-main py-60 flex flex-col items-center leading-1.3"
@@ -21,7 +22,17 @@
           open-type="chooseAvatar"
           @chooseavatar="onChooseAvatar"
         >
-          <i class="iconfont text-100 leading-1 text-[#e4e9ec]">&#xe617;</i>
+          <i
+            class="iconfont text-100 leading-1 text-[#e4e9ec]"
+            v-if="!newUserInfo.avatar"
+            >&#xe617;</i
+          >
+          <image
+            v-else
+            class="w-full h-full bg-cover"
+            :src="newUserInfo.avatar"
+            alt=""
+          />
         </button>
         <view
           class="absolute bottom-[-12rpx] right-[-10rpx] h-64 w-64 border-4 border-fff border-solid rounded-full bg-000 flex justify-center items-center"
@@ -35,13 +46,18 @@
         class="mt-50 px-20 h-80 rounded-12 leading-[80rpx] bg-[#f8f7f8] text-32 w-full"
         placeholder="请输入昵称"
         @change="inputChange"
-        v-model="newDetail.nickname"
+        v-model="newUserInfo.nickname"
       />
       <view class="mt-70 w-full">
         <up-button
           text="保 存"
-          color="#e6e6e6"
-          customStyle="{ color: '#838383'}"
+          :color="
+            newUserInfo.nickname && newUserInfo.avatar ? '#31ba52' : '#e6e6e6'
+          "
+          :customStyle="{
+            color:
+              newUserInfo.nickname && newUserInfo.avatar ? '#fff' : '#838383',
+          }"
           @click="submit"
         />
       </view>
@@ -50,11 +66,12 @@
 </template>
 
 <script>
-// import { userEdit } from "@/api/custormer.js";
-// import { urls } from "@/api/api.js";
+import { editUserInfo } from "@/api/login";
+import { base_url } from "@/utils/request";
+
 export default {
   props: {
-    detail: {
+    userInfo: {
       type: Object,
       required: true,
     },
@@ -63,10 +80,10 @@ export default {
       required: true,
     },
   },
-  emits: ["update:show", "update:detail"],
+  emits: ["update:show", "close"],
   data() {
     return {
-      newDetail: {},
+      newUserInfo: {},
       payType: 1,
       loading: false,
     };
@@ -77,81 +94,89 @@ export default {
     uni.getStorageSync("token") ? this.loadData() : "";
   },
   watch: {
-    detail(val) {
-      this.newDetail = { ...val };
+    userInfo(val) {
+      this.newUserInfo = { ...val };
     },
   },
   methods: {
-    loginOpen() {
-      this.$refs.login.open("bottom");
-    },
-    close() {
-      this.$refs.login.close();
-    },
     onChooseAvatar(e) {
-      this.newDetail = { ...this.newDetail, avatar: e.detail.avatarUrl };
+      this.newUserInfo = { ...this.newUserInfo, avatar: e.detail.avatarUrl };
     },
     inputChange(e) {
-      this.newDetail = { ...this.newDetail, nickname: e.detail.value };
+      this.newUserInfo = { ...this.newUserInfo, nickname: e.detail.value };
     },
     submit() {
-      if (!this.newDetail.avatar) {
+      if (!this.newUserInfo.avatar) {
         uni.showToast({
           title: "请点击头像获取微信头像",
           icon: "none",
         });
       } else if (
-        !this.newDetail.nickname ||
-        this.newDetail.nickname === "微信用户"
+        !this.newUserInfo.nickname ||
+        this.newUserInfo.nickname === "微信用户"
       ) {
         uni.showToast({
           title: "请输入正确的昵称",
           icon: "none",
         });
       } else {
-        if (this.newDetail.avatar === this.detail.avatar) this.userEdit();
-        else this.upload(this.newDetail.avatar);
+        if (
+          this.newUserInfo.avatar === this.userInfo.avatar &&
+          this.newUserInfo.nickname === this.userInfo.nickname
+        ) {
+          this.$emit("close");
+        } else if (this.newUserInfo.avatar === this.userInfo.avatar) {
+          this.userEdit();
+        } else {
+          this.upload(this.newUserInfo.avatar);
+        }
       }
     },
     upload(path) {
-      // uni.uploadFile({
-      //   url: urls + "/u/common/upload",
-      //   filePath: path,
-      //   name: "file",
-      //   header: {
-      //     token: uni.getStorageSync("token"),
-      //   },
-      //   formData: {},
-      //   success: (uploadFileRes) => {
-      //     uni.hideLoading();
-      //     let data = JSON.parse(uploadFileRes.data);
-      //     if (data.code === 0) {
-      //       this.newDetail = { ...this.newDetail, avatar: data.url };
-      // $emit('update:detail',  this.newDetail )"
-      //       this.userEdit();
-      //     } else {
-      //       uni.showToast({
-      //         title: res.msg || "上传失败！",
-      //         icon: "none",
-      //       });
-      //     }
-      //   },
-      //   fail: (uploadFileResErr) => {
-      //     uni.hideLoading();
-      //     uni.showToast({
-      //       title: res.msg || "上传失败！",
-      //       icon: "none",
-      //     });
-      //   },
-      // });
-    },
-    userEdit() {
-      userEdit(this.newDetail, (res) => {
-        if (res.code === 0) {
-          this.close();
-          this.$emit("update:detail", this.newDetail);
-        }
+      uni.uploadFile({
+        url: base_url + "/api/upload/image",
+        filePath: path,
+        fileType: "image",
+        name: "avatar",
+        formData: {
+          filename: "avatar",
+        },
+        header: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + uni.getStorageSync("token"),
+        },
+        success: (uploadFileRes) => {
+          console.log(uploadFileRes);
+          uni.hideLoading();
+          let data = JSON.parse(uploadFileRes.data);
+          if (data.status === 200) {
+            this.newUserInfo = { ...this.newUserInfo, avatar: data.data.url };
+            this.userEdit();
+          } else {
+            uni.showToast({
+              title: res.msg || "上传失败！",
+              icon: "none",
+            });
+          }
+        },
+        fail: (res) => {
+          uni.hideLoading();
+          uni.showToast({
+            title: res.msg || "上传失败！",
+            icon: "none",
+          });
+        },
       });
+    },
+    async userEdit() {
+      if (this.newUserInfo) await editUserInfo(this.newUserInfo);
+      uni.showToast({
+        title: "修改成功",
+        icon: "none",
+      });
+      setTimeout(() => {
+        this.$emit("close");
+      }, 1000);
     },
   },
 };

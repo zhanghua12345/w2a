@@ -2,7 +2,7 @@
   <view class="px-main">
     <view class="mt-64">欢迎加入梵米尼会籍</view>
     <view class="text-36 mt-16">请填写您的实名信息</view>
-    <form @submit="formSubmit" class="mt-main">
+    <form class="mt-main">
       <view
         class="form-box pt-40 border-0 border-b-2 border-solid border-line relative"
       >
@@ -14,7 +14,7 @@
         <view
           class="absolute z-0 top-44 left-0 text-tip transition-all duration-300"
           :class="{
-            'label-focused': inputFocused === 1 || form.mobile,
+            'label-focused': inputFocused === 1 || form.phone,
           }"
         >
           您的手机号
@@ -22,7 +22,7 @@
         <input
           class="my-20 h-48 leading-[48rpx] w-full"
           type="number"
-          v-model="form.mobile"
+          v-model="form.phone"
           maxlength="11"
           :focus="inputFocused === 1"
           @blur="inputFocused = 0"
@@ -39,13 +39,13 @@
         ></view>
         <view
           class="absolute z-0 top-44 left-0 text-tip transition-all duration-300"
-          :class="{ 'label-focused': inputFocused === 2 || form.name }"
+          :class="{ 'label-focused': inputFocused === 2 || form.rename }"
           >您的真实姓名</view
         >
         <input
           class="my-20 h-48 leading-[48rpx] w-full"
           type="text"
-          v-model="form.name"
+          v-model="form.rename"
           :focus="inputFocused === 2"
           @blur="inputFocused = 0"
         />
@@ -68,7 +68,7 @@
           class="my-20 h-48 leading-[48rpx] w-full"
           @click="openRoles = true"
         >
-          {{ form.role?.label }}
+          {{ form.role?.group_name }}
         </view>
 
         <input type="text" disabled v-model="form.role" class="hidden" />
@@ -77,9 +77,9 @@
           :columns="[roles]"
           @confirm="rolesConfirm"
           closeOnClickOverlay
-          @cancel="openRoles = false"
-          keyName="label"
-          @close="openRoles = false"
+          @cancel="rolesClone"
+          keyName="group_name"
+          @close="rolesClone"
         ></up-picker>
       </view>
 
@@ -96,17 +96,17 @@
           class="absolute z-0 top-44 left-0 text-tip transition-all duration-300"
           :class="{ 'label-focused': inputFocused === 4 || form.store }"
           >{{
-            form.role?.value === 1
+            form.role?.id === 2
               ? "所在小区"
-              : form.role?.value === 2
+              : form.role?.id === 3
               ? "所在门店"
-              : "所在门店"
+              : "所在门店/小区"
           }}</view
         >
         <input
           class="my-20 h-48 leading-[48rpx] w-full"
           type="text"
-          :disabled="form.role?.value === 3"
+          :disabled="form.role?.id === 3"
           v-model="form.store"
           :focus="inputFocused === 4"
           @blur="inputFocused = 0"
@@ -131,8 +131,9 @@
         shape="circle"
         text="立即加入"
         color="#805844"
+        size="large"
         class="mt-60"
-        form-type="submit"
+        @click="formSubmit"
       />
     </form>
     <!-- 弹框授权 -->
@@ -162,7 +163,7 @@
                 >《梵米尼门店会员章程》</span
               >
             </label>
-            <label class="label" style="margin-top: 20upx">
+            <label class="label mt-main">
               <checkbox
                 value="2"
                 style="transform: scale(0.7)"
@@ -177,6 +178,8 @@
         <up-button
           shape="circle"
           text="同意并继续"
+          @click="showDocPopup = false"
+          size="large"
           color="#805844"
           class="mt-60"
         />
@@ -186,22 +189,25 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
+import { groupList, register } from "@/api/login";
+
 const showDocPopup = ref(true);
 const inputFocused = ref(0);
 const form = reactive({
-  mobile: "",
-  name: "",
+  phone: "",
+  rename: "",
   store: "",
   role: null,
 });
 
 const openRoles = ref(false);
-const roles = ref([
-  { label: "会员（普通）", value: 1 },
-  { label: "会员（异业）", value: 2 },
-  { label: "员工", value: 3 },
-]);
+const roles = ref([]);
+const checkboxList = ref([]);
+
+onMounted(() => {
+  getGroupList();
+});
 
 const docClick = (index) => {
   if (index === 1) {
@@ -216,35 +222,44 @@ const docClick = (index) => {
 };
 
 const formSubmit = () => {
-  uni.navigateTo({
-    url: "/pages/register/success",
-  });
-  const { mobile, name } = form;
-  if (mobile === "" || name === "") {
+  const { phone, rename, role, store } = form;
+  if (!phone || !rename || !role?.id || !store) {
+    uni.showToast({
+      icon: "none",
+      title: "您还有信息没有填写",
+    });
     return false;
-  } else if (!/^1\d{10}$/.test(mobile)) {
+  } else if (!/^1\d{10}$/.test(phone)) {
     uni.showToast({
       icon: "none",
       title: "手机号码填写错误",
     });
     return;
-  }
-  if (!checkbox.value) {
+  } else if (checkboxList.value.length < 2) {
     showDocPopup.value = true;
+    return;
   } else {
     submit();
   }
 };
+
 const checkboxChange = (e) => {
-  console.log(e);
-  // this.checkboxList = e.detail.value;
+  checkboxList.value = e.detail.value;
 };
 
-const submit = () => {
-  console.log(
-    { ...this.form, memberRuleId: this.detail.memberRuleId },
-    "/memberCard/createCard"
-  );
+const submit = async () => {
+  const data = await register({ ...form, group: form.role.id });
+  console.log(data);
+  if (data.status === 200) {
+    uni.navigateTo({
+      url: "/pages/register/success",
+    });
+  } else {
+    uni.showToast({
+      icon: "none",
+      title: data.msg,
+    });
+  }
 };
 const focused = (index) => {
   setTimeout(() => {
@@ -254,13 +269,22 @@ const focused = (index) => {
     }
   }, 300);
 };
+// 选择会员角色的操作
+const rolesClone = () => {
+  if (!form.role) inputFocused.value = 0;
+  openRoles.value = false;
+};
 
 const rolesConfirm = (e) => {
-  console.log(e);
   form.role = e.value[0];
   openRoles.value = false;
-  if (e.value[0].value === 3) form.store = "梵米尼全屋定制";
+  if (e.value[0].id === 3) form.store = "梵米尼全屋定制";
   else form.store = "";
+};
+
+const getGroupList = async () => {
+  const data = await groupList();
+  roles.value = data.list;
 };
 </script>
 

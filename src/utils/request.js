@@ -1,5 +1,5 @@
 // 全局请求封装
-const base_url = "http://120.27.141.193:8088";
+export const base_url = "http://120.27.141.193:8088";
 
 export default (params) => {
   console.log(params);
@@ -43,7 +43,7 @@ export default (params) => {
         ) {
           resolve(result.data || result.res || result);
         } else if (result.status === 3) {
-          wx.showModal({
+          uni.showModal({
             title: "提示",
             content: "登录失效请重新登录,3s自动跳转登录",
             showCancel: false,
@@ -57,10 +57,17 @@ export default (params) => {
           });
           reject(result);
         } else if (result.errorCode === "0" || result.status === 2) {
-          wx.showToast({
+          uni.showToast({
             title: "请重试...",
             icon: "error",
             duration: 2000,
+          });
+          reject(result.data || result.res || result);
+        } else if (result.status === 400) {
+          console.log(5555);
+          uni.showToast({
+            icon: "none",
+            title: result.msg,
           });
           reject(result.data || result.res || result);
         }
@@ -84,7 +91,7 @@ export default (params) => {
       },
       complete() {
         // wx.hideLoading();
-        wx.hideToast();
+        // wx.hideToast();
       },
     });
   });

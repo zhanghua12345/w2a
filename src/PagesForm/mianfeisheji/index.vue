@@ -16,7 +16,7 @@
     radius="0"
   />
   <view
-    class="fixed bottom-0 left-0 right-0 h-600 rounded-t-40 z-full bg-[#eaeae8]"
+    class="fixed bottom-0 left-0 right-0 h-600 rounded-t-40 z-full bg-[#f2f2f2]"
     v-if="status === 0"
   >
     <template v-for="(item, index) in data.list" :key="index">
@@ -60,11 +60,12 @@
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
-
 import { JSON_mianfeisheji } from "@/utils/mock.js";
-
 import formResult from "@/components/formResult/index.vue";
 import formKefu from "@/components/formKefu/index.vue";
+import { designForm } from "@/api/form";
+
+const app = getApp();
 const data = ref({});
 const status = ref(0);
 
@@ -103,7 +104,15 @@ const openKefu = () => {
     });
     setTimeout(() => {
       uni.hideLoading();
-      status.value = 2;
+      if (!app.globalData.userInfo?.phone) {
+        uni.navigateTo({ url: "/pages/login/index" });
+      } else {
+        designForm({
+          area: data.value.list[0].select,
+          grade: data.value.list[1].select.name,
+        });
+        status.value = 2;
+      }
     }, 1000);
   }, 500);
 };

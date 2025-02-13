@@ -3,6 +3,8 @@ import { getCode, getToken, getUserInfo } from "@/api/login";
 export default {
   globalData: {
     userInfo: {},
+
+    islogin: false,
   },
   onLaunch: function () {
     console.log("App Launch");

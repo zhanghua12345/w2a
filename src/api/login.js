@@ -62,3 +62,28 @@ export function getPhone(data) {
     data,
   });
 }
+
+/**
+ * 会员注册
+ * @param data
+ * @returns {*}
+ */
+export function register(data) {
+  return request({
+    url: `/api/user/register`,
+    method: "post",
+    data,
+  });
+}
+
+/**
+ * 获取分组
+ * @param data
+ * @returns {*}
+ */
+export function groupList() {
+  return request({
+    url: `/api/getGroupList`,
+    method: "get",
+  });
+}

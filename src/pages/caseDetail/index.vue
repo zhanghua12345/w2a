@@ -54,23 +54,17 @@
       <i class="iconfont text-tip text-24 mr-6">&#xe66e;</i>
       点赞{{ Number(detail.praise || 0) + Number(detail.realPraise || 0) }}
     </view>
-    <!-- <view
-      class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
-    >
-      {{ detail.cate_name || "--" }}
-    </view> -->
     <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
     >
       <view
         class="flex flex-wrap items-center w-1/2 h-50"
-        v-for="item in theme"
-        :key="item"
+        v-for="(key, index) in Object.keys(detail.cate_list)"
+        :key="index"
       >
-        <i class="iconfont text-tip text-24 mr-6" v-html="item.icon" />{{
-          item.label
-        }}
-        <span class="pl-40">{{ item.name }}</span>
+        <!-- <i class="iconfont text-tip text-24 mr-6" v-html="detail.cate_list[key]" /> -->
+        {{ key }}:
+        <span class="pl-40">{{ detail.cate_list[key] }}</span>
       </view>
     </view>
   </view>
@@ -185,27 +179,50 @@ const openVR = () => {
   //   uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
   // }
 };
+
 const setBottom = async (name) => {
   console.log(name);
   if (name === "praise") {
-    await setPraise({
+    const data = await setPraise({
       id: detail.value.id, //案例id
       type: 1, // 案例1 文章2
       funType: 1, // 点赞1 收藏2 (名词)
-      fun: detail.value.isPraise ? 0 : 1, // 点赞1 取消2  (动词)
+      fun: detail.value.isPraise ? 2 : 1, // 点赞1 取消2  (动词)
     });
-    getDetail();
+    if (data.status === 200) {
+      wx.showToast({
+        title: detail.value.isPraise ? "取消成功" : "点赞成功",
+        icon: "none",
+        duration: 2000,
+      });
+      setTimeout(() => {
+        getDetail();
+      }, 2000);
+    }
+    console.log(data);
   } else if (name === "collect") {
-    await setPraise({
+    const data = await setPraise({
       id: detail.value.id,
       type: 1,
       funType: 2,
       fun: detail.value.isPraise ? 0 : 1,
     });
-    getDetail();
-  } else if (name === "share") {
+    if (data.status === 200) {
+      wx.showToast({
+        title: detail.value.isPraise ? "取消成功" : "收藏成功",
+        icon: "none",
+        duration: 2000,
+      });
+      setTimeout(() => {
+        getDetail();
+      }, 2000);
+    }
+  } else if (name === "button") {
+    uni.navigateTo({ url: "/pagesForm/baojia/index" });
+  } else {
   }
 };
+
 const getDetail = async () => {
   const data = await product_new_detail({ id: id.value });
   data.detail.attrsImagesNew = data.detail.attrsImages.filter(
@@ -214,13 +231,4 @@ const getDetail = async () => {
   detail.value = data.detail;
   console.log(detail.value);
 };
-
-// 使用 ref 创建响应式引用
-
-const theme = ref([
-  { icon: "&#xe662;", label: "风格", name: "奶油风" },
-  { icon: "&#xe662;", label: "面积", name: "100-200m²" },
-  { icon: "&#xe662;", label: "系列", name: "帕马尔" },
-  { icon: "&#xe662;", label: "小区", name: "绿地v岛" },
-]);
 </script>

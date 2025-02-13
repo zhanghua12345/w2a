@@ -17,7 +17,15 @@
         class="flex flex-wrap items-center justify-between mt-6 text-24 text-000-4"
       >
         <view class="flex-1 flex flex-wrap justify-start">
-          {{ obj.cate_name }}
+          <view
+            v-for="(key, index) in Object.keys(obj.cate_list || [])"
+            :key="index"
+            :class="{
+              'pr-10': index < 3,
+            }"
+          >
+            {{ index < 3 ? obj.cate_list[key] : "" }}
+          </view>
         </view>
         <view class="flex flex-wrap items-center justify-end">
           <i class="iconfont text-tip text-24 mr-6">&#xe662;</i

@@ -2,7 +2,7 @@
   <view class="w-full flex flex-col items-center" :class="className">
     <!-- 导航内容 -->
     <view v-if="navigator.length" class="flex flex-wrap items-center">
-      <template v-for="(item, index) in navigator">
+      <template v-for="(item, index) in navigator" :key="index">
         <view
           class="px-20 text-tip"
           :style="{ color: item.textColor }"

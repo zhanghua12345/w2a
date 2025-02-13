@@ -21,13 +21,19 @@
         "navigationBarTitleText": "案例"
       }
     },
-
     {
       "path": "pages/article/index",
       "style": {
         "navigationBarTitleText": "定制攻略"
       }
     },
+    {
+      "path": "pages/articleDetail/index",
+      "style": {
+        "navigationBarTitleText": "攻略详情"
+      }
+    },
+
     {
       "path": "pages/my/index",
       "style": {
@@ -181,6 +187,13 @@
           "path": "zhuangxiu/index",
           "style": {
             "navigationBarTitleText": "我要装修"
+          }
+        },
+        {
+          "path": "success/index",
+          "style": {
+            "navigationBarTitleText": "表单提交成功",
+            "navigationStyle": "custom"
           }
         }
       ]

@@ -97,7 +97,7 @@ const pickerIndex = ref(0);
 const list = ref([]);
 let params = {
   page: 1,
-  limit: 10,
+  limit: 5,
   cate_id: [],
 };
 const status = ref("loading");

@@ -1,7 +1,7 @@
 <template>
-  <view class="w-full h-110"></view>
+  <view class="w-full h-110 padb"></view>
   <view
-    class="fixed bottom-0 left-0 right-0 h-110 flex flex-wrap justify-around items-center bg-bg border-0 border-t-2 border-solid px-main text-24"
+    class="fixed bottom-0 left-0 right-0 pt-20 flex flex-wrap justify-around items-center bg-bg border-0 border-t-2 border-solid px-main text-24 padb"
   >
     <view
       class="flex flex-col justify-center items-center min-w-110"
@@ -59,5 +59,10 @@ const click = (name) => {
     display: none;
     /* 隐藏伪元素 */
   }
+}
+.padb {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: content-box;
 }
 </style>

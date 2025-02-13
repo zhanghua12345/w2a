@@ -1,138 +1,132 @@
 <template>
-  <view class="h-full w-full flex flex-col">
-    <view class="pb-10">
-      <up-tabs
-        :list="list4"
-        lineWidth="20"
-        lineHeight="7"
-        :lineColor="`url(${lineBg}) 100% 100%`"
-        :activeStyle="{
-          color: '#303133',
-          fontWeight: 'bold',
-          transform: 'scale(1.05)',
-        }"
-        :inactiveStyle="{
-          color: '#606266',
-          transform: 'scale(1)',
-        }"
-        itemStyle="padding-left: 30rpx; padding-right: 30rpx; height: 88rpx;"
-      />
-    </view>
-
-    <view class="flex-1 w-full h-full">
-      <swiper
-        @change="change"
-        @click="click"
-        :style="{ height: 'calc(100vh - 98rpx)' }"
-      >
-        <swiper-item>
-          <scroll-view
-            :scroll-y="true"
-            class="h-full"
-            @scrolltolower="onReachBottom"
-            @scrolltoupper="onPullDownRefresh"
-          >
-            <view class="px-main pb-main">
-              <Article className="mb-main" v-for="item in list" :key="item" />
-              <up-loadmore
-                :status="status"
-                loading-text="努力加载中，先喝杯茶"
-                loadmore-text="轻轻上拉"
-                nomore-text="实在没有了"
-              />
-            </view>
-          </scroll-view>
-        </swiper-item>
-        <swiper-item>
-          <scroll-view :scroll-y="true" class="h-full">
-            <view class="px-main pb-main">
-              <Article className="mb-main" v-for="item in list" :key="item" />
-              <up-loadmore
-                :status="status"
-                loading-text="努力加载中，先喝杯茶"
-                loadmore-text="轻轻上拉"
-                nomore-text="实在没有了"
-              />
-            </view>
-          </scroll-view>
-        </swiper-item>
-      </swiper>
-    </view>
+  <up-sticky offset-top="0">
+    <up-tabs
+      class="bg-bg"
+      :list="classList"
+      :current="activeClass"
+      lineWidth="20"
+      lineHeight="7"
+      keyName="title"
+      :lineColor="`url(${lineBg}) 100% 100%`"
+      :activeStyle="{
+        color: '#303133',
+        fontWeight: 'bold',
+        transform: 'scale(1.05)',
+      }"
+      :inactiveStyle="{
+        color: '#606266',
+        transform: 'scale(1)',
+      }"
+      itemStyle="padding-left: 30rpx; padding-right: 30rpx; height: 88rpx; "
+      @click="tabsClick"
+    />
+  </up-sticky>
+  <view class="px-main w-full">
+    <Article
+      className="mb-main"
+      v-for="(item, index) in list"
+      :key="index"
+      :obj="item"
+      @click="openDetail"
+    />
   </view>
+  <up-loadmore
+    class="pt-20 pb-40"
+    :status="status"
+    loading-text="努力加载中，先喝杯茶"
+    loadmore-text="轻轻上拉···"
+    nomore-text="实在没有了~"
+  />
   <ScrollTop />
 </template>
 
 <script setup>
-import { reactive, ref, onMounted } from "vue";
-
+import { ref, onMounted } from "vue";
+import {
+  onPageScroll,
+  onShareAppMessage,
+  onShareTimeline,
+  onReachBottom,
+  onPullDownRefresh,
+} from "@dcloudio/uni-app";
+import { articleClass, article_list } from "@/api/article";
 import Article from "@/components/article/index.vue";
-import { onShareAppMessage, onShareTimeline } from "@dcloudio/uni-app";
+import ScrollTop from "@/components/scrollTop/index.vue";
 import { useWxShare } from "@/hooks/index.js";
+// 监听滚动
+onPageScroll((e) => {});
 // 微信分享
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
 useWxShare({
-  path: "/pages/article/index",
+  path: "/pages/case/index",
 });
+
+const classList = ref([]); // 分类
+const activeClass = ref(0);
+
+const list = ref([]);
+let params = {
+  page: 1,
+  limit: 10,
+};
+const status = ref("loading");
 const lineBg =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAOCAYAAABdC15GAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFxSURBVHgBzZNRTsJAEIb/WTW+lpiY+FZPIDew3ABP4GJ8hxsI9zBpOYHeQDwBPQI+mRiRvpLojtPdYhCorQqF/6GdbGd2vvwzBXZcNAt4oj1ANeUoAT5iqkUjbEFLHNmhD1YPEvpZ3ghkGlVDCkc94/BmHMq998I5ONiY1ZBfpKAyuOtgAc5yOEDmYEWNh32BHF91sGHZHmwW4azciN9aQwnz3SJEgOmte+R2tdLprTYoa50mvuomlLpD4Y3oQZnov6D2RzCqI93bWOHaEmAGqQUyRBlZR1WfarcD/EJ2z8DtzDGvsMCwpm8XOCfDUsVOCYhiqRxI/CTQo4UOvjzO7Pow18vfywneuUHHUUxLn55lLw5JFpZ8bEUcY8oXdOLWiHLTxvoGpLqoUmy6dBT15o/ox3znpoycAmxUsiJTbs1cmxeVKp+0zmFIS7bGWiVghC7Vwse8jFKAX9eljh4ggKLLv7uaQvG9/F59Oo2SouxPu7OTCxN/s8wAAAAASUVORK5CYII=";
 
-const status = ref("loading");
-
-// 响应式数据
-const list4 = reactive([
-  { name: "梵米尼精选" },
-  { name: "空间设计" },
-  { name: "装修攻略" },
-  { name: "家居风水" },
-  { name: "收纳攻略" },
-  { name: "家居生活" },
-]);
-
-const list = ref([]);
-let pageNo = 1;
-let pageSize = 10;
+// 页面加载时自动加载数据
+onMounted(async () => {
+  await getClass();
+  getList(params);
+});
 
 // 下拉刷新
-const onPullDownRefresh = () => {
-  pageNo = 1;
+onPullDownRefresh(async () => {
   list.value = [];
-  loadData(true).then(() => {
-    uni.stopPullDownRefresh();
-  });
-};
+  params.page = 1;
+  status.value = "loading";
+  getList(params);
+  uni.stopPullDownRefresh();
+});
 
 // 上拉加载
-const onReachBottom = () => {
-  loadData();
-};
-
-// 加载数据的函数
-const loadData = async (isRefresh = false) => {
-  if (isRefresh) {
-    list.value = []; // 刷新时清空数据
-    status.value = "loadmore";
-  }
+onReachBottom(() => {
   if (status.value === "nomore") return;
-  console.log(status.value);
   status.value = "loading";
-  // 模拟数据加载，实际中应该是API请求
-  setTimeout(() => {
-    for (let i = 0; i < pageSize; i++) {
-      console.log(status.value);
+  getList();
+});
 
-      list.value.push(`Item ${pageNo * pageSize + i}`);
-      status.value = pageNo >= 4 ? "nomore" : "loadmore";
-    }
-    pageNo++;
-    console.log(pageNo);
-  }, 500);
+const tabsClick = (item, index) => {
+  activeClass.value = index;
+  list.value = [];
+  params.page = 1;
+  status.value = "loading";
+  getList(params);
 };
 
-// 页面加载时自动加载数据
-onMounted(() => {
-  loadData(true);
-});
+// 跳转到详情
+const openDetail = (item) => {
+  uni.navigateTo({ url: `/pages/articleDetail/index?id=${item.id}` });
+};
+
+// 获取分类
+const getClass = async () => {
+  const data = await articleClass();
+  classList.value = data || [];
+  activeClass.value = 0;
+};
+
+// 获取列表数据
+const getList = async () => {
+  console.log(params);
+  const data = await article_list({
+    ...params,
+    cid: classList.value[activeClass.value].id,
+  });
+  list.value = (list.value || []).concat(data);
+  params.page++;
+  status.value = data.length < params.limit ? "nomore" : "loadmore";
+};
 </script>
 
 <style scoped lang="scss"></style>
