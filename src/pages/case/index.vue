@@ -150,7 +150,7 @@ onPullDownRefresh(async () => {
 onReachBottom(() => {
   if (status.value === "nomore") return;
   status.value = "loading";
-  getList();
+  getList(params);
 });
 
 // 点击轮播图

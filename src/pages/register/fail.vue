@@ -6,10 +6,11 @@
       class="success-icon"
     />
     <i class="iconfont text-main-vip text-128">&#xe632;</i>
-    <view class="name">提交成功</view>
-    <view class="text">工作人员会在3个工作日内审核</view>
+    <view class="name">您的会员审核失败啦！</view>
+    <view class="text">失败原因</view>
+    <view class="text">456547</view>
     <view class="text">联系我们：865-884-6224</view>
-    <view class="btn2" @click="goHome"> 返回个人中心 </view>
+    <view class="btn2" @click="goRegister"> 重新提交 </view>
   </view>
 </template>
 <script>
@@ -25,6 +26,7 @@ export default {
   onLoad() {
     const res = uni.getSystemInfoSync();
     this.height = res.statusBarHeight * 2;
+    this.registerData();
   },
   onShow() {},
 
@@ -34,13 +36,11 @@ export default {
   },
 
   methods: {
-    goHome(e) {
-      uni.reLaunch({
-        url: "/pages/my/index",
-      });
+    goHome() {
+      uni.navigateTo({ url: "/pages/register/index" });
     },
 
-    async getGroupList() {
+    async registerData() {
       const data = await registerRes();
       roles.value = data.list;
     },
@@ -76,15 +76,15 @@ export default {
 }
 .btn2 {
   position: fixed;
-  bottom: 80rpx;
-  left: 64rpx;
-  width: 622rpx;
-  height: 84rpx;
+  bottom: 80upx;
+  left: 64upx;
+  width: 622upx;
+  height: 84upx;
   background: #805844;
   color: #fffcfb;
-  border-radius: 60rpx;
-  line-height: 84rpx;
-  font-size: 34rpx;
+  border-radius: 60upx;
+  line-height: 84upx;
+  font-size: 34upx;
   text-align: center;
 }
 </style>

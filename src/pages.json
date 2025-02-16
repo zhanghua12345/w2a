@@ -69,9 +69,14 @@
         "navigationBarTitleText": "注册会员"
       }
     },
-
     {
       "path": "pages/register/success",
+      "style": {
+        "navigationBarTitleText": "注册会员"
+      }
+    },
+    {
+      "path": "pages/register/fail",
       "style": {
         "navigationBarTitleText": "注册会员"
       }
@@ -91,6 +96,18 @@
     },
     {
       "path": "pages/agreement/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/company/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/brand/index",
       "style": {
         "navigationBarTitleText": ""
       }
@@ -127,7 +144,6 @@
         {
           "path": "caseCollection/index",
           "style": {
-            "navigationStyle": "custom",
             "navigationBarTitleText": "案例收藏"
           }
         },

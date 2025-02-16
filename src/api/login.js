@@ -77,6 +77,18 @@ export function register(data) {
 }
 
 /**
+ * 审核结果
+ * @param data
+ * @returns {*}
+ */
+export function registerRes() {
+  return request({
+    url: `/api/user/registerRes`,
+    method: "get",
+  });
+}
+
+/**
  * 获取分组
  * @param data
  * @returns {*}

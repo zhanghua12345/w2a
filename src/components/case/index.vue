@@ -7,8 +7,9 @@
     <!-- https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg -->
     <image
       class="w-full h-300 bg-cover"
-      src="https://img2.baidu.com/it/u=3788447690,3423920042&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500"
+      :src="obj.coverImg"
       alt=""
+      mode="aspectFill"
     />
 
     <view
@@ -31,23 +32,24 @@
       v-show="!noView"
       class="absolute right-20 top-236 flex justify-center items-center bg-000-6 rounded-full px-14 h-54 text-fff leading-1 text-24"
     >
-      <i class="iconfont leading-1 text-24 mr-4">&#xe662;</i>1K+
+      <i class="iconfont leading-1 text-24 mr-4">&#xe662;</i>{{ obj.browse }}
     </view>
     <view class="px-main py-14 w-full">
-      <view class="truncate"
-        >最1佳“灰+白”搭配！138m²美式温馨四居室，餐厅利用率100%</view
-      >
+      <view class="truncate">{{ obj.name }}</view>
       <view
         class="flex flex-wrap items-center justify-between mt-6 text-24 text-000-4"
       >
         <view class="flex-1 flex flex-wrap justify-start">
           <!-- :class="[item.className]" -->
           <view
-            v-for="(item, index) in list"
+            v-for="(key, index) in Object.keys(obj.cate_list || [])"
             :key="item"
-            class="flex justify-center items-center px-10 py-6 leading-1 mr-10 last:mr-0 rounded-6 bg-[#faeef3] text-[#ad7680]"
+            class="flex justify-center items-center px-10 py-6 leading-1 rounded-6 bg-[#faeef3] text-[#ad7680]"
+            :class="{
+              'mr-10': index < 3,
+            }"
           >
-            {{ item.name }}
+            {{ index < 3 ? obj.cate_list[key] : "" }}
           </view>
         </view>
       </view>
@@ -57,8 +59,4 @@
 <script setup>
 const emit = defineEmits(["click"]);
 defineProps(["obj", "className", "noNew", "no720", "noView"]);
-const list = [
-  { name: "三居室", className: "bg-[#faeef3]" },
-  { name: "123m²", className: "bg-[#e6eefc]" },
-];
 </script>

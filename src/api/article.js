@@ -38,16 +38,79 @@ export function article_detail(data) {
 }
 
 /**
- * 参数一：案例或者文章id
- * 参数二：分类 1 文章 2案例 静态1
- * 参数三：点赞收藏 1 点赞 2收藏
- * 参数四：功能（取消或收藏） 0 取消 1收藏
+ * 文章点赞
+ * /api/praise/:id/1/1/0
  * @param data
  * @returns {*}
  */
 export function setPraise(data) {
   return request({
-    url: `/api/praise/${data.id}/1/${data.funType}/${data.fun}`,
+    url: `/api/praise/${data.id}/1/1/0`,
     method: "post",
+  });
+}
+
+/**
+ * 文章收藏
+ * /api/praise/:id/1/2/0
+ * @param data
+ * @returns {*}
+ */
+export function setCollect(data) {
+  return request({
+    url: `/api/praise/${data.id}/1/2/0`,
+    method: "post",
+  });
+}
+
+/**
+ * 文章取消收藏
+ * /api/praise/:id/1/2/1
+ * @param data
+ * @returns {*}
+ */
+export function setCancelCollect(data) {
+  return request({
+    url: `/api/praise/${data.id}/1/2/1`,
+    method: "post",
+  });
+}
+
+/**
+ * 文章浏览列表
+ * @param data
+ * @returns {*}
+ */
+export function browseList(data) {
+  return request({
+    url: `/api/ArticleUserLog/3/1`,
+    method: "get",
+    data,
+  });
+}
+
+/**
+ * 文章收藏列表
+ * @param data
+ * @returns {*}
+ */
+export function praiseList(data) {
+  return request({
+    url: `/api/ArticleUserLog/2/1`,
+    method: "get",
+    data,
+  });
+}
+
+/**
+ * 文章点赞列表
+ * @param data
+ * @returns {*}
+ */
+export function caseUserList(data) {
+  return request({
+    url: `/api/ArticleUserLog/1/1`,
+    method: "get",
+    data,
   });
 }

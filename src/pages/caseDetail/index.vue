@@ -45,14 +45,14 @@
     <text class="mt-main">{{ detail.description }}</text>
     <view class="flex flex-wrap items-center mt-main">
       <i class="iconfont text-tip text-24 mr-6">&#xe662;</i>浏览量{{
-        Number(detail.browse || 0) + Number(detail.realBrowse || 0)
+        detail.realBrowse || 0
       }}
       <view class="px-20">
         <up-line length="10" direction="col"></up-line
       ></view>
 
       <i class="iconfont text-tip text-24 mr-6">&#xe66e;</i>
-      点赞{{ Number(detail.praise || 0) + Number(detail.realPraise || 0) }}
+      点赞{{ detail.realPraise || 0 }}
     </view>
     <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
@@ -123,7 +123,12 @@
   <BottomFun :obj.sync="detail" @click="setBottom" />
 </template>
 <script setup>
-import { product_new_detail, setPraise } from "@/api/case";
+import {
+  product_new_detail,
+  setPraise,
+  setCollect,
+  setCancelCollect,
+} from "@/api/case";
 import Title from "@/components/title/index.vue";
 import Navbar from "@/components/navbar/index.vue";
 import Case from "@/components/case/index.vue";
@@ -181,41 +186,39 @@ const openVR = () => {
 };
 
 const setBottom = async (name) => {
-  console.log(name);
   if (name === "praise") {
-    const data = await setPraise({
-      id: detail.value.id, //案例id
-      type: 1, // 案例1 文章2
-      funType: 1, // 点赞1 收藏2 (名词)
-      fun: detail.value.isPraise ? 2 : 1, // 点赞1 取消2  (动词)
-    });
+    // 点赞
+    const data = await setPraise({ id: detail.value.id });
+    await getDetail();
     if (data.status === 200) {
       wx.showToast({
-        title: detail.value.isPraise ? "取消成功" : "点赞成功",
+        title: "点赞成功",
         icon: "none",
         duration: 2000,
       });
-      setTimeout(() => {
-        getDetail();
-      }, 2000);
     }
-    console.log(data);
   } else if (name === "collect") {
-    const data = await setPraise({
-      id: detail.value.id,
-      type: 1,
-      funType: 2,
-      fun: detail.value.isPraise ? 0 : 1,
-    });
-    if (data.status === 200) {
-      wx.showToast({
-        title: detail.value.isPraise ? "取消成功" : "收藏成功",
-        icon: "none",
-        duration: 2000,
-      });
-      setTimeout(() => {
-        getDetail();
-      }, 2000);
+    //  收藏和取消收藏
+    if (!detail.value.userCollection) {
+      const data = await setCollect({ id: detail.value.id });
+      await getDetail();
+      if (data.status === 200) {
+        wx.showToast({
+          title: "收藏成功",
+          icon: "none",
+          duration: 2000,
+        });
+      }
+    } else {
+      const data = await setCancelCollect({ id: detail.value.id });
+      await getDetail();
+      if (data.status === 200) {
+        wx.showToast({
+          title: "取消收藏",
+          icon: "none",
+          duration: 2000,
+        });
+      }
     }
   } else if (name === "button") {
     uni.navigateTo({ url: "/pagesForm/baojia/index" });

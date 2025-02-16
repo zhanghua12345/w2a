@@ -33,7 +33,7 @@ export function product_new_list(data) {
   return request({
     url: `/api/product_new_list`,
     method: "get",
-    data: data,
+    data,
   });
 }
 
@@ -50,16 +50,80 @@ export function product_new_detail(data) {
 }
 
 /**
- * 参数一：案例或者文章id
- * 参数二：分类 1 文章 2案例 静态2
- * 参数三：点赞收藏 1 点赞 2收藏
- * 参数四：功能（取消或收藏） 0 取消 1收藏
+ * 案例点赞
+ * /api/praise/:id/2/1/0
  * @param data
  * @returns {*}
  */
 export function setPraise(data) {
   return request({
-    url: `/api/praise/${data.id}/2/${data.funType}/${data.fun}`,
+    url: `/api/praise/${data.id}/2/1/0`,
     method: "post",
+  });
+}
+
+/**
+ * 案例收藏
+ * /api/praise/:id/2/2/0
+ * @param data
+ * @returns {*}
+ */
+export function setCollect(data) {
+  return request({
+    url: `/api/praise/${data.id}/2/2/0`,
+    method: "post",
+  });
+}
+
+/**
+ * 案例取消收藏
+ * /api/praise/:id/2/2/1
+ * @param data
+ * @returns {*}
+ */
+export function setCancelCollect(data) {
+  return request({
+    url: `/api/praise/${data.id}/2/2/1`,
+    method: "post",
+  });
+}
+
+/**
+ * 案例浏览列表
+ * @param data
+ * @returns {*}
+ */
+export function browseList(data) {
+  console.log(data);
+  return request({
+    url: `/api/ArticleUserLog/3/2`,
+    method: "get",
+    data,
+  });
+}
+
+/**
+ * 案例收藏列表
+ * @param data
+ * @returns {*}
+ */
+export function praiseList(data) {
+  return request({
+    url: `/api/ArticleUserLog/2/2`,
+    method: "get",
+    data,
+  });
+}
+
+/**
+ * 案例点赞列表
+ * @param data
+ * @returns {*}
+ */
+export function caseUserList(data) {
+  return request({
+    url: `/api/ArticleUserLog/1/2`,
+    method: "get",
+    data,
   });
 }

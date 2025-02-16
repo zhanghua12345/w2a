@@ -41,7 +41,7 @@
         class="pr-50"
         v-for="(item, index) in dataFilter(routers, 0, 3)"
         :key="index"
-        @click="openMenu(item)"
+        @click="openDetail(item)"
       >
         <view class="text-40">{{ item.number }}</view>
         <view class="text-tip">{{ item.label }}</view>
@@ -51,7 +51,7 @@
       <view
         class="bg-131313 px-main flex flex-wrap justify-between items-center"
       >
-        <view class="py-30" @click="openPage('/pagesA/member/index')">
+        <view class="py-30">
           <i class="iconfont text-main-vip text-40">&#xe6ca;</i>
           <view class="text-fff">加入我们</view>
         </view>
@@ -66,15 +66,27 @@
         </view>
       </view>
       <view class="flex flex-wrap justify-around py-main">
-        <view
-          class="flex flex-col items-center"
+        <template
           v-for="(item, index) in dataFilter(routers, 3, 7)"
           :key="index"
-          @click="openMenu(item)"
         >
-          <i class="iconfont text-64" v-html="item.icon" />
-          <view>{{ item.label }}</view>
-        </view>
+          <button
+            class="flex flex-col items-center share"
+            open-type="share"
+            v-if="item.type === 'share'"
+          >
+            <i class="iconfont text-64" v-html="item.icon" />
+            <view>{{ item.label }}</view>
+          </button>
+          <view
+            class="flex flex-col items-center"
+            @click="openDetail(item)"
+            v-else
+          >
+            <i class="iconfont text-64" v-html="item.icon" />
+            <view>{{ item.label }}</view>
+          </view>
+        </template>
       </view>
     </view>
     <view class="mt-main bg-fff rounded-32 overflow-hidden">
@@ -82,7 +94,7 @@
         <up-cell
           v-for="(item, index) in dataFilter(routers, 7, 11)"
           :key="index"
-          @click="openMenu(item)"
+          @click="openDetail(item)"
           icon="map"
           :title="item.label"
           :border="false"
@@ -97,7 +109,7 @@
     <view class="mt-main">
       <view class="flex justify-between items-center">
         <view class="" @click="openMap">友情链接</view>
-        <view class="flex items-center" @click="navKey">
+        <view class="flex items-center">
           全部
           <i class="iconfont text-20 ml-10 text-tip">&#xe671;</i>
         </view>
@@ -105,16 +117,46 @@
 
       <view class="bg-fff rounded-32 overflow-hidden mt-main">
         <up-scroll-list :indicator="false">
-          <view
-            class="flex flex-col items-center px-main py-20"
-            :class="item.class"
-            v-for="item in links"
-            :key="item.id"
-            @click="openLink(item)"
-          >
-            <i class="iconfont text-64" v-html="item.icon" />
-            <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
-          </view>
+          <template v-for="item in links" :key="item.id">
+            <official-account
+              v-if="item.type === 'official'"
+              appId="你的公众号的appId"
+              path=""
+              @click="onOfficialAccountTap"
+            >
+              <view
+                class="flex flex-col items-center px-main py-20"
+                :class="item.class"
+              >
+                <i class="iconfont text-64" v-html="item.icon" />
+                <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
+              </view>
+              <!-- 组件内部的内容 -->
+            </official-account>
+            <button
+              open-type="contact"
+              class="share"
+              v-else-if="item.type === 'contact'"
+            >
+              <view
+                class="flex flex-col items-center px-main py-20"
+                :class="item.class"
+                @click="openLink(item)"
+              >
+                <i class="iconfont text-64" v-html="item.icon" />
+                <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
+              </view>
+            </button>
+            <view
+              class="flex flex-col items-center px-main py-20"
+              :class="item.class"
+              @click="openLink(item)"
+              v-else
+            >
+              <i class="iconfont text-64" v-html="item.icon" />
+              <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
+            </view>
+          </template>
         </up-scroll-list>
       </view>
     </view>
@@ -148,7 +190,7 @@ onPageScroll(() => {});
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
 useWxShare({
-  path: "/pages/my/index",
+  path: "/pages/home/index",
 });
 const app = getApp();
 const userInfo = ref({});
@@ -163,70 +205,73 @@ const showLoginPopup = ref(false);
 const routers = ref([
   {
     label: "案例",
-    router: "/pagesA/caseHistory/index",
+    router: "pagesA/caseHistory/index",
     number: 10,
   },
   {
     label: "好文",
-    router: "/pagesA/articleHistory/index",
+    router: "pagesA/articleHistory/index",
     number: 10,
   },
   {
-    label: "严选",
-    router: "/pagesA/carefullySelectedHistory/index",
-    number: 10,
+    label: "优选设计",
+    router: "pages/space/index",
+    number: 5,
   },
   {
     label: "案例收藏",
-    router: "/pagesA/caseCollection/index",
+    router: "pagesA/caseCollection/index",
     icon: "&#xe681;",
   },
   {
     label: "好文收藏",
-    router: "/pagesA/articleCollection/index",
+    router: "pagesA/articleCollection/index",
     icon: "&#xe628;",
   },
   {
     label: "0元设计",
-    router: "/pagesA/articleCollection/index",
+    router: "pagesForm/mianfeisheji/index",
     icon: "&#xe76c;",
   },
   {
     label: "分享",
-    router: "/pagesA/articleCollection/index",
     icon: "&#xe6d5;",
+    type: "share",
   },
   {
     label: "查看门店",
-    router: "/pagesA/articleCollection/index",
     icon: "&#xe622;",
+    type: "openMap",
   },
   {
     label: "关于我们",
-    router: "/pagesA/articleCollection/index",
+    router: "pages/agreement/index",
+    type: "about",
     icon: "&#xe612;",
   },
   {
     label: "隐私协议",
-    router: "/pagesA/articleCollection/index",
+    router: "pages/agreement/index",
+    type: "privacy",
     icon: "&#xe740;",
   },
   {
-    label: "低价量房",
-    router: "/pagesA/articleCollection/index",
+    label: "了解装修",
+    router: "pagesForm/zhuangxiu/index",
     icon: "&#xe817;",
   },
-  {
-    label: "设置",
-    router: "/pagesA/articleCollection/index",
-    icon: "&#xe7eb;",
-  },
+  // {
+  //   label: "设置",
+  //   router: "pagesA/articleCollection/index",
+  //   icon: "&#xe7eb;",
+  // },
 ]);
 const links = [
   {
     label: "梵米尼商城",
     router: "/pagesA/articleCollection/index",
     icon: "&#xe74b;",
+    type: "official",
     class: "",
   },
   {
@@ -258,23 +303,82 @@ const links = [
     label: "在线客服",
     router: "/pagesA/articleCollection/index",
     icon: "&#xe658;",
+    type: "contact",
     class: "",
   },
 ];
+
 const dataFilter = (list, startIndex, length) => {
   return list.slice(startIndex, length);
 };
+
 onShow(() => {
   // 获取用户地理位置
   const location = chooseLocation.getLocation();
   console.log(location);
 });
+
 const closeLogin = async () => {
   showLoginPopup.value = false;
   const userData = await getUserInfo();
   app.globalData.userInfo = userData;
   userInfo.value = userData;
 };
+
+const goVip = () => {
+  // regType  -1  未申请  0 审核中  1审核通过  2审核拒绝
+  console.log(userInfo.value);
+  switch (userInfo.value.regType) {
+    case -1:
+      uni.navigateTo({ url: "/pages/register/index" });
+      break;
+    case 0:
+      uni.navigateTo({ url: "/pages/register/success" });
+      break;
+    case 1:
+      uni.navigateTo({ url: "/pagesA/member/index" });
+      break;
+    case 2:
+      uni.navigateTo({ url: "/pages/register/fail" });
+      break;
+    default:
+      break;
+  }
+};
+
+const goLogin = () => {
+  if (userInfo.value.phone) return false;
+  uni.navigateTo({ url: "/pages/login/index" });
+};
+
+// 跳转事件
+const openDetail = (item) => {
+  console.log(item);
+  if (item.type === "share") {
+    wxShare();
+  } else if (item.type === "openMap") {
+    uni.openLocation({
+      latitude: 28.113988,
+      longitude: 113.033674,
+    });
+  } else {
+    uni.navigateTo({
+      url: item.routerId
+        ? `/${item.router}?type=${item.type}&id=${item.routerId}`
+        : `/${item.router}?type=${item.type}`,
+    });
+  }
+};
+
+// 微信分享
+const wxShare = () => {
+  uni.shareAppMessage({
+    title: "梵米尼全屋定制", // 分享标题
+    path: "/pages/home/index", // 分享路径，可以是当前页路径，也可以是其他页的路径
+    image: "",
+  });
+};
+
 const openMap = () => {
   const key = "3GLBZ-22HLF-Y2WJD-NPB7V-STWFO-RHFVS";
   const referer = "梵米尼家具优选";
@@ -282,25 +386,10 @@ const openMap = () => {
     url: `plugin://chooseLocation/index?key=${key}&referer=${referer}&location={"latitude":${28.113988},"longitude":${113.033674}}&name=梵米尼家居(湘府东路店)`,
   });
 };
-const navKey = (lat, lng) => {
-  uni.openLocation({
-    latitude: 28.113988,
-    longitude: 113.033674,
-  });
-};
-const goVip = () => {
-  uni.navigateTo({ url: "/pages/register/index" });
-};
-const goLogin = () => {
-  if (userInfo.value.phone) return false;
-  uni.navigateTo({ url: "/pages/login/index" });
-};
-const openPage = (page, type = "navigateTo") => {
-  uni[type]({ url: page });
-};
-const openMenu = (item) => {
-  console.log();
-  uni.navigateTo({ url: item.router });
+
+const onOfficialAccountTap = () => {
+  console.log("用户点击了公众号链接");
+  // 这里可以添加其他逻辑，例如统计点击次数等
 };
 </script>
 
@@ -313,5 +402,22 @@ $top-container-height: 690rpx;
 }
 .bg-vip-gradient {
   background-image: linear-gradient(270deg, #feeacc 0%, #ffe3a3 100%);
+}
+</style>
+<style lang="scss" scoped>
+.share {
+  border: none;
+  //透明色
+  background-color: transparent !important;
+  box-shadow: none;
+
+  /* 去除伪元素样式 */
+  &::before,
+  &::after {
+    content: none;
+    /* 去除伪元素 */
+    display: none;
+    /* 隐藏伪元素 */
+  }
 }
 </style>

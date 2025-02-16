@@ -15,9 +15,6 @@ onLoad((options) => {
     case "privacy":
       title.value = "隐私政策";
       break;
-    case "about":
-      title.value = "关于我们";
-      break;
     default:
       break;
   }

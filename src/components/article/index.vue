@@ -15,10 +15,12 @@
       </view>
       <view class="flex flex-wrap justify-between leading-1">
         <view class="flex items-center">
-          <i class="iconfont text-tip text-24 mr-6">&#xe89d;</i>2024-01-22
+          <i class="iconfont text-tip text-24 mr-6">&#xe89d;</i
+          >{{ obj.add_time }}
         </view>
         <view class="flex items-center">
-          <i class="iconfont text-tip text-24 mr-6">&#xe662;</i>{{ obj.praise }}
+          <i class="iconfont text-tip text-24 mr-6">&#xe662;</i
+          >{{ obj.realBrowse || 0 }}
         </view>
       </view>
     </view>

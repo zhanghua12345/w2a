@@ -3,6 +3,7 @@
   <view class="w-full h-700 relative">
     <up-swiper
       :list="info[0]?.list"
+      @click="swiperClick"
       keyName="img"
       indicator
       indicatorMode="line"
@@ -18,6 +19,7 @@
       <view
         v-for="(item, index) in info[1].list"
         :key="index"
+        @click="openDetail(item)"
         class="relative w-150 h-100 overflow-hidden rounded-main"
       >
         <image class="w-full h-full bg-cover" :src="item.img" />
@@ -37,13 +39,14 @@
       :title="info[2].title"
       :subTitleBottom="info[2].subTitle"
       :isMore="true"
-      @click="openPage(info[2])"
+      @click="openDetail(info[2])"
     />
     <up-scroll-list :indicator="false">
       <view
         class="h-300 mr-main last:mr-0 shadow-md"
         v-for="(item, index) in info[2].list"
         :key="index"
+        @click="openDetail(item)"
       >
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-250 h-full" :src="item.img"></image>
@@ -129,7 +132,7 @@
         v-for="item in info[5].list"
         :key="item"
         class="relative h-200 rounded-main overflow-hidden"
-        @click="openPage(item)"
+        @click="openDetail(item)"
       >
         <image class="w-full h-full bg-cover" :src="item.img" alt="" />
         <view
@@ -167,7 +170,7 @@
         class="mt-main ml-main first:ml-0 shadow-md"
         v-for="(item, index) in info[6].list"
         :key="index"
-        @click="openBrands(item)"
+        @click="openDetail(item)"
       >
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-280 h-400 bg-cover" :src="item.img" alt="" />
@@ -182,7 +185,7 @@
   <ScrollTop />
   <view
     class="fixed right-0 bottom-300 rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm z-full"
-    @click="openPage(info[7])"
+    @click="openDetail(info[7])"
   >
     {{ info[7]?.title || "" }}
   </view>
@@ -216,13 +219,12 @@ onMounted(() => {
   getInfo();
 });
 
-const openBrands = (item) => {
-  uni.navigateTo({ url: item.router });
-};
-const openPage = (page, type = "navigateTo") => {
-  uni[type]({ url: page });
+// 头部banner点击事件
+const swiperClick = (index) => {
+  openDetail(info.value[0].list[index]);
 };
 
+// 跳转事件
 const openDetail = (item) => {
   console.log(item.router);
   const type = item.router.type;
@@ -232,6 +234,7 @@ const openDetail = (item) => {
       : `/${item.router.page}`,
   });
 };
+
 const getInfo = async () => {
   const data = await getHomeData();
   console.log(data.data);

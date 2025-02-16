@@ -1,5 +1,5 @@
 <template>
-  <view class="w-full h-110 padb"></view>
+  <view class="w-full h-86 padb"></view>
   <view
     class="fixed bottom-0 left-0 right-0 pt-20 flex flex-wrap justify-around items-center bg-bg border-0 border-t-2 border-solid px-main text-24 padb"
   >
