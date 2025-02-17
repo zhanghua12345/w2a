@@ -51,7 +51,7 @@
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-250 h-full" :src="item.img"></image>
           <view
-            class="absolute top-40 left-0 bg-fff-8 text-main font-600 p-12 pr-16 min-w-160 rounded-r-full flex justify-center"
+            class="absolute top-40 left-0 bg-fff-8 text-main font-600 p-12 pr-16 min-w-120 rounded-r-full flex justify-center"
             >{{ item.title }}</view
           >
         </view>

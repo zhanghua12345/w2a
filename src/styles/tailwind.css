@@ -2,15 +2,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "kaiti";
+  src: url("https://xygywlweb.hunanjj.cn/FangYuanTi.ttf");
+}
+
 body {
+  font-family: "kaiti";
   font-size: 28rpx;
   line-height: 1.5;
   font-weight: normal;
   position: relative;
   background-color: #f8f8f8;
-  color: rgba(0,0,0,.9);
+  color: rgba(0, 0, 0, 0.9);
   min-height: 100%;
-  letter-spacing: 2rpx;
+  letter-spacing: 0rpx;
 }
 .bg-cover {
   background-position: center;
@@ -20,6 +27,6 @@ body {
   background-repeat: no-repeat;
   /* 防止背景图片重复 */
 }
-image{
+image {
   vertical-align: bottom;
 }
