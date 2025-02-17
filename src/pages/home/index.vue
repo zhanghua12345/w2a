@@ -51,7 +51,7 @@
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-250 h-full" :src="item.img"></image>
           <view
-            class="absolute top-40 left-0 bg-fff-8 text-main font-600 p-12 pr-16 min-w-120 rounded-r-full flex justify-center"
+            class="absolute top-40 left-0 bg-fff-8 text-main p-12 pr-16 min-w-120 rounded-r-full flex justify-center"
             >{{ item.title }}</view
           >
         </view>
@@ -74,10 +74,10 @@
         "
       >
         <view class="p-main absolute z-[9] flex flex-col justify-between">
-          <view class="text-[#866350] text-36 font-600">{{ item.title }}</view>
+          <view class="text-[#866350] text-36">{{ item.title }}</view>
           <view class="text-tip text-24 pt-10 flex items-center">
             {{ item.subTitle }}
-            <i class="iconfont text-20">&#xe671;</i>
+            <i class="iconfont text-18 ml-4">&#xe671;</i>
           </view>
         </view>
         <view
@@ -86,7 +86,6 @@
         >
           立即邀请
         </view>
-
         <image
           class="w-100 h-100 bg-cover absolute right-0 bottom-30"
           :src="item.img"
@@ -95,6 +94,7 @@
       </view>
     </view>
   </view>
+  <!-- 家·空间 -->
   <view class="mx-main mt-40" v-if="info[4]?.list?.length">
     <Title
       :title="info[4].title"
@@ -116,17 +116,18 @@
       >
         <image class="w-full h-full bg-cover" :src="item.img" alt="" />
         <view class="absolute bottom-10 left-0 right-0 flex justify-center">
-          <view class="bg-000-6 text-fff rounded-full px-20 py-6">
+          <view class="bg-000-6 text-fff text-24 rounded-full px-16 py-8">
             {{ item.title }}
           </view>
         </view>
       </view>
     </view>
   </view>
+  <!-- 公司介绍 -->
   <view class="mx-main mt-40" v-if="info[5]?.list?.length">
     <Title :title="info[5].title" :subTitle="info[5].subTitle" />
     <view
-      class="mt-main p-20 bg-000-04 rounded-main grid grid-rows-2 grid-cols-2 gap-main"
+      class="mt-main p-20 bg-000-08 rounded-main grid grid-rows-2 grid-cols-2 gap-main"
     >
       <view
         v-for="item in info[5].list"
@@ -141,7 +142,9 @@
           <view
             class="w-36 h-36 rounded-full bg-000-5 flex justify-center items-center ml-10 animation-zoom-in-out"
           >
-            <i class="iconfont text-20 text-fff">&#xe674;</i>
+            <i class="iconfont text-20 text-fff animation-zoom-in-out"
+              >&#xe674;</i
+            >
           </view>
         </view>
       </view>
@@ -175,7 +178,7 @@
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-280 h-400 bg-cover" :src="item.img" alt="" />
           <view
-            class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32 font-600"
+            class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32"
             >{{ item.title }}</view
           >
         </view>

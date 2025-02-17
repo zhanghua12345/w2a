@@ -5,16 +5,13 @@
     @click="emit('click')"
   >
     <view class="flex flex-col">
-      <view class="text-32 leading-1.4 flex items-center font-600" v-if="title">
+      <view class="text-32 leading-1.4 flex items-center" v-if="title">
         {{ title }}
-        <view
-          class="text-22 leading-1.2 pt-14 pl-main font-400 text-tip"
-          v-if="subTitle"
-        >
+        <view class="text-24 leading-1.2 pt-14 pl-16 text-tip" v-if="subTitle">
           {{ subTitle }}
         </view>
       </view>
-      <view class="text-20 pt-10 text-tip" v-if="subTitleBottom">
+      <view class="text-24 pt-10 text-tip" v-if="subTitleBottom">
         {{ subTitleBottom }}
       </view>
       <view
