@@ -118,6 +118,7 @@ export const JSON_mianfeisheji = {
 };
 export const JSON_zhuangxiu = {
   title: "查看专属效果图方案",
+  color: "ff8921",
   banner: [
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/dc15271c0991cf892760288beb44dde5.png",
@@ -157,6 +158,7 @@ export const JSON_zhuangxiu = {
 
 export const JSON_success = {
   title: "您的报价已生成",
+  color: "ff8921",
   banner: [
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/dc15271c0991cf892760288beb44dde5.png",

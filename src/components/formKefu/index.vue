@@ -5,6 +5,7 @@
     :class="{
       'text-bf6c22': data.color === 'bf6c22',
       'text-[#0ccc83]': data.color === '0ccc83',
+      'text-[#ff8921]': data.color === 'ff8921',
     }"
   >
     <view
@@ -25,14 +26,14 @@
     <view class="mt-main bottom relative text-36 text-000-9"
       >加微信自动发送报价结果</view
     >
-    <view class="mt-main text-tip">60m²以下", "61m²~90m²"</view>
+    <view class="mt-main text-tip">{{ data.select || "" }}</view>
     <image
       show-menu-by-longpress
       class="w-420 h-420 mt-main"
       src="/static/kefu.png"
       mode="aspectFill"
     />
-    <view class="mt-70">长按二维码识别微信</view>
+    <view class="mt-70 text-32">长按二维码识别微信</view>
   </view>
 </template>
 <script setup>

@@ -86,6 +86,7 @@ const next = (item, index) => {
       if (index < data.value.list.length - 1) {
         data.value.list[index + 1].show = true;
       } else {
+        data.value.select = `"${data.value.list[0].select} | ${data.value.list[1].select.name}`;
         status.value = 1;
       }
     }, 300);

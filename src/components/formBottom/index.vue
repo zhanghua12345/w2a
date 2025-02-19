@@ -5,6 +5,7 @@
       :class="{
         'bg-[#bf6c22]': data.color === 'bf6c22',
         'bg-[#0ccc83]': data.color === '0ccc83',
+        'bg-[#ff8921]': data.color === 'ff8921',
       }"
       @click="emit('click')"
     >
@@ -27,6 +28,7 @@
           :class="{
             'text-bf6c22': data.color === 'bf6c22',
             'text-[#0ccc83]': data.color === '0ccc83',
+            'bg-[#ff8921]': data.color === 'ff8921',
           }"
           @click="openAgreement('serve')"
           >《服务须知》</span
@@ -35,6 +37,7 @@
           :class="{
             'text-bf6c22': data.color === 'bf6c22',
             'text-[#0ccc83]': data.color === '0ccc83',
+            'bg-[#ff8921]': data.color === 'ff8921',
           }"
           @click="openAgreement('privacy')"
           >《隐私政策》</span

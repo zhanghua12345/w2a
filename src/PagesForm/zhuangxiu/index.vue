@@ -54,7 +54,7 @@
           <view
             class="h-80 rounded-main px-10 truncate text-center relative border-4 leading-[80rpx]"
             :class="{
-              'bg-fff border-[#0ccc83] ': data.list[1].select === item,
+              'bg-fff border-[#ff8921] ': data.list[1].select === item,
               'bg-[#f6f6f6] border-[#f6f6f6]': data.list[1].select !== item,
             }"
             v-for="(item, index) in data.list[1].data"
@@ -64,7 +64,7 @@
             {{ item }}
             <i
               v-show="data.list[1].select === item"
-              class="iconfont absolute top-[-4rpx] right-[-4rpx] text-[#0ccc83] leading-1 text-40"
+              class="iconfont absolute top-[-4rpx] right-[-4rpx] text-[#ff8921] leading-1 text-40"
             >
               &#xe604;
             </i>
@@ -77,7 +77,7 @@
           <view
             class="h-80 rounded-main px-10 truncate text-center relative border-4 leading-[80rpx]"
             :class="{
-              'bg-fff border-[#0ccc83] ': data.list[2].select === item,
+              'bg-fff border-[#ff8921] ': data.list[2].select === item,
               'bg-[#f6f6f6] border-[#f6f6f6]': data.list[2].select !== item,
             }"
             v-for="(item, index) in data.list[2].data"
@@ -87,7 +87,7 @@
             {{ item }}
             <i
               v-show="data.list[2].select === item"
-              class="iconfont absolute top-[-4rpx] right-[-4rpx] text-[#0ccc83] leading-1 text-40"
+              class="iconfont absolute top-[-4rpx] right-[-4rpx] text-[#ff8921] leading-1 text-40"
             >
               &#xe604;
             </i>
@@ -101,7 +101,7 @@
   </view>
   <image
     class="w-full mt-main"
-    src="http://120.27.141.193:8088//uploads/attach/2025/01/20250124/a49c65eef5d7b6fe1accf72a20c0b7fe.jpg"
+    src="http://120.27.141.193:8088//uploads/attach/2025/02/20250219/13d2272cc69a8876f81d8e95a6c144d3.jpg"
     mode="widthFix"
   />
 

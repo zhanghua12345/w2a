@@ -179,8 +179,10 @@
           <image class="w-280 h-400 bg-cover" :src="item.img" alt="" />
           <view
             class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32"
-            >{{ item.title }}</view
+            v-if="item.title"
           >
+            {{ item.title }}
+          </view>
         </view>
       </view>
     </up-scroll-list>
