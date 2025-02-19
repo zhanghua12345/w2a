@@ -1,11 +1,5 @@
 <template>
-  <up-navbar-mini
-    @leftClick="leftClick"
-    :autoBack="true"
-    homeUrl="/pages/home/index"
-  >
-  </up-navbar-mini>
-  <Navbar />
+  <Navbar title="梵米尼家具优选" leftIcon=" " />
   <view class="w-full h-700 relative">
     <up-swiper
       :list="detail?.banner || []"
@@ -116,7 +110,12 @@
       />
     </view>
     <view class="grid grid-rows-2 grid-cols-2 gap-20">
-      <Case v-for="item in 20" />
+      <Case
+        :obj="item"
+        v-for="(item, index) in likes"
+        :key="index"
+        @click="openDetail"
+      />
     </view>
   </view>
   <ScrollTop />
@@ -128,6 +127,7 @@ import {
   setPraise,
   setCollect,
   setCancelCollect,
+  guessLikes,
 } from "@/api/case";
 import Title from "@/components/title/index.vue";
 import Navbar from "@/components/navbar/index.vue";
@@ -157,6 +157,7 @@ useWxShare({
 });
 
 const detail = ref({});
+const likes = ref([]);
 const showMore = ref(false);
 const currentNum = ref(0);
 
@@ -164,25 +165,28 @@ onLoad((options) => {
   // options是传递过来的参数对象
   id.value = options.id;
   getDetail();
+  getGuessLikes();
 });
 
 // 详情查看更多
 const showMoreClick = () => {
-  showMore.value = true;
-  // if (!app.globalData.userInfo?.phone) {
-  //   uni.navigateTo({ url: "/pages/login/index" });
-  // } else {
-  //   showMore.value = true;
-  // }
+  if (!app.globalData.userInfo?.phone) {
+    uni.navigateTo({ url: "/pages/login/index" });
+  } else {
+    showMore.value = true;
+  }
 };
 
 const openVR = () => {
-  uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
-  // if (!app.globalData.userInfo?.phone) {
-  //   uni.navigateTo({ url: "/pages/login/index" });
-  // } else {
-  //   uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
-  // }
+  if (!app.globalData.userInfo?.phone) {
+    uni.navigateTo({ url: "/pages/login/index" });
+  } else {
+    uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
+  }
+};
+
+const openDetail = (data) => {
+  uni.navigateTo({ url: `/pages/caseDetail/index?id=${data.id}` });
 };
 
 const setBottom = async (name) => {
@@ -232,6 +236,10 @@ const getDetail = async () => {
     (e) => e.images?.length
   );
   detail.value = data.detail;
-  console.log(detail.value);
+};
+
+const getGuessLikes = async () => {
+  const data = await guessLikes({ id: id.value });
+  likes.value = data.list;
 };
 </script>

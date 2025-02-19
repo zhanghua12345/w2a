@@ -104,6 +104,7 @@ module.exports = {
         line: "#f0f0f0",
         "main-sub": "#b3ecff",
         "main-vip": "#805844",
+        bf6c22: "#bf6c22",
         f0f0f0: "#f0f0f0",
         d6f4fa: "#d6f4fa",
         "1c1c1e": "#1c1c1e",

@@ -2,6 +2,10 @@
   <view
     v-show="status === 2"
     class="fixed bottom-0 left-0 right-0 h-[900rpx] rounded-t-40 z-full bg-gradient-to-b from-[#feeac5] via-[#f2f2f2] via-20% to-[#f8f8f8] flex flex-col items-center"
+    :class="{
+      'text-bf6c22': data.color === 'bf6c22',
+      'text-[#0ccc83]': data.color === '0ccc83',
+    }"
   >
     <view
       class="w-140 h-140 rounded-full border-10 border-fff border-solid bg-bg mt-[-70rpx]"
@@ -18,7 +22,7 @@
       <i class="iconfont text-24 mr-6">&#xe663;</i>
       梵米尼推荐官XX
     </view>
-    <view class="mt-main bottom relative text-36 font-600"
+    <view class="mt-main bottom relative text-36 text-000-9"
       >加微信自动发送报价结果</view
     >
     <view class="mt-main text-tip">60m²以下", "61m²~90m²"</view>
@@ -28,7 +32,7 @@
       src="/static/kefu.png"
       mode="aspectFill"
     />
-    <view class="mt-70 text-[#0ccc83]">长按二维码识别微信</view>
+    <view class="mt-70">长按二维码识别微信</view>
   </view>
 </template>
 <script setup>

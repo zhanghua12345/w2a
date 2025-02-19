@@ -16,24 +16,32 @@
     radius="0"
   />
   <view
-    class="fixed bottom-0 left-0 right-0 h-720 rounded-t-40 z-full bg-gradient-to-b from-[#feeac5] via-[#f9f9f9] to-bg"
+    class="fixed bottom-0 left-0 right-0 h-720 rounded-t-40 z-full bg-[#fde9c8]"
     v-if="status === 0"
   >
-    <view
-      class="h-110 text-36 text-000 flex justify-center items-center font-600"
-    >
+    <view class="h-110 text-36 text-000 flex justify-center items-center">
+      <image
+        class="h-20 mr-10"
+        mode="heightFix"
+        src="http://120.27.141.193:8088//uploads/attach/2025/02/20250219/274c6dba7fcdaf3f07a68e9da4393e65.png"
+      />
       {{ data.subTitle }}
+      <image
+        class="h-20 ml-10"
+        mode="heightFix"
+        src="http://120.27.141.193:8088//uploads/attach/2025/02/20250219/cbd8dccce771bd35758a99776c75599f.png"
+      />
     </view>
 
     <view
-      class="w-full h-610 bg-gradient-to-b from-bg to-[#fef6e9] rounded-t-40"
+      class="w-full h-610 bg-gradient-to-t from-[#feefd2] to-[#fff] rounded-t-40"
     >
       <template v-for="(item, index) in data.list" :key="index">
         <up-transition
           :show="item.show"
           :mode="item.show ? 'slide-right' : 'slide-left'"
         >
-          <view class="text-center pt-main">
+          <view class="text-center pt-main text-32">
             <view class=""
               >{{ index + 1 }}/{{ data.list?.length }} {{ item.title }}</view
             >
@@ -41,7 +49,7 @@
           </view>
           <view class="flex flex-wrap justify-between px-main">
             <view
-              class="w-330 h-190 p-20 bg-fff shadow rounded-20 mt-main flex flex-col justify-center items-center active:bg-bg"
+              class="w-330 h-190 p-20 bg-[#fdddac] shadow rounded-20 mt-main flex flex-col justify-center items-center active:bg-[#b8833a] border-2 border-solid border-[#b8833a] text-[#6d4406]"
               v-for="(e, i) in item.data"
               :key="i"
               @click="next(e, index)"

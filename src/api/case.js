@@ -50,6 +50,18 @@ export function product_new_detail(data) {
 }
 
 /**
+ * 案例详情
+ * @param data
+ * @returns {*}
+ */
+export function guessLikes(data) {
+  return request({
+    url: `/api/guessLikes/${data.id}`,
+    method: "get",
+  });
+}
+
+/**
  * 案例点赞
  * /api/praise/:id/2/1/0
  * @param data

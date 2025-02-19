@@ -7,7 +7,7 @@
     indicatorMode="line"
     circular
     easingFunction="easeInOutCubic"
-    height="300rpx"
+    height="340rpx"
     radius="0"
     @click="bannerClick"
   ></up-swiper>

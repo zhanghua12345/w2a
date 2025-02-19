@@ -16,7 +16,7 @@
     >
       <view class="flex-1 pr-30">
         <view
-          class="text-48 font-700 w-full flex flex-wrap items-center"
+          class="text-48 w-full flex flex-wrap items-center"
           @click="goLogin"
           >{{ userInfo.nickname || "您好，请登录" }}
           <span>
@@ -28,8 +28,8 @@
             >
           </span>
         </view>
-        <view class="mt-20">{{ userInfo.phone }}</view>
-        <view>梵米尼-创造您的生活</view>
+        <view class="mt-10">{{ userInfo.phone }}</view>
+        <view class="mt-10">梵米尼-创造您的生活</view>
       </view>
       <image
         class="h-150 w-150 rounded-full"
@@ -47,14 +47,15 @@
         <view class="text-tip">{{ item.label }}</view>
       </view>
     </view>
-    <view class="bg-fff rounded-32 overflow-hidden mt-50">
+    <view class="bg-fff rounded-32 overflow-hidden mt-50 shadow-sm">
       <view
-        class="bg-131313 px-main flex flex-wrap justify-between items-center"
+        class="px-main flex flex-wrap justify-end items-center relative h-156"
       >
-        <view class="py-30">
-          <i class="iconfont text-main-vip text-40">&#xe6ca;</i>
-          <view class="text-fff">加入我们</view>
-        </view>
+        <image
+          class="w-full absolute top-0 left-0 h-full"
+          src="/static/my/vip.png"
+          mode="aspectFill"
+        />
         <view
           class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient relative"
           @click="goVip"
@@ -75,21 +76,21 @@
             open-type="share"
             v-if="item.type === 'share'"
           >
-            <i class="iconfont text-64" v-html="item.icon" />
-            <view>{{ item.label }}</view>
+            <image class="h-50 w-50" :src="`/static/my/${item.icon}.png`" />
+            <view class="pt-16">{{ item.label }}</view>
           </button>
           <view
             class="flex flex-col items-center"
             @click="openDetail(item)"
             v-else
           >
-            <i class="iconfont text-64" v-html="item.icon" />
-            <view>{{ item.label }}</view>
+            <image class="h-50 w-50" :src="`/static/my/${item.icon}.png`" />
+            <view class="pt-20">{{ item.label }}</view>
           </view>
         </template>
       </view>
     </view>
-    <view class="mt-main bg-fff rounded-32 overflow-hidden">
+    <view class="mt-main bg-fff rounded-32 overflow-hidden shadow-sm">
       <up-cell-group :border="false">
         <up-cell
           v-for="(item, index) in dataFilter(routers, 7, 11)"
@@ -115,7 +116,7 @@
         </view>
       </view>
 
-      <view class="bg-fff rounded-32 overflow-hidden mt-main">
+      <view class="bg-fff rounded-32 overflow-hidden mt-main shadow-sm">
         <up-scroll-list :indicator="false">
           <template v-for="item in links" :key="item.id">
             <official-account
@@ -125,11 +126,11 @@
               @click="onOfficialAccountTap"
             >
               <view
-                class="flex flex-col items-center px-main py-20"
+                class="flex flex-col items-center px-main pt-40 pb-20"
                 :class="item.class"
               >
-                <i class="iconfont text-64" v-html="item.icon" />
-                <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
+                <image class="h-70 w-70" :src="`/static/my/${item.type}.png`" />
+                <view class="whitespace-nowrap pt-20">{{ item.label }}</view>
               </view>
               <!-- 组件内部的内容 -->
             </official-account>
@@ -139,29 +140,29 @@
               v-else-if="item.type === 'contact'"
             >
               <view
-                class="flex flex-col items-center px-main py-20"
+                class="flex flex-col items-center px-main pt-40 pb-20"
                 :class="item.class"
                 @click="openLink(item)"
               >
-                <i class="iconfont text-64" v-html="item.icon" />
-                <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
+                <image class="h-70 w-70" :src="`/static/my/${item.type}.png`" />
+                <view class="whitespace-nowrap pt-20">{{ item.label }}</view>
               </view>
             </button>
             <view
-              class="flex flex-col items-center px-main py-20"
+              class="flex flex-col items-center px-main pt-40 pb-20"
               :class="item.class"
               @click="openLink(item)"
               v-else
             >
-              <i class="iconfont text-64" v-html="item.icon" />
-              <view class="whitespace-nowrap mt-10">{{ item.label }}</view>
+              <image class="h-70 w-70" :src="`/static/my/${item.type}.png`" />
+              <view class="whitespace-nowrap pt-20">{{ item.label }}</view>
             </view>
           </template>
         </up-scroll-list>
       </view>
     </view>
   </view>
-  <Footer className="py-60" content="Copyright © 2023 图鸟科技" />
+  <Footer className="py-60" content="Copyright © 2025 梵米尼" />
   <Login
     v-model:userInfo="userInfo"
     v-model:show="showLoginPopup"
@@ -221,21 +222,21 @@ const routers = ref([
   {
     label: "案例收藏",
     router: "pagesA/caseCollection/index",
-    icon: "&#xe681;",
+    icon: "caseCollection",
   },
   {
     label: "好文收藏",
     router: "pagesA/articleCollection/index",
-    icon: "&#xe628;",
+    icon: "articleCollection",
   },
   {
     label: "0元设计",
     router: "pagesForm/mianfeisheji/index",
-    icon: "&#xe76c;",
+    icon: "mianfeisheji",
   },
   {
     label: "分享",
-    icon: "&#xe6d5;",
+    icon: "share",
     type: "share",
   },
   {
@@ -271,32 +272,35 @@ const links = [
     label: "梵米尼商城",
     router: "/pagesA/articleCollection/index",
     icon: "&#xe74b;",
-    type: "official",
+    type: "mall",
     class: "",
   },
   {
     label: "公众号",
     router: "/pagesA/articleCollection/index",
     icon: "&#xe614;",
+    type: "official",
     class: "text-main",
   },
   {
     label: "抖音号",
     router: "/pagesA/articleCollection/index",
     icon: "&#xe601;",
+    type: "tikTok",
     class: "",
   },
   {
     label: "视频号",
     router: "/pagesA/articleCollection/index",
     icon: "&#xe69c;",
+    type: "video",
     class: "",
   },
-
   {
     label: "H5网站",
     router: "/pagesA/articleCollection/index",
     icon: "&#xe607;",
+    type: "H5",
     class: "",
   },
   {

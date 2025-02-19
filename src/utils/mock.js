@@ -1,6 +1,7 @@
 export const JSON_baojia = {
   title: "梵米尼装修报价",
   subTitle: "完善信息让报价更精准",
+  color: "bf6c22",
   banner: [
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/dc15271c0991cf892760288beb44dde5.png",
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/9c563e246d67ef749140417a3ad66a3a.png",
@@ -72,6 +73,7 @@ export const JSON_baojia = {
 
 export const JSON_mianfeisheji = {
   title: "查看专属效果图方案",
+  color: "0ccc83",
   banner: [
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/9c563e246d67ef749140417a3ad66a3a.png",
     "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/840c57f126d0134bb7ee32a9c3173963.png",

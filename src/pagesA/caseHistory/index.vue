@@ -1,29 +1,36 @@
 <template>
   <view class="px-main text-24">
     <view
-      class="flex flex-wrap items-center py-16 border-0 border-b-2 border-solid last:border-b-0"
+      class="flex flex-wrap items-center py-16 border-0 border-b-2 border-solid last:border-b-0 relative"
       v-for="(item, index) in list"
+      @click="openDetail(item)"
       :key="index"
     >
-      <i
-        class="iconfont leading-1 text-64"
-        :class="item.info.userCollection ? 'text-main' : 'text-tip'"
-        @click="setCollects(item, index)"
-      >
-        &#xe629;
-      </i>
-      <image
-        class="ml-20 h-158 w-200 rounded-16"
-        :src="item.info.coverImg"
-        alt=""
-        mode="aspectFill"
-      />
+      <div class="h-158 w-200 rounded-16 relative overflow-hidden">
+        <image
+          class="w-full h-full"
+          :src="item.info.coverImg"
+          alt=""
+          mode="aspectFill"
+        />
+        <div
+          class="h-50 w-50 absolute top-0 left-0 flex items-center justify-center text-fff"
+          :class="item.info.userCollection ? 'bg-main' : 'bg-000-4'"
+        >
+          <i
+            class="iconfont text-26 leading-1"
+            @click.stop="setCollects(item, index)"
+          >
+            &#xe629;
+          </i>
+        </div>
+      </div>
 
       <view class="flex-1 pl-main">
-        <view class="line-clamp-2 font-600 text-28">
+        <view class="line-clamp-2 text-32">
           {{ item.info.name }}
         </view>
-        <view class="line-clamp-1 text-400 mt-20 text-tip">{{
+        <view class="line-clamp-1 mt-20 text-tip">{{
           item.info.description
         }}</view>
       </view>
@@ -74,6 +81,10 @@ onReachBottom(() => {
   status.value = "loading";
   getList(params);
 });
+
+const openDetail = (data) => {
+  uni.navigateTo({ url: `/pages/caseDetail/index?id=${data.id}` });
+};
 
 const setCollects = async (item, index) => {
   //  收藏和取消收藏

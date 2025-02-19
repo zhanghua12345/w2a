@@ -11,10 +11,10 @@
       alt=""
       mode="aspectFill"
     />
-    <view class="px-main py-14 w-full">
-      <view class="truncate">{{ obj.name }}</view>
+    <view class="px-16 py-14 w-full">
+      <view class="truncate text-30">{{ obj.name }}</view>
       <view
-        class="flex flex-wrap items-center justify-between mt-6 text-24 text-000-4"
+        class="flex flex-wrap items-center justify-between mt-10 text-24 text-000-4"
       >
         <view class="flex-1 flex flex-wrap justify-start">
           <view
@@ -29,15 +29,13 @@
         </view>
         <view class="flex flex-wrap items-center justify-end">
           <i class="iconfont text-tip text-24 mr-6">&#xe662;</i
-          >{{ Number(obj.browse || 0) + Number(obj.realBrowse || 0) }}
+          >{{ obj.realBrowse || 0 }}
           <view class="px-20">
             <up-line length="10" direction="col"></up-line
           ></view>
 
           <i class="iconfont text-tip text-24 mr-6">&#xe66e;</i>
-          {{ Number(obj.praise || 0) + Number(obj.realPraise || 0) }}
-          <!-- <TnIcon name="title" /> -->
-          <!-- <TnIcon name="carousel" /> -->
+          {{ obj.realPraise || 0 }}
         </view>
       </view>
     </view>

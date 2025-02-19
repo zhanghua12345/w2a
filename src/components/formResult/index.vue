@@ -2,6 +2,10 @@
   <view
     v-show="status === 1"
     class="fixed bottom-0 left-0 right-0 h-[900rpx] rounded-t-40 z-full bg-gradient-to-b from-[#feeac5] via-[#f2f2f2] via-20% to-[#f8f8f8] flex flex-col items-center"
+    :class="{
+      'text-bf6c22': data.color === 'bf6c22',
+      'text-[#0ccc83]': data.color === '0ccc83',
+    }"
   >
     <view
       class="w-140 h-140 rounded-full border-10 border-fff border-solid bg-bg mt-[-70rpx]"
@@ -18,13 +22,13 @@
       <i class="iconfont text-24 mr-6">&#xe663;</i>
       梵米尼推荐官XX
     </view>
-    <view class="mt-main font-600">xx正在为您计算中...</view>
-    <view class="mt-80 bottom relative text-36 font-600"
+    <view class="mt-main text-000-9">xx正在为您计算中...</view>
+    <view class="mt-80 bottom relative text-36 text-000-9"
       >登录后即可查看报价</view
     >
     <view class="mt-80 text-[#bf6c22] text-center">
-      <view class="font-600">梵米尼专注装修15年</view>
-      <view class="mt-main font-600">6000多万累计业主报价</view>
+      <view class="">梵米尼专注装修15年</view>
+      <view class="mt-20">6000多万累计业主报价</view>
     </view>
     <view class="absolute bottom-100 left-0 right-0 w-524 mx-auto">
       <formBottom @click="emit('click')" :data="data" />

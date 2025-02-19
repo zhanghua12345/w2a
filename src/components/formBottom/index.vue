@@ -1,13 +1,17 @@
 <template>
   <view class="w-full h-full relative">
     <view
-      class="w-full h-110 flex justify-center items-center bg-[#0ccc83] text-fff rounded-16 text-32 font-600"
+      class="w-full h-110 flex justify-center items-center text-fff rounded-16 text-32"
+      :class="{
+        'bg-[#bf6c22]': data.color === 'bf6c22',
+        'bg-[#0ccc83]': data.color === '0ccc83',
+      }"
       @click="emit('click')"
     >
       {{ data.bottomTitle || "查看装修报价" }}
     </view>
     <view
-      class="absolute top-[-30rpx] right-0 flex items-center rounded-tl-full rounded-r-full px-20 h-50 text-24 text-[#592e04] font-600 bg-gradient-to-r from-[#fcd290] to-[#fdefd3]"
+      class="absolute top-[-30rpx] right-0 flex items-center rounded-tl-full rounded-r-full px-20 h-50 text-24 text-[#592e04] bg-gradient-to-r from-[#fcd290] to-[#fdefd3]"
       v-if="data.formRead"
     >
       已有{{ data.formRead }}人查看
@@ -15,14 +19,24 @@
     <view class="flex flex-wrap pt-main justify-center">
       <i class="iconfont text-20 mr-6 text-tip">&#xe663;</i>
       <view
-        class="text-18 text-tip flex-1"
+        class="text-20 text-tip flex-1"
         v-if="data.bottomTip === 'agreement'"
       >
         我已阅读并同意梵米尼
-        <span class="text-[#0ccc83]" @click="openAgreement('serve')"
+        <span
+          :class="{
+            'text-bf6c22': data.color === 'bf6c22',
+            'text-[#0ccc83]': data.color === '0ccc83',
+          }"
+          @click="openAgreement('serve')"
           >《服务须知》</span
         >
-        和<span class="text-[#0ccc83]" @click="openAgreement('privacy')"
+        和<span
+          :class="{
+            'text-bf6c22': data.color === 'bf6c22',
+            'text-[#0ccc83]': data.color === '0ccc83',
+          }"
+          @click="openAgreement('privacy')"
           >《隐私政策》</span
         >
         且授权平台或平台指定装企联系我</view
