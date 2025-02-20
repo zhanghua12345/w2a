@@ -6,23 +6,25 @@
       mode="aspectFill"
       alt=""
     />
-    <view class="px-main absolute top-0 left-0 text-fff">
+    <!-- <view class="px-main absolute top-0 left-0 text-fff">
       <view class="flex flex-wrap items-start text-48 pt-100">
         <i class="iconfont leading-1 text-48">&#xe644;</i>
         <view class="flex-1 pl-main leading-1.3">{{ detail.title }}</view>
       </view>
       <view class="pb-20">{{ detail.dec }}</view>
-    </view>
-    <view class="px-main absolute bottom-60 left-0 text-fff">
-      <view class="pb-20">{{ detail.realBrowse }} 人看过</view>
+    </view> -->
+    <view
+      class="px-main absolute bottom-60 left-0 text-fff flex flex-wrap justify-between items-center w-full"
+    >
       <up-avatar-group :urls="urls" size="35" gap="0.4" extraValue=" " />
+      <view class="">{{ detail.realBrowse }} 人看过</view>
     </view>
   </view>
   <view
     class="bg-bg rounded-t-40 mt-[-40rpx] relative flex flex-col items-center overflow-hidden"
   >
     <view
-      class="w-full bg-gradient-to-b from-[#feeac5] to-bg pb-100 text-36 text-000 flex justify-center items-center font-600 px-90 text-center"
+      class="w-full bg-gradient-to-b from-[#feeac5] to-bg pb-90 text-36 text-000 flex justify-center items-center px-90 text-center"
     >
     </view>
     <view

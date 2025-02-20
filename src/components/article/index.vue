@@ -10,7 +10,7 @@
       alt=""
     />
     <view class="flex-1 flex flex-col justify-between pl-main">
-      <view class="line-clamp-2 font-600">
+      <view class="line-clamp-2">
         {{ obj.title }}
       </view>
       <view class="flex flex-wrap justify-between leading-1">
@@ -19,7 +19,7 @@
           >{{ obj.add_time }}
         </view>
         <view class="flex items-center">
-          <i class="iconfont text-tip text-24 mr-6">&#xe662;</i
+          <i class="iconfont text-tip text-24 mr-6">&#xe8bf;</i
           >{{ obj.realBrowse || 0 }}
         </view>
       </view>

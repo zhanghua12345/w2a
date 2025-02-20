@@ -7,7 +7,7 @@
         :style="'padding-top:' + height + 'rpx'"
         class="custom flex-y-center"
       >
-        <view class="font30 fontBold colorNormal text-center font-600 text-30"
+        <view class="font30 fontBold colorNormal text-center text-30"
           >会员</view
         >
       </view>
@@ -16,13 +16,13 @@
           <image class="card-bg" src="/static/vip.png" />
           <view class="info">
             <view class="info-name">
-              <view class="text-48 font-600">尊敬的梵米尼会员</view>
+              <view class="text-48">尊敬的梵米尼会员</view>
               <view class="">No.645645456456</view>
             </view>
             <!-- <view class="h-44">会员激活后生效</view> -->
             <view class="mt-16">累计已获得</view>
             <view class="info-box">
-              <view class="font-600">
+              <view class="">
                 <span class="text-64 leading-1"> 1267 </span>积分
               </view>
               <view class="change">修改资料</view>
@@ -64,9 +64,7 @@
               "
             >
               <view class="p-main absolute z-10 flex flex-col justify-between">
-                <view class="text-[#866350] text-36 font-600">{{
-                  item.name
-                }}</view>
+                <view class="text-[#866350] text-36">{{ item.name }}</view>
                 <view class="text-tip text-24 pt-10 flex items-center">
                   {{ item.subName }}
                   <i class="iconfont text-20">&#xe671;</i>

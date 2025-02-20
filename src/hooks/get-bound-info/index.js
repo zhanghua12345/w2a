@@ -12,9 +12,12 @@ export const getBoundInfo = () => {
       navBarHeight: 20, // 导航栏的高度
     };
   }
+  console.log(uni.getMenuButtonBoundingClientRect());
   const statusBarHeight = systemInfo.statusBarHeight; // 状态栏高度
   const boundWidth = uni.getMenuButtonBoundingClientRect()?.width || 0; // 胶囊宽度
   const boundHeight = uni.getMenuButtonBoundingClientRect()?.height || 0; // 胶囊高度
+  const boundRight =
+    systemInfo.windowWidth - uni.getMenuButtonBoundingClientRect()?.right || 7; // 胶囊距离右边宽度
   const boundTop =
     uni.getMenuButtonBoundingClientRect()?.top || statusBarHeight; // 胶囊距离状态栏的高度
 
@@ -24,6 +27,7 @@ export const getBoundInfo = () => {
     boundWidth, // 胶囊宽度
     boundHeight, // 胶囊高度
     boundTop, // 胶囊距离状态栏的高度
+    boundRight,
     navBarHeight, // 导航栏的高度
   };
 };

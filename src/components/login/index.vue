@@ -12,7 +12,7 @@
     <view
       class="popup-box px-main py-60 flex flex-col items-center leading-1.3"
     >
-      <view class="text-36 text-000 font-700 w-full">获取您的昵称、头像</view>
+      <view class="text-36 text-000 w-full">获取您的昵称、头像</view>
       <view class="text-26 text-[#aaa] mt-12 w-full"
         >获取用户头像、昵称，主要用于向用户提供具有辨识度的用户体验</view
       >

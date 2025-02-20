@@ -5,12 +5,25 @@
     @click="emit('click', obj)"
   >
     <!-- https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg -->
-    <image
-      class="w-full h-300 bg-cover"
-      :src="obj.coverImg"
-      alt=""
-      mode="aspectFill"
-    />
+    <div class="w-full h-300 relative">
+      <view
+        class="absolute z-full top-0 left-0 right-0 bottom-0 flex justify-center items-center"
+      >
+        <view
+          class="bg-000-6 rounded-full px-30 py-12 text-fff flex items-center"
+          @click.stop="emit('openVR', obj)"
+        >
+          <i class="iconfont leading-1 pr-10">&#xe71c;</i>全屋漫游
+        </view>
+      </view>
+      <image
+        class="w-full h-full"
+        :src="obj.coverImg"
+        alt=""
+        mode="aspectFill"
+      />
+    </div>
+
     <view class="px-16 py-14 w-full">
       <view class="truncate text-30">{{ obj.name }}</view>
       <view
@@ -28,13 +41,13 @@
           </view>
         </view>
         <view class="flex flex-wrap items-center justify-end">
-          <i class="iconfont text-tip text-24 mr-6">&#xe662;</i
+          <i class="iconfont font-600 text-tip text-24 mr-6">&#xe8bf;</i
           >{{ obj.realBrowse || 0 }}
           <view class="px-20">
             <up-line length="10" direction="col"></up-line
           ></view>
 
-          <i class="iconfont text-tip text-24 mr-6">&#xe66e;</i>
+          <i class="iconfont font-600 text-tip text-24 mr-6">&#xe623;</i>
           {{ obj.realPraise || 0 }}
         </view>
       </view>
@@ -42,6 +55,6 @@
   </view>
 </template>
 <script setup>
-const emit = defineEmits(["click"]);
+const emit = defineEmits(["click", "openVR"]);
 defineProps(["obj", "className"]);
 </script>

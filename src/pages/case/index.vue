@@ -42,6 +42,7 @@
       :obj="item"
       :key="item"
       @click="openDetail(item)"
+      @openVR="openVR(item)"
     />
   </view>
   <up-loadmore
@@ -79,6 +80,8 @@ import { caseList, caseClass, product_new_list } from "@/api/case";
 import ScrollTop from "@/components/scrollTop/index.vue";
 import Box from "@/components/box/index.vue";
 import { useWxShare } from "@/hooks/index.js";
+
+const app = getApp();
 // 监听滚动
 onPageScroll((e) => {});
 // 微信分享
@@ -128,9 +131,11 @@ const pickerConfirm = (value) => {
   list.value = [];
   params.page = 1;
   status.value = "loading";
+  console.log(classList.value);
   params.cate_id = classList.value
     .filter((e) => !!e.cate_id)
     .map((item) => item.cate_id);
+  console.log(params.cate_id);
   getList();
 };
 
@@ -157,11 +162,20 @@ onReachBottom(() => {
 const bannerClick = (index) => {
   openDetail({ id: bannerList.value[index].id });
 };
-
 // 跳转到详情
 const openDetail = (item) => {
   console.log(item);
   uni.navigateTo({ url: `/pages/caseDetail/index?id=${item.id}` });
+};
+
+// 跳转到VR
+const openVR = (item) => {
+  if (!app.globalData.userInfo?.phone) {
+    uni.navigateTo({ url: "/pages/login/index" });
+  } else {
+    uni.navigateTo({ url: `/pages/VR/index?url=${item.VR_link}` });
+  }
+  openDetail({ id: bannerList.value[index].id });
 };
 
 // 获取顶部banner

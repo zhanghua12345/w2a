@@ -147,7 +147,7 @@
       closeOnClickOverlay
     >
       <view class="my-30 flex flex-col items-center px-main">
-        <view class="font-600 text-30">授权同意页面</view>
+        <view class="text-30">授权同意页面</view>
         <view class="bg-fff mt-52 rounded-28">
           <checkbox-group
             @change="checkboxChange"

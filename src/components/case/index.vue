@@ -18,7 +18,7 @@
     >
       <i class="iconfont text-main text-64 leading-1">&#xe62d;</i>
       <view
-        class="absolute w-full top-4 h-full text-fff text-24 font-600 flex flex-wrap justify-center"
+        class="absolute w-full top-4 h-full text-fff text-24 flex flex-wrap justify-center"
         >NEW</view
       >
     </view>
@@ -32,7 +32,7 @@
       v-show="!noView"
       class="absolute right-20 top-236 flex justify-center items-center bg-000-6 rounded-full px-14 h-54 text-fff leading-1 text-24"
     >
-      <i class="iconfont leading-1 text-24 mr-4">&#xe662;</i>{{ obj.browse }}
+      <i class="iconfont leading-1 text-24 mr-4">&#xe8bf;</i>{{ obj.browse }}
     </view>
     <view class="px-main py-14 w-full">
       <view class="truncate">{{ obj.name }}</view>
@@ -43,7 +43,7 @@
           <!-- :class="[item.className]" -->
           <view
             v-for="(key, index) in Object.keys(obj.cate_list || [])"
-            :key="item"
+            :key="index"
             class="flex justify-center items-center px-10 py-6 leading-1 rounded-6 bg-[#faeef3] text-[#ad7680]"
             :class="{
               'mr-10': index < 3,

@@ -25,7 +25,7 @@
         :mode="item.show ? 'slide-right' : 'slide-left'"
       >
         <view class="flex justify-center mt-main">
-          <view class="bottom relative text-36 font-600 text-center inline">
+          <view class="bottom relative text-36 text-center inline">
             {{ data.title }}
           </view>
         </view>

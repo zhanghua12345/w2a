@@ -7,7 +7,7 @@
       class="flex flex-col justify-center items-center min-w-110"
       @click="click('praise')"
     >
-      <i class="iconfont leading-1">&#xe662;</i>
+      <i class="iconfont font-600 leading-1 pb-6">&#xe65e;</i>
       点赞{{ obj.realPraise || 0 }}
     </view>
     <view
@@ -15,14 +15,14 @@
       :class="obj.userCollection ? 'text-main' : 'text-tip'"
       @click="click('collect')"
     >
-      <i class="iconfont leading-1">&#xe629;</i>
-      {{ obj.userCollection ? "  已收藏" : "收藏" + obj.realCollection }}
+      <i class="iconfont font-600 leading-1 pb-6">&#xe629;</i>
+      {{ obj.userCollection ? "  已收藏" : "收藏" }}
     </view>
     <button
       class="flex flex-col justify-center items-center min-w-110 share"
       open-type="share"
     >
-      <i class="iconfont leading-1">&#xe643;</i>
+      <i class="iconfont font-600 leading-1 pb-6">&#xe647;</i>
       分享
     </button>
     <view class="flex-1 pl-20">

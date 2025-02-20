@@ -11,9 +11,7 @@
     </view>
   </view>
   <view class="px-main bg-fff rounded-t-40 pt-20 pb-60">
-    <view class="text-32 text-[#1a1a1a] font-600 mt-main">
-      一分钟了解装修流程
-    </view>
+    <view class="text-32 text-[#1a1a1a] mt-main"> 一分钟了解装修流程 </view>
     <video
       class="w-full h-400 rounded-main mt-40"
       src="https://vr.justeasy.cn/view/16zho9528286sa52-1695819876.html"
@@ -29,9 +27,7 @@
       />
       <view class="pl-main">快速了解装修流程，让你装修不迷茫</view>
     </view>
-    <view class="text-32 text-[#1a1a1a] font-600 mt-main">
-      看看你家怎么装修
-    </view>
+    <view class="text-32 text-[#1a1a1a] mt-main"> 看看你家怎么装修 </view>
     <view
       class="mt-main grid grid-rows-6 grid-cols-6 gap-main h-500"
       v-if="info.length"
@@ -55,9 +51,7 @@
         </view>
       </view>
     </view>
-    <view class="text-32 text-[#1a1a1a] font-600 mt-main">
-      打算花多少钱来装修
-    </view>
+    <view class="text-32 text-[#1a1a1a] mt-main"> 打算花多少钱来装修 </view>
     <video
       class="w-full h-400 rounded-main mt-40"
       src="https://vr.justeasy.cn/view/16zho9528286sa52-1695819876.html"

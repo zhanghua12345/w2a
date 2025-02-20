@@ -20,9 +20,7 @@
         :style="{ height: height || 0 + 'px' }"
         >&#xe633;</i
       >
-      <view class="flex justify-center text-40 text-main font-600"
-        >梵米尼家具优选</view
-      >
+      <view class="flex justify-center text-40 text-main">梵米尼家具优选</view>
     </view>
     <up-sticky :offset-top="height + statusBarHeight" bgColor="#fff">
       <up-tabs

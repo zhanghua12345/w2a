@@ -1,6 +1,33 @@
 <template>
+  <view
+    class="fixed z-[20]"
+    v-if="isBack"
+    :style="{
+      top: boundInfo.boundTop + 'px',
+      left: boundInfo.boundRight + 'px',
+    }"
+  >
+    <i
+      class="iconfont leading-1 pl-10 text-fff"
+      @click="goBack"
+      :style="{
+        fontSize: boundInfo.boundHeight + 'px',
+      }"
+      >&#xe6ad;</i
+    >
+  </view>
   <Navbar title="梵米尼家具优选" leftIcon=" " />
   <view class="w-full h-700 relative">
+    <view
+      class="absolute z-[9] top-0 left-0 right-0 bottom-0 flex justify-center items-center"
+    >
+      <view
+        class="bg-000-6 rounded-full px-30 py-12 text-fff flex items-center"
+        @click="openVR"
+      >
+        <i class="iconfont leading-1 pr-8">&#xe71c;</i>全屋漫游
+      </view>
+    </view>
     <up-swiper
       :list="detail?.banner || []"
       indicator
@@ -14,11 +41,10 @@
     >
       <template #indicator>
         <view class="flex justify-between w-690 h-50 text-24">
-          <view class="w-80"></view>
+          <view class="w-76"></view>
           <view class="bg-000-5 w-240 rounded-full flex text-fff">
             <view class="w-1/2 flex justify-center items-center" @click="openVR"
-              >720
-              <i class="iconfont text-30 leading-1 ml-10">&#xe76e;</i></view
+              >720 <i class="iconfont text-30 leading-1 ml-6">&#xe76e;</i></view
             >
             <view
               class="w-1/2 flex justify-center items-center bg-main rounded-full"
@@ -35,21 +61,25 @@
     <view class="absolute bottom-0 left-0 right-0 h-30 rounded-t-full bg-bg" />
   </view>
   <view class="px-main">
-    <view class="text-48 text-000 font-600">{{ detail.name || "--" }}</view>
-    <text class="mt-main">{{ detail.description }}</text>
+    <view class="text-36 text-000">{{ detail.name || "--" }}</view>
+    <view class="pt-20 text-tip text-24">
+      <text>{{ detail.description }}</text>
+    </view>
+
     <view class="flex flex-wrap items-center mt-main">
-      <i class="iconfont text-tip text-24 mr-6">&#xe662;</i>浏览量{{
+      <i class="iconfont font-600 text-tip text-24 mr-6">&#xe8bf;</i>浏览量{{
         detail.realBrowse || 0
       }}
       <view class="px-20">
         <up-line length="10" direction="col"></up-line
       ></view>
 
-      <i class="iconfont text-tip text-24 mr-6">&#xe66e;</i>
+      <i class="iconfont font-600 text-tip text-24 mr-6">&#xe623;</i>
       点赞{{ detail.realPraise || 0 }}
     </view>
     <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
+      v-if="detail.cate_list.length > 0"
     >
       <view
         class="flex flex-wrap items-center w-1/2 h-50"
@@ -77,7 +107,7 @@
       :key="item"
     >
       <template v-if="item.images?.length">
-        <view class="text-36 font-600 w-full flex justify-center py-30">{{
+        <view class="text-36 w-full flex justify-center py-30">{{
           item.value
         }}</view>
         <view
@@ -94,7 +124,7 @@
       @click="showMoreClick"
       v-if="!showMore"
     >
-      点击查看更多 <i class="iconfont text-24 ml-6">&#xfd90;</i>
+      点击查看更多 <i class="iconfont font-600 text-24 ml-6">&#xfd90;</i>
     </view>
   </view>
   <view class="mt-main px-main" v-html="detail.content" v-if="detail.content">
@@ -142,13 +172,19 @@ import {
   onShareTimeline,
   onLoad,
 } from "@dcloudio/uni-app";
-import { useWxShare } from "@/hooks/index.js";
+import { useWxShare, getBoundInfo } from "@/hooks/index.js";
 
 const app = getApp();
 const id = ref("");
-
+const isBack = ref(true);
 // 监听滚动
-onPageScroll((e) => {});
+onPageScroll((e) => {
+  if (e.scrollTop > 60 && isBack.value) {
+    isBack.value = false;
+  } else if (e.scrollTop <= 60 && !isBack.value) {
+    isBack.value = true;
+  }
+});
 // 微信分享
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
@@ -160,12 +196,14 @@ const detail = ref({});
 const likes = ref([]);
 const showMore = ref(false);
 const currentNum = ref(0);
+const boundInfo = ref({});
 
 onLoad((options) => {
   // options是传递过来的参数对象
   id.value = options.id;
   getDetail();
   getGuessLikes();
+  boundInfo.value = getBoundInfo();
 });
 
 // 详情查看更多
@@ -189,6 +227,18 @@ const openDetail = (data) => {
   uni.navigateTo({ url: `/pages/caseDetail/index?id=${data.id}` });
 };
 
+const goBack = () => {
+  console.log(111);
+  if (getCurrentPages().length > 1) {
+    uni.navigateBack({
+      delta: 1,
+    });
+  } else {
+    uni.switchTab({
+      url: "/pages/case/index",
+    });
+  }
+};
 const setBottom = async (name) => {
   if (name === "praise") {
     // 点赞
@@ -202,26 +252,30 @@ const setBottom = async (name) => {
       });
     }
   } else if (name === "collect") {
-    //  收藏和取消收藏
-    if (!detail.value.userCollection) {
-      const data = await setCollect({ id: detail.value.id });
-      await getDetail();
-      if (data.status === 200) {
-        wx.showToast({
-          title: "收藏成功",
-          icon: "none",
-          duration: 2000,
-        });
-      }
+    if (!app.globalData.userInfo?.phone) {
+      uni.navigateTo({ url: "/pages/login/index" });
     } else {
-      const data = await setCancelCollect({ id: detail.value.id });
-      await getDetail();
-      if (data.status === 200) {
-        wx.showToast({
-          title: "取消收藏",
-          icon: "none",
-          duration: 2000,
-        });
+      //  收藏和取消收藏
+      if (!detail.value.userCollection) {
+        const data = await setCollect({ id: detail.value.id });
+        await getDetail();
+        if (data.status === 200) {
+          wx.showToast({
+            title: "收藏成功",
+            icon: "none",
+            duration: 2000,
+          });
+        }
+      } else {
+        const data = await setCancelCollect({ id: detail.value.id });
+        await getDetail();
+        if (data.status === 200) {
+          wx.showToast({
+            title: "取消收藏",
+            icon: "none",
+            duration: 2000,
+          });
+        }
       }
     }
   } else if (name === "button") {
@@ -234,6 +288,10 @@ const getDetail = async () => {
   const data = await product_new_detail({ id: id.value });
   data.detail.attrsImagesNew = data.detail.attrsImages.filter(
     (e) => e.images?.length
+  );
+  data.detail.content = data.detail.content.replace(
+    /\<img/g,
+    '<img style="max-width:100%;height:auto" '
   );
   detail.value = data.detail;
 };

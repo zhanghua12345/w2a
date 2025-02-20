@@ -19,7 +19,7 @@
   <view
     class="mt-60 mx-main shadow rounded-20 p-main flex flex-col items-center bg-fff"
   >
-    <view class="text-32 font-600">开启安心装修第一步</view>
+    <view class="text-32">开启安心装修第一步</view>
     <view class="w-full mt-main">
       <view class="mt-main">
         <view class="mb-36">{{ data.list[0].title }}</view>
