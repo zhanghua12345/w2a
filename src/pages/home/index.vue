@@ -102,13 +102,13 @@
       :isMore="true"
       @click="openDetail(info[4])"
     />
-    <view class="mt-main grid grid-rows-6 grid-cols-6 gap-main h-500">
+    <view class="mt-main grid grid-rows-7 grid-cols-6 gap-20 h-540">
       <view
         class="bg-000 rounded-main text-fff relative overflow-hidden shadow-md"
         :class="{
           'row-span-4 col-span-2': [0].includes(index),
           'row-span-2 col-span-2': [1, 2, 3, 4].includes(index),
-          'row-span-2 col-span-3': [5, 6].includes(index),
+          'row-span-3 col-span-3': [5, 6].includes(index),
         }"
         v-for="(item, index) in info[4].list"
         :key="index"
@@ -231,8 +231,13 @@ const swiperClick = (index) => {
 
 // 跳转事件
 const openDetail = (item) => {
-  console.log(item.router);
   const type = item.router.type;
+  if (item.router.id === 12 || item.router.id === 13) {
+    item.router.page = "pages/agreement/index";
+    uni[type]({
+      url: `/${item.router.page}?id=${item.routerId}&title=${item.title}`,
+    });
+  }
   uni[type]({
     url: item.router.isId
       ? `/${item.router.page}?id=${item.routerId}`

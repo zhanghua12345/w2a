@@ -291,7 +291,7 @@ const getDetail = async () => {
   );
   data.detail.content = data.detail.content.replace(
     /\<img/g,
-    '<img style="max-width:100%;height:auto" '
+    '<img style="width:100%;height:auto" '
   );
   detail.value = data.detail;
 };

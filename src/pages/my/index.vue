@@ -248,12 +248,14 @@ const routers = ref([
     label: "关于我们",
     router: "pages/agreement/index",
     type: "about",
+    routerId: 6,
     icon: "&#xe612;",
   },
   {
     label: "隐私协议",
     router: "pages/agreement/index",
     type: "privacy",
+    routerId: 3,
     icon: "&#xe740;",
   },
   {

@@ -29,7 +29,7 @@
     </view>
     <view class="text-32 text-[#1a1a1a] mt-main"> 看看你家怎么装修 </view>
     <view
-      class="mt-main grid grid-rows-6 grid-cols-6 gap-main h-500"
+      class="mt-main grid grid-rows-7 grid-cols-6 gap-20 h-540"
       v-if="info.length"
     >
       <view
@@ -37,7 +37,7 @@
         :class="{
           'row-span-4 col-span-2': [0].includes(index),
           'row-span-2 col-span-2': [1, 2, 3, 4].includes(index),
-          'row-span-2 col-span-3': [5, 6].includes(index),
+          'row-span-3 col-span-3': [5, 6].includes(index),
         }"
         v-for="(item, index) in info[4].list"
         :key="index"

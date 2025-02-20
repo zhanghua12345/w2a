@@ -101,18 +101,6 @@
       }
     },
     {
-      "path": "pages/company/index",
-      "style": {
-        "navigationBarTitleText": ""
-      }
-    },
-    {
-      "path": "pages/brand/index",
-      "style": {
-        "navigationBarTitleText": ""
-      }
-    },
-    {
       "path": "pages/space/index",
       "style": {
         "navigationBarTitleText": "装修清单"
