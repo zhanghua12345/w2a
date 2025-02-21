@@ -9,8 +9,9 @@
         <view>
           <view class="pt-10">姓名：张三</view>
           <view class="text-24 text-[#999]">微信昵称：小王</view>
+          <view class="text-24 text-[#999]">手机号：15879081640</view>
         </view>
-        <view class="text-main"> 15879081640 </view>
+        <view class="text-main">审核成功</view>
       </view>
       <view
         class="flex flex-wrap justify-between pt-16 text-24"
