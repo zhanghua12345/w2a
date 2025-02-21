@@ -17,7 +17,7 @@
     >
       已有{{ data.formRead }}人查看
     </view>
-    <view class="flex flex-wrap pt-main justify-center">
+    <view class="flex flex-wrap pt-main justify-center" v-if="data?.bottomTip">
       <i class="iconfont text-20 mr-6 text-tip">&#xe663;</i>
       <view
         class="text-20 text-tip flex-1"

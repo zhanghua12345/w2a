@@ -22,14 +22,15 @@
           </view>
         </view>
         <view
-          class="px-main rounded-8 mx-full mt-20 py-10 flex items-center justify-between bg-[#f9ebea]"
+          class="px-main rounded-8 mx-full mt-20 py-16 flex items-center justify-between bg-[#fff6f7] shadow-sm"
         >
           <view class="flex-1"
             >可提现余额
-            <span class="font-600 text-[#f30]">￥25.33</span>
+            <span class="font-600 text-[#e44951]">￥25.33</span>
           </view>
           <view
-            class="w-200 flex items-center justify-center border-2 text-[#f30] border-[#f30] px-14 py-6 rounded-full"
+            class="w-160 flex items-center justify-center border-2 text-[#c84e46] border-[#c84e46] px-14 py-6 rounded-full"
+            @click="openDetail({ router: '/pagesA/pointDiscount/index' })"
           >
             立即提现
           </view>
@@ -63,6 +64,7 @@
               class="rounded-main text-fff relative shadow-sm"
               v-for="(item, index) in actives"
               :key="index"
+              @click="openDetail(item)"
               :class="
                 index === 0
                   ? ['row-span-2', 'col-span-4', 'bg-fdf2e0']
@@ -136,21 +138,21 @@ const actives = ref([
   {
     image_url:
       "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/a20581fad329aad752bc8f1462fdc3d8.png",
-    router: "/pages/join/index",
+    router: "/pagesA/pointTask/index",
     name: "赚现金",
     subName: "为我代言，赚现金礼包",
   },
   {
     image_url:
       "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/43ae52eda2654e87f5c8dd471ffd24b2.png",
-    router: "/demo-pages/basic/color/index",
+    router: "/pagesA/pointDiscount/index",
     name: "现金提现",
     subName: "为梵米尼代言",
   },
   {
     image_url:
       "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/88a60c4057401bb4051ae6ff0bd189bd.png",
-    router: "/demo-pages/basic/color/index",
+    router: "",
     name: "更多权益",
     subName: "解锁中...",
   },
@@ -158,6 +160,10 @@ const actives = ref([
 
 const openPoints = () => {
   uni.navigateTo({ url: "/pagesA/pointList/index" });
+};
+
+const openDetail = (item) => {
+  uni.navigateTo({ url: item.router });
 };
 </script>
 

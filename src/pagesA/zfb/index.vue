@@ -1,34 +1,19 @@
 <template>
-  <up-swiper
-    :list="data.banner"
-    indicator
-    indicatorMode="line"
-    circular
-    easingFunction="easeInOutCubic"
-    height="410rpx"
-    radius="0"
-  />
-  <view class="relative flex justify-center h-62 mt-[-30rpx] z-full">
-    <view
-      class="px-20 h-full text-24 text-[#ef3d3d] flex items-center bg-gradient-to-r from-[#ffd4d0] to-[#f6e5e3] rounded-main"
-    >
-      <i class="iconfont mr-6">&#xe663;</i>
-      邀请客户签单最低获得“<span class="font-600">1000元</span>”
-    </view>
-  </view>
   <view
-    class="mt-60 mx-main shadow rounded-20 p-main flex flex-col items-center bg-fff relative"
+    class="mt-main mx-main shadow rounded-20 p-main flex flex-col items-center bg-fff relative"
   >
     <view class="absolute right-main top-main" @click="showPopup = true">
       <i class="iconfont px-10">&#xe8c8;</i>
     </view>
-    <view class="text-32">开启邀请第一步</view>
+    <view class="text-32">绑定信息</view>
     <view class="w-full">
-      <view class="mt-main" v-for="(item, index) in data.list" :key="index">
+      <view
+        class="mt-main first:mt-0"
+        v-for="(item, index) in list"
+        :key="index"
+      >
         <view class="mb-10"
-          ><span class="text-[#ef3d3d] w-20">
-            {{ item.isSelect ? "*" : "" }}
-          </span>
+          ><span class="text-[#ef3d3d] w-20"> * </span>
           {{ item.title }}
         </view>
         <view
@@ -43,13 +28,18 @@
         </view>
       </view>
     </view>
-    <view class="w-full mt-50">
-      <formBottom @click="openKefu" :data="data" />
-      <view class="mt-40 underline text-main text-center" @click="openMoneyList"
-        >查看我的邀请</view
-      >
+  </view>
+  <view class="mx-main mt-main flex flex-col items-center">
+    <up-button text="提交" shape="circle" type="error" color="#ef3d3d" />
+    <view class="mt-main underline text-main text-24">
+      注：请确认您的支付宝信息，以免提现失败
     </view>
   </view>
+  <image
+    class="w-full mt-40 pb-40"
+    src="http://120.27.141.193:8088//uploads/attach/2025/02/20250221/7d61bc1568e02aca9bad9d0bb7904eb4.jpg"
+    mode="widthFix"
+  />
   <up-popup
     :show="showPopup"
     @close="showPopup = false"
@@ -62,18 +52,30 @@
       <view class="px-20 text-tip" v-html="popupText"> </view>
     </view>
   </up-popup>
-  <view class="h-60 w-full"></view>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { JSON_yaoqing } from "@/utils/mock.js";
-import formBottom from "@/components/formBottom/index.vue";
-import { renovationForm } from "@/api/form";
 
 const app = getApp();
-const data = ref({});
-const status = ref(0);
+const list = ref([
+  {
+    title: "真实姓名",
+    select: "",
+  },
+  {
+    title: "支付宝账号",
+    select: "",
+  },
+  {
+    title: "手机号码",
+    select: "",
+  },
+  {
+    title: "微信号",
+    select: "",
+  },
+]);
 const showPopup = ref(false);
 const popupText =
   "您在提交资料后，该用户在门店完成下单。<br />您即可获取一笔1000-2000的金额奖励";
@@ -83,11 +85,7 @@ const openPicker = () => {
 };
 
 // 页面加载时自动加载数据
-onMounted(() => {
-  status.value = 0;
-  data.value = JSON_yaoqing;
-  data.value.list[0].show = true; // TODO
-});
+onMounted(() => {});
 
 const openKefu = () => {
   uni.navigateTo({ url: "/pagesForm/success/index" });

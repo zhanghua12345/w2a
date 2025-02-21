@@ -156,19 +156,31 @@
         {
           "path": "pointList/index",
           "style": {
-            "navigationBarTitleText": "积分详情"
+            "navigationBarTitleText": "提现记录"
+          }
+        },
+        {
+          "path": "moneyList/index",
+          "style": {
+            "navigationBarTitleText": "我的邀请"
           }
         },
         {
           "path": "pointDiscount/index",
           "style": {
-            "navigationBarTitleText": "积分折现"
+            "navigationBarTitleText": "积分提现"
           }
         },
         {
           "path": "pointTask/index",
           "style": {
-            "navigationBarTitleText": "积分任务"
+            "navigationBarTitleText": "我要邀请"
+          }
+        },
+        {
+          "path": "zfb/index",
+          "style": {
+            "navigationBarTitleText": "会员资料"
           }
         }
       ]
