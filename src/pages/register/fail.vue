@@ -5,11 +5,11 @@
       mode="scaleToFill"
       class="success-icon"
     />
-    <i class="iconfont text-main-vip text-128">&#xe632;</i>
+    <i class="iconfont text-main-vip text-128">&#xe6e7;</i>
     <view class="name">您的会员审核失败啦！</view>
     <view class="text">失败原因</view>
-    <view class="text">456547</view>
-    <view class="text">联系我们：865-884-6224</view>
+    <view class="text">{{ detail.remarks }}</view>
+    <view class="text mt-main">联系我们：865-884-6224</view>
     <view class="btn2" @click="goRegister"> 重新提交 </view>
   </view>
 </template>
@@ -21,6 +21,7 @@ export default {
     return {
       height: 0,
       scrollTop: 0,
+      detail: {},
     };
   },
   onLoad() {
@@ -36,13 +37,14 @@ export default {
   },
 
   methods: {
-    goHome() {
+    goRegister() {
       uni.navigateTo({ url: "/pages/register/index" });
     },
 
     async registerData() {
       const data = await registerRes();
-      roles.value = data.list;
+      console.log(data);
+      this.detail = data.data;
     },
   },
 };

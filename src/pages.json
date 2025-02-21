@@ -142,12 +142,6 @@
           }
         },
         {
-          "path": "spaces/index",
-          "style": {
-            "navigationBarTitleText": "空间设计"
-          }
-        },
-        {
           "path": "join/form",
           "style": {
             "navigationStyle": "custom"
@@ -156,7 +150,25 @@
         {
           "path": "member/index",
           "style": {
-            "navigationStyle": "custom"
+            "navigationBarTitleText": "会员中心"
+          }
+        },
+        {
+          "path": "pointList/index",
+          "style": {
+            "navigationBarTitleText": "积分详情"
+          }
+        },
+        {
+          "path": "pointDiscount/index",
+          "style": {
+            "navigationBarTitleText": "积分折现"
+          }
+        },
+        {
+          "path": "pointTask/index",
+          "style": {
+            "navigationBarTitleText": "积分任务"
           }
         }
       ]

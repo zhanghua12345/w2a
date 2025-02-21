@@ -61,7 +61,7 @@
   <view class="mx-main mt-40" v-if="info[3]?.list?.length">
     <view class="grid grid-rows-2 grid-cols-9 gap-20 h-330">
       <view
-        class="rounded-main text-fff relative"
+        class="rounded-main text-fff relative shadow-sm"
         v-for="(item, index) in info[3].list"
         :key="index"
         @click="openDetail(item)"

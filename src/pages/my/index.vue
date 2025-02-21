@@ -197,9 +197,9 @@ const app = getApp();
 const userInfo = ref({});
 onMounted(async () => {
   //判断是否获取到动态设置的globalData
-  const userData = await getUserInfo();
-  app.globalData.userInfo = userData;
-  userInfo.value = userData;
+  // const userData = await getUserInfo();
+  // app.globalData.userInfo = userData;
+  // userInfo.value = userData;
 });
 
 const showLoginPopup = ref(false);
@@ -318,7 +318,10 @@ const dataFilter = (list, startIndex, length) => {
   return list.slice(startIndex, length);
 };
 
-onShow(() => {
+onShow(async () => {
+  const userData = await getUserInfo();
+  app.globalData.userInfo = userData;
+  userInfo.value = userData;
   // 获取用户地理位置
   const location = chooseLocation.getLocation();
   console.log(location);

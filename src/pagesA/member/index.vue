@@ -1,17 +1,9 @@
 <template>
-  <Navbar leftIcon=" " title="会员" />
+  <!-- <Navbar leftIcon=" " title="会员" /> -->
   <view class="tabbar-container">
     <image src="/static/member-bg.png" mode="scaleToFill" class="slice" />
-    <view class="containerc pt-80">
-      <view
-        :style="'padding-top:' + height + 'rpx'"
-        class="custom flex-y-center"
-      >
-        <view class="font30 fontBold colorNormal text-center text-30"
-          >会员</view
-        >
-      </view>
-      <view class="container-box px-main pt-main">
+    <view class="containerc">
+      <view class="container-box mt-main px-main">
         <view class="card">
           <image class="card-bg" src="/static/vip.png" />
           <view class="info">
@@ -20,39 +12,55 @@
               <view class="">No.645645456456</view>
             </view>
             <!-- <view class="h-44">会员激活后生效</view> -->
-            <view class="mt-16">累计已获得</view>
+            <view class="mt-16">我的收益</view>
             <view class="info-box">
-              <view class="">
-                <span class="text-64 leading-1"> 1267 </span>积分
+              <view class="text-32">
+                ￥ <span class="text-64 leading-1">1228.33</span>
               </view>
-              <view class="change">修改资料</view>
+              <view class="change" @click="openPoints">明细</view>
             </view>
           </view>
         </view>
         <view
-          class="card-2 flex-around"
-          style="margin-top: 24upx; align-items: flex-start"
+          class="px-main rounded-8 mx-full mt-20 py-10 flex items-center justify-between bg-[#f9ebea]"
         >
-          <view
-            class="box flex flex-col items-center"
-            v-for="(item, index) in list"
-            :key="index"
-          >
-            <img style="width: 80upx; height: 80upx" :src="item.icon" alt="" />
-            <view
-              style="padding-top: 10upx; font-size: 26upx; color: #673f2b"
-              >{{ item.name }}</view
-            >
-            <view style="color: #bfbfbf; font-size: 18upx; margin-top: 2upx">{{
-              item.text
-            }}</view>
+          <view class="flex-1"
+            >可提现余额
+            <span class="font-600 text-[#f30]">￥25.33</span>
           </view>
-          <image class="card-huiyuan" src="/static/login-w.jpg" />
+          <view
+            class="w-200 flex items-center justify-center border-2 text-[#f30] border-[#f30] px-14 py-6 rounded-full"
+          >
+            立即提现
+          </view>
+        </view>
+        <view class="card-2">
+          <view class="flex flex-row items-start justify-around">
+            <view
+              class="box flex flex-col items-center"
+              v-for="(item, index) in list"
+              :key="index"
+            >
+              <img
+                style="width: 80upx; height: 80upx"
+                :src="item.icon"
+                alt=""
+              />
+              <view
+                style="padding-top: 10upx; font-size: 26upx; color: #673f2b"
+                >{{ item.name }}</view
+              >
+              <view
+                style="color: #bfbfbf; font-size: 18upx; margin-top: 2upx"
+                >{{ item.text }}</view
+              >
+            </view>
+          </view>
         </view>
         <view class="mt-main">
           <view class="grid grid-rows-2 grid-cols-9 gap-20 h-330">
             <view
-              class="rounded-main text-fff relative"
+              class="rounded-main text-fff relative shadow-sm"
               v-for="(item, index) in actives"
               :key="index"
               :class="
@@ -63,11 +71,13 @@
                   : ['row-span-1', 'col-span-5', 'bg-f9ebea']
               "
             >
-              <view class="p-main absolute z-10 flex flex-col justify-between">
+              <view class="p-main absolute z-[9] flex flex-col justify-between">
                 <view class="text-[#866350] text-36">{{ item.name }}</view>
                 <view class="text-tip text-24 pt-10 flex items-center">
                   {{ item.subName }}
-                  <i class="iconfont text-20">&#xe671;</i>
+                  <i class="iconfont text-18 ml-4" v-if="index !== 2">
+                    &#xe671;
+                  </i>
                 </view>
               </view>
               <view
@@ -76,7 +86,6 @@
               >
                 立即邀请
               </view>
-
               <image
                 class="w-100 h-100 bg-cover absolute right-0 bottom-30"
                 :src="item.image_url"
@@ -85,7 +94,7 @@
             </view>
           </view>
         </view>
-        <view class="card-2 text-tip text-26" style="padding: 30upx 26upx">
+        <view class="card-2 text-tip text-26 px-26 py-30">
           <view class="tip">温馨提示：</view>
           <view class="mt-12"
             >1、注册成为会员并且成功分享一个会员可得店内大礼包一个；</view
@@ -98,24 +107,8 @@
   </view>
 </template>
 <script setup>
-import Title from "@/components/title/index.vue";
-import Navbar from "@/components/navbar/index.vue";
-import ScrollTop from "@/components/scrollTop/index.vue";
 import { onMounted, onUnmounted, ref } from "vue";
-import {
-  onPageScroll,
-  onShareAppMessage,
-  onShareTimeline,
-} from "@dcloudio/uni-app";
-import { useWxShare } from "@/hooks/index.js";
-// 监听滚动
-onPageScroll((e) => {});
-// 微信分享
-onShareAppMessage(() => ({}));
-onShareTimeline(() => ({}));
-useWxShare({
-  path: "/pages/home/index",
-});
+
 const list = ref([
   {
     icon: "/static/images/member-icon2.png",
@@ -141,27 +134,38 @@ const list = ref([
 //活动
 const actives = ref([
   {
-    image_url: "/static/active_1.png",
+    image_url:
+      "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/a20581fad329aad752bc8f1462fdc3d8.png",
     router: "/pages/join/index",
-    name: "分享有礼",
-    subName: "查看我推荐的用户",
+    name: "赚现金",
+    subName: "为我代言，赚现金礼包",
   },
   {
-    image_url: "/static/active_1.png",
+    image_url:
+      "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/43ae52eda2654e87f5c8dd471ffd24b2.png",
     router: "/demo-pages/basic/color/index",
-    name: "成交返现",
+    name: "现金提现",
     subName: "为梵米尼代言",
   },
   {
-    image_url: "/static/active_1.png",
+    image_url:
+      "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/88a60c4057401bb4051ae6ff0bd189bd.png",
     router: "/demo-pages/basic/color/index",
-    name: "积分兑换",
-    subName: "共有1280积分",
+    name: "更多权益",
+    subName: "解锁中...",
   },
 ]);
+
+const openPoints = () => {
+  uni.navigateTo({ url: "/pagesA/pointList/index" });
+};
 </script>
 
 <style lang="scss" scoped>
+.money::before {
+  content: "￥";
+  font-size: 20rpx;
+}
 .tabbar-container {
   color: #1c0808;
   position: relative;
@@ -191,7 +195,6 @@ const actives = ref([
   }
 }
 .container-box {
-  margin-top: 48upx;
   .card {
     position: relative;
     width: 100%;
@@ -244,9 +247,9 @@ const actives = ref([
       width: 600upx;
     }
     .box {
-      padding: 40upx 0 0;
+      padding: 30rpx 0rpx;
       text-align: center;
-      width: 160upx;
+      width: 166rpx;
     }
     .tip {
       font-size: 26upx;
