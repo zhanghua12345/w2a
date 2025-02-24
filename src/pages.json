@@ -154,33 +154,45 @@
           }
         },
         {
-          "path": "pointList/index",
-          "style": {
-            "navigationBarTitleText": "提现记录"
-          }
-        },
-        {
-          "path": "moneyList/index",
-          "style": {
-            "navigationBarTitleText": "我的邀请"
-          }
-        },
-        {
           "path": "pointDiscount/index",
           "style": {
-            "navigationBarTitleText": "积分提现"
+            "navigationBarTitleText": "提现"
+          }
+        },
+        {
+          "path": "pointDiscount/success",
+          "style": {
+            "navigationBarTitleText": "提现"
+          }
+        },
+        {
+          "path": "pointDiscount/list",
+          "style": {
+            "navigationBarTitleText": "提现"
+          }
+        },
+        {
+          "path": "pointDiscount/zfb",
+          "style": {
+            "navigationBarTitleText": "会员资料"
           }
         },
         {
           "path": "pointTask/index",
           "style": {
-            "navigationBarTitleText": "我要邀请"
+            "navigationBarTitleText": "我的邀请"
           }
         },
         {
-          "path": "zfb/index",
+          "path": "pointTask/success",
           "style": {
-            "navigationBarTitleText": "会员资料"
+            "navigationBarTitleText": "我的邀请"
+          }
+        },
+        {
+          "path": "pointTask/list",
+          "style": {
+            "navigationBarTitleText": "我的邀请"
           }
         }
       ]

@@ -7,23 +7,24 @@
     >
       <view class="flex flex-wrap items-center justify-between">
         <view>
-          <view class="pt-10">姓名：张三</view>
-          <view class="text-24 text-[#999]">微信昵称：小王</view>
-          <view class="text-24 text-[#999]">手机号：15879081640</view>
+          <view class="text-24 text-[#999]">2025-02-20 19:18</view>
+          <view class="pt-10">{{
+            index % 2 === 1 ? "签到赠送" : "用户到店"
+          }}</view>
         </view>
-        <view class="text-main">审核成功</view>
+        <view class="{{index%2===1  ? 'text-[#1A1A1A]' : 'text-main'}}">
+          + 99
+        </view>
       </view>
       <view
         class="flex flex-wrap justify-between pt-16 text-24"
         v-if="index % 2 === 0"
       >
-        <view
-          class="flex flex-wrap items-start justify-start text-main flex-1 pr-20"
-        >
-          <i class="iconfont leading-1.5 pr-8 text-24">&#xe644;</i>
-          <view class="flex-1"> 长沙市 开福区 绿地v岛c区 9栋1001户 </view>
+        <view class="flex flex-wrap items-center text-main">
+          <i class="iconfont leading-1 pr-8 text-24">&#xe644;</i>
+          您推荐的xxx到店啦
         </view>
-        <view class="text-24 text-[#999]">2025-02-20 19:18</view>
+        <view class="text-[#8B8B8B]">余额：599</view>
       </view>
     </view>
   </view>
@@ -32,11 +33,11 @@
     :status="status"
     loading-text="努力加载中，先喝杯茶"
     loadmore-text="轻轻上拉···"
-    nomore-text="实在没有了~"
+    nomore-text="没有更多了~"
   />
 </template>
 <script setup>
-import { browseList } from "@/api/case";
+import { withdrawalList } from "@/api/my";
 
 import { onMounted, ref } from "vue";
 
@@ -74,7 +75,7 @@ onReachBottom(() => {
 });
 
 const getList = async (params) => {
-  const data = await browseList(params);
+  const data = await withdrawalList(params);
   list.value = (list.value || []).concat(data.list);
   params.page++;
   status.value = data.list.length < params.limit ? "nomore" : "loadmore";

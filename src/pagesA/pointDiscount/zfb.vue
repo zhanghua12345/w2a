@@ -56,6 +56,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { onShow } from "@dcloudio/uni-app";
 
 const app = getApp();
 const list = ref([
@@ -79,20 +80,15 @@ const list = ref([
 const showPopup = ref(false);
 const popupText =
   "您在提交资料后，该用户在门店完成下单。<br />您即可获取一笔1000-2000的金额奖励";
-const showPicker = ref(false);
-const openPicker = () => {
-  showPicker.value = true;
-};
 
 // 页面加载时自动加载数据
 onMounted(() => {});
 
-const openKefu = () => {
-  uni.navigateTo({ url: "/pagesForm/success/index" });
-};
-const openMoneyList = () => {
-  uni.navigateTo({ url: "/pagesA/moneyList/index" });
-};
+onShow(async () => {
+  const userData = await getUserInfo();
+  app.globalData.memberInfo = userData;
+  memberInfo.value = userData;
+});
 </script>
 
 <style lang="scss" scoped>

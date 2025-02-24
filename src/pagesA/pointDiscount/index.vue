@@ -49,7 +49,13 @@
     </view>
   </view>
   <view class="mx-main mt-main flex flex-col items-center">
-    <up-button text="提交" shape="circle" type="error" color="#ef3d3d" />
+    <up-button
+      text="提交"
+      shape="circle"
+      type="error"
+      color="#ef3d3d"
+      @click="submit"
+    />
     <view class="mt-main text-[#ef3d3d]">*每月25号后可提现</view>
     <view class="mt-80 underline text-tip" @click="openAgreement"
       >提现说明</view
@@ -58,17 +64,47 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
+import { withdrawal } from "@/api/my";
+import { onShow } from "@dcloudio/uni-app";
+
+const app = getApp();
 const moneyValue = ref(null);
+const memberInfo = ref({});
 onMounted(() => {});
 const openAgreement = () => {
   uni.navigateTo({
     url: `/pages/agreement/index?id=1&title=梵米尼提现说明`,
   });
 };
+onShow(async () => {
+  const userData = await getUserInfo();
+  app.globalData.memberInfo = userData;
+  memberInfo.value = userData;
+});
 
+const submit = async () => {
+  if (!moneyValue.value) {
+    wx.showToast({
+      title: "提现金额不能为0",
+      icon: "none",
+    });
+    return false;
+  }
+  const params = {
+    money: moneyValue.value,
+  };
+  uni.showToast({
+    title: "数据提交中...",
+    icon: "none",
+    mask: true, // 是否显示透明蒙层，防止触摸穿透
+  });
+  const res = await withdrawal(params);
+  console.log(res);
+  uni.navigateTo({ url: "/pagesA/pointDiscount/success?msg=" + res.msg });
+};
 const openZFB = () => {
   uni.navigateTo({
-    url: `/pagesA/zfb/index`,
+    url: `/pagesA/pointDiscount/zfb`,
   });
 };
 </script>

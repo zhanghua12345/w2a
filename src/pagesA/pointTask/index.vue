@@ -44,8 +44,8 @@
       </view>
     </view>
     <view class="w-full mt-50">
-      <formBottom @click="openKefu" :data="data" />
-      <view class="mt-40 underline text-main text-center" @click="openMoneyList"
+      <formBottom @click="submit" :data="data" />
+      <view class="mt-40 underline text-main text-center" @click="openPointTask"
         >查看我的邀请</view
       >
     </view>
@@ -69,7 +69,7 @@
 import { ref, onMounted } from "vue";
 import { JSON_yaoqing } from "@/utils/mock.js";
 import formBottom from "@/components/formBottom/index.vue";
-import { renovationForm } from "@/api/form";
+import { invite } from "@/api/my";
 
 const app = getApp();
 const data = ref({});
@@ -89,11 +89,46 @@ onMounted(() => {
   data.value.list[0].show = true; // TODO
 });
 
-const openKefu = () => {
-  uni.navigateTo({ url: "/pagesForm/success/index" });
+const submit = async () => {
+  console.log(data.value);
+  let list = data.value.list;
+  if (!list[0].select && !list[1].select) {
+    wx.showToast({
+      title: "邀请人姓名和微信昵称必须填写一个",
+      icon: "none",
+    });
+    return false;
+  } else if (!list[2].select) {
+    wx.showToast({
+      title: "邀请人手机号不能为空",
+      icon: "none",
+    });
+    return false;
+  } else if (!list[3].select) {
+    wx.showToast({
+      title: "邀请人房屋具体位置不能为空",
+      icon: "none",
+    });
+    return false;
+  }
+  const params = {
+    name: list[0].select,
+    phone: list[2].select,
+    wechat_name: list[1].select,
+    area: list[3].select,
+  };
+  uni.showToast({
+    title: "数据提交中...",
+    icon: "none",
+    mask: true, // 是否显示透明蒙层，防止触摸穿透
+  });
+  const res = await invite(params);
+  console.log(res);
+  uni.navigateTo({ url: "/pagesA/pointTask/success?msg=" + res.msg });
 };
-const openMoneyList = () => {
-  uni.navigateTo({ url: "/pagesA/moneyList/index" });
+
+const openPointTask = () => {
+  uni.navigateTo({ url: "/pagesA/pointTask/list" });
 };
 </script>
 

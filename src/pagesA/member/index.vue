@@ -159,7 +159,7 @@ const actives = ref([
 ]);
 
 const openPoints = () => {
-  uni.navigateTo({ url: "/pagesA/pointList/index" });
+  uni.navigateTo({ url: "/pagesA/pointDiscount/index" });
 };
 
 const openDetail = (item) => {

@@ -7,24 +7,33 @@
     >
       <view class="flex flex-wrap items-center justify-between">
         <view>
-          <view class="text-24 text-[#999]">2025-02-20 19:18</view>
-          <view class="pt-10">{{
-            index % 2 === 1 ? "签到赠送" : "用户到店"
-          }}</view>
+          <view class="pt-10">姓名：{{ item.name || "--" }}</view>
+          <view class="text-24 text-[#999]"
+            >微信昵称：{{ item.wechat_name || "--" }}</view
+          >
+          <view class="text-24 text-[#999]">手机号：{{ item.phone }}</view>
         </view>
-        <view class="{{index%2===1  ? 'text-[#1A1A1A]' : 'text-main'}}">
-          + 99
-        </view>
+        <view class="text-main">{{
+          item.status === 0
+            ? "已提交"
+            : item.status === 1
+            ? item.remakes || "用户到店"
+            : item.remakes || "用户未到店"
+        }}</view>
       </view>
       <view
         class="flex flex-wrap justify-between pt-16 text-24"
         v-if="index % 2 === 0"
       >
-        <view class="flex flex-wrap items-center text-main">
-          <i class="iconfont leading-1 pr-8 text-24">&#xe644;</i>
-          您推荐的xxx到店啦
+        <view
+          class="flex flex-wrap items-start justify-start text-main flex-1 pr-20"
+        >
+          <i class="iconfont leading-1.5 pr-8 text-24">&#xe644;</i>
+          <view class="flex-1"> {{ item.area }} </view>
         </view>
-        <view class="text-[#8B8B8B]">余额：599</view>
+        <view class="text-24 text-[#999]">{{
+          item.updated_at || item.updated_at
+        }}</view>
       </view>
     </view>
   </view>
@@ -33,11 +42,11 @@
     :status="status"
     loading-text="努力加载中，先喝杯茶"
     loadmore-text="轻轻上拉···"
-    nomore-text="实在没有了~"
+    nomore-text="没有更多了~"
   />
 </template>
 <script setup>
-import { browseList } from "@/api/case";
+import { inviteList } from "@/api/my";
 
 import { onMounted, ref } from "vue";
 
@@ -75,7 +84,7 @@ onReachBottom(() => {
 });
 
 const getList = async (params) => {
-  const data = await browseList(params);
+  const data = await inviteList(params);
   list.value = (list.value || []).concat(data.list);
   params.page++;
   status.value = data.list.length < params.limit ? "nomore" : "loadmore";
