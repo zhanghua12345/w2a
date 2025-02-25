@@ -1,7 +1,7 @@
 <template>
   <view class="px-main py-16 flex items-center justify-between bg-[#fff6e5]">
     <view class="flex-1 text-[#ab363b] flex items-center">
-      <i class="iconfont text-18 mr-10"> &#xe671; </i>
+      <i class="iconfont mr-10">&#xe658;</i>
       提现如有疑问，请联系专属客服
     </view>
     <button open-type="contact" class="share">

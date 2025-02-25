@@ -15,7 +15,7 @@
         />
         <div
           class="h-50 w-50 absolute top-0 left-0 flex items-center justify-center text-fff"
-          :class="item.info.userCollection ? 'bg-main' : 'bg-000-4'"
+          :class="item.userCollection ? 'bg-main' : 'bg-000-4'"
         >
           <i
             class="iconfont text-26 leading-1"
@@ -27,7 +27,7 @@
       </div>
 
       <view class="flex-1 pl-main">
-        <view class="line-clamp-2 text-32">
+        <view class="line-clamp-2 text-30">
           {{ item.info.name }}
         </view>
         <view class="line-clamp-1 mt-20 text-tip">{{
@@ -37,11 +37,18 @@
     </view>
   </view>
   <up-loadmore
+    v-if="list.length > 10"
     class="pt-20 pb-40"
     :status="status"
     loading-text="努力加载中，先喝杯茶"
     loadmore-text="轻轻上拉···"
     nomore-text="实在没有了~"
+  />
+  <up-empty
+    v-else-if="!list?.length"
+    text="没有数据~"
+    icon="/static/no-info.png"
+    marginTop="200"
   />
 </template>
 <script setup>
@@ -55,7 +62,7 @@ const list = ref([]);
 
 let params = {
   page: 1,
-  limit: 8,
+  limit: 10,
 };
 
 const status = ref("loading");
@@ -83,15 +90,15 @@ onReachBottom(() => {
 });
 
 const openDetail = (data) => {
-  uni.navigateTo({ url: `/pages/caseDetail/index?id=${data.id}` });
+  uni.navigateTo({ url: `/pages/caseDetail/index?id=${data.info.id}` });
 };
 
 const setCollects = async (item, index) => {
   //  收藏和取消收藏
-  if (!item.info.userCollection) {
+  if (!item.userCollection) {
     const data = await setCollect({ id: item.info.id });
     if (data.status === 200) {
-      list.value[index].info.userCollection = true;
+      list.value[index].userCollection = true;
       wx.showToast({
         title: "收藏成功",
         icon: "none",
@@ -101,7 +108,7 @@ const setCollects = async (item, index) => {
   } else {
     const data = await setCancelCollect({ id: item.info.id });
     if (data.status === 200) {
-      list.value[index].info.userCollection = false;
+      list.value[index].userCollection = false;
       wx.showToast({
         title: "取消收藏",
         icon: "none",

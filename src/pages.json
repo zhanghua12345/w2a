@@ -64,6 +64,13 @@
       }
     },
     {
+      "path": "pages/linkPage/index",
+      "style": {
+        "navigationBarTitleText": "梵米尼家具"
+      }
+    },
+
+    {
       "path": "pages/register/index",
       "style": {
         "navigationBarTitleText": "注册会员"
@@ -121,12 +128,6 @@
           "path": "articleHistory/index",
           "style": {
             "navigationBarTitleText": "文章历史"
-          }
-        },
-        {
-          "path": "carefullySelectedHistory/index",
-          "style": {
-            "navigationBarTitleText": "梵米尼严选"
           }
         },
         {
@@ -241,7 +242,7 @@
   ],
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#ff8921",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "height": "50px",

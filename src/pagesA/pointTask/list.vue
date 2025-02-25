@@ -38,11 +38,18 @@
     </view>
   </view>
   <up-loadmore
+    v-if="list.length > 5"
     class="pt-20 pb-40"
     :status="status"
     loading-text="努力加载中，先喝杯茶"
     loadmore-text="轻轻上拉···"
-    nomore-text="没有更多了~"
+    nomore-text="实在没有了~"
+  />
+  <up-empty
+    v-else-if="!list?.length"
+    text="没有数据~"
+    icon="/static/no-info.png"
+    marginTop="200"
   />
 </template>
 <script setup>

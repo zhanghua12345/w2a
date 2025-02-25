@@ -38,6 +38,17 @@ export function getUserInfo() {
 }
 
 /**
+ * 个人中心数据
+ * @returns {*}
+ */
+export function articleUserLogNum() {
+  return request({
+    url: `/api/user/articleUserLogNum`,
+    method: "get",
+  });
+}
+
+/**
  * 编辑头像和昵称
  * @param data
  * @returns {*}

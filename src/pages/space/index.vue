@@ -3,7 +3,7 @@
     <image
       class="w-140"
       mode="widthFix"
-      src="http://120.27.141.193:8088//uploads/attach/2025/01/20250124/2f986aa6dd4691c469527b42a3242957.jpg"
+      src="http://120.27.141.193:8088//uploads/attach/2025/02/20250224/4bd4bd61ea5c3be1cef876d2119a77d3.png"
       alt=""
     />
     <view class="flex-1 h-full flex flex-wrap items-center pl-30 text-tip">

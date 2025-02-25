@@ -13,7 +13,7 @@
     />
 
     <view
-      v-show="!noNew"
+      v-show="!noNew && obj.new"
       class="absolute left-20 top-0 w-90 h-100 flex flex-wrap justify-center"
     >
       <i class="iconfont text-main text-64 leading-1">&#xe62d;</i>

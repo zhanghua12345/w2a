@@ -9,11 +9,18 @@
     />
   </view>
   <up-loadmore
+    v-if="list.length > 8"
     class="pt-20 pb-40"
     :status="status"
     loading-text="努力加载中，先喝杯茶"
     loadmore-text="轻轻上拉···"
     nomore-text="实在没有了~"
+  />
+  <up-empty
+    v-else-if="!list?.length"
+    text="没有数据~"
+    icon="/static/no-info.png"
+    marginTop="200"
   />
 </template>
 <script setup>
@@ -29,7 +36,7 @@ const list = ref([]);
 
 let params = {
   page: 1,
-  limit: 8,
+  limit: 10,
 };
 
 const status = ref("loading");
@@ -62,6 +69,9 @@ const openDetail = (data) => {
 
 const getList = async (params) => {
   const data = await praiseList(params);
+  data.list.forEach((element) => {
+    element.info.add_time = element.created_at.split(" ")[0];
+  });
   list.value = (list.value || []).concat(data.list);
   params.page++;
   status.value = data.list.length < params.limit ? "nomore" : "loadmore";

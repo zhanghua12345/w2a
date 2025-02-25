@@ -21,14 +21,14 @@
     </view>
   </view>
   <view
-    class="bg-bg rounded-t-40 mt-[-40rpx] relative flex flex-col items-center overflow-hidden"
+    class="bg-bg rounded-t-40 mt-[-40rpx] relative flex flex-col items-center overflow-hidden w-full"
   >
     <view
       class="w-full bg-gradient-to-b from-[#feeac5] to-bg pb-90 text-36 text-000 flex justify-center items-center px-90 text-center"
     >
     </view>
     <view
-      class="rounded-t-40 htmlContianer overflow-hidden mt-[-80rpx]"
+      class="rounded-t-40 htmlContianer overflow-hidden mt-[-80rpx] w-full bg-bg"
       v-html="detail.content"
     ></view>
   </view>

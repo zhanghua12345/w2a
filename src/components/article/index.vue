@@ -10,9 +10,13 @@
       alt=""
     />
     <view class="flex-1 flex flex-col justify-between pl-main">
-      <view class="line-clamp-2">
+      <view class="line-clamp-2 text-30">
         {{ obj.title }}
       </view>
+      <view class="line-clamp-2 text-tip">
+        {{ obj.synopsis }}
+      </view>
+
       <view class="flex flex-wrap justify-between leading-1">
         <view class="flex items-center">
           <i class="iconfont text-tip text-24 mr-6">&#xe89d;</i

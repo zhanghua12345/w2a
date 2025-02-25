@@ -59,8 +59,15 @@
         <view
           class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient relative"
           @click="goVip"
+          v-if="userInfo?.regType"
         >
-          立即加入
+          {{
+            userInfo.regType === -1
+              ? "立即加入"
+              : userInfo.regType === 1
+              ? "立即前往"
+              : "查看审核结果"
+          }}
           <view class="absolute z-100 right-50 top-4">
             <Handle />
           </view>
@@ -184,7 +191,7 @@ import {
 import { useWxShare } from "@/hooks/index.js";
 import Handle from "@/components/handle/index.vue";
 const chooseLocation = requirePlugin("chooseLocation");
-import { getUserInfo } from "@/api/login";
+import { getUserInfo, articleUserLogNum } from "@/api/login";
 // 监听滚动
 onPageScroll(() => {});
 // 微信分享
@@ -195,6 +202,7 @@ useWxShare({
 });
 const app = getApp();
 const userInfo = ref({});
+const numData = ref({});
 onMounted(async () => {
   //判断是否获取到动态设置的globalData
   // const userData = await getUserInfo();
@@ -320,8 +328,10 @@ const dataFilter = (list, startIndex, length) => {
 
 onShow(async () => {
   const userData = await getUserInfo();
+  const data = await articleUserLogNum();
   app.globalData.userInfo = userData;
   userInfo.value = userData;
+  numData.value = data;
   // 获取用户地理位置
   const location = chooseLocation.getLocation();
   console.log(location);
