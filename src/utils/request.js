@@ -1,5 +1,5 @@
 // 全局请求封装
-export const base_url = "https://fanminitop.com/";
+export const base_url = "https://fanminitop.com";
 
 export default (params) => {
   console.log(params);

@@ -23,13 +23,13 @@
       <image
         class="h-20 mr-10"
         mode="heightFix"
-        src="http://120.27.141.193:8088//uploads/attach/2025/02/20250219/274c6dba7fcdaf3f07a68e9da4393e65.png"
+        src="https://fanminitop.com//uploads/attach/2025/02/20250219/274c6dba7fcdaf3f07a68e9da4393e65.png"
       />
       {{ data.subTitle }}
       <image
         class="h-20 ml-10"
         mode="heightFix"
-        src="http://120.27.141.193:8088//uploads/attach/2025/02/20250219/cbd8dccce771bd35758a99776c75599f.png"
+        src="https://fanminitop.com//uploads/attach/2025/02/20250219/cbd8dccce771bd35758a99776c75599f.png"
       />
     </view>
 

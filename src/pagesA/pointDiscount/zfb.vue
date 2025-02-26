@@ -43,7 +43,7 @@
   </view>
   <image
     class="w-full mt-40 pb-40"
-    src="http://120.27.141.193:8088//uploads/attach/2025/02/20250221/7d61bc1568e02aca9bad9d0bb7904eb4.jpg"
+    src="https://fanminitop.com//uploads/attach/2025/02/20250221/7d61bc1568e02aca9bad9d0bb7904eb4.jpg"
     mode="widthFix"
   />
   <up-popup

@@ -147,21 +147,21 @@ const list = ref([
 const actives = ref([
   {
     image_url:
-      "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/a20581fad329aad752bc8f1462fdc3d8.png",
+      "https://fanminitop.com//uploads/attach/2025/01/20250124/a20581fad329aad752bc8f1462fdc3d8.png",
     router: "/pagesA/pointTask/index",
     name: "赚现金",
     subName: "为我代言，赚现金礼包",
   },
   {
     image_url:
-      "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/43ae52eda2654e87f5c8dd471ffd24b2.png",
+      "https://fanminitop.com//uploads/attach/2025/01/20250124/43ae52eda2654e87f5c8dd471ffd24b2.png",
     router: "/pagesA/pointDiscount/index",
     name: "现金提现",
     subName: "为梵米尼代言",
   },
   {
     image_url:
-      "http://120.27.141.193:8088//uploads/attach/2025/01/20250124/88a60c4057401bb4051ae6ff0bd189bd.png",
+      "https://fanminitop.com//uploads/attach/2025/01/20250124/88a60c4057401bb4051ae6ff0bd189bd.png",
     router: "",
     name: "更多权益",
     subName: "解锁中...",

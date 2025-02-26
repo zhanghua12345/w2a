@@ -3,7 +3,7 @@
     <image
       class="w-140"
       mode="widthFix"
-      src="http://120.27.141.193:8088//uploads/attach/2025/02/20250224/4bd4bd61ea5c3be1cef876d2119a77d3.png"
+      src="https://fanminitop.com//uploads/attach/2025/02/20250224/4bd4bd61ea5c3be1cef876d2119a77d3.png"
       alt=""
     />
     <view class="flex-1 h-full flex flex-wrap items-center pl-30 text-tip">

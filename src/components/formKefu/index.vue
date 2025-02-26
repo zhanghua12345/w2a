@@ -13,7 +13,7 @@
     >
       <image
         class="w-full h-full rounded-full"
-        src="http://120.27.141.193:8088//uploads/attach/2025/01/20250121/840c57f126d0134bb7ee32a9c3173963.png"
+        src="https://fanminitop.com//uploads/attach/2025/01/20250121/840c57f126d0134bb7ee32a9c3173963.png"
         mode="aspectFill"
       />
     </view>

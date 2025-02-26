@@ -101,7 +101,7 @@
   </view>
   <image
     class="w-full mt-main pb-200"
-    src="http://120.27.141.193:8088//uploads/attach/2025/02/20250219/13d2272cc69a8876f81d8e95a6c144d3.jpg"
+    src="https://fanminitop.com//uploads/attach/2025/02/20250219/13d2272cc69a8876f81d8e95a6c144d3.jpg"
     mode="widthFix"
   />
 
