@@ -19,10 +19,10 @@
   <Navbar title="梵米尼家具优选" leftIcon=" " />
   <view class="w-full h-700 relative">
     <view
-      class="absolute z-[9] top-0 left-0 right-0 bottom-0 flex justify-center items-center"
+      class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"
     >
       <view
-        class="bg-000-6 rounded-full px-30 py-12 text-fff flex items-center"
+        class="bg-000-6 rounded-full px-30 py-12 text-fff flex items-center z-[9]"
         @click="openVR"
       >
         <i class="iconfont leading-1 pr-8">&#xe71c;</i>全屋漫游

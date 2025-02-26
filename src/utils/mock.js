@@ -171,11 +171,10 @@ export const JSON_yaoqing = {
   title: "查看专属效果图方案",
   color: "ff8921",
   banner: [
-    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/70db07fb1f00f5d6675f35ab80af9c56.png",
-    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/dc15271c0991cf892760288beb44dde5.png",
-    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/840c57f126d0134bb7ee32a9c3173963.png",
-    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/3e48dc767d5e67ff97db670b8ab5a2ee.png",
-    "http://120.27.141.193:8088//uploads/attach/2025/01/20250121/9c563e246d67ef749140417a3ad66a3a.png",
+    "http://120.27.141.193:8088//uploads/attach/2025/02/20250225/53f9ac99771de8e305b5b76b19500689.jpg",
+    "http://120.27.141.193:8088//uploads/attach/2025/02/20250225/5d017d7fdd904ab6b3323a7a7f491c1c.jpg",
+    "http://120.27.141.193:8088//uploads/attach/2025/02/20250225/b279be6d4d216565fecdf51dd659a3c6.jpg",
+    "http://120.27.141.193:8088//uploads/attach/2025/02/20250225/0dbafc464288ee0618764b01646f1c8c.jpg",
   ],
   list: [
     {

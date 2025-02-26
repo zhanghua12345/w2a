@@ -8,14 +8,19 @@
           <image class="card-bg" src="/static/vip.png" />
           <view class="info">
             <view class="info-name">
-              <view class="text-48">尊敬的梵米尼会员</view>
+              <view class="text-48"
+                >尊敬的梵米尼{{ memberInfo.group_name || "会员" }}</view
+              >
               <view class="">No.645645456456</view>
             </view>
             <!-- <view class="h-44">会员激活后生效</view> -->
             <view class="mt-16">我的收益</view>
             <view class="info-box">
               <view class="text-32">
-                ￥ <span class="text-64 leading-1">1228.33</span>
+                ￥
+                <span class="text-64 leading-1">{{
+                  memberInfo.money || "0.00"
+                }}</span>
               </view>
               <view class="change" @click="openPoints">明细</view>
             </view>
@@ -26,7 +31,9 @@
         >
           <view class="flex-1"
             >可提现余额
-            <span class="font-600 text-[#e44951]">￥25.33</span>
+            <span class="font-600 text-[#e44951]">
+              ￥{{ memberInfo.money || "0.00" }}
+            </span>
           </view>
           <view
             class="w-160 flex items-center justify-center border-2 text-[#c84e46] border-[#c84e46] px-14 py-6 rounded-full"
@@ -109,7 +116,10 @@
   </view>
 </template>
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref } from "vue";
+import { getMemberInfo } from "@/api/my";
+import { onShow } from "@dcloudio/uni-app";
+const app = getApp();
 
 const list = ref([
   {
@@ -157,6 +167,12 @@ const actives = ref([
     subName: "解锁中...",
   },
 ]);
+const memberInfo = ref({});
+onShow(async () => {
+  const data = await getMemberInfo();
+  app.globalData.memberInfo = data.data;
+  memberInfo.value = data.data;
+});
 
 const openPoints = () => {
   uni.navigateTo({ url: "/pagesA/pointDiscount/list" });

@@ -3,7 +3,7 @@ import { getCode, getToken, getUserInfo } from "@/api/login";
 export default {
   globalData: {
     userInfo: {},
-
+    memberInfo: {},
     islogin: false,
   },
   onLaunch: function () {

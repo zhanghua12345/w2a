@@ -1,6 +1,31 @@
 import request from "@/utils/request";
 
 /**
+ * 会员详情
+ * @param data
+ * @returns {*}
+ */
+export function getMemberInfo() {
+  return request({
+    url: `/api/user/memberInfo`,
+    method: "get",
+  });
+}
+
+/**
+ * 会员信息修改
+ * @param data
+ * @returns {*}
+ */
+export function memberSave(data) {
+  return request({
+    url: `/api/user/memberSave`,
+    method: "post",
+    data,
+  });
+}
+
+/**
  * 提现
  * @param data
  * @returns {*}

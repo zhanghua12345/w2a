@@ -18,7 +18,11 @@
         <view
           class="text-48 w-full flex flex-wrap items-center"
           @click="goLogin"
-          >{{ userInfo.nickname || "您好，请登录" }}
+          >{{
+            userInfo.phone && userInfo.nickname
+              ? userInfo.nickname
+              : "您好，请登录"
+          }}
           <span>
             <i
               class="iconfont text-48 leading-1 text-tip p-20"

@@ -62,7 +62,12 @@
       <view class="px-20 text-tip" v-html="popupText"> </view>
     </view>
   </up-popup>
-  <view class="h-60 w-full"></view>
+
+  <image
+    class="w-full mt-main"
+    src="http://120.27.141.193:8088//uploads/attach/2025/02/20250224/41956c62c0dadc818480d83c95402d4f.jpg"
+    mode="widthFix"
+  />
 </template>
 
 <script setup>

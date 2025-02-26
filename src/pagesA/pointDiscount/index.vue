@@ -15,7 +15,7 @@
   <view
     class="px-40 rounded-main bg-fff relative shadow-sm mx-main mt-main flex flex-col items-center"
   >
-    <view class="text-48 pt-60">￥35.74</view>
+    <view class="text-48 pt-60">￥{{ memberInfo.money || "0.00" }}</view>
     <view class="">可提现金额</view>
     <view class="w-full flex flex-wrap items-center justify-between mt-main">
       <up-input
@@ -31,13 +31,13 @@
       </up-input>
       <view
         class="pl-main py-6 text-[#ab363b] ml-50"
-        @click="moneyValue = 35.74"
+        @click="moneyValue = memberInfo.money"
         >全部</view
       >
     </view>
     <view class="pb-main w-full">
       <view class="flex flex-wrap items-center justify-between mt-50">
-        到账支付宝 15879081640
+        到账支付宝 {{ memberInfo.alipay }}
         <view
           class="py-12 px-30 text-fff rounded-full bg-[#ef3d3d] relative"
           @click="openZFB()"
@@ -45,7 +45,7 @@
           去修改
         </view>
       </view>
-      <view class="mt-20">姓名 张华</view>
+      <view class="mt-20">姓名 {{ memberInfo.rename }}</view>
     </view>
   </view>
   <view class="mx-main mt-main flex flex-col items-center">
@@ -64,7 +64,7 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
-import { withdrawal } from "@/api/my";
+import { withdrawal, getMemberInfo } from "@/api/my";
 import { onShow } from "@dcloudio/uni-app";
 
 const app = getApp();
@@ -77,9 +77,9 @@ const openAgreement = () => {
   });
 };
 onShow(async () => {
-  const userData = await getUserInfo();
-  app.globalData.memberInfo = userData;
-  memberInfo.value = userData;
+  const data = await getMemberInfo();
+  app.globalData.memberInfo = data.data;
+  memberInfo.value = data.data;
 });
 
 const submit = async () => {

@@ -20,7 +20,7 @@
           class="h-90 px-main rounded-main flex items-center justify-between bg-[#f6f6f6]"
         >
           <up-input
-            v-model="item.select"
+            v-model="item.value"
             :placeholder="item.placeholder || '请选择'"
             fontSize="24rpx"
             border="none"
@@ -30,7 +30,13 @@
     </view>
   </view>
   <view class="mx-main mt-main flex flex-col items-center">
-    <up-button text="提交" shape="circle" type="error" color="#ef3d3d" />
+    <up-button
+      text="提交"
+      shape="circle"
+      type="error"
+      color="#ef3d3d"
+      @click="submit"
+    />
     <view class="mt-main underline text-main text-24">
       注：请确认您的支付宝信息，以免提现失败
     </view>
@@ -56,25 +62,25 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { onShow } from "@dcloudio/uni-app";
+import { memberSave } from "@/api/my";
 
 const app = getApp();
 const list = ref([
   {
     title: "真实姓名",
-    select: "",
+    value: "",
   },
   {
     title: "支付宝账号",
-    select: "",
+    value: "",
   },
   {
     title: "手机号码",
-    select: "",
+    value: "",
   },
   {
     title: "微信号",
-    select: "",
+    value: "",
   },
 ]);
 const showPopup = ref(false);
@@ -82,13 +88,40 @@ const popupText =
   "您在提交资料后，该用户在门店完成下单。<br />您即可获取一笔1000-2000的金额奖励";
 
 // 页面加载时自动加载数据
-onMounted(() => {});
-
-onShow(async () => {
-  const userData = await getUserInfo();
-  app.globalData.memberInfo = userData;
-  memberInfo.value = userData;
+onMounted(() => {
+  const memberInfo = app.globalData.memberInfo;
+  list.value[0].value = memberInfo.rename;
+  list.value[1].value = memberInfo.alipay;
+  list.value[2].value = memberInfo.phone;
+  list.value[3].value = memberInfo.wechat;
 });
+const submit = async () => {
+  if (
+    list.value[0].value &&
+    list.value[1].value &&
+    list.value[2].value &&
+    list.value[3].value
+  ) {
+    const params = {
+      rename: list.value[0].value,
+      alipay: list.value[1].value,
+      phone: list.value[2].value,
+      wechat: list.value[3].value,
+    };
+    await memberSave(params);
+    uni.showToast({
+      title: "信息修改成功",
+      icon: "none",
+      mask: true, // 是否显示透明蒙层，防止触摸穿透
+    });
+  } else {
+    wx.showToast({
+      title: "必填数据不能为空",
+      icon: "none",
+    });
+    return false;
+  }
+};
 </script>
 
 <style lang="scss" scoped>

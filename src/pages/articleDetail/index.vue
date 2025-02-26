@@ -46,6 +46,7 @@ import {
 import { ref } from "vue";
 import BottomFun from "@/components/bottomFunArticle/index.vue";
 
+const app = getApp();
 // 微信分享
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
@@ -86,26 +87,30 @@ const setBottom = async (name) => {
       });
     }
   } else if (name === "collect") {
-    //  收藏和取消收藏
-    if (!detail.value.userCollection) {
-      const data = await setCollect({ id: detail.value.id });
-      await getDetail();
-      if (data.status === 200) {
-        wx.showToast({
-          title: "收藏成功",
-          icon: "none",
-          duration: 2000,
-        });
-      }
+    if (!app.globalData.userInfo?.phone) {
+      uni.navigateTo({ url: "/pages/login/index" });
     } else {
-      const data = await setCancelCollect({ id: detail.value.id });
-      await getDetail();
-      if (data.status === 200) {
-        wx.showToast({
-          title: "取消收藏",
-          icon: "none",
-          duration: 2000,
-        });
+      //  收藏和取消收藏
+      if (!detail.value.userCollection) {
+        const data = await setCollect({ id: detail.value.id });
+        await getDetail();
+        if (data.status === 200) {
+          wx.showToast({
+            title: "收藏成功",
+            icon: "none",
+            duration: 2000,
+          });
+        }
+      } else {
+        const data = await setCancelCollect({ id: detail.value.id });
+        await getDetail();
+        if (data.status === 200) {
+          wx.showToast({
+            title: "取消收藏",
+            icon: "none",
+            duration: 2000,
+          });
+        }
       }
     }
   } else if (name === "button") {
