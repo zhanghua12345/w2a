@@ -27,7 +27,6 @@
             <i
               class="iconfont text-48 leading-1 text-tip p-20"
               v-if="userInfo.nickname"
-              @click="showLoginPopup = true"
               >&#xe638;</i
             >
           </span>
