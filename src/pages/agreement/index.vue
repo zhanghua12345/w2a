@@ -11,7 +11,6 @@ const detail = ref({});
 onLoad((options) => {
   // options是传递过来的参数对象
   id = options?.id;
-  console.log(options);
   switch (options.id) {
     case "2":
       title.value = "代理商协议";

@@ -36,6 +36,7 @@
         <view class="mt-10">梵米尼-创造您的生活</view>
       </view>
       <image
+        @click="goLogin"
         class="h-150 w-150 rounded-full"
         :src="userInfo.avatar || '/static/user.png'"
       />
@@ -118,37 +119,22 @@
         </up-cell>
       </up-cell-group>
     </view>
-    <view class="mt-main">
+    <view class="mt-main pb-main">
       <view class="flex justify-between items-center">
         <view class="" @click="openMap">友情链接</view>
-        <view class="flex items-center">
+        <!-- <view class="flex items-center">
           全部
           <i class="iconfont text-20 ml-10 text-tip">&#xe671;</i>
-        </view>
+        </view> -->
       </view>
 
       <view class="bg-fff rounded-32 overflow-hidden mt-main shadow-sm">
         <up-scroll-list :indicator="false">
           <template v-for="item in links" :key="item.id">
-            <official-account
-              v-if="item.type === 'official'"
-              appId="你的公众号的appId"
-              path=""
-              @click="onOfficialAccountTap"
-            >
-              <view
-                class="flex flex-col items-center px-main pt-40 pb-20"
-                :class="item.class"
-              >
-                <image class="h-70 w-70" :src="`/static/my/${item.type}.png`" />
-                <view class="whitespace-nowrap pt-20">{{ item.label }}</view>
-              </view>
-              <!-- 组件内部的内容 -->
-            </official-account>
             <button
               open-type="contact"
               class="share"
-              v-else-if="item.type === 'contact'"
+              v-if="item.type === 'contact'"
             >
               <view
                 class="flex flex-col items-center px-main pt-40 pb-20"
@@ -172,8 +158,10 @@
         </up-scroll-list>
       </view>
     </view>
+    <official-account></official-account>
   </view>
-  <Footer className="py-60" content="Copyright © 2025 梵米尼" />
+
+  <Footer className=" pt-main pb-60" content="Copyright © 2025 梵米尼" />
   <Login
     v-model:userInfo="userInfo"
     v-model:show="showLoginPopup"
@@ -259,14 +247,12 @@ const routers = ref([
   {
     label: "关于我们",
     router: "pages/agreement/index",
-    type: "about",
     routerId: 6,
     icon: "&#xe612;",
   },
   {
     label: "隐私协议",
     router: "pages/agreement/index",
-    type: "privacy",
     routerId: 3,
     icon: "&#xe740;",
   },
@@ -294,7 +280,7 @@ const links = [
     router: "/pagesA/articleCollection/index",
     icon: "&#xe614;",
     type: "official",
-    class: "text-main",
+    class: "",
   },
   {
     label: "抖音号",
@@ -338,7 +324,6 @@ onShow(async () => {
   numData.value = data;
   // 获取用户地理位置
   const location = chooseLocation.getLocation();
-  console.log(location);
 });
 
 const closeLogin = async () => {
@@ -350,7 +335,10 @@ const closeLogin = async () => {
 
 const goVip = () => {
   // regType  -1  未申请  0 审核中  1审核通过  2审核拒绝
-  console.log(userInfo.value);
+  if (!userInfo.value.phone) {
+    uni.navigateTo({ url: "/pages/login/index" });
+    return false;
+  }
   switch (userInfo.value.regType) {
     case -1:
       uni.navigateTo({ url: "/pages/register/index" });
@@ -370,8 +358,11 @@ const goVip = () => {
 };
 
 const goLogin = () => {
-  if (userInfo.value.phone) return false;
-  uni.navigateTo({ url: "/pages/login/index" });
+  if (!userInfo.value.phone) {
+    uni.navigateTo({ url: "/pages/login/index" });
+    return false;
+  }
+  showLoginPopup.value = true;
 };
 
 // 跳转事件
@@ -387,7 +378,7 @@ const openDetail = (item) => {
   } else {
     uni.navigateTo({
       url: item.routerId
-        ? `/${item.router}?type=${item.type}&id=${item.routerId}`
+        ? `/${item.router}?id=${item.routerId}`
         : `/${item.router}?type=${item.type}`,
     });
   }

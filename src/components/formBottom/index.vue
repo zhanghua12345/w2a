@@ -30,7 +30,7 @@
             'text-[#0ccc83]': data.color === '0ccc83',
             'bg-[#ff8921]': data.color === 'ff8921',
           }"
-          @click="openAgreement('serve')"
+          @click="openAgreement({ id: 4, title: '服务须知' })"
           >《服务须知》</span
         >
         和<span
@@ -39,7 +39,7 @@
             'text-[#0ccc83]': data.color === '0ccc83',
             'bg-[#ff8921]': data.color === 'ff8921',
           }"
-          @click="openAgreement('privacy')"
+          @click="openAgreement({ id: 3, title: '隐私政策' })"
           >《隐私政策》</span
         >
         且授权平台或平台指定装企联系我</view
@@ -61,7 +61,9 @@ onMounted(() => {
 });
 
 const openAgreement = (page) => {
-  uni.navigateTo({ url: `/pages/agreement/index?type=${page}` });
+  uni.navigateTo({
+    url: `/pages/agreement/index?id=${page.id}&title=${page.title}`,
+  });
 };
 </script>
 <style lang="scss" scoped>

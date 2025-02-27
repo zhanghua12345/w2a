@@ -79,7 +79,7 @@
     </view>
     <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
-      v-if="detail.cate_list.length > 0"
+      v-if="detail.cate_list"
     >
       <view
         class="flex flex-wrap items-center w-1/2 h-50"
@@ -243,12 +243,11 @@ const setBottom = async (name) => {
   if (name === "praise") {
     // 点赞
     const data = await setPraise({ id: detail.value.id });
-    await getDetail();
+    detail.value.realPraise++;
     if (data.status === 200) {
       wx.showToast({
         title: "点赞成功",
         icon: "none",
-        duration: 2000,
       });
     }
   } else if (name === "collect") {

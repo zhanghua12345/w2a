@@ -195,10 +195,11 @@ const getClass = async () => {
 
 // 获取列表数据
 const getList = async () => {
+  params.cate_id = params.cate_id.toString();
   console.log(params);
   const data = await product_new_list({
     ...params,
-    cate_id: params.cate_id.length ? params.cate_id : "",
+    cate_id: params.cate_id || "",
   });
   list.value = (list.value || []).concat(data.list);
   params.page++;

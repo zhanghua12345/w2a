@@ -4,7 +4,7 @@
     <view v-if="navigator.length" class="flex flex-wrap items-center">
       <template v-for="(item, index) in navigator" :key="index">
         <view
-          class="px-20 text-tip"
+          class="px-20 text-tip font-400"
           :style="{ color: item.textColor }"
           @click="navClick(item)"
         >
@@ -41,12 +41,12 @@ defineProps({
         title: "回到首页",
         url: "/pages/home/index",
         type: "switch",
-        textColor: "blue",
+        textColor: "#cf5d38",
       },
       {
-        title: "关于图鸟",
+        title: "了解梵米尼",
         type: "navigate",
-        url: "/pages/about/index",
+        url: "/pages/agreement/index?id=6",
       },
     ],
   },

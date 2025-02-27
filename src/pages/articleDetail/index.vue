@@ -16,7 +16,18 @@
     <view
       class="px-main absolute bottom-60 left-0 text-fff flex flex-wrap justify-between items-center w-full"
     >
-      <up-avatar-group :urls="urls" size="35" gap="0.4" extraValue=" " />
+      <up-avatar-group
+        :urls="[...detail.head, '']"
+        size="35"
+        gap="0.4"
+        :extraValue="
+          detail.realBrowse > 9999
+            ? Math.floor(detail.realBrowse / 10000) + 'w'
+            : detail.realBrowse > 999
+            ? Math.floor(detail.realBrowse / 1000) + 'k'
+            : detail.realBrowse
+        "
+      />
       <view class="">{{ detail.realBrowse }} 人看过</view>
     </view>
   </view>
@@ -57,15 +68,6 @@ useWxShare({
   path: `/pages/articleDetail/index?id=${id.value}`,
 });
 
-const urls = ref([
-  "https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000",
-  "https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000",
-  "https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000",
-  "https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000",
-  "https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000",
-  "https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000",
-  "https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000",
-]);
 const detail = ref({});
 
 onLoad((options) => {
@@ -78,7 +80,7 @@ const setBottom = async (name) => {
   if (name === "praise") {
     // 点赞
     const data = await setPraise({ id: detail.value.id });
-    await getDetail();
+    detail.value.realPraise++;
     if (data.status === 200) {
       wx.showToast({
         title: "点赞成功",
