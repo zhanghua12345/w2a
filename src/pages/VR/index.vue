@@ -19,7 +19,6 @@ useWxShare({
 onLoad((options) => {
   // options是传递过来的参数对象
   url.value = options.url;
-  url.value = "https://vr.justeasy.cn/view/1lc73i33m862q6v2-1734061313.html";
 });
 </script>
 <style lang="scss" scoped></style>

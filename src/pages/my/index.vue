@@ -138,7 +138,6 @@
             >
               <view
                 class="flex flex-col items-center px-main pt-40 pb-20"
-                :class="item.class"
                 @click="openLink(item)"
               >
                 <image class="h-70 w-70" :src="`/static/my/${item.type}.png`" />
@@ -147,7 +146,6 @@
             </button>
             <view
               class="flex flex-col items-center px-main pt-40 pb-20"
-              :class="item.class"
               @click="openLink(item)"
               v-else
             >
@@ -270,45 +268,44 @@ const routers = ref([
 const links = [
   {
     label: "梵米尼商城",
-    router: "/pagesA/articleCollection/index",
+    router: "/pages/about/index",
     icon: "&#xe74b;",
     type: "mall",
-    class: "",
+    img: "/static/gong.jpg",
   },
   {
     label: "公众号",
-    router: "/pagesA/articleCollection/index",
+    router: "/pages/about/index",
     icon: "&#xe614;",
     type: "official",
-    class: "",
+    img: "/static/gong.jpg",
   },
   {
     label: "抖音号",
-    router: "/pagesA/articleCollection/index",
+    router: "/pages/about/index",
     icon: "&#xe601;",
     type: "tikTok",
-    class: "",
+    img: "/static/gong.jpg",
   },
   {
     label: "视频号",
-    router: "/pagesA/articleCollection/index",
+    router: "/pages/about/index",
     icon: "&#xe69c;",
     type: "video",
-    class: "",
+    img: "/static/gong.jpg",
   },
   {
     label: "H5网站",
-    router: "/pagesA/articleCollection/index",
+    router: "/pages/about/index",
     icon: "&#xe607;",
     type: "H5",
-    class: "",
+    img: "/static/gong.jpg",
   },
   {
     label: "在线客服",
-    router: "/pagesA/articleCollection/index",
     icon: "&#xe658;",
     type: "contact",
-    class: "",
+    img: "/static/gong.jpg",
   },
 ];
 
@@ -401,9 +398,10 @@ const openMap = () => {
   });
 };
 
-const onOfficialAccountTap = () => {
-  console.log("用户点击了公众号链接");
-  // 这里可以添加其他逻辑，例如统计点击次数等
+const openLink = (item) => {
+  uni.navigateTo({
+    url: `${item.router}?type=${item.type}&img=${item.img}`,
+  });
 };
 </script>
 

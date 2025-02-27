@@ -59,8 +59,7 @@
     {
       "path": "pages/about/index",
       "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "关于"
+        "navigationBarTitleText": ""
       }
     },
     {
@@ -69,7 +68,6 @@
         "navigationBarTitleText": "梵米尼家具"
       }
     },
-
     {
       "path": "pages/register/index",
       "style": {
