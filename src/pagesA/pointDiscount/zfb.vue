@@ -38,7 +38,7 @@
       @click="submit"
     />
     <view class="mt-main underline text-main text-24">
-      注：请确认您的支付宝信息，以免提现失败
+      注：请确认您的zfb信息，以免提现失败
     </view>
   </view>
   <image
@@ -71,7 +71,7 @@ const list = ref([
     value: "",
   },
   {
-    title: "支付宝账号",
+    title: "zfb账号",
     value: "",
   },
   {

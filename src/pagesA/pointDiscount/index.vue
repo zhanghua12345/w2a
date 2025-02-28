@@ -37,7 +37,7 @@
     </view>
     <view class="pb-main w-full">
       <view class="flex flex-wrap items-center justify-between mt-50">
-        到账支付宝 {{ memberInfo.alipay }}
+        到账zfb {{ memberInfo.alipay }}
         <view
           class="py-12 px-30 text-fff rounded-full bg-[#ef3d3d] relative"
           @click="openZFB()"

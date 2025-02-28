@@ -28,8 +28,9 @@
             :class="{
               'rotate-180': index === pickerIndex && openPicker,
             }"
-            >&#xfd90;</i
           >
+            &#xfd90;
+          </i>
         </view>
       </view>
     </view>
