@@ -159,7 +159,7 @@
                 style="transform: scale(0.7)"
               />我已阅读并同意<span
                 class="text-main-vip"
-                @click.stop="docClick(2)"
+                @click.stop="openAgreement({ id: '5' })"
                 >《梵米尼门店会员章程》</span
               >
             </label>
@@ -169,7 +169,7 @@
                 style="transform: scale(0.7)"
               />我已阅读并同意<span
                 class="text-main-vip"
-                @click.stop="docClick(2)"
+                @click.stop="openAgreement({ id: '3' })"
                 >《个人隐私信息保护条款》</span
               >
             </label>
@@ -209,16 +209,10 @@ onMounted(() => {
   getGroupList();
 });
 
-const docClick = (index) => {
-  if (index === 1) {
-    uni.navigateTo({
-      url: "/pagesA/member/doc-1",
-    });
-  } else {
-    uni.navigateTo({
-      url: "/pagesA/member/doc-2",
-    });
-  }
+const openAgreement = (item) => {
+  uni.navigateTo({
+    url: `/pages/agreement/index?id=${item.id}`,
+  });
 };
 
 const formSubmit = () => {

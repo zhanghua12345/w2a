@@ -208,6 +208,7 @@ onLoad((options) => {
 
 // 详情查看更多
 const showMoreClick = () => {
+  console.log(app.globalData);
   if (!app.globalData.userInfo?.phone) {
     uni.navigateTo({ url: "/pages/login/index" });
   } else {

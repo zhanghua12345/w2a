@@ -120,7 +120,6 @@ const pickerClick = (index) => {
 
 // 点击分类菜单确认
 const pickerConfirm = (value) => {
-  console.log(value);
   openPicker.value = false;
   classList.value[pickerIndex.value] = {
     ...classList.value[pickerIndex.value],
@@ -131,11 +130,9 @@ const pickerConfirm = (value) => {
   list.value = [];
   params.page = 1;
   status.value = "loading";
-  console.log(classList.value);
   params.cate_id = classList.value
     .filter((e) => !!e.cate_id)
     .map((item) => item.cate_id);
-  console.log(params.cate_id);
   getList();
 };
 
@@ -164,7 +161,6 @@ const bannerClick = (index) => {
 };
 // 跳转到详情
 const openDetail = (item) => {
-  console.log(item);
   uni.navigateTo({ url: `/pages/caseDetail/index?id=${item.id}` });
 };
 
@@ -175,7 +171,6 @@ const openVR = (item) => {
   } else {
     uni.navigateTo({ url: `/pages/VR/index?url=${item.VR_link}` });
   }
-  openDetail({ id: bannerList.value[index].id });
 };
 
 // 获取顶部banner

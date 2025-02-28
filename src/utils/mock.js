@@ -195,6 +195,7 @@ export const JSON_yaoqing = {
       title: "邀请人房屋所在位置",
       placeholder: "例：长沙市 开福区 xx小区 01栋 1001号",
       select: "",
+      isSelect: true,
     },
   ],
   bottomTitle: "提交",

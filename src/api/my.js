@@ -52,6 +52,18 @@ export function withdrawalList(data) {
 }
 
 /**
+ * 总收益列表
+ * @param data
+ * @returns {*}
+ */
+export function balanceDetails(data) {
+  return request({
+    url: `/api/user/balanceDetails`,
+    method: "get",
+    data,
+  });
+}
+/**
  * 会员邀请用户到店
  * @param data
  * @returns {*}

@@ -12,14 +12,20 @@ onLoad((options) => {
   // options是传递过来的参数对象
   id = options?.id;
   switch (options.id) {
-    case "2":
-      title.value = "代理商协议";
+    case "1":
+      title.value = "梵米尼提现说明";
       break;
-    case "4":
-      title.value = "服务须知";
+    case "2":
+      title.value = "梵米尼代理商协议";
       break;
     case "3":
-      title.value = "隐私政策";
+      title.value = "梵米尼隐私政策";
+      break;
+    case "4":
+      title.value = "梵米尼服务须知";
+      break;
+    case "5":
+      title.value = "梵米尼会员章程";
       break;
     case "6":
       title.value = "关于我们";

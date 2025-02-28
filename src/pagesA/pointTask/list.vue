@@ -1,4 +1,17 @@
 <template>
+  <view class="px-main py-16 flex items-center justify-between bg-[#fff6e5]">
+    <view class="flex-1 text-[#ab363b] flex items-center">
+      <i class="iconfont mr-10">&#xe658;</i>
+      提现如有疑问，请联系专属客服
+    </view>
+    <button open-type="contact" class="share">
+      <view
+        class="flex items-center justify-center border-2 text-[#ab363b] border-[#ab363b] px-10 py-2 rounded-full text-24"
+      >
+        去联系
+      </view>
+    </button>
+  </view>
   <view class="px-main text-24">
     <view
       class="py-main border-0 border-b-2 last:border-b-0 border-solid border-[#eee]"
@@ -6,25 +19,29 @@
       :key="this"
     >
       <view class="flex flex-wrap items-center justify-between">
-        <view>
+        <view class="flex-1">
           <view class="pt-10">姓名：{{ item.name || "--" }}</view>
           <view class="text-24 text-[#999]"
             >微信昵称：{{ item.wechat_name || "--" }}</view
           >
           <view class="text-24 text-[#999]">手机号：{{ item.phone }}</view>
         </view>
-        <view class="text-main">{{
-          item.status === 0
-            ? "已提交"
-            : item.status === 1
-            ? item.remakes || "用户到店"
-            : item.remakes || "用户未到店"
-        }}</view>
+        <view class="max-w-200 text-right">
+          <view class="text-main">
+            {{
+              item.status === 0
+                ? "已提交"
+                : item.status === 1
+                ? "用户邀请成功"
+                : "用户邀请失败"
+            }}
+          </view>
+          <view class="w-full text-24 text-tip mt-10">
+            {{ item.status === 1 ? "" : item.remakes }}
+          </view>
+        </view>
       </view>
-      <view
-        class="flex flex-wrap justify-between pt-16 text-24"
-        v-if="index % 2 === 0"
-      >
+      <view class="flex flex-wrap justify-between pt-16 text-24">
         <view
           class="flex flex-wrap items-start justify-start text-main flex-1 pr-20"
         >
@@ -97,4 +114,21 @@ const getList = async (params) => {
   status.value = data.list.length < params.limit ? "nomore" : "loadmore";
 };
 </script>
-<style lang="sass" scoped></style>
+
+<style lang="scss" scoped>
+.share {
+  border: none;
+  //透明色
+  background-color: transparent !important;
+  box-shadow: none;
+
+  /* 去除伪元素样式 */
+  &::before,
+  &::after {
+    content: none;
+    /* 去除伪元素 */
+    display: none;
+    /* 隐藏伪元素 */
+  }
+}
+</style>

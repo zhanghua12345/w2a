@@ -3,7 +3,7 @@
   <view class="tabbar-container">
     <image src="/static/member-bg.png" mode="scaleToFill" class="slice" />
     <view class="containerc">
-      <view class="container-box mt-main px-main">
+      <view class="container-box pt-main px-main">
         <view class="card">
           <image class="card-bg" src="/static/vip.png" />
           <view class="info">
@@ -19,7 +19,7 @@
               <view class="text-32">
                 ￥
                 <span class="text-64 leading-1">{{
-                  memberInfo.money || "0.00"
+                  memberInfo.all_money || "0.00"
                 }}</span>
               </view>
               <view class="change" @click="openPoints">明细</view>
@@ -43,7 +43,7 @@
           </view>
         </view>
         <view class="card-2">
-          <view class="flex flex-row items-start justify-around">
+          <view class="flex flex-row items-start justify-around px-10">
             <view
               class="box flex flex-col items-center"
               v-for="(item, index) in list"
@@ -84,9 +84,7 @@
                 <view class="text-[#866350] text-36">{{ item.name }}</view>
                 <view class="text-tip text-24 pt-10 flex items-center">
                   {{ item.subName }}
-                  <i class="iconfont text-18 ml-4" v-if="index !== 2">
-                    &#xe671;
-                  </i>
+                  <i class="iconfont text-18 ml-4"> &#xe671; </i>
                 </view>
               </view>
               <view
@@ -163,8 +161,9 @@ const actives = ref([
     image_url:
       "https://fanminitop.com//uploads/attach/2025/01/20250124/88a60c4057401bb4051ae6ff0bd189bd.png",
     router: "",
-    name: "更多权益",
-    subName: "解锁中...",
+    name: "我的邀请",
+    router: "/pagesA/pointTask/list",
+    subName: "现金已入账",
   },
 ]);
 const memberInfo = ref({});

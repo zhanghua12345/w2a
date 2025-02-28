@@ -1,14 +1,9 @@
 <template>
-  <view class="tabbar-contain">
-    <image
-      src="/static/images/icon/icon-success.png"
-      mode="scaleToFill"
-      class="success-icon"
-    />
+  <view class="tabbar-contain pt-100">
     <i class="iconfont text-main-vip text-128">&#xe632;</i>
     <view class="name">{{ msg || "提交成功" }}</view>
     <view class="text">你可以前往我的邀请查看提交结果</view>
-    <view class="text">联系我们：865-884-6224</view>
+    <view class="text mt-main">联系我们：865-884-6224</view>
     <view class="btn2" @click="openPointTask"> 我的邀请</view>
   </view>
 </template>
@@ -25,7 +20,7 @@ export default {
   },
   methods: {
     openPointTask() {
-      uni.reLaunch({
+      uni.navigateTo({
         url: "/pagesA/pointTask/list",
       });
     },

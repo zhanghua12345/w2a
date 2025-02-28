@@ -3,28 +3,27 @@
     <view
       class="py-main border-0 border-b-2 last:border-b-0 border-solid border-[#eee]"
       v-for="(item, index) in list"
-      :key="this"
+      :key="index"
     >
       <view class="flex flex-wrap items-center justify-between">
-        <view>
-          <view class="text-24 text-[#999]">2025-02-20 19:18</view>
-          <view class="pt-10">{{
-            index % 2 === 1 ? "签到赠送" : "用户到店"
-          }}</view>
+        <view class="flex-1">
+          <view class="text-main"> {{ item.note }} </view>
+          <view class="text-24 text-[#999] mt-10">{{ item.created_at }}</view>
         </view>
-        <view class="{{index%2===1  ? 'text-[#1A1A1A]' : 'text-main'}}">
-          + 99
+        <view
+          class="max-w-200 text-right text-24"
+          :class="item.type === 1 ? 'text-main' : 'text-tip'"
+        >
+          {{ item.type === 1 ? "+" : "-" }}{{ item.money }}
         </view>
       </view>
-      <view
-        class="flex flex-wrap justify-between pt-16 text-24"
-        v-if="index % 2 === 0"
-      >
-        <view class="flex flex-wrap items-center text-main">
-          <i class="iconfont leading-1 pr-8 text-24">&#xe644;</i>
-          您推荐的xxx到店啦
+
+      <view class="flex flex-wrap justify-between pt-16 text-24">
+        <view class="flex flex-wrap items-start text-tip flex-1 pr-40">
+          <i class="iconfont pr-8 text-24">&#xe644;</i>
+          <view class="flex-1"> {{ item.desc }} </view>
         </view>
-        <view class="text-[#8B8B8B]">余额：599</view>
+        <view class="text-[#8B8B8B]">余额：{{ item.new_money }}</view>
       </view>
     </view>
   </view>
@@ -44,7 +43,7 @@
   />
 </template>
 <script setup>
-import { withdrawalList } from "@/api/my";
+import { balanceDetails } from "@/api/my";
 
 import { onMounted, ref } from "vue";
 
@@ -82,7 +81,7 @@ onReachBottom(() => {
 });
 
 const getList = async (params) => {
-  const data = await withdrawalList(params);
+  const data = await balanceDetails(params);
   list.value = (list.value || []).concat(data.list);
   params.page++;
   status.value = data.list.length < params.limit ? "nomore" : "loadmore";

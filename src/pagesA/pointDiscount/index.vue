@@ -56,7 +56,9 @@
       color="#ef3d3d"
       @click="submit"
     />
-    <view class="mt-main text-[#ef3d3d]">*每月25号后可提现</view>
+    <view class="mt-main text-tip"
+      >*提现后请点击顶部「去联系」或微信联系客服</view
+    >
     <view class="mt-80 underline text-tip" @click="openAgreement"
       >提现说明</view
     >
@@ -85,7 +87,7 @@ onShow(async () => {
 const submit = async () => {
   if (!moneyValue.value) {
     wx.showToast({
-      title: "提现金额不能为0",
+      title: "请先点击「全部」导入提现金额",
       icon: "none",
     });
     return false;

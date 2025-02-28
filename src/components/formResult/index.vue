@@ -24,7 +24,7 @@
     </view>
     <view class="mt-main text-000-9">xx正在为您计算中...</view>
     <view class="mt-80 bottom relative text-36 text-000-9"
-      >登录后即可查看报价</view
+      >点击查看获取海量资料</view
     >
     <view class="mt-80 text-[#bf6c22] text-center">
       <view class="">梵米尼专注装修15年</view>

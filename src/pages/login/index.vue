@@ -3,7 +3,7 @@
     <view class="after-navber">
       <view>
         <image
-          src="https://gips3.baidu.com/it/u=2619873661,315331996&fm=3028&app=3028&size=w931&q=75&n=0&f=JPEG&fmt=auto&maxorilen2heic=2000000"
+          src="https://fanminitop.com/uploads/attach/2025/02/20250225/582abb13c2ccaf95c2e36449a741f2eb.jpg"
           style="width: 100%"
           mode="widthFix"
           class="logo"

@@ -63,7 +63,6 @@
         <view
           class="py-12 px-30 text-5e3d05 rounded-full bg-vip-gradient relative"
           @click="goVip"
-          v-if="userInfo?.regType"
         >
           {{
             userInfo.regType === -1
@@ -167,52 +166,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import Navbar from "@/components/navbar/index.vue";
 import Footer from "@/components/footer/index.vue";
 import Login from "@/components/login/index.vue";
-import {
-  onShareAppMessage,
-  onShareTimeline,
-  onPageScroll,
-  onShow,
-} from "@dcloudio/uni-app";
-import { useWxShare } from "@/hooks/index.js";
+import { onPageScroll, onShow } from "@dcloudio/uni-app";
 import Handle from "@/components/handle/index.vue";
-const chooseLocation = requirePlugin("chooseLocation");
-import { getUserInfo, articleUserLogNum } from "@/api/login";
+import { getUserInfo, articleUserLogNum, registerRes } from "@/api/login";
 // 监听滚动
 onPageScroll(() => {});
-// 微信分享
-onShareAppMessage(() => ({}));
-onShareTimeline(() => ({}));
-useWxShare({
-  path: "/pages/home/index",
-});
+
 const app = getApp();
 const userInfo = ref({});
 const numData = ref({});
-onMounted(async () => {
-  //判断是否获取到动态设置的globalData
-  // const userData = await getUserInfo();
-  // app.globalData.userInfo = userData;
-  // userInfo.value = userData;
-});
 
 const showLoginPopup = ref(false);
 const routers = ref([
   {
     label: "案例",
     router: "pagesA/caseHistory/index",
-    number: 10,
+    number: "10",
   },
   {
     label: "好文",
     router: "pagesA/articleHistory/index",
-    number: 10,
+    number: "10",
   },
   {
-    label: "优选设计",
+    label: "闭坑指南",
     router: "pages/space/index",
     number: 5,
   },
@@ -270,41 +251,41 @@ const links = [
     router: "/pages/about/index",
     icon: "&#xe74b;",
     type: "mall",
-    img: "/static/gong.jpg",
+    img: "https://fanminitop.com/uploads/attach/2025/02/20250227/fa77f3da27f8abf2c9a30019703f21c0.jpg",
   },
   {
     label: "公众号",
     router: "/pages/about/index",
     icon: "&#xe614;",
     type: "official",
-    img: "/static/gong.jpg",
+    img: "https://fanminitop.com/uploads/attach/2025/02/20250227/4e328cf0e726c001935d7ed472c31e33.png",
   },
   {
     label: "抖音号",
     router: "/pages/about/index",
     icon: "&#xe601;",
     type: "tikTok",
-    img: "/static/gong.jpg",
+    img: "https://fanminitop.com/uploads/attach/2025/02/20250227/4e328cf0e726c001935d7ed472c31e33.png",
   },
   {
     label: "视频号",
     router: "/pages/about/index",
     icon: "&#xe69c;",
     type: "video",
-    img: "/static/gong.jpg",
+    img: "https://fanminitop.com/uploads/attach/2025/02/20250227/4e328cf0e726c001935d7ed472c31e33.png",
   },
   {
     label: "H5网站",
     router: "/pages/about/index",
     icon: "&#xe607;",
     type: "H5",
-    img: "/static/gong.jpg",
+    img: "https://fanminitop.com/uploads/attach/2025/02/20250227/4e328cf0e726c001935d7ed472c31e33.png",
   },
   {
     label: "在线客服",
     icon: "&#xe658;",
     type: "contact",
-    img: "/static/gong.jpg",
+    img: "https://fanminitop.com/uploads/attach/2025/02/20250227/4e328cf0e726c001935d7ed472c31e33.png",
   },
 ];
 
@@ -313,13 +294,14 @@ const dataFilter = (list, startIndex, length) => {
 };
 
 onShow(async () => {
+  console.log("=====onShow=====");
   const userData = await getUserInfo();
   const data = await articleUserLogNum();
   app.globalData.userInfo = userData;
   userInfo.value = userData;
-  numData.value = data;
-  // 获取用户地理位置
-  const location = chooseLocation.getLocation();
+  numData.value = data.data;
+  routers.value[0].number = data.data.caseBrowse;
+  routers.value[1].number = data.data.articleBrowse;
 });
 
 const closeLogin = async () => {
@@ -329,13 +311,19 @@ const closeLogin = async () => {
   userInfo.value = userData;
 };
 
-const goVip = () => {
+const goVip = async () => {
   // regType  -1  未申请  0 审核中  1审核通过  2审核拒绝
-  if (!userInfo.value.phone) {
+  if (!app.globalData.userInfo.phone) {
     uni.navigateTo({ url: "/pages/login/index" });
     return false;
   }
-  switch (userInfo.value.regType) {
+  let status = userInfo.value.regType;
+  if (status !== -1) {
+    const data = await registerRes();
+    status = data.data.status;
+  }
+
+  switch (status) {
     case -1:
       uni.navigateTo({ url: "/pages/register/index" });
       break;
@@ -354,10 +342,11 @@ const goVip = () => {
 };
 
 const goLogin = () => {
-  if (!userInfo.value.phone) {
+  if (!app.globalData.userInfo.phone) {
     uni.navigateTo({ url: "/pages/login/index" });
     return false;
   }
+  userInfo.value = app.globalData.userInfo;
   showLoginPopup.value = true;
 };
 

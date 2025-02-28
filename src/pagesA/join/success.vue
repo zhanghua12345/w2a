@@ -9,7 +9,6 @@
     <view class="text">请您保持电话畅通</view>
     <view class="text">工作人员会在3个工作日内与您联系</view>
     <view class="btn2" @click="goHome"> 返回首页 </view>
-
   </view>
 </template>
 <script>
@@ -34,9 +33,9 @@ export default {
 
   methods: {
     goHome(e) {
-     uni.reLaunch({
-          url: "/pages/custormer/index/index",
-        });
+      uni.reLaunch({
+        url: "/pages/custormer/index/index",
+      });
     },
   },
 };
@@ -58,15 +57,14 @@ export default {
     height: 156upx;
     margin-top: 120upx;
   }
-  .name{
+  .name {
     font-size: 40upx;
     font-weight: 500;
     padding: 40upx 0;
   }
-  .text{
+  .text {
     font-size: 30upx;
-    color: #9E9E9E;
-
+    color: #9e9e9e;
   }
 }
 .btn2 {
@@ -76,7 +74,7 @@ export default {
   width: 622upx;
   height: 84upx;
   background: #805844;
-  color: #FFFCFB;
+  color: #fffcfb;
   border-radius: 60upx;
   line-height: 84upx;
   font-size: 34upx;

@@ -76,16 +76,12 @@ import { JSON_yaoqing } from "@/utils/mock.js";
 import formBottom from "@/components/formBottom/index.vue";
 import { invite } from "@/api/my";
 
-const app = getApp();
 const data = ref({});
 const status = ref(0);
 const showPopup = ref(false);
 const popupText =
   "您在提交资料后，该用户在门店完成下单。<br />您即可获取一笔1000-2000的金额奖励";
 const showPicker = ref(false);
-const openPicker = () => {
-  showPicker.value = true;
-};
 
 // 页面加载时自动加载数据
 onMounted(() => {
@@ -128,7 +124,6 @@ const submit = async () => {
     mask: true, // 是否显示透明蒙层，防止触摸穿透
   });
   const res = await invite(params);
-  console.log(res);
   uni.navigateTo({ url: "/pagesA/pointTask/success?msg=" + res.msg });
 };
 

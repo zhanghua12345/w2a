@@ -1,10 +1,5 @@
 <template>
-  <view class="tabbar-contain">
-    <image
-      src="/static/images/icon/icon-success.png"
-      mode="scaleToFill"
-      class="success-icon"
-    />
+  <view class="tabbar-contain pt-100">
     <i class="iconfont text-main-vip text-128">&#xe6e7;</i>
     <view class="name">您的会员审核失败啦！</view>
     <view class="text">失败原因</view>
@@ -19,21 +14,12 @@ export default {
   components: {},
   data() {
     return {
-      height: 0,
       scrollTop: 0,
       detail: {},
     };
   },
   onLoad() {
-    const res = uni.getSystemInfoSync();
-    this.height = res.statusBarHeight * 2;
     this.registerData();
-  },
-  onShow() {},
-
-  onPageScroll(e) {
-    // 页面滚动时会触发
-    this.scrollTop = e.scrollTop; // 更新滚动位置
   },
 
   methods: {
