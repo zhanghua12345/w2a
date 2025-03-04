@@ -55,7 +55,7 @@
     </view>
   </view>
   <up-loadmore
-    v-if="list.length > 5"
+    v-if="list.length > 8"
     class="pt-20 pb-40"
     :status="status"
     loading-text="努力加载中，先喝杯茶"

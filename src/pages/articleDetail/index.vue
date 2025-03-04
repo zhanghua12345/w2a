@@ -41,7 +41,7 @@
     <view
       class="rounded-t-40 htmlContianer overflow-hidden mt-[-80rpx] bg-bg p-main"
       v-html="detail.content"
-    ></view>
+    />
   </view>
   <BottomFun :obj.sync="detail" @click="setBottom" />
 </template>
