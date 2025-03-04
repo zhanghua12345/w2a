@@ -9,14 +9,14 @@
   <!-- 顶部容器 -->
   <view class="px-main pt-main">
     <view
-      class="flex flex-wrap justify-between items-center"
+      class="flex flex-wrap justify-between items-center px-10"
       :style="{
         paddingTop: '90px',
       }"
     >
       <view class="flex-1 pr-30">
         <view
-          class="text-48 w-full flex flex-wrap items-center"
+          class="text-48 w-full flex flex-wrap items-center text-000"
           @click="goLogin"
           >{{
             userInfo.phone && userInfo.nickname
@@ -31,8 +31,8 @@
             >
           </span>
         </view>
-        <view class="mt-10">{{ userInfo.phone }}</view>
-        <view class="mt-10">梵米尼-创造您的生活</view>
+        <view class="text-tip">{{ userInfo.phone }}</view>
+        <view class="text-tip">梵米尼-创造您的生活</view>
       </view>
       <image
         @click="goLogin"
@@ -40,7 +40,7 @@
         :src="userInfo.avatar || '/static/user.png'"
       />
     </view>
-    <view class="pt-80 flex flex-wrap">
+    <view class="pt-80 flex flex-wrap px-10">
       <view
         class="pr-50"
         v-for="(item, index) in dataFilter(routers, 0, 3)"
