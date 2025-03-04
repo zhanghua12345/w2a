@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "kaiti";
-  src: url("https://xygywlweb.hunanjj.cn/FangYuanTi.ttf");
+  src: url("https://fanminitop.com/ttf/55.ttf");
 }
 
 body {
@@ -15,9 +15,9 @@ body {
   font-weight: normal;
   position: relative;
   background-color: #f8f8f8;
-  color: rgba(0, 0, 0, 0.9);
+  color: rgba(0, 0, 0, 0.8);
   min-height: 100%;
-  letter-spacing: 0rpx;
+  letter-spacing: 1rpx;
 }
 .bg-cover {
   background-position: center;

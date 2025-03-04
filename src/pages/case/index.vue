@@ -14,17 +14,17 @@
   <up-sticky offset-top="0">
     <view class="py-main bg-bg">
       <view
-        class="mx-main rounded-main flex flex-row justify-between shadow-md bg-000-04"
+        class="mx-main rounded-main flex flex-row justify-between shadow bg-000-04"
       >
         <view
           v-for="(item, index) in classList"
           :key="index"
-          class="flex justify-center items-center py-20 text-24 w-full px-4"
+          class="flex justify-center items-center py-20 w-full px-4"
           @click="pickerClick(index)"
         >
           {{ item.cate_name }}
           <i
-            class="iconfont text-tip text-20 ml-10 transition-transform duration-300"
+            class="iconfont text-tip text-20 ml-6 transition-transform duration-300"
             :class="{
               'rotate-180': index === pickerIndex && openPicker,
             }"
@@ -47,11 +47,18 @@
     />
   </view>
   <up-loadmore
+    v-if="list.length > 8"
     class="pt-20 pb-40"
     :status="status"
     loading-text="努力加载中，先喝杯茶"
     loadmore-text="轻轻上拉···"
     nomore-text="实在没有了~"
+  />
+  <up-empty
+    v-else-if="!list?.length"
+    text="没有数据~"
+    icon="/static/no-info.png"
+    marginTop="200"
   />
   <up-picker
     v-if="openPicker"

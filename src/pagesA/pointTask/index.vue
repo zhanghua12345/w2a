@@ -36,7 +36,7 @@
         >
           <up-input
             v-model="item.select"
-            :placeholder="item.placeholder || '请选择'"
+            :placeholder="item?.placeholder || '请输入'"
             fontSize="24rpx"
             border="none"
           />

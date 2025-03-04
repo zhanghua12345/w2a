@@ -9,15 +9,17 @@
       :src="obj.image_input[0]"
       alt=""
     />
-    <view class="flex-1 flex flex-col justify-between pl-main">
-      <view class="line-clamp-2 text-30">
-        {{ obj.title }}
-      </view>
-      <view class="line-clamp-2 text-tip">
-        {{ obj.synopsis }}
+    <view class="flex-1 flex flex-col justify-between pl-20">
+      <view>
+        <view class="line-clamp-2 text-32">
+          {{ obj.title }}
+        </view>
+        <view class="line-clamp-1 text-tip text-24 leading-1.2 pt-10">
+          {{ obj.synopsis }}
+        </view>
       </view>
 
-      <view class="flex flex-wrap justify-between leading-1">
+      <view class="flex flex-wrap justify-between leading-1 text-tip text-24">
         <view class="flex items-center">
           <i class="iconfont text-tip text-24 mr-6">&#xe89d;</i
           >{{ obj.add_time }}

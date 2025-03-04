@@ -14,20 +14,30 @@
     />
     <view
       v-if="info[1]?.list?.length"
-      class="absolute bottom-main left-main right-main py-10 rounded-main bg-000-4 flex items-center justify-around shadow-md"
+      class="absolute bottom-main left-main right-main py-10 rounded-main bg-000-6 flex items-center justify-around shadow-md px-6"
     >
       <view
         v-for="(item, index) in info[1].list"
         :key="index"
         @click="openDetail(item)"
-        class="relative w-150 h-100 overflow-hidden rounded-main"
+        class="relative w-158 h-106 overflow-hidden rounded-main"
       >
         <image class="w-full h-full bg-cover" :src="item.img" />
         <view
-          class="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full text-fff bg-000-1"
+          class="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full text-fff"
         >
-          <i class="iconfont text-fff text-40" v-html="item.icon" />
-          <view class="text-24">{{ item.title }}</view>
+          <i class="iconfont text-fff text-40 leading-1.2">{{
+            index === 0
+              ? "&#xe613;"
+              : index === 1
+              ? "&#xe62c;"
+              : index === 2
+              ? "&#xe627;"
+              : "&#xe68f;"
+          }}</i>
+          <view class="text-24 bg-000-6 rounded-8 px-8 py-2">{{
+            item.title
+          }}</view>
         </view>
       </view>
     </view>
@@ -51,7 +61,7 @@
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-250 h-full" :src="item.img"></image>
           <view
-            class="absolute top-40 left-0 bg-fff-8 text-main p-12 pr-16 min-w-120 rounded-r-full flex justify-center"
+            class="absolute top-30 left-0 bg-fff-8 text-main p-8 pr-16 min-w-120 rounded-r-full flex justify-center"
             >{{ item.title }}</view
           >
         </view>
@@ -81,7 +91,7 @@
           </view>
         </view>
         <view
-          class="border-[#e1a490] text-[#e1a490] px-20 py-10 border-2 border-solid rounded-8 absolute bottom-80 left-main"
+          class="border-[#e1a490] text-[#e1a490] px-20 py-10 border-2 border-solid rounded-8 absolute bottom-80 left-main text-32"
           v-if="index === 0"
         >
           立即邀请
@@ -137,15 +147,13 @@
       >
         <image class="w-full h-full bg-cover" :src="item.img" alt="" />
         <view
-          class="absolute left-0 top-0 bottom-0 right-0 z-1 bg-000-2 text-fff flex justify-center items-center"
-          >{{ item.title }}
-          <view
-            class="w-36 h-36 rounded-full bg-000-5 flex justify-center items-center ml-10 animation-zoom-in-out"
-          >
-            <i class="iconfont text-20 text-fff animation-zoom-in-out"
-              >&#xe674;</i
-            >
+          class="absolute bottom-6 right-10 z-1 flex justify-center items-center text-fff bg-000-6 px-16 py-8 rounded-full animation-zoom-in-out"
+        >
+          <view>
+            {{ item.title }}
           </view>
+
+          <i class="iconfont text-20">&#xe674;</i>
         </view>
       </view>
     </view>
@@ -178,7 +186,7 @@
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-280 h-400 bg-cover" :src="item.img" alt="" />
           <view
-            class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32"
+            class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32 py-6"
             v-if="item.title"
           >
             {{ item.title }}

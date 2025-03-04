@@ -22,10 +22,11 @@
       class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"
     >
       <view
-        class="bg-000-6 rounded-full px-30 py-12 text-fff flex items-center z-[9]"
+        class="bg-000-6 rounded-full px-24 py-14 text-fff flex items-center text-32 z-[9] animation-zoom-in-out"
         @click="openVR"
       >
-        <i class="iconfont leading-1 pr-8">&#xe71c;</i>全屋漫游
+        <i class="iconfont leading-1 text-32">&#xe71c;</i>
+        全屋漫游
       </view>
     </view>
     <up-swiper
@@ -40,11 +41,11 @@
       radius="0"
     >
       <template #indicator>
-        <view class="flex justify-between w-690 h-50 text-24">
+        <view class="flex justify-between w-690 h-50">
           <view class="w-76"></view>
           <view class="bg-000-5 w-240 rounded-full flex text-fff">
             <view class="w-1/2 flex justify-center items-center" @click="openVR"
-              >720 <i class="iconfont text-30 leading-1 ml-6">&#xe76e;</i></view
+              >720<i class="iconfont text-32 leading-1">&#xe76e;</i></view
             >
             <view
               class="w-1/2 flex justify-center items-center bg-main rounded-full"
@@ -52,7 +53,7 @@
             >
           </view>
           <view
-            class="bg-000-5 w-76 rounded-full text-fff flex justify-center items-center"
+            class="bg-000-5 w-76 rounded-full text-fff text-24 flex justify-center items-center"
             >{{ currentNum + 1 }}/{{ detail?.banner.length || 0 }}</view
           >
         </view>
@@ -62,19 +63,18 @@
   </view>
   <view class="px-main">
     <view class="text-36 text-000">{{ detail.name || "--" }}</view>
-    <view class="pt-20 text-tip text-24">
+    <view class="pt-20 text-tip">
       <text>{{ detail.description }}</text>
     </view>
 
-    <view class="flex flex-wrap items-center mt-main">
-      <i class="iconfont font-600 text-tip text-24 mr-6">&#xe8bf;</i>浏览量{{
-        detail.realBrowse || 0
-      }}
+    <view class="flex flex-wrap items-center mt-main text-tip text-24">
+      <i class="iconfont text-tip text-24 mr-6">&#xe8bf;</i>浏览量
+      {{ detail.realBrowse || 0 }}
       <view class="px-20">
-        <up-line length="10" direction="col"></up-line
-      ></view>
+        <up-line length="10" direction="col" />
+      </view>
 
-      <i class="iconfont font-600 text-tip text-24 mr-6">&#xe623;</i>
+      <i class="iconfont text-tip text-24 mr-6">&#xe623;</i>
       点赞{{ detail.realPraise || 0 }}
     </view>
     <view
@@ -120,7 +120,7 @@
       </template>
     </view>
     <view
-      class="absolute bottom-0 left-0 right-0 h-160 pt-30 bg-gradient-to-t from-fff from-10% via-fff-5 via-70% to-fff-0 flex flex-wrap justify-center items-center text-32 text-main"
+      class="absolute bottom-0 left-0 right-0 h-140 pt-40 bg-gradient-to-t from-fff from-10% via-fff-5 via-70% to-fff-0 flex flex-wrap justify-center items-center text-32 text-main"
       @click="showMoreClick"
       v-if="!showMore"
     >
@@ -134,12 +134,12 @@
     <view class="w-350">
       <up-divider
         text="猜你喜欢"
-        textSize="32rpx"
+        textSize="36rpx"
         textColor="#cf5d38"
         lineColor="#aaa"
       />
     </view>
-    <view class="grid grid-rows-2 grid-cols-2 gap-20">
+    <view class="grid grid-rows-2 grid-cols-2 gap-main">
       <Case
         :obj="item"
         v-for="(item, index) in likes"

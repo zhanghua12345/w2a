@@ -9,11 +9,13 @@
       keyName="title"
       :lineColor="`url(${lineBg}) 100% 100%`"
       :activeStyle="{
+        fontSize: '32rpx',
         color: '#303133',
         fontWeight: 'bold',
         transform: 'scale(1.05)',
       }"
       :inactiveStyle="{
+        fontSize: '32rpx',
         color: '#606266',
         transform: 'scale(1)',
       }"
@@ -31,11 +33,18 @@
     />
   </view>
   <up-loadmore
+    v-if="list.length > 8"
     class="pt-20 pb-40"
     :status="status"
     loading-text="努力加载中，先喝杯茶"
     loadmore-text="轻轻上拉···"
     nomore-text="实在没有了~"
+  />
+  <up-empty
+    v-else-if="!list?.length"
+    text="没有数据~"
+    icon="/static/no-info.png"
+    marginTop="200"
   />
   <ScrollTop />
 </template>

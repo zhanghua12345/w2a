@@ -36,8 +36,8 @@
       <i class="iconfont leading-1 text-24 mr-4">&#xe8bf;</i>
       {{ obj.browse }}
     </view>
-    <view class="px-main py-14 w-full">
-      <view class="truncate">{{ obj.name }}</view>
+    <view class="px-20 py-14 w-full">
+      <view class="line-clamp-2 text-32">{{ obj.name }}</view>
       <view
         class="flex flex-wrap items-center justify-between mt-6 text-24 text-000-4"
       >

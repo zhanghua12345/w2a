@@ -5,15 +5,16 @@
     @click="emit('click', obj)"
   >
     <!-- https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg -->
-    <div class="w-full h-300 relative">
+    <div class="w-full h-330 relative">
       <view
         class="absolute z-full top-0 left-0 right-0 bottom-0 flex justify-center items-center"
       >
         <view
-          class="bg-000-6 rounded-full px-30 py-12 text-fff flex items-center"
+          class="bg-000-6 rounded-full px-24 py-14 text-fff flex items-center text-32 animation-zoom-in-out"
           @click.stop="emit('openVR', obj)"
         >
-          <i class="iconfont leading-1 pr-10">&#xe71c;</i>全屋漫游
+          <i class="iconfont leading-1 text-32">&#xe71c;</i>
+          全屋漫游
         </view>
       </view>
       <image
@@ -25,7 +26,7 @@
     </div>
 
     <view class="px-16 py-14 w-full">
-      <view class="truncate text-30">{{ obj.name }}</view>
+      <view class="truncate text-32">{{ obj.name }}</view>
       <view
         class="flex flex-wrap items-center justify-between mt-10 text-24 text-000-4"
       >
@@ -41,13 +42,13 @@
           </view>
         </view>
         <view class="flex flex-wrap items-center justify-end">
-          <i class="iconfont font-600 text-tip text-24 mr-6">&#xe8bf;</i
-          >{{ obj.realBrowse || 0 }}
+          <i class="iconfont text-tip text-24 mr-6">&#xe8bf;</i>
+          {{ obj.realBrowse || 0 }}
           <view class="px-20">
-            <up-line length="10" direction="col"></up-line
-          ></view>
+            <up-line length="10" direction="col" />
+          </view>
 
-          <i class="iconfont font-600 text-tip text-24 mr-6">&#xe623;</i>
+          <i class="iconfont text-tip text-24 mr-6">&#xe623;</i>
           {{ obj.realPraise || 0 }}
         </view>
       </view>

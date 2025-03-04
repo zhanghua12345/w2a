@@ -30,7 +30,7 @@
     {
       "path": "pages/articleDetail/index",
       "style": {
-        "navigationBarTitleText": "攻略详情"
+        "navigationBarTitleText": "文章攻略"
       }
     },
 

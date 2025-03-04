@@ -178,22 +178,27 @@ export const JSON_yaoqing = {
   ],
   list: [
     {
-      title: "邀请人姓名",
+      title: "客户姓名",
       select: "",
     },
     {
-      title: "邀请人微信昵称",
+      title: "客户微信昵称",
       select: "",
     },
     {
-      title: "邀请人手机号",
+      title: "客户手机号",
       isSelect: true,
       select: "",
     },
-
     {
       title: "邀请人房屋所在位置",
       placeholder: "例：长沙市 开福区 xx小区 01栋 1001号",
+      select: "",
+      isSelect: true,
+    },
+    {
+      title: "客户情况",
+      placeholder: "例：预计xxx时间到店等",
       select: "",
       isSelect: true,
     },

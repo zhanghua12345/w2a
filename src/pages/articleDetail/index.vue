@@ -6,29 +6,29 @@
       mode="aspectFill"
       alt=""
     />
-    <!-- <view class="px-main absolute top-0 left-0 text-fff">
-      <view class="flex flex-wrap items-start text-48 pt-100">
-        <i class="iconfont leading-1 text-48">&#xe644;</i>
-        <view class="flex-1 pl-main leading-1.3">{{ detail.title }}</view>
-      </view>
-      <view class="pb-20">{{ detail.dec }}</view>
-    </view> -->
     <view
-      class="px-main absolute bottom-60 left-0 text-fff flex flex-wrap justify-between items-center w-full"
+      class="absolute bottom-60 left-main right-main text-fff p-20 bg-000-4 rounded-main"
     >
-      <up-avatar-group
-        :urls="[...detail.head, '']"
-        size="35"
-        gap="0.4"
-        :extraValue="
-          detail.realBrowse > 9999
-            ? Math.floor(detail.realBrowse / 10000) + 'w'
-            : detail.realBrowse > 999
-            ? Math.floor(detail.realBrowse / 1000) + 'k'
-            : detail.realBrowse
-        "
-      />
-      <view class="">{{ detail.realBrowse }} 人看过</view>
+      <view class="flex flex-wrap items-start text-36">
+        <i class="iconfont leading-1.3 text-36">&#xe644;</i>
+        <view class="flex-1 pl-10 leading-1.3">{{ detail.title }}</view>
+      </view>
+      <view class="pt-10 text-fff-8 text-24">{{ detail.synopsis }}</view>
+      <view class="flex flex-wrap justify-between items-center w-full mt-20">
+        <up-avatar-group
+          :urls="[...detail.head, '']"
+          size="35"
+          gap="0.4"
+          :extraValue="
+            detail.realBrowse > 9999
+              ? Math.floor(detail.realBrowse / 10000) + 'w'
+              : detail.realBrowse > 999
+              ? Math.floor(detail.realBrowse / 1000) + 'k'
+              : detail.realBrowse
+          "
+        />
+        <view class="text-24">{{ detail.realBrowse }}人看过</view>
+      </view>
     </view>
   </view>
   <view
@@ -39,7 +39,7 @@
     >
     </view>
     <view
-      class="rounded-t-40 htmlContianer overflow-hidden mt-[-80rpx] w-full bg-bg"
+      class="rounded-t-40 htmlContianer overflow-hidden mt-[-80rpx] bg-bg p-main"
       v-html="detail.content"
     ></view>
   </view>
@@ -123,13 +123,18 @@ const setBottom = async (name) => {
 
 const getDetail = async () => {
   const data = await article_detail({ id: id.value });
-  uni.setNavigationBarTitle({
-    title: data.title,
-  });
+  // uni.setNavigationBarTitle({
+  //   title: data.title,
+  // });
   data.content = data.content.replace(
     /\<img/g,
     '<img style="width:100%;height:auto" '
   );
+  data.content = data.content.replace(
+    /\<p>/g,
+    '<p style="font-size:16px; line-height:1.8">'
+  );
+  console.log(data.content);
   detail.value = data;
 };
 </script>
