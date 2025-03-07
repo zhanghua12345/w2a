@@ -37,11 +37,6 @@
                       <template #label>
                         <view class="flex items-center">
                           <view class="mr-main">{{ i.name }}</view>
-                          <up-input
-                            v-show="form[item.id] === i.id"
-                            v-model="form[item.id + 'input']"
-                            :style="{ height: '44rpx', 'font-size': '20rpx' }"
-                          />
                         </view>
                       </template>
                     </up-radio>
@@ -63,6 +58,15 @@
                 <template v-if="item.type === 'input'">
                   <view class="select-box">
                     <up-input v-model="form[item.id]" placeholder="请输入" />
+                  </view>
+                </template>
+                <template v-if="item.type === 'number'">
+                  <view class="select-box">
+                    <up-input
+                      type="number"
+                      v-model="form[item.id]"
+                      placeholder="请输入"
+                    />
                   </view>
                 </template>
                 <template v-if="item.type === 'textarea'">
@@ -202,6 +206,14 @@ const selectClick = (e, i) => {
   selectIndex.value = i;
   actions.value = e.option;
   showSheet.value = true;
+  const mapArr = [5, 4, 8, 1, 8, 1, 2, 3, 4, 5];
+  mapArr
+    .filter((e) => e > 3)
+    .map((e) => e * 2)
+    .sort((a, b) => a - b)
+    .reduce((pre, cur) => {
+      return pre + cur;
+    }, 0);
 };
 
 const submit = () => {

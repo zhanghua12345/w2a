@@ -87,7 +87,7 @@
             v-if="item.type === 'share'"
           >
             <image class="h-50 w-50" :src="`/static/my/${item.icon}.png`" />
-            <view class="pt-16">{{ item.label }}</view>
+            <view class="pt-20">{{ item.label }}</view>
           </button>
           <view
             class="flex flex-col items-center"
@@ -112,7 +112,7 @@
           :isLink="true"
         >
           <template #icon>
-            <i class="iconfont text-36 text-tip" v-html="item.icon" />
+            <i class="iconfont text-36" v-html="item.icon" />
           </template>
         </up-cell>
       </up-cell-group>
