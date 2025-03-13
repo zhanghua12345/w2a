@@ -12,14 +12,36 @@
     @click="bannerClick"
   ></up-swiper>
   <up-sticky offset-top="0">
-    <view class="py-main bg-bg">
+    <view class="py-20 bg-bg">
       <view
-        class="mx-main rounded-main flex flex-row justify-between shadow bg-000-04"
+        class="mx-main rounded-main flex flex-row justify-between flex justify-between items-center"
+      >
+        <up-input
+          placeholder="搜索"
+          shape="circle"
+          v-model="searchValue"
+          prefixIcon="search"
+          prefixIconStyle="font-size: 22px;color: #909399"
+          @confirm="searchCase"
+        >
+          <template #suffix>
+            <up-button
+              text="搜索"
+              type="error"
+              size="mini"
+              shape="circle"
+              @click="searchCase"
+            />
+          </template>
+        </up-input>
+      </view>
+      <view
+        class="mx-main rounded-main flex flex-row justify-between shadow bg-000-04 mt-20"
       >
         <view
           v-for="(item, index) in classList"
           :key="index"
-          class="flex justify-center items-center py-20 w-full px-4"
+          class="flex justify-center items-center py-12 w-full px-4"
           @click="pickerClick(index)"
         >
           {{ item.cate_name }}
@@ -100,7 +122,7 @@ useWxShare({
 });
 
 const bannerList = ref([]); // 顶部banner
-
+const searchValue = ref(""); // 搜索
 const classList = ref([]); // 分类
 const openPicker = ref(false);
 const pickerIndex = ref(0);
@@ -119,7 +141,13 @@ onMounted(async () => {
   getClass();
   getList(params);
 });
-
+const searchCase = () => {
+  console.log(searchValue.value);
+  list.value = [];
+  params.page = 1;
+  status.value = "loading";
+  getList();
+};
 // 点击分类菜单
 const pickerClick = (index) => {
   openPicker.value = true;
@@ -191,7 +219,9 @@ const getBanner = async () => {
 const getClass = async () => {
   const data = await caseClass();
   data.list.forEach((e) => {
-    e.children.unshift({ id: 0, cate_name: "全部" });
+    e?.children?.length
+      ? e.children.unshift({ id: 0, cate_name: "全部" })
+      : (e.children = [{ id: 0, cate_name: "全部" }]);
   });
   classList.value = data.list || [];
 };
@@ -203,6 +233,7 @@ const getList = async () => {
   const data = await product_new_list({
     ...params,
     cate_id: params.cate_id || "",
+    name: searchValue.value,
   });
   list.value = (list.value || []).concat(data.list);
   params.page++;

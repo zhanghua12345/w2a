@@ -38,3 +38,28 @@ export function renovationForm(data) {
     data,
   });
 }
+
+/**
+ * AI查看案例Form数据
+ * @param data
+ * @returns {*}
+ */
+export function problemListAI() {
+  return request({
+    url: "/api/problemList",
+    method: "get",
+  });
+}
+
+/**
+ * AI查看案例Submit
+ * @param data
+ * @returns {*}
+ */
+export function aiCaseSubmit(data) {
+  return request({
+    url: "/api/aiCase",
+    method: "post",
+    data,
+  });
+}

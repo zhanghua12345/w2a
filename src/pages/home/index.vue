@@ -1,5 +1,6 @@
 <template>
   <Navbar />
+
   <view class="w-full h-700 relative">
     <up-swiper
       :list="info[0]?.list"
@@ -11,6 +12,16 @@
       easingFunction="easeInOutCubic"
       height="700rpx"
       radius="0"
+    />
+    <image
+      class="absolute max-w-500 left-main"
+      mode="heightFix"
+      :style="{
+        top: boundInfo.boundTop + 'px',
+        height: boundInfo.boundHeight + 'px',
+      }"
+      v-if="info[0].img"
+      :src="info[0].img"
     />
     <view
       v-if="info[1]?.list?.length"
@@ -112,19 +123,18 @@
       :isMore="true"
       @click="openDetail(info[4])"
     />
-    <view class="mt-main grid grid-rows-7 grid-cols-6 gap-20 h-540">
+    <view class="mt-main grid grid-rows-5 grid-cols-6 gap-20 h-450">
       <view
         class="bg-000 rounded-main text-fff relative overflow-hidden shadow-md"
         :class="{
-          'row-span-4 col-span-2': [0].includes(index),
-          'row-span-2 col-span-2': [1, 2, 3, 4].includes(index),
-          'row-span-3 col-span-3': [5, 6].includes(index),
+          'row-span-2 col-span-2': [0, 1, 2].includes(index),
+          'row-span-3 col-span-3': [3, 4].includes(index),
         }"
         v-for="(item, index) in info[4].list"
         :key="index"
         @click="openDetail(item)"
       >
-        <image class="w-full h-full bg-cover" :src="item.img" alt="" />
+        <image class="w-full h-full bg-cover" :src="item?.img" alt="" />
         <view class="absolute bottom-10 left-0 right-0 flex justify-center">
           <view class="bg-000-6 text-fff text-24 rounded-full px-16 py-8">
             {{ item.title }}
@@ -196,12 +206,25 @@
     </up-scroll-list>
   </view>
   <ScrollTop />
-  <!-- <view
-    class="fixed right-0 bottom-300 rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm z-full"
+  <view
+    class="fixed right-0 bottom-300 z-full"
+    v-if="info[7].img || info[7]?.title"
     @click="openDetail(info[7])"
   >
-    {{ info[7]?.title || "" }}
-  </view> -->
+    <image
+      class="h-70 mr-10 shadow-sm"
+      v-if="info[7].img"
+      :src="info[7].img"
+      mode="heightFix"
+      alt=""
+    />
+    <view
+      class="rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm"
+      v-else
+    >
+      {{ info[7]?.title || "" }}
+    </view>
+  </view>
 </template>
 
 <script setup>
@@ -216,7 +239,7 @@ import {
   onShareAppMessage,
   onShareTimeline,
 } from "@dcloudio/uni-app";
-import { useWxShare } from "@/hooks/index.js";
+import { useWxShare, getBoundInfo } from "@/hooks/index.js";
 // 监听滚动
 onPageScroll((e) => {});
 // 微信分享
@@ -226,10 +249,12 @@ useWxShare({
   path: "/pages/home/index",
 });
 const info = ref([]);
+const boundInfo = ref({});
 
 // 页面加载时自动加载数据
 onMounted(() => {
   getInfo();
+  boundInfo.value = getBoundInfo();
 });
 
 // 头部banner点击事件
@@ -239,6 +264,7 @@ const swiperClick = (index) => {
 
 // 跳转事件
 const openDetail = (item) => {
+  console.log(item);
   const type = item.router.type;
   if (item.router.id === 12 || item.router.id === 13) {
     item.router.page = "pages/agreement/index";

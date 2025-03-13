@@ -33,7 +33,12 @@
         "navigationBarTitleText": "文章攻略"
       }
     },
-
+    {
+      "path": "pages/active/index",
+      "style": {
+        "navigationBarTitleText": "活动"
+      }
+    },
     {
       "path": "pages/my/index",
       "style": {
@@ -204,6 +209,14 @@
           "style": {
             "navigationBarTitleText": "在线免费设计",
             "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "AIsheji/VR",
+          "style": {
+            "navigationStyle": "custom",
+            "navigationBarTitleText": "VR链接",
+            "disableScroll": true
           }
         },
         {
