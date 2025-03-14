@@ -266,6 +266,7 @@ const swiperClick = (index) => {
 
 // 跳转事件
 const openDetail = (item) => {
+  if (app.globalData.envDevelop) return false;
   console.log(item);
   const type = item.router.type;
   if (item.router.id === 12 || item.router.id === 13) {

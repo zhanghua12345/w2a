@@ -50,6 +50,7 @@
 </template>
 
 <script setup>
+const app = getApp();
 import { ref, onMounted } from "vue";
 import {
   onPageScroll,
@@ -132,6 +133,11 @@ const getList = async () => {
     ...params,
     cid: classList.value[activeClass.value].id,
   });
+  if (app.globalData.envDevelop) {
+    list.value = data.slice(0, 1);
+    status.value = nomore;
+    return false;
+  }
   list.value = (list.value || []).concat(data);
   params.page++;
   status.value = data.length < params.limit ? "nomore" : "loadmore";

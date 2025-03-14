@@ -40,7 +40,7 @@
         :src="userInfo.avatar || '/static/user.png'"
       />
     </view>
-    <view class="pt-80 flex flex-wrap px-10">
+    <view class="pt-80 flex flex-wrap px-10" v-if="!app.globalData.envDevelop">
       <view
         class="pr-50"
         v-for="(item, index) in dataFilter(routers, 0, 3)"
@@ -51,7 +51,10 @@
         <view class="text-tip">{{ item.label }}</view>
       </view>
     </view>
-    <view class="bg-fff rounded-32 overflow-hidden mt-50 shadow-sm">
+    <view
+      class="bg-fff rounded-32 overflow-hidden mt-50 shadow-sm"
+      v-if="!app.globalData.envDevelop"
+    >
       <view
         class="px-main flex flex-wrap justify-end items-center relative h-156"
       >
