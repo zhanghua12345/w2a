@@ -4,10 +4,10 @@
     :list="bannerList"
     keyName="recommend_img"
     indicator
-    indicatorMode="line"
+    indicatorMode="dot"
     circular
     easingFunction="easeInOutCubic"
-    height="340rpx"
+    height="420rpx"
     radius="0"
     @click="bannerClick"
   ></up-swiper>

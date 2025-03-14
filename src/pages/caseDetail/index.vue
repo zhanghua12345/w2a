@@ -17,7 +17,7 @@
     >
   </view>
   <Navbar title="梵米尼家具优选" leftIcon=" " />
-  <view class="w-full h-700 relative">
+  <view class="w-full h-1000 relative">
     <view
       class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"
     >
@@ -35,7 +35,7 @@
       indicatorMode="line"
       circular
       easingFunction="easeInOutCubic"
-      height="700rpx"
+      height="1000rpx"
       indicatorStyle="bottom: 50rpx"
       @change="(e) => (currentNum = e.current)"
       radius="0"
@@ -79,7 +79,7 @@
     </view>
     <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
-      v-if="detail.cate_list"
+      v-if="detail.cate_list.length"
     >
       <view
         class="flex flex-wrap items-center w-1/2 h-50"
@@ -107,9 +107,9 @@
       :key="item"
     >
       <template v-if="item.images?.length">
-        <view class="text-36 w-full flex justify-center py-30">{{
-          item.value
-        }}</view>
+        <view class="text-36 w-full flex justify-center py-30">
+          {{ item.value }}
+        </view>
         <view
           class="rounded-32 overflow-hidden mb-20 last:mb-0"
           v-for="e in item.images"

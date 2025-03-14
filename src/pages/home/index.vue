@@ -64,13 +64,13 @@
     />
     <up-scroll-list :indicator="false">
       <view
-        class="h-300 mr-main last:mr-0 shadow-md"
+        class="h-320 mr-main last:mr-0 shadow-md"
         v-for="(item, index) in info[2].list"
         :key="index"
         @click="openDetail(item)"
       >
         <view class="h-full overflow-hidden rounded-main relative">
-          <image class="w-250 h-full" :src="item.img"></image>
+          <image class="w-240 h-full" :src="item.img"></image>
           <view
             class="absolute top-30 left-0 bg-fff-8 text-main p-8 pr-16 min-w-120 rounded-r-full flex justify-center"
             >{{ item.title }}</view

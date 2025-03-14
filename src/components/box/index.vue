@@ -5,7 +5,7 @@
     @click="emit('click', obj)"
   >
     <!-- https://pic.rmb.bdstatic.com/bjh/240622/ed7252d2cc92f558896a7dea906197e83269.jpeg -->
-    <div class="w-full h-330 relative">
+    <div class="w-full h-390 relative">
       <view
         class="absolute z-full top-0 left-0 right-0 bottom-0 flex justify-center items-center"
       >

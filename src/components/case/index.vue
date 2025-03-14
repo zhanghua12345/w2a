@@ -37,8 +37,8 @@
       {{ obj.browse }}
     </view>
     <view class="px-20 py-14 w-full">
-      <view class="line-clamp-2 text-32">{{ obj.name }}</view>
-      <view
+      <view class="line-clamp-2 text-32 min-h-96">{{ obj.name }}</view>
+      <!-- <view
         class="flex flex-wrap items-center justify-between mt-6 text-24 text-000-4"
       >
         <view class="flex-1 flex flex-wrap justify-start">
@@ -51,7 +51,7 @@
             {{ index < 3 ? obj.cate_list[key] : "" }}
           </view>
         </view>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>
