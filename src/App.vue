@@ -5,11 +5,15 @@ export default {
     userInfo: {},
     memberInfo: {},
     islogin: false,
+    envDevelop: false,
   },
   onLaunch: function () {
     console.log("App Launch");
     const _this = this;
     // 微信更新提醒
+    _this.globalData.envDevelop =
+      wx.getAccountInfoSync().miniProgram.envVersion === "develop";
+
     if (uni.canIUse("getUpdateManager")) {
       const updateManager = uni.getUpdateManager();
       updateManager.onCheckForUpdate((res) => {

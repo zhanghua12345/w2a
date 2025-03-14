@@ -191,7 +191,7 @@
   </view>
 </template>
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import Navbar from "@/components/navbar/index.vue";
 import { problemListAI, aiCaseSubmit } from "@/api/form";
 
@@ -285,7 +285,9 @@ const submit = () => {
         }
       });
       const data = await aiCaseSubmit(answer);
-      console.log(data);
+      const value = JSON.stringify(data.data.map((e) => e.vr_link));
+      console.log(value);
+      uni.navigateTo({ url: "/pagesForm/AIsheji/VR?urls=" + value });
     })
     .catch((errors) => {
       uni.showToast({

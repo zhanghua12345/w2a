@@ -169,7 +169,7 @@
     </view>
   </view>
   <!-- 品牌介绍 -->
-  <view class="mx-main mt-40 pb-20">
+  <view class="mx-main mt-40 pb-20" v-if="info[6]?.title">
     <Title :title="info[6]?.title" :subTitle="info[6]?.subTitle" />
     <image
       v-if="info[6]?.img"
@@ -208,7 +208,7 @@
   <ScrollTop />
   <view
     class="fixed right-0 bottom-300 z-full"
-    v-if="info[7].img || info[7]?.title"
+    v-if="info[7]?.img || info[7]?.title"
     @click="openDetail(info[7])"
   >
     <image
@@ -240,6 +240,8 @@ import {
   onShareTimeline,
 } from "@dcloudio/uni-app";
 import { useWxShare, getBoundInfo } from "@/hooks/index.js";
+
+const app = getApp();
 // 监听滚动
 onPageScroll((e) => {});
 // 微信分享
@@ -281,8 +283,8 @@ const openDetail = (item) => {
 
 const getInfo = async () => {
   const data = await getHomeData();
-  console.log(data.data);
-  info.value = data.data;
+  if (app.globalData.envDevelop) info.value = data.data.slice(0, 1);
+  else info.value = data.data;
 };
 </script>
 
