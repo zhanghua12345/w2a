@@ -122,7 +122,7 @@
     </view>
     <view class="mt-main pb-main">
       <view class="flex justify-between items-center">
-        <view class="" @click="openMap">友情链接</view>
+        <view class="">友情链接</view>
         <!-- <view class="flex items-center">
           全部
           <i class="iconfont text-20 ml-10 text-tip">&#xe671;</i>

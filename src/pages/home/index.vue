@@ -207,15 +207,15 @@
   </view>
   <ScrollTop />
   <view
-    class="fixed right-0 bottom-300 z-full"
+    class="fixed right-0 bottom-290 z-full"
     v-if="info[7]?.img || info[7]?.title"
     @click="openDetail(info[7])"
   >
     <image
-      class="h-70 mr-10 shadow-sm"
+      class="w-90 mr-main shadow-sm"
       v-if="info[7].img"
       :src="info[7].img"
-      mode="heightFix"
+      mode="widthFix"
       alt=""
     />
     <view

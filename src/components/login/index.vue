@@ -147,22 +147,21 @@ export default {
         },
         success: (uploadFileRes) => {
           console.log(uploadFileRes);
-          uni.hideLoading();
           let data = JSON.parse(uploadFileRes.data);
           if (data.status === 200) {
             this.newUserInfo = { ...this.newUserInfo, avatar: data.data.url };
             this.userEdit();
           } else {
             uni.showToast({
-              title: res.msg || "上传失败！",
+              title: res?.msg || "上传失败了！",
               icon: "none",
             });
           }
         },
         fail: (res) => {
-          uni.hideLoading();
+          console.log(res);
           uni.showToast({
-            title: res.msg || "上传失败！",
+            title: res?.msg || "上传失败！",
             icon: "none",
           });
         },
