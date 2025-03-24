@@ -1,7 +1,7 @@
 <template>
   <Navbar />
 
-  <view class="w-full h-700 relative">
+  <view class="w-full h-700 relative" v-show="info[0]?.show">
     <up-swiper
       :list="info[0]?.list"
       @click="swiperClick"
@@ -20,11 +20,11 @@
         top: boundInfo.boundTop + 'px',
         height: boundInfo.boundHeight + 'px',
       }"
-      v-if="info[0].img"
-      :src="info[0].img"
+      v-if="info[0]?.img"
+      :src="info[0]?.img"
     />
     <view
-      v-if="info[1]?.list?.length"
+      v-if="info[1]?.list?.length && info[1].show"
       class="absolute bottom-main left-main right-main py-10 rounded-main bg-000-6 flex items-center justify-around shadow-md px-6"
     >
       <view
@@ -54,7 +54,7 @@
     </view>
   </view>
   <!-- 案例 -->
-  <view class="mt-40 mx-main" v-if="info[2]?.list?.length">
+  <view class="mt-40 mx-main" v-if="info[2]?.list?.length && info[2].show">
     <Title
       className="mb-20"
       :title="info[2].title"
@@ -79,7 +79,7 @@
       </view>
     </up-scroll-list>
   </view>
-  <view class="mx-main mt-40" v-if="info[3]?.list?.length">
+  <view class="mx-main mt-40" v-if="info[3]?.list?.length && info[3].show">
     <view class="grid grid-rows-2 grid-cols-9 gap-20 h-330">
       <view
         class="rounded-main text-fff relative shadow-sm"
@@ -116,7 +116,7 @@
     </view>
   </view>
   <!-- 家·空间 -->
-  <view class="mx-main mt-40" v-if="info[4]?.list?.length">
+  <view class="mx-main mt-40" v-if="info[4]?.list?.length && info[4].show">
     <Title
       :title="info[4].title"
       :subTitle="info[4].subTitle"
@@ -144,7 +144,7 @@
     </view>
   </view>
   <!-- 公司介绍 -->
-  <view class="mx-main mt-40" v-if="info[5]?.list?.length">
+  <view class="mx-main mt-40" v-if="info[5]?.list?.length && info[5].show">
     <Title :title="info[5].title" :subTitle="info[5].subTitle" />
     <view
       class="mt-main p-20 bg-000-08 rounded-main grid grid-rows-2 grid-cols-2 gap-main"
@@ -168,35 +168,50 @@
       </view>
     </view>
   </view>
+  <!-- 精英团队 -->
+  <view class="mx-main mt-40" v-if="info[6]?.title && info[6].show">
+    <Title :title="info[6]?.title" :subTitleBottom="info[6]?.subTitle" />
+    <up-scroll-list v-if="info[6]?.list?.length" indicatorActiveColor="#cf5d38">
+      <view
+        class="mt-20 ml-main first:ml-0 shadow-md"
+        v-for="(item, index) in info[6].list"
+        :key="index"
+      >
+        <view class="h-full overflow-hidden rounded-main relative">
+          <image class="w-180 h-240" :src="item.img" mode="aspectFill"></image>
+        </view>
+      </view>
+    </up-scroll-list>
+  </view>
   <!-- 品牌介绍 -->
-  <view class="mx-main mt-40 pb-20" v-if="info[6]?.title">
-    <Title :title="info[6]?.title" :subTitle="info[6]?.subTitle" />
+  <view class="mx-main mt-40 pb-20" v-if="info[7]?.title && info[7].show">
+    <Title :title="info[7]?.title" :subTitle="info[7]?.subTitle" />
     <image
-      v-if="info[6]?.img"
+      v-if="info[7]?.img"
       class="rounded-main mt-main overflow-hidden w-full"
-      :src="info[6].img"
+      :src="info[7].img"
       mode="widthFix"
       alt=""
     />
 
     <video
-      v-if="info[6]?.video"
+      v-if="info[7]?.video"
       class="w-full h-400 rounded-main mt-main"
-      :src="info[6].video"
+      :src="info[7].video"
       muted
       autoplay
     />
-    <up-scroll-list :indicator="false" v-if="info[6]?.list?.length">
+    <up-scroll-list :indicator="false" v-if="info[7]?.list?.length">
       <view
         class="mt-main ml-main first:ml-0 shadow-md"
-        v-for="(item, index) in info[6].list"
+        v-for="(item, index) in info[7].list"
         :key="index"
         @click="openDetail(item)"
       >
         <view class="h-full overflow-hidden rounded-main relative">
           <image class="w-280 h-400 bg-cover" :src="item.img" alt="" />
           <view
-            class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-main text-32 py-6"
+            class="absolute bottom-0 left-0 right-0 flex justify-center items-center text-fff bg-000-2 text-32 py-6"
             v-if="item.title"
           >
             {{ item.title }}
@@ -205,16 +220,15 @@
       </view>
     </up-scroll-list>
   </view>
-  <ScrollTop />
   <view
     class="fixed right-0 bottom-290 z-full"
-    v-if="info[7]?.img || info[7]?.title"
-    @click="openDetail(info[7])"
+    v-if="info[8]?.img || (info[8]?.title && info[8].show)"
+    @click="openDetail(info[8])"
   >
     <image
       class="w-90 mr-main shadow-sm"
-      v-if="info[7].img"
-      :src="info[7].img"
+      v-if="info[8].img"
+      :src="info[8].img"
       mode="widthFix"
       alt=""
     />
@@ -222,9 +236,10 @@
       class="rounded-l-full bg-main pl-40 pr-20 py-10 text-fff shadow-sm"
       v-else
     >
-      {{ info[7]?.title || "" }}
+      {{ info[8]?.title || "" }}
     </view>
   </view>
+  <ScrollTop />
 </template>
 
 <script setup>
