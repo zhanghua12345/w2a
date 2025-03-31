@@ -13,7 +13,7 @@ export const JSON_baojia = {
       subTitle: "按套内实际面积计算",
       show: true,
       type: "only",
-      data: ["60m²以下", "61m²~90m²", "91m²~130m²", "130m²以上"],
+      data: ["100m²~130m²", "131m²~160m²", "161m²~200m²", "200m²以上"],
     },
     {
       title: "选择您家装修类型",
@@ -82,7 +82,7 @@ export const JSON_mianfeisheji = {
       title: "选择您家房屋面积",
       show: true,
       type: "only",
-      data: ["60m²以下", "61m²~90m²", "91m²~130m²", "130m²以上"],
+      data: ["100m²~130m²", "131m²~160m²", "161m²~200m²", "200m²以上"],
     },
     {
       title: "选择装修档次",

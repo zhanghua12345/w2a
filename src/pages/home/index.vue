@@ -173,12 +173,40 @@
     <Title :title="info[6]?.title" :subTitleBottom="info[6]?.subTitle" />
     <up-scroll-list v-if="info[6]?.list?.length" indicatorActiveColor="#cf5d38">
       <view
-        class="mt-20 ml-main first:ml-0 shadow-md"
-        v-for="(item, index) in info[6].list"
+        class="mt-20 ml-main first:ml-0"
+        v-for="index in Math.ceil(info[6].list.length / 2)"
         :key="index"
       >
-        <view class="h-full overflow-hidden rounded-main relative">
-          <image class="w-180 h-240" :src="item.img" mode="aspectFill"></image>
+        <view
+          class="border-2 border-ccc border-solid shadow-md bg-fff p-12 rounded-main"
+        >
+          <image
+            class="w-280 h-462 rounded-main"
+            :src="info[6].list[index * 2 - 2]?.img"
+            mode="aspectFill"
+            @click="
+              previewImage(
+                index * 2 - 2,
+                info[6].list.map((e) => e.img)
+              )
+            "
+          />
+        </view>
+        <view
+          v-if="info[6].list[index * 2 - 1]?.img"
+          class="border-2 border-ccc border-solid shadow-md bg-fff p-12 rounded-main mt-main"
+        >
+          <image
+            class="w-280 h-462 rounded-main"
+            :src="info[6].list[index * 2 - 1]?.img"
+            mode="aspectFill"
+            @click="
+              previewImage(
+                index * 2 - 1,
+                info[6].list.map((e) => e.img)
+              )
+            "
+          />
         </view>
       </view>
     </up-scroll-list>
@@ -221,12 +249,12 @@
     </up-scroll-list>
   </view>
   <view
-    class="fixed right-0 bottom-290 z-full"
+    class="fixed right-0 bottom-200 z-full"
     v-if="info[8]?.img || (info[8]?.title && info[8].show)"
     @click="openDetail(info[8])"
   >
     <image
-      class="w-90 mr-main shadow-sm"
+      class="w-90 mr- shadow-sm"
       v-if="info[8].img"
       :src="info[8].img"
       mode="widthFix"
@@ -274,6 +302,13 @@ onMounted(() => {
   boundInfo.value = getBoundInfo();
 });
 
+const previewImage = (current, urls) => {
+  uni.previewImage({
+    current, // 当前图片下标
+    urls, // 图片路径组
+    // 其他参数
+  });
+};
 // 头部banner点击事件
 const swiperClick = (index) => {
   openDetail(info.value[0].list[index]);

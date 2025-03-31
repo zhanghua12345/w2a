@@ -2,6 +2,7 @@
   <up-back-top
     :scroll-top="scrollTop"
     mode="square"
+    bottom="50"
     :customStyle="{ backgroundColor: '#cf5d38' }"
     :iconStyle="{ color: '#fff' }"
     icon="arrow-up"

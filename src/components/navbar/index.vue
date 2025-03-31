@@ -3,7 +3,7 @@
     class="fixed z-10 left-0 w-full"
     v-show="Number(scrollNum) > (Number(scrollTop) || 60)"
   >
-    <up-navbar :style="{ 'z-index': 11 }" :title="title || '梵米尼全屋定制 +'">
+    <up-navbar :style="{ 'z-index': 11 }" :title="title || '梵米尼全屋定制'">
       <template #left>
         <view
           v-show="leftIcon"

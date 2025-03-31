@@ -30,7 +30,7 @@
     {
       "path": "pages/articleDetail/index",
       "style": {
-        "navigationBarTitleText": "文章攻略"
+        "navigationBarTitleText": "定制攻略"
       }
     },
     {
@@ -124,13 +124,13 @@
         {
           "path": "articleCollection/index",
           "style": {
-            "navigationBarTitleText": "文章收藏"
+            "navigationBarTitleText": "攻略收藏"
           }
         },
         {
           "path": "articleHistory/index",
           "style": {
-            "navigationBarTitleText": "文章历史"
+            "navigationBarTitleText": "攻略历史"
           }
         },
         {
@@ -277,7 +277,7 @@
         "pagePath": "pages/article/index",
         "iconPath": "static/tabBar/article.png",
         "selectedIconPath": "static/tabBar/article_active.png",
-        "text": "文章"
+        "text": "攻略"
       },
       {
         "pagePath": "pages/my/index",

@@ -1,7 +1,7 @@
 import request from "@/utils/request";
 
 /**
- * 文章分类
+ * 攻略分类
  * @param data
  * @returns {*}
  */
@@ -13,7 +13,7 @@ export function articleClass() {
 }
 
 /**
- * 文章列表
+ * 攻略列表
  * @param data
  * @returns {*}
  */
@@ -26,7 +26,7 @@ export function article_list(data) {
 }
 
 /**
- * 文章详情
+ * 攻略详情
  * @param data
  * @returns {*}
  */
@@ -38,7 +38,7 @@ export function article_detail(data) {
 }
 
 /**
- * 文章点赞
+ * 攻略点赞
  * /api/praise/:id/1/1/0
  * @param data
  * @returns {*}
@@ -51,7 +51,7 @@ export function setPraise(data) {
 }
 
 /**
- * 文章收藏
+ * 攻略收藏
  * /api/praise/:id/1/2/0
  * @param data
  * @returns {*}
@@ -64,7 +64,7 @@ export function setCollect(data) {
 }
 
 /**
- * 文章取消收藏
+ * 攻略取消收藏
  * /api/praise/:id/1/2/1
  * @param data
  * @returns {*}
@@ -77,7 +77,7 @@ export function setCancelCollect(data) {
 }
 
 /**
- * 文章浏览列表
+ * 攻略浏览列表
  * @param data
  * @returns {*}
  */
@@ -90,7 +90,7 @@ export function browseList(data) {
 }
 
 /**
- * 文章收藏列表
+ * 攻略收藏列表
  * @param data
  * @returns {*}
  */
@@ -103,7 +103,7 @@ export function praiseList(data) {
 }
 
 /**
- * 文章点赞列表
+ * 攻略点赞列表
  * @param data
  * @returns {*}
  */
