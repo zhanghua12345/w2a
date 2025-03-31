@@ -19,6 +19,7 @@
   <Navbar title="梵米尼家具优选" leftIcon=" " />
   <view class="w-full h-1000 relative">
     <view
+      v-if="detail?.VR_link"
       class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"
     >
       <view
@@ -30,7 +31,7 @@
       </view>
     </view>
     <up-swiper
-      :list="detail?.banner || []"
+      :list="detail?.banner"
       indicator
       indicatorMode="line"
       circular
@@ -79,7 +80,7 @@
     </view>
     <view
       class="mt-50 bg-000-04 p-main rounded-20 flex flex-wrap justify-start"
-      v-if="detail.cate_list.length"
+      v-if="JSON.stringify(detail.cate_list) !== '[]'"
     >
       <view
         class="flex flex-wrap items-center w-1/2 h-50"
@@ -141,6 +142,7 @@
     </view>
     <view class="grid grid-rows-2 grid-cols-2 gap-main">
       <Case
+        :no720="!item?.VR_link"
         :obj="item"
         v-for="(item, index) in likes"
         :key="index"
@@ -192,7 +194,7 @@ useWxShare({
   path: `/pages/caseDetail/index?id=${id.value}`,
 });
 
-const detail = ref({});
+const detail = ref({ banner: [] });
 const likes = ref([]);
 const showMore = ref(false);
 const currentNum = ref(0);
@@ -219,7 +221,7 @@ const showMoreClick = () => {
 const openVR = () => {
   if (!app.globalData.userInfo?.phone) {
     uni.navigateTo({ url: "/pages/login/index" });
-  } else {
+  } else if (detail.value?.VR_link) {
     uni.navigateTo({ url: `/pages/VR/index?url=${detail.value.VR_link}` });
   }
 };
