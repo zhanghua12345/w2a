@@ -43,7 +43,8 @@
   <up-empty
     v-else-if="!list?.length"
     text="没有数据~"
-    icon="/static/no-info.png"
+    icon="/static/no-info.gif"
+    width="100"
     marginTop="200"
   />
   <ScrollTop />
@@ -69,7 +70,7 @@ onPageScroll((e) => {});
 onShareAppMessage(() => ({}));
 onShareTimeline(() => ({}));
 useWxShare({
-  path: "/pages/case/index",
+  path: "/pages/article/index",
 });
 
 const classList = ref([]); // 分类
@@ -134,7 +135,7 @@ const getList = async () => {
     cid: classList.value[activeClass.value].id,
   });
   if (app.globalData.envDevelop) {
-    list.value = data.slice(0, 1);
+    list.value = data.length ? data.slice(0, 1) : [];
     status.value = nomore;
     return false;
   }
